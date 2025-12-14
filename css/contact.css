@@ -70,19 +70,18 @@
     align-items: center;
     gap: 0.75rem;
     color: var(--secondary);
-    font-size: 1.25rem;
-    font-weight: 500;
-    padding: 1rem 2rem;
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    transition: all 0.2s;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 1rem 2.5rem;
+    background: transparent;
+    border: 2px solid var(--secondary);
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
 }
 
 .email-link:hover {
-    border-color: var(--secondary);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 20px rgba(50, 208, 17, 0.15);
+    background: var(--secondary);
+    color: var(--bg-dark);
 }
 
 .email-link svg {
@@ -103,23 +102,28 @@
     justify-content: center;
     width: 60px;
     height: 60px;
-    background: var(--bg-elevated);
-    border: 1px solid var(--border);
+    background: transparent;
+    border: 2px solid var(--secondary);
     border-radius: 50%;
     color: var(--secondary);
     transition: all 0.3s ease;
 }
 
 .social-btn:hover {
-    background: var(--bg-elevated);
-    border-color: var(--secondary);
-    color: var(--secondary);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(50, 208, 17, 0.2);
+    background: var(--secondary);
+    color: var(--bg-dark);
 }
 
 .social-btn:hover .social-icon-img {
-    filter: brightness(0) saturate(100%) invert(52%) sepia(95%) saturate(1000%) hue-rotate(85deg) brightness(95%) contrast(95%);
+    filter: brightness(0);
+}
+
+.social-btn:hover svg {
+    fill: var(--bg-dark);
+}
+
+.email-link:hover svg {
+    stroke: var(--bg-dark);
 }
 
 .social-btn svg {
@@ -178,21 +182,21 @@
 }
 
 .subscribe-btn {
-    padding: 0.9rem 2rem;
-    background: var(--secondary);
-    color: var(--bg-dark);
-    border: none;
+    padding: 1rem 2.5rem;
+    background: var(--bg-dark);
+    color: var(--secondary);
+    border: 2px solid var(--secondary);
     border-radius: var(--radius);
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
     width: 100%;
 }
 
 .subscribe-btn:hover {
-    background: #4ae025;
-    transform: translateY(-2px);
+    background: var(--secondary);
+    color: var(--bg-dark);
 }
 
 .subscribe-success {

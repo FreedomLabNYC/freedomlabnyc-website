@@ -540,10 +540,13 @@
 /* === Freedom Tech Section === */
 .tech-grid {
     display: grid;
-    grid-template-columns: repeat(5, 180px);
+    grid-template-columns: repeat(5, 1fr);
     gap: 1rem;
     margin-top: 1.5rem;
     justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .tech-card {
@@ -1383,6 +1386,20 @@
     
     .tech-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+    
+    .tech-card {
+        padding: 1rem 0.75rem;
+    }
+    
+    .tech-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .tech-card span {
+        font-size: 0.8rem;
     }
     
     .mission-item {
@@ -1399,6 +1416,20 @@
     
     .tech-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .tech-card {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .tech-icon {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .tech-card span {
+        font-size: 0.7rem;
     }
 }
 
@@ -1657,18 +1688,18 @@
         font-size: 1rem !important;
     }
     
-    /* Mission module mobile */
+    /* Mission module mobile - keep numbers on left */
     .neon-item-split {
-        flex-direction: column;
+        flex-direction: row;
     }
     
     .split-left {
-        width: 100%;
+        min-width: 60px;
         padding: 1rem;
     }
     
     .neon-number-vertical {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
     
     .split-right {

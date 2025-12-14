@@ -101,10 +101,16 @@
 
 .iframe-wrapper iframe {
     display: block;
-    background: #ffffff;
+    background: #0a0a0a;
     border-radius: var(--radius);
     width: calc(100% + 20px);
     margin-right: -20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.iframe-wrapper iframe.loaded {
+    opacity: 1;
 }
 
 /* === Neon Footer === */
@@ -205,7 +211,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: #fff;
+    background: #0a0a0a;
     border-radius: var(--radius);
     padding: 1.5rem;
     z-index: 10;
@@ -213,7 +219,7 @@
 
 .shimmer-line,
 .shimmer-card {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background: linear-gradient(90deg, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%);
     background-size: 200% 100%;
     animation: shimmer 1.5s infinite;
     border-radius: 4px;

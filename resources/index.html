@@ -3,129 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Page not found - Freedom Lab NYC">
-    <title>404 - Page Not Found | Freedom Lab NYC</title>
-    <link rel="icon" href="static/img/torch transparent icocrop2.png" type="image/png">
-    <link rel="stylesheet" href="css/styles.css">
+    <meta name="description" content="Freedom Lab NYC Resources - Educational materials and guides for Freedom Tech coming soon.">
+    <title>Resources | Freedom Lab NYC</title>
+    <link rel="icon" href="../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=block" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=block" rel="stylesheet">
     <style>
-        /* Force dark mode */
-        html, body {
-            background-color: #0a0a0a !important;
-            color: #ffffff !important;
-            overflow-x: hidden;
-        }
-        
-        .error-content {
+        .coming-soon-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: calc(100vh - 200px);
+            min-height: calc(100vh - 400px);
             text-align: center;
-            padding: 2rem;
-            background-color: #0a0a0a;
+            padding: 3rem 2rem;
         }
         
-        .error-code {
+        .coming-soon-text {
             font-family: 'Press Start 2P', monospace;
-            font-size: 6rem;
+            font-size: 2rem;
             color: #32D011;
             text-shadow: 0 0 30px rgba(50, 208, 17, 0.5);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         
-        .error-title {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 1.5rem;
-            color: #ffffff;
-            margin-bottom: 1rem;
-        }
-        
-        .error-message {
+        .coming-soon-description {
             color: #a0a0a0;
             font-size: 1.1rem;
             max-width: 500px;
-            margin-bottom: 2rem;
             line-height: 1.6;
         }
         
-        .error-links {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: nowrap;
-            justify-content: center;
-        }
-        
-        .error-link {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            min-height: 48px;
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            background: transparent;
-            color: #32D011;
-            border: 2px solid #32D011;
-        }
-        
-        .error-link:hover {
-            background: #32D011;
-            color: #0a0a0a;
-        }
-        
-        .error-link-primary {
-            background: rgba(128, 128, 128, 0.3);
-            border: 2px solid #ffffff;
-            color: #ffffff;
-        }
-        
-        .error-link-primary:hover {
-            background: #32D011;
-            border-color: #32D011;
-            color: #0a0a0a;
-        }
-        
-        .terminal-cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2em;
-            background: #32D011;
-            margin-left: 5px;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
         @media (max-width: 768px) {
-            .error-code {
-                font-size: 4rem;
+            .coming-soon-text {
+                font-size: 1.5rem;
             }
             
-            .error-title {
+            .coming-soon-description {
                 font-size: 1rem;
-            }
-            
-            .error-link {
-                padding: 0.75rem 1rem;
-                font-size: 0.85rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .error-link {
-                padding: 0.6rem 0.75rem;
-                font-size: 0.75rem;
             }
         }
     </style>
@@ -137,11 +55,11 @@
     <!-- Header -->
     <header class="header">
         <a href="/" class="logo">
-            <img src="static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            <img src="../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
         </a>
         <nav class="nav-menu" id="navMenu">
             <a href="/classes-events/" class="nav-link">Classes & Events</a>
-            <a href="/resources/" class="nav-link">Resources</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
             <a href="/contact/" class="nav-link">Contact</a>
             <a href="/join/" class="nav-btn">Join</a>
         </nav>
@@ -152,17 +70,17 @@
         </div>
     </header>
 
-    <main class="error-content">
-        <div class="error-code">404</div>
-        <h1 class="error-title">Page Not Found<span class="terminal-cursor"></span></h1>
-        <p class="error-message">
-            The page you're looking for doesn't exist or has been moved. 
-            Escape the tyranny of this undelivered page.
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Resources</h1>
+    </section>
+
+    <!-- Main Content -->
+    <main class="coming-soon-content">
+        <div class="coming-soon-text">Coming Soon</div>
+        <p class="coming-soon-description">
+            We're working on educational materials and guides for Freedom Tech. Check back soon for tutorials, documentation, and resources.
         </p>
-        <div class="error-links">
-            <a href="/" class="error-link error-link-primary">Back to Home</a>
-            <a href="/classes-events/" class="error-link">Explore Classes & Events</a>
-        </div>
     </main>
 
     <!-- Footer -->
@@ -174,7 +92,7 @@
                 </svg>
             </a>
             <a href="https://primal.net/p/nprofile1qqsrzwgcg39ck26lc3e2yfjhntgcecnlgy9evsuxrfsxx6p46r5s3pgzdvhyj" target="_blank" class="footer-social-link" aria-label="Nostr">
-                <img src="static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon">
+                <img src="../static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon">
             </a>
             <a href="https://x.com/freedomlabnyc" target="_blank" class="footer-social-link" aria-label="X">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg">
@@ -218,7 +136,6 @@
             });
         });
     </script>
-    <script src="js/social-config.js"></script>
+    <script src="../js/social-config.js"></script>
 </body>
 </html>
-
