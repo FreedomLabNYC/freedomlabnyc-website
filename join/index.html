@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Join Freedom Lab NYC as a member - support Freedom Tech education and community building in New York City. Multiple membership tiers available.">
     <title>Join | Freedom Lab NYC</title>
-    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/join.css">
+    <link rel="icon" href="../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/join.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=block" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=block" rel="stylesheet">
 </head>
 <body>
     <!-- Mobile Overlay -->
@@ -18,14 +19,14 @@
     
     <!-- Header -->
     <header class="header">
-        <a href="index.html" class="logo">
-            <img src="static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+        <a href="/" class="logo">
+            <img src="../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
         </a>
         <nav class="nav-menu" id="navMenu">
-            <a href="classes-events.html" class="nav-link">Classes & Events</a>
-            <a href="https://freedomlab.nyc/classes/" class="nav-link" target="_blank">Resources</a>
-            <a href="contact.html" class="nav-link">Contact</a>
-            <a href="join.html" class="nav-btn">Join</a>
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="https://freedomlabnyc.github.io/classes/" class="nav-link" target="_blank">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/join/" class="nav-btn">Join</a>
         </nav>
         <div class="hamburger" id="hamburger">
             <span></span>
@@ -41,10 +42,28 @@
 
     <!-- Main Content -->
     <main class="join-content">
+        <!-- Subscribe Section -->
+        <section class="subscribe-section">
+            <div class="section-box">
+                <h2>Subscribe for Early Access</h2>
+                <p class="section-description">Get notified about upcoming classes, workshops, and community events before the general public.</p>
+                
+                <form class="subscribe-form" action="https://formspree.io/f/xqarbwyr" method="POST">
+                    <div class="form-row">
+                        <input type="text" name="firstName" placeholder="First name" required>
+                        <input type="text" name="lastName" placeholder="Last name" required>
+                    </div>
+                    <input type="email" name="email" placeholder="Email address" required>
+                    <button type="submit" class="subscribe-btn">Subscribe</button>
+                    <p class="subscribe-success" style="display: none;">Thank you for subscribing!</p>
+                </form>
+            </div>
+        </section>
+
         <!-- Membership Section -->
         <section class="membership-section">
             <div class="section-box">
-                <h2>Become a Member <span class="coming-soon">(COMING SOON)</span></h2>
+                <h2>Become a Member</h2>
                 <p class="section-description">Support Freedom Lab NYC and help us make Freedom Tech accessible to everyone.</p>
                 
                 <div class="pricing-grid">
@@ -59,7 +78,7 @@
                             <li>50% off classes, workshops, and events</li>
                             <li>Members are grandfathered in to this price tier in the event of a price raise</li>
                         </ul>
-                        <a href="#" class="join-tier-btn join-tier-btn-green">Join Now</a>
+                        <span class="join-tier-btn join-tier-btn-green coming-soon-btn">Coming Soon</span>
                     </div>
 
                     <!-- Tier 2 -->
@@ -73,7 +92,7 @@
                             <li>100% off classes, workshops, and events</li>
                             <li>Members are grandfathered in to this price tier in the event of a price raise</li>
                         </ul>
-                        <a href="#" class="join-tier-btn join-tier-btn-green">Join Now</a>
+                        <span class="join-tier-btn join-tier-btn-green coming-soon-btn">Coming Soon</span>
                     </div>
 
                     <!-- Tier 3 (Featured) -->
@@ -88,27 +107,9 @@
                             <li>Join the list of founding members on our website and other commemorative items</li>
                             <li>Members are grandfathered in to this price tier in the event of a price raise</li>
                         </ul>
-                        <a href="#" class="join-tier-btn join-tier-btn-featured">Join Now</a>
+                        <span class="join-tier-btn join-tier-btn-featured coming-soon-btn">Coming Soon</span>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Subscribe Section -->
-        <section class="subscribe-section">
-            <div class="section-box">
-                <h2>Subscribe for Early Access</h2>
-                <p class="section-description">Get notified about upcoming classes, workshops, and community events before anyone else.</p>
-                
-                <form class="subscribe-form" action="https://formspree.io/f/xqarbwyr" method="POST">
-                    <div class="form-row">
-                        <input type="text" name="firstName" placeholder="First name" required>
-                        <input type="text" name="lastName" placeholder="Last name" required>
-                    </div>
-                    <input type="email" name="email" placeholder="Email address" required>
-                    <button type="submit" class="subscribe-btn">Subscribe</button>
-                    <p class="subscribe-success" style="display: none;">Thank you for subscribing!</p>
-                </form>
             </div>
         </section>
     </main>
@@ -151,14 +152,14 @@
                 </svg>
             </a>
             <a href="https://primal.net/p/nprofile1qqsrzwgcg39ck26lc3e2yfjhntgcecnlgy9evsuxrfsxx6p46r5s3pgzdvhyj" target="_blank" class="footer-social-link" aria-label="Nostr">
-                <img src="static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon">
+                <img src="../static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon">
             </a>
-            <a href="https://x.com/BTCNetworkNYC" target="_blank" class="footer-social-link" aria-label="X">
+            <a href="https://x.com/freedomlabnyc" target="_blank" class="footer-social-link" aria-label="X">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
             </a>
-            <a href="https://www.linkedin.com/company/the-bitcoin-network-nyc/" target="_blank" class="footer-social-link" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/company/freedom-lab-nyc/" target="_blank" class="footer-social-link" aria-label="LinkedIn">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
@@ -230,6 +231,7 @@
             subscribeObserver.observe(el);
         });
     </script>
+    <script src="../js/social-config.js"></script>
 </body>
 </html>
 
