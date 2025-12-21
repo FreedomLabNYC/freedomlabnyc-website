@@ -23,6 +23,10 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 body {
     font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--bg-dark);
@@ -30,6 +34,7 @@ body {
     line-height: 1.6;
     min-height: 100vh;
     overflow-x: hidden;
+    position: relative;
 }
 
 a {
@@ -973,7 +978,7 @@ a:hover {
     .nav-menu {
         position: fixed;
         top: 0;
-        right: -280px;
+        right: 0;
         width: 280px;
         height: 100vh;
         background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
@@ -983,12 +988,15 @@ a:hover {
         padding: 5rem 2rem 2rem;
         gap: 0;
         z-index: 100;
-        transition: right 0.3s ease;
+        transition: transform 0.3s ease;
         border-left: 1px solid var(--border);
+        transform: translateX(100%);
+        visibility: hidden;
     }
     
     .nav-menu.active {
-        right: 0;
+        transform: translateX(0);
+        visibility: visible;
     }
     
     .nav-menu .nav-link,
