@@ -1,0 +1,137 @@
+/* === Thank You Page Styles === */
+
+.thankyou-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+    min-height: calc(100vh - 400px);
+    justify-content: center;
+}
+
+/* === Section Box === */
+.thankyou-content .section-box {
+    background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 3rem;
+    margin: 0 auto;
+    max-width: 700px;
+    text-align: center;
+}
+
+/* === Dashed Background Pattern === */
+.thankyou-content .dashed-background {
+    position: relative;
+    overflow: hidden;
+}
+.thankyou-content .dashed-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 3% 45% / 35px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 92% 50% / 45px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 25% 55% / 20px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 70% 48% / 30px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 12% 85% / 35px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 78% 88% / 40px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 55% 92% / 25px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 62% 78% / 35px 2px no-repeat;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+}
+.thankyou-content .dashed-background > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* === Thank You Icon === */
+.thankyou-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    color: var(--secondary);
+}
+
+.thankyou-content .section-box h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.thankyou-content .section-description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+/* === Back Link === */
+.back-home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--secondary);
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 2px solid var(--secondary);
+    border-radius: var(--radius);
+    transition: all 0.3s ease;
+}
+
+.back-home-link:hover {
+    background: var(--secondary);
+    color: var(--bg-dark);
+}
+
+.back-home-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* === Entrance Animations === */
+.animate-ready .thankyou-content .section-box {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animate-ready .thankyou-content .section-box.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .thankyou-content {
+        padding: 1rem;
+    }
+    
+    .thankyou-content .section-box {
+        padding: 2rem 1.5rem;
+        margin: 0 0.5rem;
+    }
+    
+    .thankyou-content .section-box h2 {
+        font-size: 1.5rem;
+    }
+    
+    .thankyou-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .back-home-link {
+        padding: 0.85rem 1.5rem;
+        font-size: 1rem;
+        min-height: 48px;
+    }
+}

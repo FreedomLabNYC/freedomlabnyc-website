@@ -1,0 +1,233 @@
+/* === Donate Page Styles === */
+
+.donate-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* === Section Box === */
+.donate-content .section-box {
+    background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    margin: 0 2rem;
+}
+
+/* === Dashed Background Pattern === */
+.donate-content .dashed-background {
+    position: relative;
+    overflow: hidden;
+}
+.donate-content .dashed-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 3% 45% / 35px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 92% 50% / 45px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 25% 55% / 20px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 70% 48% / 30px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 12% 85% / 35px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 78% 88% / 40px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 55% 92% / 25px 2px no-repeat,
+        linear-gradient(90deg, #32D011 100%, #32D011 100%) 62% 78% / 35px 2px no-repeat;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+}
+.donate-content .dashed-background > * {
+    position: relative;
+    z-index: 1;
+}
+
+.donate-content .section-box h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.donate-content .section-description {
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* === Donation Form Container === */
+.donation-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* === BTCPay Form Overrides === */
+.donation-form-container .btcpay-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.donation-form-container .btcpay-custom-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.donation-form-container .btcpay-input-price {
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    text-align: center;
+    width: 180px;
+}
+
+.donation-form-container .btcpay-input-price:focus {
+    outline: none;
+    border-color: var(--secondary);
+}
+
+.donation-form-container select[name="currency"] {
+    background: var(--bg-input);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    cursor: pointer;
+    min-width: 100px;
+}
+
+.donation-form-container select[name="currency"]:focus {
+    outline: none;
+    border-color: var(--secondary);
+}
+
+.donation-form-container .btcpay-input-range {
+    width: 200px;
+    margin: 0.5rem 0;
+}
+
+.donation-form-container button.submit {
+    background: var(--secondary) !important;
+    color: var(--bg-dark) !important;
+    border: none !important;
+    padding: 1rem 2rem !important;
+    border-radius: var(--radius) !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    min-width: 200px !important;
+    justify-content: center !important;
+}
+
+.donation-form-container button.submit:hover {
+    background: #4ae025 !important;
+    transform: translateY(-2px);
+}
+
+.donation-form-container button.submit span {
+    color: var(--bg-dark) !important;
+    font-weight: 700 !important;
+}
+
+.donation-form-container button.submit img {
+    height: 28px !important;
+    filter: brightness(0);
+}
+
+/* === Why Donate Section === */
+.why-donate-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.why-donate-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-elevated);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.why-donate-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--secondary);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.why-donate-item p {
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* === Entrance Animations === */
+.animate-ready .donate-content .section-box {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animate-ready .donate-content .section-box.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .donate-content {
+        padding: 1rem;
+    }
+    
+    .donate-content .section-box {
+        padding: 1.5rem;
+        margin: 0 0.5rem;
+    }
+    
+    .donate-content .section-box h2 {
+        font-size: 1.35rem;
+    }
+    
+    .donation-form-container .btcpay-input-price {
+        font-size: 1.5rem;
+        width: 150px;
+    }
+    
+    .donation-form-container button.submit {
+        min-width: 180px !important;
+        padding: 0.85rem 1.5rem !important;
+        font-size: 1rem !important;
+    }
+    
+    .why-donate-item {
+        padding: 0.85rem;
+    }
+}

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Support Freedom Lab NYC - donate to help us continue providing Freedom Tech education and community resources in NYC.">
+    <title>Donate | Freedom Lab NYC</title>
+    <link rel="icon" href="../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/donate.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=block" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=block" rel="stylesheet">
+    <style>
+        .btcpay-form { display: inline-flex; align-items: center; justify-content: center; } .btcpay-form--inline { flex-direction: row; } .btcpay-form--block { flex-direction: column; } .btcpay-form--inline .submit { margin-left: 15px; } .btcpay-form--block select { margin-bottom: 10px; } .btcpay-form .btcpay-custom-container{ text-align: center; }.btcpay-custom { display: flex; align-items: center; justify-content: center; } .btcpay-form .plus-minus { cursor:pointer; font-size:25px; line-height: 25px; background: #DFE0E1; height: 30px; width: 45px; border:none; border-radius: 60px; margin: auto 5px; display: inline-flex; justify-content: center; } .btcpay-form select { -moz-appearance: none; -webkit-appearance: none; appearance: none; color: currentColor; background: transparent; border:1px solid transparent; display: block; padding: 1px; margin-left: auto; margin-right: auto; font-size: 11px; cursor: pointer; } .btcpay-form select:hover { border-color: #ccc; } .btcpay-form option { color: #000; background: rgba(0,0,0,.1); }
+        input[type=range].btcpay-input-range { -webkit-appearance:none; width:100%; background: transparent; } input[type=range].btcpay-input-range:focus { outline:0; } input[type=range].btcpay-input-range::-webkit-slider-runnable-track { width:100%; height:3.1px; cursor:pointer; box-shadow:0 0 1.7px #020,0 0 0 #003c00; background:#f3f3f3; border-radius:1px; border:0; } input[type=range].btcpay-input-range::-webkit-slider-thumb { box-shadow:none; border:2.5px solid #32D011; height:22px; width:22px; border-radius:50%; background:#0a0a0a; cursor:pointer; -webkit-appearance:none; margin-top:-9.45px } input[type=range].btcpay-input-range:focus::-webkit-slider-runnable-track { background:#fff; } input[type=range].btcpay-input-range::-moz-range-track { width:100%; height:3.1px; cursor:pointer; box-shadow:0 0 1.7px #020,0 0 0 #003c00; background:#f3f3f3; border-radius:1px; border:0; } input[type=range].btcpay-input-range::-moz-range-thumb { box-shadow:none; border:2.5px solid #32D011; height:22px; width:22px; border-radius:50%; background:#0a0a0a; cursor:pointer; } input[type=range].btcpay-input-range::-ms-track { width:100%; height:3.1px; cursor:pointer; background:0 0; border-color:transparent; color:transparent; } input[type=range].btcpay-input-range::-ms-fill-lower { background:#e6e6e6; border:0; border-radius:2px; box-shadow:0 0 1.7px #020,0 0 0 #003c00; } input[type=range].btcpay-input-range::-ms-fill-upper { background:#f3f3f3; border:0; border-radius:2px; box-shadow:0 0 1.7px #020,0 0 0 #003c00; } input[type=range].btcpay-input-range::-ms-thumb { box-shadow:none; border:2.5px solid #32D011; height:22px; width:22px; border-radius:50%; background:#0a0a0a; cursor:pointer; height:3.1px; } input[type=range].btcpay-input-range:focus::-ms-fill-lower { background:#f3f3f3; } input[type=range].btcpay-input-range:focus::-ms-fill-upper { background:#fff; }
+    </style>
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="logo">
+            <img src="../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+        </a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="https://freedomlabnyc.github.io/classes/" class="nav-link" target="_blank">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link active">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Donate</h1>
+    </section>
+
+    <!-- Main Content -->
+    <main class="donate-content">
+        <!-- Donation Form Section -->
+        <section class="donate-section">
+            <div class="section-box dashed-background">
+                <h2>Support Our Mission</h2>
+                <p class="section-description">Your donation helps us continue providing Freedom Tech education, hosting community events, and building a more sovereign future together.</p>
+                
+                <div class="donation-form-container">
+                    <form method="POST" action="https://btcpay.freedomlab.nyc/api/v1/invoices" class="btcpay-form btcpay-form--block">
+                        <input type="hidden" name="storeId" value="Cfd8fkouRCqasW7CysoVR31Lf9Xbb8zJVYJsbRHGbpwv" />
+                        <input type="hidden" name="checkoutDesc" value="Thank you for supporting us!" />
+                        <input type="hidden" name="browserRedirect" value="https://freedomlab.nyc/thankyou" />
+                        <input type="hidden" name="notifyEmail" value="alexandre@pecorilla.us" />
+                        <div class="btcpay-custom-container">
+                            <input class="btcpay-input-price" type="number" name="price" min="1" max="200" step="1" value="10" data-price="10" style="width:180px;" />
+                            <select name="currency">
+                                <option value="USD" selected>USD</option>
+                                <option value="GBP">GBP</option>
+                                <option value="EUR">EUR</option>
+                                <option value="BTC">BTC</option>
+                            </select>
+                            <input type="range" class="btcpay-input-range" min="1" max="200" step="1" value="10" style="width:200px;margin-bottom:15px;" />
+                        </div>
+                        <button type="submit" class="submit" name="submit" title="Pay with BTCPay Server, a Self-Hosted Bitcoin Payment Processor">
+                            <span>Donate with</span>
+                            <img src="https://btcpay.freedomlab.nyc/img/paybutton/logo.svg" alt="BTCPay">
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Donate Section -->
+        <section class="why-section">
+            <div class="section-box">
+                <h2>Why Donate?</h2>
+                <p class="section-description">Your contribution directly supports our community initiatives.</p>
+                
+                <div class="why-donate-list">
+                    <div class="why-donate-item">
+                        <svg class="why-donate-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                        </svg>
+                        <p><strong>Education:</strong> Freedom Tech workshops and classes for the NYC community.</p>
+                    </div>
+                    <div class="why-donate-item">
+                        <svg class="why-donate-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                        <p><strong>Community:</strong> Meetups and events that connect Freedom Tech enthusiasts and experts.</p>
+                    </div>
+                    <div class="why-donate-item">
+                        <svg class="why-donate-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                        <p><strong>Resources:</strong> Educational materials, equipment, and infrastructure for hands-on learning.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-social">
+            <a href="/contact/" class="footer-social-link" aria-label="Email">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg">
+                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+            </a>
+            <a href="https://primal.net/p/nprofile1qqsrzwgcg39ck26lc3e2yfjhntgcecnlgy9evsuxrfsxx6p46r5s3pgzdvhyj" target="_blank" class="footer-social-link" aria-label="Nostr">
+                <img src="../static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon">
+            </a>
+            <a href="https://x.com/freedomlabnyc" target="_blank" class="footer-social-link" aria-label="X">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/freedom-lab-nyc/" target="_blank" class="footer-social-link" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // BTCPay slider/input sync
+        function handleSliderChange(event) {
+            event.preventDefault();
+            const root = event.target.closest('.btcpay-form');
+            const el = root.querySelector('.btcpay-input-price');
+            const price = parseInt(el.value);
+            const min = parseInt(event.target.getAttribute('min')) || 1;
+            const max = parseInt(event.target.getAttribute('max'));
+            if (price < min) {
+                el.value = min;
+            } else if (price > max) {
+                el.value = max;
+            }
+            root.querySelector('.btcpay-input-range').value = el.value;
+        }
+        function handleSliderInput(event) {
+            event.target.closest('.btcpay-form').querySelector('.btcpay-input-price').value = event.target.value;
+        }
+        document.querySelectorAll(".btcpay-form .btcpay-input-range").forEach(function(el) {
+            if (!el.dataset.initialized) {
+                el.addEventListener('input', handleSliderInput);
+                el.dataset.initialized = true;
+            }
+        });
+        document.querySelectorAll(".btcpay-form .btcpay-input-price").forEach(function(el) {
+            if (!el.dataset.initialized) {
+                el.addEventListener('change', handleSliderChange);
+                el.dataset.initialized = true;
+            }
+        });
+        
+        function handlePriceInput(event) {
+            event.preventDefault();
+            const root = event.target.closest('.btcpay-form');
+            const price = parseInt(event.target.dataset.price);
+            if (isNaN(event.target.value)) root.querySelector('.btcpay-input-price').value = price;
+            const min = parseInt(event.target.getAttribute('min')) || 1;
+            const max = parseInt(event.target.getAttribute('max'));
+            if (event.target.value < min) {
+                event.target.value = min;
+            } else if (event.target.value > max) {
+                event.target.value = max;
+            }
+        }
+        document.querySelectorAll(".btcpay-form .btcpay-input-price").forEach(function(el) {
+            if (!el.dataset.initialized) {
+                el.addEventListener('input', handlePriceInput);
+                el.dataset.initialized = true;
+            }
+        });
+    </script>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Enable animations
+        document.body.classList.add('animate-ready');
+        
+        // Entrance animations for all section boxes (staggered)
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        document.querySelectorAll('.donate-content .section-box').forEach((el, i) => {
+            setTimeout(() => {
+                sectionObserver.observe(el);
+            }, i * 100);
+        });
+    </script>
+    <script src="../js/social-config.js"></script>
+</body>
+</html>
