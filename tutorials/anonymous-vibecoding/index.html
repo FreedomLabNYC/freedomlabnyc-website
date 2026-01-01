@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Set up a fully anonymous AI code editor with zero KYC requirements using Monero, VSCodium, and Cline.">
+    <title>Anonymous Vibecoding: The Ultimate Zero-KYC Guide | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide"></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/tutorials/" class="nav-link active">Tutorials</a>
+            <a href="https://freedomlabnyc.github.io/classes/" class="nav-link" target="_blank">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/tutorials/">Tutorials</a><span>›</span><span>Anonymous Vibecoding</span>
+            </div>
+            <h1 class="tutorial-title">Anonymous Vibecoding: The Ultimate Zero-KYC Guide</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-tag">Privacy</span>
+                <span class="tutorial-tag">AI</span>
+                <span class="tutorial-tag">Linux</span>
+            </div>
+        </div>
+
+        <nav class="tutorial-toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#what-are-ai-code-editors">What are AI code editors?</a></li>
+                <li><a href="#the-catch">The Catch</a></li>
+                <li><a href="#what-we-will-set-up">What we will set up</a></li>
+                <li><a href="#step-1-getting-monero">Step 1 - Getting Monero (XMR)</a></li>
+                <li><a href="#step-2-protect-your-ip">Step 2 - Protect your IP</a></li>
+                <li><a href="#step-3-protect-your-computer">Step 3 - Protect your computer</a></li>
+                <li><a href="#step-4-install-vscodium">Step 4 - Install VSCodium</a></li>
+                <li><a href="#step-5-install-cline">Step 5 - Install Cline</a></li>
+                <li><a href="#step-6-get-an-api-key">Step 6 - Get an API Key on OpenRouter.ai</a></li>
+                <li><a href="#step-7-finish-configuring-cline">Step 7 - Finish configuring Cline</a></li>
+                <li><a href="#step-8-start-vibecoding">Step 8 - Start Vibecoding</a></li>
+            </ol>
+        </nav>
+
+        <section class="tutorial-section" id="introduction">
+            <h2>Introduction</h2>
+            <p>AI code editors are a total game changer. Not only do they fast-track the development of new apps, but they also unlock a new era of experimentation and prototyping, a trend often called "vibecoding."</p>
+            <p>The biggest shift, however, is accessibility: they allow creative people to bypass technical barriers and finally bring their ideas to cyberspace.</p>
+        </section>
+
+        <section class="tutorial-section" id="what-are-ai-code-editors">
+            <h2>What are AI code editors?</h2>
+            <p>Code editors, and their more advanced counterparts known as IDEs (Integrated Development Environments), offer a unified interface with all the tools needed to build applications. They function as an all-in-one workspace, but you usually need to be technical to use them.</p>
+            <p>Now, they are enhanced with AI. In the sidebar, an agent acts as the orchestrator. You type instructions in plain English, and the agent translates them into code. It's like having a developer sitting next to you, bridging the gap between your requirements and the actual build. You no longer need to be technical to create digital applications.</p>
+            <p>Right now, the clear market leaders are Cursor, Windsurf, and Replit.</p>
+            <p>Their pricing is usage-based. You load up a balance and pay for every prompt you send. You can also switch between models on the fly. Premium AIs cost more but handle complex tasks better, while standard ones save you money. You pay only for the intelligence you need.</p>
+        </section>
+
+        <section class="tutorial-section" id="the-catch">
+            <h2>The Catch</h2>
+            <p>To use these tools, you are forced to hand over your legal identity. You can't just use them anonymously; you must register an account and provide sensitive data such as:</p>
+            <ul>
+                <li>Legal Name</li>
+                <li>Address</li>
+                <li>Credit Card Information</li>
+            </ul>
+            <p>On top of that, they log your IP address and usually block privacy tools like Tor and VPNs.</p>
+            <p>This destroys true freedom. You cannot safely build disruptive tools or challenge the status quo when every prompt you type is linked to your "legal" identity. Knowing that your work is permanently traceable forces you to self-censor, limiting your creativity and potential.</p>
+        </section>
+
+        <section class="tutorial-section" id="what-we-will-set-up">
+            <h2>What we will set up</h2>
+            <p>In this tutorial, we will replicate the exact setup of market leaders like Cursor and Windsurf, but without the identity tracking.</p>
+            <p>Anonymity without performance and ease of use cannot win in the long run. You will keep access to all AI models, including the best-performing commercial ones like Claude and ChatGPT. Crucially, we preserve the seamless user experience found in commercial tools. You get the same power and ease of use, but you are untraceable.</p>
+            <p>However, there is a caveat. Since we still continue to rely on remote models, any provider you choose (whether it is OpenAI, Anthropic, or others) will continue to receive your code and prompts. They might use them for training or steal your idea. So in that sense, there is no difference from using commercial tools. It is simply too expensive and complex for most people to run models locally, and for now, if we talk purely about performance, proprietary models are still the best and we need to be pragmatic.</p>
+            <p>But, like we said, with the setup we will use, they won't be able to trace anything back to your "legal" identity. In a world of AI, the code itself holds less value than your freedom to build it anonymously.</p>
+            <p><em>Note: We cover running AI models locally or on controlled servers in our <a href="/tutorials/self-host-ai/">Self-Host AI Models</a> tutorial.</em></p>
+        </section>
+
+        <section class="tutorial-section" id="step-1-getting-monero">
+            <h2>Step 1 - Getting Monero (XMR)</h2>
+            <p>Monero is a private and untraceable cryptocurrency, essentially a "dark bitcoin." When you transact in Monero, nobody can see who you are transacting with or the amounts involved. (<a href="https://www.getmonero.org/" target="_blank">getmonero.org</a>)</p>
+            <img src="assets/monero.jpeg" alt="Monero Explained" style="max-width: 600px;">
+            <p>First, get yourself a wallet (<a href="https://www.getmonero.org/downloads/" target="_blank">download</a>) and backup your seed safely.</p>
+
+            <h3>Option 1: The KYC Route (If available)</h3>
+            <p>Buy Monero from a centralized exchange if it is available in your region.</p>
+            <ul>
+                <li>Withdraw immediately to the wallet you just created.</li>
+                <li><strong>Critical:</strong> The exchange knows your "legal" identity and will link it to the withdrawal address you used. Never publish this address online and never reuse it (always generate a new "sub-address" for new withdrawals).</li>
+                <li>Once the funds are in your wallet, the link is broken. Future transactions are untraceable and cannot be linked back to you.</li>
+            </ul>
+
+            <h3>Option 2: The No-KYC Route</h3>
+            <p>If you can't use a standard exchange (or just don't want to), use an instant swap service.</p>
+            <ul>
+                <li><strong>How:</strong> Use a site like <a href="https://changenow.io/exchange?from=btc&to=xmr" target="_blank">ChangeNow</a>.</li>
+                <li>You send them Bitcoin (or almost any other crypto), and they send the equivalent in XMR (minus a small fee) straight to the wallet you just created.</li>
+                <li>No account or ID is required.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="step-2-protect-your-ip">
+            <h2>Step 2 - Protect your IP</h2>
+            <p>Even if you use Monero and don't provide any personal info, your IP address can and will still be used to trace you. So you must hide it.</p>
+
+            <h3>Option 1: VPN</h3>
+            <p>For low to moderate threat models, use a VPN with a kill switch enabled to prevent any leaks.</p>
+            <p><a href="https://mullvad.net/en" target="_blank">Mullvad</a> is a good one; they don't require any personal info and they accept Monero.</p>
+
+            <h3>Option 2: Tor</h3>
+            <p>For a high threat model, use Tor. The Tor Browser alone won't be enough since our AI code editor won't be running in a browser. You want your entire traffic to be routed through Tor.</p>
+            <p>For this, you can use <a href="https://www.whonix.org/" target="_blank">Whonix</a> in a virtual machine or <a href="https://tails.net/" target="_blank">Tails</a> on a USB stick. They force Tor for the entire operating system, so your traffic can never leak.</p>
+            <p><strong>No matter which option you choose, ensure that every single step you take from now on is routed strictly through your VPN or Tor connection.</strong> See our <a href="/tutorials/tor-vs-vpn/">Tor vs VPN</a> guide to help you decide.</p>
+        </section>
+
+        <section class="tutorial-section" id="step-3-protect-your-computer">
+            <h2>Step 3 - Protect your computer</h2>
+            <p>Everything we've done in Step 1 and Step 2 won't matter if you use closed-source operating systems like Windows or macOS. These operating systems are proprietary; they track user activity, and features like Windows Recall are designed to capture screenshots of your activity.</p>
+            <p>Ideally, you should run Linux with minimal or no proprietary software. <a href="https://ubuntu.com/" target="_blank">Ubuntu</a> or <a href="https://www.debian.org/" target="_blank">Debian</a> are the best options for beginners.</p>
+        </section>
+
+        <section class="tutorial-section" id="step-4-install-vscodium">
+            <h2>Step 4 - Install VSCodium</h2>
+            <p>Cursor, Windsurf, and similar tools are all based on Microsoft's proprietary software, Visual Studio Code.</p>
+            <p>VSCodium is a free, open-source version of Visual Studio Code with all of Microsoft's telemetry removed.</p>
+            <img src="assets/vscodium.png" alt="VSCodium" style="max-width: 600px;">
+            <ul>
+                <li><a href="https://vscodium.com/" target="_blank">vscodium.com</a></li>
+                <li><a href="https://github.com/VSCodium/vscodium/" target="_blank">GitHub</a></li>
+                <li><a href="https://github.com/VSCodium/vscodium/releases" target="_blank">Releases</a></li>
+            </ul>
+            <p>Download and install it.</p>
+        </section>
+
+        <section class="tutorial-section" id="step-5-install-cline">
+            <h2>Step 5 - Install Cline</h2>
+            <p>Cline is a free, open-source AI agent that transforms VSCodium from a basic code editor into a fully autonomous AI editor. (<a href="https://github.com/cline/cline" target="_blank">GitHub</a>)</p>
+            <img src="assets/vscodium_cline_extension.png" alt="Cline Extension" style="max-width: 600px;">
+            <ol>
+                <li>In VSCodium, click the <strong>Extensions</strong> icon on the left sidebar.</li>
+                <li>Search for "Cline" and install it.</li>
+            </ol>
+            <p>Cline will now appear in the sidebar. You do not need to create an account. Simply select the option to configure your own API key (should be "Bring my own API key"). Leave it there for now.</p>
+        </section>
+
+        <section class="tutorial-section" id="step-6-get-an-api-key">
+            <h2>Step 6 - Get an API Key on OpenRouter.ai</h2>
+            <p>Cline itself is just an empty agent; it needs to connect to an AI model to function. For this, we must choose a provider, get an API key, and add funds to our balance.</p>
+            <p>OpenRouter is a unified interface that gives you access to almost every AI model (including Claude and GPT) through a single API key and supports crypto payments. (<a href="https://openrouter.ai/" target="_blank">openrouter.ai</a>)</p>
+            <img src="assets/openrouter.jpg" alt="OpenRouter" style="max-width: 600px;">
+
+            <h3>Create an account</h3>
+            <p>Sign up to OpenRouter.ai with a fake email. If you want a reusable one with a good privacy track record, use <a href="https://tuta.com/" target="_blank">Tuta</a>.</p>
+            <p><strong>Note:</strong> Tuta often blocks signups from VPNs or Tor to prevent bot spam. You can bypass this by upgrading to a paid account. Since Tuta does not accept crypto directly, you must buy a <strong>Tuta Gift Card</strong> using Monero from <a href="https://monerica.com/businesses/email-providers-forwarders/tuta-e-mail" target="_blank">one of these resellers</a>, and then redeem it to upgrade your account anonymously.</p>
+
+            <h3>Add a fake address</h3>
+            <p>OpenRouter requires an address for compliance purposes. Use a <a href="https://www.fakexy.com/" target="_blank">fake address generator</a>; they don't verify it in any way.</p>
+
+            <h3>Install MetaMask</h3>
+            <p>MetaMask is a free, open-source, and self-custodial wallet that is supported by OpenRouter to let you pay for credits. (<a href="https://metamask.io/" target="_blank">metamask.io</a>)</p>
+            <p>Install the MetaMask browser extension. <strong>Do not</strong> log in with Google or any other account; strictly select "Create a new wallet" to generate your own secret key. (<a href="https://metamask.io/download" target="_blank">download</a>)</p>
+
+            <h3>Exchange Monero for Ethereum</h3>
+            <p>On ChangeNow, swap your Monero for Ethereum (ETH) (or any other crypto supported by MetaMask) and send it to your MetaMask address. (<a href="https://changenow.io/exchange?from=xmr&to=eth" target="_blank">swap XMR to ETH</a>)</p>
+            <p>Because your MetaMask wallet is anonymous and the funds originated from Monero, the money is effectively untraceable to you.</p>
+
+            <h3>Get credits</h3>
+            <ol>
+                <li>Go to <a href="https://openrouter.ai/settings/credits" target="_blank">openrouter.ai/settings/credits</a>.</li>
+                <li>Check "<strong>Use crypto</strong>" and enter the amount you want to add.</li>
+                <li>Click "<strong>Purchase</strong>".</li>
+            </ol>
+            <p>Choose the MetaMask option. The payment window will trigger your extension; connect your wallet and confirm the transaction. After a short wait, your balance will be credited.</p>
+
+            <h3>Get an API key</h3>
+            <p>Go to <a href="https://openrouter.ai/settings/keys" target="_blank">openrouter.ai/settings/keys</a> and create a new API key. Copy it immediately.</p>
+        </section>
+
+        <section class="tutorial-section" id="step-7-finish-configuring-cline">
+            <h2>Step 7 - Finish configuring Cline</h2>
+            <p>Return to Cline where we left off.</p>
+            <ol>
+                <li><strong>API Provider:</strong> Select "<strong>OpenRouter</strong>", then paste your API key below.</li>
+                <li><strong>Model:</strong> Choose a default model of your choice (you can change this later in the settings).</li>
+                <li><strong>Optional:</strong> Enable "<strong>Thinking</strong>" for better performance and adjust the token amount if desired.</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="step-8-start-vibecoding">
+            <h2>Step 8 - Start Vibecoding</h2>
+            <p>You are all set.</p>
+            <p>Click the Cline icon in the left sidebar to open the chat interface. You can now type your first prompt (e.g., "Create a simple snake game in Python").</p>
+            <p><strong>Note:</strong> By default, Cline will ask for your permission before running any command or editing any file. This is a security feature. You can approve actions individually or configure "Auto-approve" settings if you want it to work faster.</p>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/tutorials/" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Tutorials</a>
+        </nav>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-social">
+            <a href="/contact/" class="footer-social-link" aria-label="Email"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+            <a href="https://primal.net/p/nprofile1qqsrzwgcg39ck26lc3e2yfjhntgcecnlgy9evsuxrfsxx6p46r5s3pgzdvhyj" target="_blank" class="footer-social-link" aria-label="Nostr"><img src="../../static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon"></a>
+            <a href="https://x.com/freedomlabnyc" target="_blank" class="footer-social-link" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/company/freedom-lab-nyc/" target="_blank" class="footer-social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        </div>
+    </footer>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        // Image lightbox
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = '<img src="" alt="">';
+        document.body.appendChild(lightbox);
+        const lightboxImg = lightbox.querySelector('img');
+        document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    </script>
+</body>
+</html>
