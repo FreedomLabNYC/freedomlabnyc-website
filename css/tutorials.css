@@ -1,5 +1,50 @@
 /* === Tutorials Page Styles === */
 
+/* === Support Banner === */
+.tutorial-support-banner {
+    background: linear-gradient(135deg, rgba(247, 147, 26, 0.08) 0%, rgba(247, 147, 26, 0.03) 100%);
+    border: 1px solid rgba(247, 147, 26, 0.2);
+    border-radius: 8px;
+    padding: 0.875rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.tutorial-support-banner svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    color: #f7931a;
+}
+
+.tutorial-support-banner p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.tutorial-support-banner a {
+    color: #f7931a;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+.tutorial-support-banner a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .tutorial-support-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
+
 .tutorials-content {
     display: flex;
     flex-direction: column;
