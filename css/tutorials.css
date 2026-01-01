@@ -27,14 +27,13 @@
 
 .tutorial-support-banner a {
     color: #f7931a;
-    text-decoration: none;
+    text-decoration: underline;
     font-weight: 500;
     transition: opacity 0.2s ease;
 }
 
 .tutorial-support-banner a:hover {
     opacity: 0.8;
-    text-decoration: underline;
 }
 
 @media (max-width: 600px) {

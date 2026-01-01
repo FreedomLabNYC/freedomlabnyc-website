@@ -28,14 +28,13 @@
 
 .tutorial-support-banner a {
     color: #f7931a;
-    text-decoration: none;
+    text-decoration: underline;
     font-weight: 500;
     transition: opacity 0.2s ease;
 }
 
 .tutorial-support-banner a:hover {
     opacity: 0.8;
-    text-decoration: underline;
 }
 
 @media (max-width: 600px) {
@@ -57,6 +56,15 @@
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border);
+}
+
+.tutorial-header a:not(.tutorial-breadcrumb a) {
+    color: var(--secondary);
+    text-decoration: underline;
+}
+
+.tutorial-header a:not(.tutorial-breadcrumb a):hover {
+    opacity: 0.8;
 }
 
 .tutorial-breadcrumb {
@@ -236,13 +244,12 @@
 
 .tutorial-section a {
     color: var(--secondary);
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s ease;
+    text-decoration: underline;
+    transition: opacity 0.2s ease;
 }
 
 .tutorial-section a:hover {
-    border-bottom-color: var(--secondary);
+    opacity: 0.8;
 }
 
 /* === Lists === */
