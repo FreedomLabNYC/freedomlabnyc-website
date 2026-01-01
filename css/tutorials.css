@@ -1,0 +1,383 @@
+/* === Tutorials Page Styles === */
+
+.tutorials-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 3rem;
+}
+
+/* === Hero Section === */
+.tutorials-hero {
+    background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.tutorials-hero h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 2.16rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.tutorials-hero p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* === Filters Section === */
+.tutorials-filters-section {
+    padding: 0 2rem;
+}
+
+.tutorials-filters-container {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* === Search Box === */
+.tutorials-search-box {
+    position: relative;
+    width: 100%;
+}
+
+.tutorials-search-box input {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    padding-right: 3rem;
+    background: var(--bg-input);
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.tutorials-search-box input:focus {
+    outline: none;
+    border-color: var(--secondary);
+    box-shadow: 0 0 20px rgba(50, 208, 17, 0.15);
+}
+
+.tutorials-search-box input::placeholder {
+    color: var(--text-muted);
+}
+
+.tutorials-search-box .search-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    color: var(--secondary);
+    pointer-events: none;
+}
+
+/* === Tags Filter === */
+.tutorials-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.tags-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tag-pill {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-family: 'Space Grotesk', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tag-pill:hover {
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
+.tag-pill.active {
+    background: var(--secondary);
+    border-color: var(--secondary);
+    color: var(--bg-dark);
+    font-weight: 500;
+}
+
+/* === Tutorials Grid Section === */
+.tutorials-grid-section {
+    padding: 0 2rem;
+}
+
+.tutorials-grid-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* === Empty State === */
+.tutorials-empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.tutorials-empty-state .empty-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    color: var(--secondary);
+    opacity: 0.7;
+}
+
+.tutorials-empty-state .empty-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.tutorials-empty-state h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.tutorials-empty-state p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* === Tutorials Grid === */
+.tutorials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* === Tutorial Card === */
+.tutorial-card {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.tutorial-card:hover {
+    border-color: var(--secondary);
+    box-shadow: 0 4px 20px rgba(50, 208, 17, 0.1);
+    transform: translateY(-2px);
+}
+
+.tutorial-card-header {
+    background: #161b22;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border-bottom: 1px solid #30363d;
+}
+
+.tutorial-card-tag {
+    font-size: 0.7rem;
+    color: var(--secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    background: rgba(50, 208, 17, 0.1);
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid rgba(50, 208, 17, 0.25);
+}
+
+.tutorial-card-body {
+    padding: 1.25rem;
+}
+
+.tutorial-card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.tutorial-card-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.tutorial-card-title a:hover {
+    color: var(--secondary);
+}
+
+.tutorial-card-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tutorial-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.tutorial-card-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.tutorial-card-meta svg {
+    width: 14px;
+    height: 14px;
+}
+
+.tutorial-card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tutorial-card-link:hover {
+    color: #4ae025;
+}
+
+.tutorial-card-link .arrow {
+    transition: transform 0.2s ease;
+}
+
+.tutorial-card-link:hover .arrow {
+    transform: translateX(3px);
+}
+
+/* === No Results State === */
+.tutorials-no-results {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--text-muted);
+    display: none;
+}
+
+.tutorials-no-results.visible {
+    display: block;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    .tutorials-hero {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .tutorials-hero h1 {
+        font-size: 1.44rem;
+        line-height: 1.4;
+    }
+    
+    .tutorials-hero p {
+        font-size: 1rem;
+    }
+    
+    .tutorials-filters-section,
+    .tutorials-grid-section {
+        padding: 0 1rem;
+    }
+    
+    .tutorials-search-box input {
+        padding: 0.85rem 1rem;
+        padding-right: 2.75rem;
+        font-size: 0.95rem;
+        min-height: 48px;
+    }
+    
+    .tag-pill {
+        padding: 0.5rem 0.85rem;
+        font-size: 0.85rem;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+    
+    .tutorials-empty-state {
+        padding: 3rem 1.5rem;
+    }
+    
+    .tutorials-empty-state .empty-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .tutorials-empty-state h3 {
+        font-size: 1.25rem;
+    }
+    
+    .tutorials-empty-state p {
+        font-size: 0.95rem;
+    }
+    
+    .tutorials-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .tutorials-hero h1 {
+        font-size: 1.2rem;
+    }
+    
+    .tags-list {
+        gap: 0.4rem;
+    }
+    
+    .tag-pill {
+        padding: 0.45rem 0.75rem;
+        font-size: 0.8rem;
+    }
+}
