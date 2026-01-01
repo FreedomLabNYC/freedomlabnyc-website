@@ -509,6 +509,16 @@
             currentSearch = e.target.value.toLowerCase();
             filterTutorials();
         });
+
+        // Make entire tutorial card clickable
+        document.querySelectorAll('.tutorial-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const link = card.querySelector('.tutorial-card-title a');
+                if (link) {
+                    window.location.href = link.href;
+                }
+            });
+        });
     </script>
     <script src="../js/social-config.js"></script>
 </body>
