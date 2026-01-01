@@ -64,15 +64,17 @@
                     <span class="tags-label">Filter by topic:</span>
                     <div class="tags-list">
                         <button class="tag-pill active" data-tag="all">All</button>
-                        <button class="tag-pill" data-tag="privacy">Privacy</button>
-                        <button class="tag-pill" data-tag="encryption">Encryption</button>
-                        <button class="tag-pill" data-tag="bitcoin">Bitcoin</button>
-                        <button class="tag-pill" data-tag="mining">Mining</button>
                         <button class="tag-pill" data-tag="linux">Linux</button>
                         <button class="tag-pill" data-tag="self-hosting">Self-hosting</button>
-                        <button class="tag-pill" data-tag="ai">AI</button>
-                        <button class="tag-pill" data-tag="nostr">Nostr</button>
+                        <button class="tag-pill" data-tag="privacy">Privacy</button>
+                        <button class="tag-pill" data-tag="bitcoin">Bitcoin</button>
+                        <button class="tag-pill" data-tag="security">Security</button>
+                        <button class="tag-pill" data-tag="encryption">Encryption</button>
                         <button class="tag-pill" data-tag="networking">Networking</button>
+                        <button class="tag-pill" data-tag="mining">Mining</button>
+                        <button class="tag-pill" data-tag="ai">AI</button>
+                        <button class="tag-pill" data-tag="lightning">Lightning</button>
+                        <button class="tag-pill" data-tag="hardware-wallet">Hardware Wallet</button>
                     </div>
                 </div>
             </div>
@@ -430,17 +432,19 @@
         // Tutorial filtering
         const tutorialCards = document.querySelectorAll('.tutorial-card');
         const noResults = document.getElementById('tutorialsNoResults');
-        let currentTag = 'all';
+        let selectedTags = new Set();
         let currentSearch = '';
 
         function filterTutorials() {
             let visibleCount = 0;
             tutorialCards.forEach(card => {
-                const tags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+                const cardTags = card.dataset.tags ? card.dataset.tags.split(',') : [];
                 const title = card.querySelector('.tutorial-card-title').textContent.toLowerCase();
                 const description = card.querySelector('.tutorial-card-description').textContent.toLowerCase();
                 
-                const matchesTag = currentTag === 'all' || tags.includes(currentTag);
+                // Match if no tags selected OR card has ALL selected tags
+                const matchesTag = selectedTags.size === 0 || 
+                    [...selectedTags].every(tag => cardTags.includes(tag));
                 const matchesSearch = !currentSearch || 
                     title.includes(currentSearch) || 
                     description.includes(currentSearch);
@@ -456,13 +460,37 @@
             noResults.style.display = visibleCount === 0 ? 'block' : 'none';
         }
 
-        // Tag Filter Functionality
+        // Tag Filter Functionality (multi-select)
         const tagPills = document.querySelectorAll('.tag-pill');
+        const allPill = document.querySelector('.tag-pill[data-tag="all"]');
+        
         tagPills.forEach(pill => {
             pill.addEventListener('click', () => {
-                tagPills.forEach(p => p.classList.remove('active'));
-                pill.classList.add('active');
-                currentTag = pill.dataset.tag;
+                const tag = pill.dataset.tag;
+                
+                if (tag === 'all') {
+                    // Clear all selections
+                    selectedTags.clear();
+                    tagPills.forEach(p => p.classList.remove('active'));
+                    allPill.classList.add('active');
+                } else {
+                    // Toggle this tag
+                    allPill.classList.remove('active');
+                    
+                    if (selectedTags.has(tag)) {
+                        selectedTags.delete(tag);
+                        pill.classList.remove('active');
+                    } else {
+                        selectedTags.add(tag);
+                        pill.classList.add('active');
+                    }
+                    
+                    // If no tags selected, activate "All"
+                    if (selectedTags.size === 0) {
+                        allPill.classList.add('active');
+                    }
+                }
+                
                 filterTutorials();
             });
         });
