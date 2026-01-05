@@ -13,8 +13,7 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=block" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=block" rel="stylesheet">
     <style>
-        .btcpay-form { display: inline-flex; align-items: center; justify-content: center; } .btcpay-form--inline { flex-direction: row; } .btcpay-form--block { flex-direction: column; } .btcpay-form--inline .submit { margin-left: 15px; } .btcpay-form--block select { margin-bottom: 10px; } .btcpay-form .btcpay-custom-container{ text-align: center; }.btcpay-custom { display: flex; align-items: center; justify-content: center; } .btcpay-form .plus-minus { cursor:pointer; font-size:25px; line-height: 25px; background: #DFE0E1; height: 30px; width: 45px; border:none; border-radius: 60px; margin: auto 5px; display: inline-flex; justify-content: center; } .btcpay-form select { -moz-appearance: none; -webkit-appearance: none; appearance: none; color: currentColor; background: transparent; border:1px solid transparent; display: block; padding: 1px; margin-left: auto; margin-right: auto; font-size: 11px; cursor: pointer; } .btcpay-form select:hover { border-color: #ccc; } .btcpay-form option { color: #000; background: rgba(0,0,0,.1); }
-        input[type=range].btcpay-input-range { -webkit-appearance:none; width:100%; background: transparent; } input[type=range].btcpay-input-range:focus { outline:0; } input[type=range].btcpay-input-range::-webkit-slider-runnable-track { width:100%; height:3.1px; cursor:pointer; box-shadow:0 0 1.7px #020,0 0 0 #003c00; background:#f3f3f3; border-radius:1px; border:0; } input[type=range].btcpay-input-range::-webkit-slider-thumb { box-shadow:none; border:2.5px solid #32D011; height:22px; width:22px; border-radius:50%; background:#0a0a0a; cursor:pointer; -webkit-appearance:none; margin-top:-9.45px } input[type=range].btcpay-input-range:focus::-webkit-slider-runnable-track { background:#fff; } input[type=range].btcpay-input-range::-moz-range-track { width:100%; height:3.1px; cursor:pointer; box-shadow:0 0 1.7px #020,0 0 0 #003c00; background:#f3f3f3; border-radius:1px; border:0; } input[type=range].btcpay-input-range::-moz-range-thumb { box-shadow:none; border:2.5px solid #32D011; height:22px; width:22px; border-radius:50%; background:#0a0a0a; cursor:pointer; } input[type=range].btcpay-input-range::-ms-track { width:100%; height:3.1px; cursor:pointer; background:0 0; border-color:transparent; color:transparent; } input[type=range].btcpay-input-range::-ms-fill-lower { background:#e6e6e6; border:0; border-radius:2px; box-shadow:0 0 1.7px #020,0 0 0 #003c00; } input[type=range].btcpay-input-range::-ms-fill-upper { background:#f3f3f3; border:0; border-radius:2px; box-shadow:0 0 1.7px #020,0 0 0 #003c00; } input[type=range].btcpay-input-range::-ms-thumb { box-shadow:none; border:2.5px solid #32D011; height:22px; width:22px; border-radius:50%; background:#0a0a0a; cursor:pointer; height:3.1px; } input[type=range].btcpay-input-range:focus::-ms-fill-lower { background:#f3f3f3; } input[type=range].btcpay-input-range:focus::-ms-fill-upper { background:#fff; }
+        .btcpay-form { display: inline-flex; align-items: center; justify-content: center; } .btcpay-form--inline { flex-direction: row; } .btcpay-form--block { flex-direction: column; } .btcpay-form--inline .submit { margin-left: 15px; } .btcpay-form--block select { margin-bottom: 10px; } .btcpay-form .btcpay-custom-container{ text-align: center; }.btcpay-custom { display: flex; align-items: center; justify-content: center; } .btcpay-form .plus-minus { cursor:pointer; font-size:25px; line-height: 25px; background: #DFE0E1; height: 30px; width: 45px; border:none; border-radius: 60px; margin: auto 5px; display: inline-flex; justify-content: center; } .btcpay-form select { -moz-appearance: none; -webkit-appearance: none; appearance: none; color: currentColor; background: transparent; border:1px solid transparent; display: block; padding: 1px; margin-left: auto; margin-right: auto; font-size: 11px; cursor: pointer; } .btcpay-form select:hover { border-color: #ccc; } .btcpay-form option { color: #000; background: rgba(0,0,0,.1); } .btcpay-input-price { -moz-appearance: textfield; border: none; box-shadow: none; text-align: center; font-size: 25px; margin: auto; border-radius: 5px; line-height: 35px; background: #fff; }.btcpay-input-price::-webkit-outer-spin-button, .btcpay-input-price::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
 <body>
@@ -57,18 +56,19 @@
                 <div class="donation-form-container">
                     <form method="POST" action="https://btcpay.freedomlab.nyc/api/v1/invoices" class="btcpay-form btcpay-form--block">
                         <input type="hidden" name="storeId" value="Cfd8fkouRCqasW7CysoVR31Lf9Xbb8zJVYJsbRHGbpwv" />
+                        <input type="hidden" name="orderId" value="website_donation" />
                         <input type="hidden" name="checkoutDesc" value="Thank you for supporting us!" />
-                        <input type="hidden" name="browserRedirect" value="https://freedomlab.nyc/thankyou" />
-                        <input type="hidden" name="notifyEmail" value="alexandre@pecorilla.us" />
+                        <input type="hidden" name="browserRedirect" value="https://freedomlab.nyc/thankyou/" />
                         <div class="btcpay-custom-container">
-                            <input class="btcpay-input-price" type="number" name="price" min="1" max="200" step="1" value="10" data-price="10" style="width:180px;" />
+                            <div class="btcpay-custom">
+                                <input class="btcpay-input-price" type="number" name="price" min="1" max="1000000" step="1" value="10" data-price="10" />
+                            </div>
                             <select name="currency">
                                 <option value="USD" selected>USD</option>
                                 <option value="GBP">GBP</option>
                                 <option value="EUR">EUR</option>
                                 <option value="BTC">BTC</option>
                             </select>
-                            <input type="range" class="btcpay-input-range" min="1" max="200" step="1" value="10" style="width:200px;margin-bottom:15px;" />
                         </div>
                         <button type="submit" class="submit" name="submit" title="Pay with BTCPay Server, a Self-Hosted Bitcoin Payment Processor">
                             <span>Donate with</span>
@@ -140,37 +140,7 @@
     </footer>
 
     <script>
-        // BTCPay slider/input sync
-        function handleSliderChange(event) {
-            event.preventDefault();
-            const root = event.target.closest('.btcpay-form');
-            const el = root.querySelector('.btcpay-input-price');
-            const price = parseInt(el.value);
-            const min = parseInt(event.target.getAttribute('min')) || 1;
-            const max = parseInt(event.target.getAttribute('max'));
-            if (price < min) {
-                el.value = min;
-            } else if (price > max) {
-                el.value = max;
-            }
-            root.querySelector('.btcpay-input-range').value = el.value;
-        }
-        function handleSliderInput(event) {
-            event.target.closest('.btcpay-form').querySelector('.btcpay-input-price').value = event.target.value;
-        }
-        document.querySelectorAll(".btcpay-form .btcpay-input-range").forEach(function(el) {
-            if (!el.dataset.initialized) {
-                el.addEventListener('input', handleSliderInput);
-                el.dataset.initialized = true;
-            }
-        });
-        document.querySelectorAll(".btcpay-form .btcpay-input-price").forEach(function(el) {
-            if (!el.dataset.initialized) {
-                el.addEventListener('change', handleSliderChange);
-                el.dataset.initialized = true;
-            }
-        });
-        
+        // BTCPay price input handler
         function handlePriceInput(event) {
             event.preventDefault();
             const root = event.target.closest('.btcpay-form');

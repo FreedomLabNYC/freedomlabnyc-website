@@ -86,16 +86,24 @@
     gap: 0.75rem;
 }
 
+.donation-form-container .btcpay-custom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
 .donation-form-container .btcpay-input-price {
-    background: var(--bg-input);
-    border: 1px solid var(--border);
-    color: var(--text-primary);
+    background: var(--bg-input) !important;
+    border: 1px solid var(--border) !important;
+    color: var(--text-primary) !important;
     font-size: 2rem;
     font-weight: 600;
     padding: 0.5rem 1rem;
-    border-radius: var(--radius);
+    border-radius: var(--radius) !important;
     text-align: center;
-    width: 180px;
+    width: 220px;
+    min-width: 220px;
 }
 
 .donation-form-container .btcpay-input-price:focus {
@@ -119,10 +127,6 @@
     border-color: var(--secondary);
 }
 
-.donation-form-container .btcpay-input-range {
-    width: 200px;
-    margin: 0.5rem 0;
-}
 
 .donation-form-container button.submit {
     background: var(--secondary) !important;
@@ -218,7 +222,8 @@
     
     .donation-form-container .btcpay-input-price {
         font-size: 1.5rem;
-        width: 150px;
+        width: 170px;
+        min-width: 170px;
     }
     
     .donation-form-container button.submit {
