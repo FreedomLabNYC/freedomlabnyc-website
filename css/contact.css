@@ -205,6 +205,41 @@
     font-weight: 500;
 }
 
+/* === PGP Info Banner === */
+.pgp-info-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(50, 208, 17, 0.08);
+    border: 1px solid rgba(50, 208, 17, 0.25);
+    border-radius: var(--radius);
+}
+
+.pgp-info-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--secondary);
+}
+
+.pgp-info-banner p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.pgp-info-banner a {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+.pgp-info-banner a:hover {
+    text-decoration: underline;
+}
+
 /* === Entrance Animations === */
 .animate-ready .contact-content .section-box {
     opacity: 0;
