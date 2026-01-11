@@ -128,6 +128,18 @@ a:hover {
     color: var(--bg-dark);
 }
 
+.nav-link-onion {
+    color: #7D4698;
+    border: 1px solid #7D4698;
+    padding: 0.3rem 0.6rem;
+    border-radius: var(--radius);
+}
+
+.nav-link-onion:hover {
+    color: #9b59b6;
+    border-color: #9b59b6;
+}
+
 .auth-section {
     display: flex;
     align-items: center;
@@ -1006,6 +1018,11 @@ a:hover {
         margin-top: 1rem;
         justify-content: center;
         border-bottom: none;
+    }
+    
+    .nav-menu .nav-link-onion {
+        border: none;
+        padding: 1rem 0;
     }
     
     /* Header adjustments */

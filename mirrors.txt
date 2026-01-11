@@ -1,0 +1,13 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+http://2iyutqpfixbdpgwd7so7zuodvqqanpjssv54fyqaessxfv6z3d7egjyd.onion
+https://freedomlab.nyc/
+info@freedomlab.nyc
+-----BEGIN PGP SIGNATURE-----
+
+iHUEARYKAB0WIQRtv6CDcGiO9wynMVxAHHC0ruovvQUCaWP9QwAKCRBAHHC0ruov
+vXpqAQCBms7Hznb9dLYdcqNm2fyeMdcEjAKAS06QcTr3WQStHQD+O7iR77yy51iw
+kKNVyFmq0P3ZQm+3F4JfBRTIgEOZ7w8=
+=xHoV
+-----END PGP SIGNATURE-----
