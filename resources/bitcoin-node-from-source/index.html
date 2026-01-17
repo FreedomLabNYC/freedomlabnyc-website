@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Setup your own Bitcoin node from source on a Raspberry Pi. Advanced tutorial covering Bitcoin Core compilation, Electrs, and BTC RPC Explorer.">
+    <title>Setup your Bitcoin node from source | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide"></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="http://2iyutqpfixbdpgwd7so7zuodvqqanpjssv54fyqaessxfv6z3d7egjyd.onion" class="nav-link nav-link-onion" target="_blank">Onion Site</a>
+            <a href="/join/" class="nav-btn">Join</a>
+            
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+        <div class="tutorial-support-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <p>These tutorials are written by Freedom Lab members in their free time. If you find them helpful, please consider <a href="/donate/">supporting our work</a>.</p>
+        </div>
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>Setup your Bitcoin node from source</span>
+            </div>
+            <h1 class="tutorial-title">Setup your Bitcoin node from source</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Tutorial</span>
+                <span class="tutorial-tag">Bitcoin</span>
+                <span class="tutorial-tag">Linux</span>
+                <span class="tutorial-tag">Self-hosting</span>
+            </div>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>This tutorial is for advanced users with good technical skills. For a more guided setup, consider using <a href="/resources/bitcoin-node-umbrel/">Umbrel OS</a> instead.</p></div></div>
+            <p class="tutorial-intro">In this tutorial we setup our own Bitcoin node from scratch! What is covered:</p>
+            <ul>
+                <li>Buy, assemble and flash a Raspberry Pi</li>
+                <li>Download, compile and install the original Bitcoin Core software</li>
+                <li>Download, compile and install a modern Electrum server in Rust</li>
+                <li>Connect your wallets to your node through the Tor protocol</li>
+            </ul>
+            <div class="callout callout-note"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div class="callout-content"><p>We assume the reader might not own their internet connection or have access to the router's admin interface. Therefore, this guide defaults to a Tor-only setup.</p></div></div>
+            <h4>Credits</h4>
+            <p>This tutorial would have not been possible without <a href="https://theroadtonode.com/" target="_blank">TheRoadToNode</a> and <a href="https://github.com/harrybawsac" target="_blank">Harry Bawsac</a>.</p>
+        </div>
+        <nav class="tutorial-toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#hardware-list">Hardware List</a></li>
+                <li><a href="#flash-raspberry-pi-os">Flash Raspberry Pi OS</a></li>
+                <li><a href="#assemble-the-hardware">Assemble the hardware</a></li>
+                <li><a href="#ssh-into-the-pi">SSH into the Pi</a></li>
+                <li><a href="#prepare-the-system">Prepare the system</a></li>
+                <li><a href="#install-bitcoin-core">Install Bitcoin Core</a></li>
+                <li><a href="#configure-bitcoin-core">Configure Bitcoin Core</a></li>
+                <li><a href="#start-bitcoin-core">Start Bitcoin Core</a></li>
+                <li><a href="#setup-electrs">Setup Electrs</a></li>
+                <li><a href="#setup-btc-rpc-explorer">Setup BTC RPC Explorer</a></li>
+                <li><a href="#connect-wallets">Connect wallets</a></li>
+                <li><a href="#update-process">Update Process</a></li>
+            </ol>
+        </nav>
+        <section class="tutorial-section" id="hardware-list">
+            <h2>Hardware List</h2>
+            <div class="callout callout-note"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div class="callout-content"><p>If you don't want to use a Pi then just ssh into an old laptop or VPS and fast forward to <a href="#prepare-the-system">Prepare the system</a>.</p></div></div>
+            <p>This is the hardware I use in this tutorial:</p>
+            <ul>
+                <li>Raspberry Pi 5 or Raspberry Pi 4 <strong>with 8GB of RAM</strong></li>
+                <li>2TB portable SSD</li>
+            </ul>
+            <p>You'll find that on Amazon or anywhere else.</p>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>Unlike the Umbrel method, this approach does not require a separate microSD card for the OS. Everything will be flashed and installed directly onto the portable SSD.</p></div></div>
+        </section>
+
+        <section class="tutorial-section" id="flash-raspberry-pi-os">
+            <h2>Flash Raspberry Pi OS</h2>
+            <h3>Download Pi Imager</h3>
+            <p>To flash the OS onto the portable SSD we will use a software utility called <em><strong>Raspberry Pi Imager</strong></em>. You can download it <a href="https://www.raspberrypi.com/software/" target="_blank">here</a>.</p>
+            <h3>Choose OS image</h3>
+            <p>Now connect the portable SSD to your computer and launch the Pi Imager. First you have to select 3 options:</p>
+            <ul>
+                <li><strong>Raspberry Pi Device</strong>: Choose <em>Raspberry Pi 5</em> or <em>Raspberry Pi 4</em> depending on the model you use.</li>
+                <li><strong>Operating System</strong>: Choose <em>Raspberry Pi OS Lite (64-bit)</em></li>
+                <li><strong>Storage</strong>: Select your portable SSD</li>
+            </ul>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>Raspberry Pi OS Lite does not include a GUI or extra utilities, allowing us to conserve system resources.</p></div></div>
+            <h3>Apply custom settings</h3>
+            <p>Click on <em><strong>Next</strong></em>. The imager will now show a popup to ask you if you want to apply customisation settings. Click on <em><strong>Edit Settings.</strong></em></p>
+            <h4>General Tab</h4>
+            <ul>
+                <li>Set a hostname for the Pi on your local network</li>
+                <li>Set a username and password (this will create a new user)</li>
+                <li>Add your Wi-fi settings (that way the Pi will auto-connect at boot)</li>
+                <li>Set locale settings by inputing your timezone and keyboard layout</li>
+            </ul>
+            <h4>Services Tab</h4>
+            <p>In the previous tab, we ensured the creation of a new user and automatic Wi-Fi connection at boot. In this tab, we will set up an SSH service to enable direct login to the Pi after it boots.</p>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>We won't use password authentication. It's better practice and safer to use public-key authentication.</p></div></div>
+            <p>First we must generate a pair of keys for our user:</p>
+            <pre><code>ssh-keygen -t ed25519 -C "youremail@whatever.com"</code></pre>
+            <p>Next we must copy the content of the public key (<code>*.pub</code>). Now in the <em><strong>Services</strong></em> tab of the Pi Imager:</p>
+            <ul>
+                <li>Click <em><strong>Enable SSH</strong></em></li>
+                <li>Choose <em><strong>Allow public-key authentication only</strong></em></li>
+                <li>Copy the content of the public key</li>
+            </ul>
+            <p>Click <em><strong>Save</strong></em>, we are now done with the customizations.</p>
+            <h3>Flash the OS</h3>
+            <p>Back on the customisation popup, click <em><strong>Yes</strong></em> to apply the settings you just inputed. Click <em><strong>Yes</strong></em> again to flash the OS onto the SSD.</p>
+            <p>Once it's done, safely eject the SSD from your computer.</p>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>Make sure to safely backup your user credentials and your SSH private key.</p></div></div>
+        </section>
+
+        <section class="tutorial-section" id="assemble-the-hardware">
+            <h2>Assemble the hardware</h2>
+            <p>Plug the portable SSD into a USB 3.0 port on the Pi, then connect the Pi to power. Wait approximately 10 minutes for the installation process and the first boot to complete.</p>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>The Pi 4 and Pi 5 should automatically detect and boot from the portable SSD without requiring any manual configuration.</p></div></div>
+        </section>
+
+        <section class="tutorial-section" id="ssh-into-the-pi">
+            <h2>SSH into the Pi</h2>
+            <p>You can now connect to your Pi via SSH using the private key you created previously:</p>
+            <pre><code>ssh -i your_private_key username@hostname.local</code></pre>
+            <p>or</p>
+            <pre><code>ssh -i your_private_key username@IP</code></pre>
+        </section>
+
+        <section class="tutorial-section" id="prepare-the-system">
+            <h2>Prepare the system</h2>
+            <h3>Update the system</h3>
+            <pre><code>sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre>
+            <h3>Disable SSH Password Login</h3>
+            <p>In the SSH configuration, make sure password login is disabled (<code>PasswordAuthentication no</code>)</p>
+            <pre><code>sudo cat /etc/ssh/sshd_config | grep PasswordAuthentication</code></pre>
+            <h3>Setup a firewall</h3>
+            <p>We need to setup a firewall to restrict inbound traffic for our node.</p>
+            <p>First we install it:</p>
+            <pre><code>sudo apt install ufw</code></pre>
+            <p>By default <code>ufw</code> denies all incoming traffic so we must allow inbound SSH traffic before we enable it:</p>
+            <pre><code>sudo ufw allow 22/tcp</code></pre>
+            <p>Now we can enable the firewall:</p>
+            <pre><code>sudo ufw enable</code></pre>
+            <p>We can check the status with those commands:</p>
+            <pre><code>sudo ufw status</code></pre>
+            <pre><code>sudo ufw status verbose</code></pre>
+            <h3>Install Tor</h3>
+            <p>Install Tor:</p>
+            <pre><code>sudo apt install tor</code></pre>
+            <p>Add your user:</p>
+            <pre><code>sudo usermod -a -G debian-tor your-user</code></pre>
+            <p>You must log out and log back in for the changes to take effect.</p>
+            <p>Finally we can enable Tor at boot and start it:</p>
+            <pre><code>sudo systemctl enable tor</code></pre>
+            <pre><code>sudo systemctl start tor</code></pre>
+            <h3>Install Bitcoin Core dependencies</h3>
+            <p>The following packages will be needed to install Bitcoin Core:</p>
+            <pre><code>sudo apt install git automake autoconf autotools-dev build-essential cmake make pkg-config protobuf-compiler libminiupnpc-dev libprotobuf-dev libdb++-dev libzmq3-dev libsqlite3-dev libboost-thread-dev libboost-test-dev libboost-all-dev libevent-dev libtool libssl-dev libboost-system-dev libboost-filesystem-dev capnproto libcapnp-dev</code></pre>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>If you get the error <code>Error: Unable to locate package libdb++-dev</code> then you must specify the version number. Run <code>apt search 'libdb.*++-dev'</code>and install the latest version displayed. Example: <code>libdb5.3++-dev</code></p></div></div>
+            <h3>Install Node.js</h3>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>This is only required if you plan to install <a href="https://github.com/janoside/btc-rpc-explorer" target="_blank">BTC RPC Explorer</a>.</p></div></div>
+            <p>The steps to install Node.js 23 are detailed <a href="https://github.com/nodesource/distributions?tab=readme-ov-file#using-ubuntu-nodejs-23" target="_blank">here</a>.</p>
+            <p>Install curl:</p>
+            <pre><code>sudo apt install curl</code></pre>
+            <p>Download the setup script:</p>
+            <pre><code>curl -fsSL https://deb.nodesource.com/setup_23.x -o nodesource_setup.sh</code></pre>
+            <p>Run it:</p>
+            <pre><code>sudo -E bash nodesource_setup.sh</code></pre>
+            <p>Install node:</p>
+            <pre><code>sudo apt install nodejs</code></pre>
+            <p>Verify the installation:</p>
+            <pre><code>node -v</code></pre>
+            <p>And also update npm to the latest version:</p>
+            <pre><code>sudo npm install -g npm@latest</code></pre>
+            <h3>Install Rust and Cargo</h3>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>This will be needed by the Electrum server if you plan on installing it.</p></div></div>
+            <p>Install dependencies:</p>
+            <pre><code>sudo apt install -y clang cmake</code></pre>
+            <p>Install Rust and Cargo:</p>
+            <pre><code>curl https://sh.rustup.rs -sSf | sh</code></pre>
+        </section>
+
+        <section class="tutorial-section" id="install-bitcoin-core">
+            <h2>Install Bitcoin Core</h2>
+            <h3>Get latest stable version</h3>
+            <p>First clone the repo:</p>
+            <pre><code>cd ~</code></pre>
+            <pre><code>git clone https://github.com/bitcoin/bitcoin.git</code></pre>
+            <p>Next we need to make sure to use the <strong>latest stable version</strong>. To find it, list the latest tags:</p>
+            <pre><code>cd bitcoin/</code></pre>
+            <pre><code>git describe --tags `git rev-list --tags --max-count=20`</code></pre>
+            <p>The output will look like this:</p>
+            <pre><code>v28.1
+v28.1rc2-6-g36314b8da2
+v28.1rc2-5-g58910279dc
+v28.1rc2-4-g6a68ef9bfb
+v28.1rc2-3-g5b368f88a9
+v28.1rc2-2-g05cd448e33
+v28.1rc2-1-g621c634b7f
+v28.1rc2
+v28.1rc1-10-g5576618152
+v28.1rc1-9-g01fe07a2ce
+v28.1rc1-8-g7ddfcf32da
+v28.1rc1-7-ge0b27b234c
+v28.1rc1-6-gbdc6b3e531
+v28.1rc1-5-ga0585b6087
+v28.1rc1-4-gbbde830b97
+v28.1rc1-3-g227642d5af
+v28.1rc1-2-gb8112cf422
+v28.1rc1-1-g2835158be0
+v28.1rc1
+v28.0-15-g8fef83a0a0</code></pre>
+            <p>From top (newest) to bottom (oldest) tags, the latest stable version is <code>v28.1</code>.</p>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>Stable versions are easily recognizable by their clean format, <strong>vX.Y</strong> (e.g., <strong>v28.1</strong>), with no additional suffixes like <code>rc</code> or commit metadata.</p></div></div>
+            <div class="callout callout-note"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div class="callout-content"><p>Versions with <code>rc</code> in their names are called release candidates (preliminary versions).</p></div></div>
+            <div class="callout callout-note"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div class="callout-content"><p>Some versions simply represent intermediate development states, serving as milestones.</p><p>The tag <code>v28.0-15-g8fef83a0a0</code> indicates version <strong>v28.0</strong> with <strong>15</strong> additional commits, followed by the short commit hash <strong>8fef83a0a0</strong>.</p></div></div>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>Alternatively you can find the latest stable version <a href="https://github.com/bitcoin/bitcoin/releases" target="_blank">here</a> and take note of the tag <a href="https://github.com/bitcoin/bitcoin/tags" target="_blank">here</a>.</p></div></div>
+            <p>Now we can switch to that version:</p>
+            <pre><code>git checkout &lt;version-tag&gt; # Example: git checkout v28.1</code></pre>
+            <h3>Configure, Compile and Install</h3>
+            <h4>For version 29 and after</h4>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>Since version 29, bitcoin switched to <strong>CMake</strong> to compile.</p></div></div>
+            <p>Create the configuration files:</p>
+            <pre><code>cmake -B build -DBUILD_GUI=OFF # OPTION 1: Wallet functionalty enabled
+cmake -B build -DBUILD_GUI=OFF -DENABLE_WALLET=OFF # OPTION 2: Wallet functionality disabled</code></pre>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>The wallet functionality lets the node manage its own keys, addresses, and transactions. Disabling it removes these features but still allows connection and use of external wallets for validation and broadcasting.</p></div></div>
+            <div class="callout callout-note"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div class="callout-content"><p>If you change your mind, just delete the <code>build/</code> directory and go again.</p></div></div>
+            <p>Now compile the source code:</p>
+            <pre><code>cmake --build build -j $(nproc)</code></pre>
+            <p>Finally, copy the binaries to system-wide directories:</p>
+            <pre><code>sudo cmake --install build</code></pre>
+            <h4>For version 28 and before</h4>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>Until version 28 included, bitcoin used <strong>autotools</strong> for compilation.</p></div></div>
+            <p>Create the configuration files:</p>
+            <pre><code>./autogen.sh</code></pre>
+            <p>Use <strong>one</strong> of the following two commands to apply the configuration files:</p>
+            <pre><code>./configure --without-gui # OPTION 1: Wallet functionalty enabled
+./configure --without-gui --disable-wallet # OPTION 2: Wallet functionality disabled</code></pre>
+            <p>Now compile the source code:</p>
+            <pre><code>make -j $(nproc)</code></pre>
+            <p>Finally, copy the binaries to system-wide directories:</p>
+            <pre><code>sudo make install</code></pre>
+            <h3>Verify Installation</h3>
+            <p>Run the following to verify the installation:</p>
+            <pre><code>bitcoin --version</code></pre>
+            <pre><code>bitcoind --version</code></pre>
+        </section>
+
+        <section class="tutorial-section" id="configure-bitcoin-core">
+            <h2>Configure Bitcoin Core</h2>
+            <h3>Base Configuration</h3>
+            <p>Let's create the needed files:</p>
+            <pre><code>cd ~</code></pre>
+            <pre><code>mkdir ~/.bitcoin</code></pre>
+            <pre><code>touch ~/.bitcoin/bitcoin.conf</code></pre>
+            <p>Add the following configuration to the <code>bitcoin.conf</code> file we just created:</p>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>With the configuration below the node will be accessible <strong>only on localhost and on the Tor network</strong>. Refer to <a href="https://theroadtonode.com/bitcoin-core/configure-and-start#configuration" target="_blank">the configuration file on this page</a> if you wish to also expose your node via IPv4/IPv6.</p></div></div>
+            <pre><code># Enable JSON-RPC API on port 8332
+server=1
+# Restrict JSON-RPC API to localhost only
+rpcbind=127.0.0.1
+rpcallowip=127.0.0.1
+# Run Bitcoin Core as a background daemon
+daemon=1
+# Accept incoming P2P traffic (port 8333) to be a full participant in the network 
+# If set to 0, other nodes can't sync from us, but we can still sync from them
+listen=1
+# Keep full index of all transactions, not just those of the node's wallet.
+# Uses more space but allows querying any transaction by its txid
+# We need it if we want to run an Electrum Server or a blockchain explorer
+txindex=1
+# Cache size in MBs. Lower it to 500 after the first blockchain sync is complete. 
+dbcache=3000
+# Run the node **only** on the Tor network
+onlynet=onion
+proxy=127.0.0.1:9050
+bind=127.0.0.1
+# Use native segwit addresses by default
+addresstype=bech32
+changetype=bech32
+</code></pre>
+            <h3>JSON-RPC API</h3>
+            <p>Bitcoin provides a control interface via a <strong>JSON-RPC API</strong> on port <strong>8332</strong>. We enabled with <code>server=1</code> in the <code>bitcoin.conf</code> file.</p>
+            <p>Other locally running applications that need to interact with Bitcoin's JSON-RPC API will use the cookie located at <code>~/.bitcoin/.cookie</code>.</p>
+            <p>If you ever want to connect remotely running applications to the JSON-RPC API, you can create a set of credentials with the command below:</p>
+            <pre><code>python3 ~/bitcoin/share/rpcauth/rpcauth.py &lt;username-of-your-choice&gt;</code></pre>
+            <p>Verify the output and append the mentioned line to the bottom of the <code>bitcoin.conf</code> file.</p>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>Save the plain text password securely because the line added to <code>bitcoin.conf</code> contains only the hash.</p></div></div>
+            <h3>Configure Tor</h3>
+            <p>Bitcoin Core and other applications you install will heavily rely on Tor to connect with peers and ensure our wallets remain accessible. <strong>Proper configuration is critical.</strong></p>
+            <h4>Tor-default Configuration</h4>
+            <p>Edit the default tor configuration file:</p>
+            <pre><code>sudo vim /etc/tor/torrc</code></pre>
+            <p>Add the following lines:</p>
+            <pre><code>SocksPort 9050
+ControlPort 9051
+CookieAuthentication 1
+CookieAuthFileGroupReadable 1</code></pre>
+            <ul>
+                <li><code>SocksPort</code> ⇒ SOCKS proxy, routes traffic through the Tor network</li>
+                <li><code>ControlPort</code> ⇒ Allows other programs to interact with the Tor daemon</li>
+                <li><code>CookieAuthentication</code> ⇒ Requires local cookie authentication to access the control port (<code>/run/tor/control.authcookie)</code></li>
+                <li><code>CookieAuthFileGroupReadable</code> ⇒ Only users in the <code>debian-tor</code> group can authenticate with the cookie</li>
+            </ul>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>This configuration restricts Tor's control port to only local programs launched by our user.</p></div></div>
+            <p>Now restart tor:</p>
+            <pre><code>sudo systemctl restart tor@default</code></pre>
+            <h4>Tor-Instance Configuration</h4>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>If you're using a different tor instance,the config above won't work because bitcoin won't be able to find the cookie auth file for the instance. So instead we will use password authentication to access the control port.</p></div></div>
+            <p>Choose a strong password, then generate a hash with tor:</p>
+            <pre><code>tor --hash-password "YourStrongPasswordHere"</code></pre>
+            <p>This will output a hash for the password specified, example:</p>
+            <pre><code>16:DCC57869A5B8899B60F099CCF421641762DDD9DEFBB385F28A2031CE3C</code></pre>
+            <p>Now edit your tor instance config like <code>/etc/tor/instances/tor4bitcoin/torrc</code> to add the following:</p>
+            <pre><code>SocksPort 9060
+ControlPort 9061
+HashedControlPassword
+16:DCC57869A5B8899B60F099CCF421641762DDD9DEFBB385F28A2031CE3C</code></pre>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>Replace ports 9060/9061 by whatever free port you want.</p></div></div>
+            <p>Now enable and start the tor instance:</p>
+            <pre><code>sudo systemctl enable --now tor@tor4bitcoin</code></pre>
+            <p>Next edit <code>~/.bitcoin/bitcoin.conf</code> and edit this line with the right tor socks port:</p>
+            <pre><code>proxy=127.0.0.1:9060</code></pre>
+            <p>Next add these lines. Make sure to add the right tor control port and the password you chose before.</p>
+            <pre><code>torcontrol=127.0.0.1:9061
+torpassword=YourStrongPasswordHere</code></pre>
+            <h4>Hidden Onion Service for the JSON-RPC API</h4>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p><strong>Exposing the RPC API is not recommended unless you fully understand the risks. It is a prime target for brute-force attacks and zero-day exploits. If compromised, an attacker could steal your Bitcoin IF you enabled the node's wallet and had funds in it.</strong></p></div></div>
+            <p>As configured, the JSON-RPC API is accessible only from localhost. To expose this port externally, you can <a href="https://theroadtonode.com/bitcoin-core/change-tor#rpc-via-tor" target="_blank">create a Tor service for it</a>.</p>
+            <h3>Configure systemd service</h3>
+            <p>Bitcoin Core's main program is <code>bitcoind</code> (short for Bitcoin Daemon). We will configure it as a <code>systemd</code> service to simplify management:</p>
+            <pre><code>sudo vim /etc/systemd/system/bitcoind.service</code></pre>
+            <p>Add the following:</p>
+            <pre><code>[Unit]
+Description=Bitcoin Daemon
+After=network.target
+
+[Service]
+User=your_user
+PIDFile=/home/your_user/.bitcoin/bitcoind.pid
+ExecStart=/usr/local/bin/bitcoind
+Restart=always
+TimeoutSec=120
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+            <ul>
+                <li>In <code>User=</code>, replace <code>your_user</code> with your own user</li>
+                <li>Do the same in the path of <code>PIDFile=</code></li>
+                <li>Verify the path of <code>ExecStart=</code> by running the command <code>which bitcoind</code></li>
+            </ul>
+            <p>Finally, reload systemd:</p>
+            <pre><code>sudo systemctl daemon-reload</code></pre>
+        </section>
+
+        <section class="tutorial-section" id="start-bitcoin-core">
+            <h2>Start Bitcoin Core</h2>
+            <h3>Startup</h3>
+            <p>Configure <code>bitcoind</code> to automatically start at boot:</p>
+            <pre><code>sudo systemctl enable bitcoind.service</code></pre>
+            <p>Start <code>bitcoind</code>:</p>
+            <pre><code>sudo systemctl start bitcoind.service</code></pre>
+            <h3>Initial Synchronization</h3>
+            <p>Your node will now connect to other peers to download and verify the entire blockchain, block by block, starting from <a href="https://mempool.space/block/000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f" target="_blank">the genesis block on January 3, 2009</a>.</p>
+            <div class="callout callout-note"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div class="callout-content"><p><strong>Sync is in progress. This operation may take 3 to 7 days to complete.</strong></p></div></div>
+            <h3>Monitoring</h3>
+            <h4>Logs</h4>
+            <p>To view the Bitcoin Core logs:</p>
+            <pre><code>tail -f ~/.bitcoin/debug.log</code></pre>
+            <p>You can monitor progress live by checking for <code>height=</code> or <code>progress=</code>.</p>
+            <h4>bitcoin-cli</h4>
+            <p><strong>bitcoin-cli</strong> is part of Bitcoin Core and serves as a command-line interface for the JSON-RPC API.</p>
+            <h4>Node Status</h4>
+            <p>You can use it to monitor the status of your node and the synchronization progress:</p>
+            <pre><code>bitcoin-cli -getinfo</code></pre>
+            <h4>Network Info</h4>
+            <p>You can use it to check your integration with the P2P network:</p>
+            <pre><code>bitcoin-cli getnetworkinfo</code></pre>
+            <p>If you're using Tor, note in the output how Bitcoin used the Tor control port to create an onion service for P2P on port 8333.</p>
+            <pre><code>[...]
+"localaddresses": [
+    {
+        "address": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.onion",
+        "port": 8333,
+        "score": 4
+    }
+[...]</code></pre>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>You can find the full list of <code>bitcoin-cli</code> commands <a href="https://chainquery.com/bitcoin-cli" target="_blank">here</a>.</p></div></div>
+            <h4>Blockchain Data</h4>
+            <p>Get the current block height:</p>
+            <pre><code>bitcoin-cli getblockcount</code></pre>
+            <p>Get some blockchain statstics:</p>
+            <pre><code>bitcoin-cli getblockchaininfo</code></pre>
+            <h3>Post Synchronization</h3>
+            <p>Once fully synchronized, edit Bitcoin's config file located at <code>~/.bitcoin/bitcoin.conf</code>, and lower the value of <code>dbcache</code> to <strong>500</strong>. Then, restart Bitcoin:</p>
+            <pre><code>sudo systemctl restart bitcoind.service</code></pre>
+        </section>
+
+        <section class="tutorial-section" id="setup-electrs">
+            <h2>Setup Electrs</h2>
+            <p>An Electrum server is an indexing layer built on top of Bitcoin Core. It enables more efficient blockchain queries and easier wallet connections. Most wallets support Electrum.</p>
+            <p>We're going to use <a href="https://github.com/romanz/electrs" target="_blank">Electrs</a>, a Rust implementation of an Electrum Server.</p>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>Make sure <a href="#prepare-the-system">Rust and Cargo are installed</a>.</p></div></div>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>Make sure your node is <a href="#start-bitcoin-core">100% synchronized</a> before proceeding.</p></div></div>
+            <h3>Install Electrs</h3>
+            <p>Clone the repo:</p>
+            <pre><code>cd ~</code></pre>
+            <pre><code>git clone https://github.com/romanz/electrs.git</code></pre>
+            <p>Source the env file to update your <code>$PATH</code> with Rust &amp; Cargo binaries:</p>
+            <pre><code>. "$HOME/.cargo/env"</code></pre>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>The binaries might already be in your PATH if Rust automatically added <code>."$HOME/.cargo/env"</code> to your <code>.profile</code>, <code>.bashrc</code>, or <code>.zshrc</code>.</p><p>You can verify this with the command:</p><p><code>grep -H '.cargo/env' ~/.bashrc ~/.zshrc ~/.profile</code></p></div></div>
+            <p>Now you can compile electrs:</p>
+            <pre><code>cd electrs</code></pre>
+            <pre><code>cargo build --locked --release</code></pre>
+            <p>Once it's done, test the compilation was successful by checking the version:</p>
+            <pre><code>~/electrs/target/release/electrs --version</code></pre>
+            <h3>Configure Electrs</h3>
+            <p>Create the configuration file:</p>
+            <pre><code>mkdir ~/.electrs &amp;&amp; mkdir ~/.electrs/db &amp;&amp; touch ~/.electrs/config.toml</code></pre>
+            <p>Add the following configuration to the <code>config.toml</code> file we just created:</p>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>With the configuration below the Electrum server will be accessible <strong>only on localhost and on the Tor network</strong>. Refer to <a href="https://theroadtonode.com/bitcoin-core-extensions/electrs#configuration" target="_blank">the configuration file on this page</a> if you wish to also expose your node via IPv4/IPv6.</p></div></div>
+            <pre><code>cookie_file = "/home/alex/.bitcoin/.cookie"
+daemon_rpc_addr = "127.0.0.1:8332"
+daemon_p2p_addr = "127.0.0.1:8333"
+db_dir = "/home/alex/.electrs/db"
+network = "bitcoin"
+electrum_rpc_addr = "127.0.0.1:50001"
+log_filters = "INFO"</code></pre>
+            <ul>
+                <li><code>cookie_file</code>: Electrs can use the Bitcoin JSON-RPC API with <a href="#configure-bitcoin-core">cookie authentication</a>.</li>
+                <li><code>daemon_rpc_addr</code>: Bitcoin JSON-RPC API address and port.</li>
+                <li><code>daemon_p2p_addr</code>: Bitcoin P2P address and port.</li>
+                <li><code>db_dir</code>: Directory where Electrs store its index file.</li>
+                <li><code>electrum_rpc_addr</code>: Electrum will run only on localhost, on port 50001.</li>
+            </ul>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>Using 127.0.0.1 ensures that only locally running applications and Tor traffic can access our Electrum server.</p></div></div>
+            <h3>Create Tor hidden service</h3>
+            <p>We need to create a Tor hidden service to connect our wallets to the Electrum server. Edit the conf file:</p>
+            <pre><code>sudo vim /etc/tor/torrc</code></pre>
+            <p>Add the following:</p>
+            <pre><code>HiddenServiceDir /var/lib/tor/electrs_hidden_service/
+HiddenServicePort 50001 127.0.0.1:50001</code></pre>
+            <p>Save it then restart tor:</p>
+            <pre><code>sudo systemctl restart tor</code></pre>
+            <h3>Configure systemd service</h3>
+            <p>Create the service file:</p>
+            <pre><code>sudo vim /etc/systemd/system/electrs.service</code></pre>
+            <p>Add the following:</p>
+            <pre><code>[Unit]
+Description=electrs
+Requires=bitcoind.service
+After=bitcoind.service
+[Service]
+WorkingDirectory=/home/your_user/electrs
+ExecStart=/home/your_user/electrs/target/release/electrs
+User=your_user
+Group=your_user
+Type=simple
+Restart=on-failure
+TimeoutSec=120
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+            <p>Line 6,7,8 and 9 make sure to replace <code>your_user</code> by your own user. Finally, reload systemd:</p>
+            <pre><code>sudo systemctl daemon-reload</code></pre>
+            <h3>Startup</h3>
+            <p>Configure <code>Electrs</code> to automatically start at boot:</p>
+            <pre><code>sudo systemctl enable electrs.service</code></pre>
+            <p>Start <code>Electrs</code>:</p>
+            <pre><code>sudo systemctl start electrs.service</code></pre>
+            <p>Electrum will now connect to Bitcoin Core to build its own index of the blockchain.</p>
+            <div class="callout callout-note"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div class="callout-content"><p><strong>Indexing is in progress. This operation may take 12 to 24 hours to complete.</strong></p></div></div>
+            <h3>Monitoring</h3>
+            <p>Check the logs and monitor progress in real time:</p>
+            <pre><code>journalctl -u electrs.service -f</code></pre>
+        </section>
+
+        <section class="tutorial-section" id="setup-btc-rpc-explorer">
+            <h2>Setup BTC RPC Explorer</h2>
+            <p>BTC RPC Explorer is essentially a web GUI for the Bitcoin JSON-RPC API. It is highly useful for node monitoring, management, and as a blockchain explorer.</p>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>Before you start make sure <a href="#prepare-the-system">you've installed Node.js</a>.</p></div></div>
+            <h3>Install BTC RPC Explorer</h3>
+            <h4>Get the latest stable release</h4>
+            <p>Clone the repo:</p>
+            <pre><code>cd ~</code></pre>
+            <pre><code>git clone https://github.com/janoside/btc-rpc-explorer.git</code></pre>
+            <pre><code>cd btc-rpc-explorer/</code></pre>
+            <p>Show the latest version tags:</p>
+            <pre><code>git describe --tags `git rev-list --tags --max-count=20`</code></pre>
+            <p>Switch to the latest stable version:</p>
+            <pre><code>git checkout -f &lt;version-tag&gt;</code></pre>
+            <h4>Install</h4>
+            <p>Update local dependencies within version ranges specified in package.json:</p>
+            <pre><code>npm update</code></pre>
+            <p>Install:</p>
+            <pre><code>npm install</code></pre>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>If you get an error try updating the following packages to their latest version instead:</p></div></div>
+            <pre><code>npm install zeromq@latest</code></pre>
+            <pre><code>npm install nan@latest</code></pre>
+            <p>Then try installing again:</p>
+            <pre><code>npm install</code></pre>
+            <h4>Configure</h4>
+            <p>Create the config file:</p>
+            <pre><code>touch .env</code></pre>
+            <p>Add the following:</p>
+            <pre><code>BTCEXP_HOST=192.168.1.52
+BTCEXP_PORT=3002
+BTCEXP_BITCOIND_HOST=127.0.0.1
+BTCEXP_BITCOIND_PORT=8332
+BTCEXP_BITCOIND_COOKIE=/home/your_user/.bitcoin/.cookie
+BTCEXP_BITCOIND_RPC_TIMEOUT=5000
+BTCEXP_PRIVACY_MODE=true
+BTCEXP_BASIC_AUTH_PASSWORD=your_secure_password
+BTCEXP_ADDRESS_API=electrum
+BTCEXP_ELECTRUM_SERVERS=tcp://127.0.0.1:50001</code></pre>
+            <ul>
+                <li><code>BTCEXP_HOST</code>: Replace with your Pi's local IP to make BTC RPC Explorer accessible on your LAN.</li>
+                <li><code>BTCEXP_BITCOIND_COOKIE</code>: Update the path with your own user.</li>
+                <li><code>BTCEXP_BASIC_AUTH_PASSWORD</code>: Set a strong password to secure access.</li>
+            </ul>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>With this setup, BTC RPC Explorer is accessible from any machine on our LAN, is password-protected, and also connected to our Electrum server.</p></div></div>
+            <h3>Configure systemd service</h3>
+            <p>Create the service file:</p>
+            <pre><code>sudo cat /etc/systemd/system/btc-rpc-explorer.service</code></pre>
+            <p>Add the following:</p>
+            <pre><code>[Unit]
+Description=BTC-RPC-Explorer
+Requires=electrs.service
+After=electrs.service
+[Service]
+WorkingDirectory=/home/your_user/btc-rpc-explorer
+ExecStart=npm run start
+User=your_user
+Group=your_user
+Type=simple
+Restart=on-failure
+TimeoutSec=120
+RestartSec=30
+[Install]
+WantedBy=multi-user.target</code></pre>
+            <p>Line 6,8 and 9 make sure to replace <code>your_user</code> by your own user.</p>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>See <code>.env-sample</code> to discover more options.</p></div></div>
+            <p>Finally, reload systemd:</p>
+            <pre><code>sudo systemctl daemon-reload</code></pre>
+            <h3>Startup</h3>
+            <p>Configure <code>BTC-RPC Explorer</code> to automatically start at boot:</p>
+            <pre><code>sudo systemctl enable btc-rpc-explorer.service</code></pre>
+            <p>Start <code>BTC-RPC Explorer</code>:</p>
+            <pre><code>sudo systemctl start btc-rpc-explorer.service</code></pre>
+            <div class="callout callout-note"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div class="callout-content"><p>Access BTC RPC Explorer at <code>http://NODE-IP:3002</code> from any device on your LAN.</p></div></div>
+            <p>You'll see a popup asking you to enter a username and password. The username doesn't matter; just use the password you set up in the <code>.env</code> file.</p>
+            <h3>Issue with Node Details page</h3>
+            <p>The page <code>/node-details</code> of BTC RPC Explorer throws an error. I suck at coding but I was able to fix it with ChatGPT.</p>
+            <p>Edit the below file:</p>
+            <pre><code>vim views/node-details.pug</code></pre>
+            <p>At line 29, replace this block of code:</p>
+            <pre><code>if (getblockchaininfo.warnings &amp;&amp; getblockchaininfo.warnings.trim().length &gt; 0)
+	+contentSection("Active Warnings")
+		if (getblockchaininfo.warnings &amp;&amp; getblockchaininfo.warnings.trim().length &gt; 0)
+			span.text-danger #{getblockchaininfo.warnings}
+		else
+			span.text-success None</code></pre>
+            <p>By this one:</p>
+            <pre><code>if (getblockchaininfo.warnings)
+	+contentSection("Active Warnings")
+		if (getblockchaininfo.warnings)
+			span.text-danger #{getblockchaininfo.warnings}
+		else
+			span.text-success None</code></pre>
+            <p>(Basically I removed <code>getblockchaininfo.warnings.trim().length &gt; 0</code> in both if statements).</p>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>This is a dirty DIY way of patching it, but it does the job lol.</p></div></div>
+            <p>Make sure to restart BTC RPC Explorer and the page should be working:</p>
+            <pre><code>sudo systemctl restart btc-rpc-explorer.service</code></pre>
+            <h3>Tor</h3>
+            <p>I personally wouldn't risk exposing this app to the outside world. It has some bugs, is vulnerable to brute-force attacks, and stores the password in a plain text <code>.env</code> file.</p>
+            <p>If I ever do, I will ensure that the features enabling manual Bitcoin JSON-RPC API calls are disabled.</p>
+        </section>
+
+        <section class="tutorial-section" id="connect-wallets">
+            <h2>Connect wallets</h2>
+            <p>To connect your wallet to your node, simply add your Electrum server's address and port in the wallet's network settings.</p>
+            <p>You will find your Electrum server's address here:</p>
+            <pre><code>sudo cat /var/lib/tor/electrs_hidden_service/hostname</code></pre>
+            <p>The port is <strong>50001</strong> unless you specified otherwise.</p>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>When connecting your wallet, ensure Tor is enabled (or bundled with your wallet); otherwise, you won't be able to access your node.</p></div></div>
+        </section>
+
+        <section class="tutorial-section" id="update-process">
+            <h2>Update Process</h2>
+            <p>Keep your node software up to date:</p>
+            <ul>
+                <li><a href="#update-the-os">Update the OS</a></li>
+                <li><a href="#update-bitcoin-core">Update Bitcoin Core</a></li>
+                <li><a href="#update-rust">Update Rust</a></li>
+                <li><a href="#update-electrs">Update Electrs</a></li>
+                <li><a href="#update-nodejs">Update Node.js</a></li>
+                <li><a href="#update-btc-rpc-explorer">Update BTC RPC Explorer</a></li>
+            </ul>
+            <h3 id="update-the-os">Update the OS</h3>
+            <p>Do this frequently:</p>
+            <pre><code>sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre>
+            <h3 id="update-bitcoin-core">Update Bitcoin Core</h3>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>For more details and context on this process, refer to the <a href="#install-bitcoin-core">installation step</a>.</p></div></div>
+            <p>Verify what your current version is:</p>
+            <pre><code>bitcoind --version</code></pre>
+            <p>Fetch the latest changes:</p>
+            <pre><code>cd ~/bitcoin</code></pre>
+            <pre><code>git fetch --all</code></pre>
+            <p>Show the latest version tags:</p>
+            <pre><code>git describe --tags `git rev-list --tags --max-count=20`</code></pre>
+            <p>Switch to the latest stable version:</p>
+            <pre><code>git checkout -f &lt;version-tag&gt;</code></pre>
+            <h4>Configure, Compile and Install</h4>
+            <h4>For version 29 and after</h4>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>Since version 29, bitcoin switched to <strong>CMake</strong> to compile.</p></div></div>
+            <p>Clear files and outputs from the previous build process:</p>
+            <pre><code>rm -rf build</code></pre>
+            <p>Create the configuration files:</p>
+            <pre><code>cmake -B build -DBUILD_GUI=OFF # OPTION 1: Wallet functionalty enabled
+cmake -B build -DBUILD_GUI=OFF -DENABLE_WALLET=OFF # OPTION 2: Wallet functionality disabled</code></pre>
+            <p>Compile the source code:</p>
+            <pre><code>cmake --build build -j $(nproc)</code></pre>
+            <h4>For version 28 and before</h4>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>Until version 28 included, bitcoin used <strong>autotools</strong> for compilation.</p></div></div>
+            <p>Clear files and outputs from the previous build process:</p>
+            <pre><code>make clean</code></pre>
+            <p>Create the configuration files:</p>
+            <pre><code>./autogen.sh</code></pre>
+            <p>Use <strong>one</strong> of the following two commands to apply the configuration files:</p>
+            <pre><code>./configure --without-gui # OPTION 1: Wallet functionalty enabled
+./configure --without-gui --disable-wallet # OPTION 2: Wallet functionality disabled</code></pre>
+            <p>Compile the source code:</p>
+            <pre><code>make -j $(nproc)</code></pre>
+            <h4>Stop, Install and Restart</h4>
+            <p>Once the compilation is done, we stop Electrs and bitcoind:</p>
+            <pre><code>sudo systemctl stop electrs.service</code></pre>
+            <pre><code>sudo systemctl stop bitcoind.service</code></pre>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>Wait until both programs have exited cleanly. You can monitor the logs for confirmation.</p></div></div>
+            <p>Now we can update the binaries system-wide:</p>
+            <pre><code>sudo cmake --install build # For version 29 and after
+sudo make install # For version 28 and before</code></pre>
+            <p>Finally we can restart bitcoind and Electrs:</p>
+            <pre><code>sudo systemctl start bitcoind.service</code></pre>
+            <pre><code>sudo systemctl start electrs.service</code></pre>
+            <p>You can check your new version with:</p>
+            <pre><code>bitcoind --version</code></pre>
+            <h3 id="update-rust">Update Rust</h3>
+            <p>If Rust and Cargo binaries aren't in your path, run:</p>
+            <pre><code>. "$HOME/.cargo/env"</code></pre>
+            <p>Update Rust and Cargo:</p>
+            <pre><code>rustup update</code></pre>
+            <p>Update rustup:</p>
+            <pre><code>rustup self update</code></pre>
+            <p>Check the new versions:</p>
+            <pre><code>rustc --version</code></pre>
+            <pre><code>cargo --version</code></pre>
+            <pre><code>rustup --version</code></pre>
+            <p>Now, update all packages installed with Cargo by running:</p>
+            <pre><code>cargo install-update -a</code></pre>
+            <p>If you encounter an error because <code>cargo-update</code> is not installed, install it using:</p>
+            <pre><code>cargo install cargo-update</code></pre>
+            <h3 id="update-electrs">Update Electrs</h3>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>For more details and context on this process, refer to the <a href="#setup-electrs">installation step</a>.</p></div></div>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>Make sure to <a href="#update-rust">update Rust</a> first before proceeding.</p></div></div>
+            <p>Fetch the latest changes:</p>
+            <pre><code>cd ~/electrs</code></pre>
+            <pre><code>git fetch --all</code></pre>
+            <p>Show the latest version tags:</p>
+            <pre><code>git describe --tags `git rev-list --tags --max-count=20`</code></pre>
+            <p>Switch to the latest stable version:</p>
+            <pre><code>git checkout -f &lt;version-tag&gt;</code></pre>
+            <p>Stop Electrs:</p>
+            <pre><code>sudo systemctl stop electrs.service</code></pre>
+            <p>Source the env file and compile</p>
+            <pre><code>. "$HOME/.cargo/env"</code></pre>
+            <pre><code>cargo build --locked --release</code></pre>
+            <p>Start electrs:</p>
+            <pre><code>sudo systemctl start electrs.service</code></pre>
+            <p>Verify the new version:</p>
+            <pre><code>~/electrs/target/release/electrs --version</code></pre>
+            <h3 id="update-nodejs">Update Node.js</h3>
+            <p>Update Node.js to the latest version:</p>
+            <pre><code>sudo apt update &amp;&amp; sudo apt upgrade -y nodejs</code></pre>
+            <p>Update npm to the latest version globally:</p>
+            <pre><code>sudo npm install -g npm@latest</code></pre>
+            <p>Update all globally installed npm packages:</p>
+            <pre><code>sudo npm update -g</code></pre>
+            <h3 id="update-btc-rpc-explorer">Update BTC RPC Explorer</h3>
+            <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>For more details and context on this process, refer to the <a href="#setup-btc-rpc-explorer">installation step</a>.</p></div></div>
+            <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>Make sure to <a href="#update-nodejs">update Node.js</a> first before proceeding.</p></div></div>
+            <p>Fetch the latest changes:</p>
+            <pre><code>cd ~/btc-rpc-explorer</code></pre>
+            <pre><code>git fetch --all</code></pre>
+            <p>Show the latest version tags:</p>
+            <pre><code>git describe --tags `git rev-list --tags --max-count=20`</code></pre>
+            <p>Switch to the latest stable version:</p>
+            <pre><code>git checkout -f &lt;version-tag&gt;</code></pre>
+            <p>Stop BTC RPC Explorer:</p>
+            <pre><code>sudo systemctl stop btc-rpc-explorer.service</code></pre>
+            <p>Update the dependencies:</p>
+            <pre><code>npm update</code></pre>
+            <p>Install the updates:</p>
+            <pre><code>npm install</code></pre>
+            <p>Once it's done, you can start BTC RPC Explorer again:</p>
+            <pre><code>sudo systemctl start btc-rpc-explorer.service</code></pre>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/resources/" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Tutorials</a>
+        </nav>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-social">
+            <a href="/contact/" class="footer-social-link" aria-label="Email"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+            <a href="https://primal.net/p/nprofile1qqsrzwgcg39ck26lc3e2yfjhntgcecnlgy9evsuxrfsxx6p46r5s3pgzdvhyj" target="_blank" class="footer-social-link" aria-label="Nostr"><img src="../../static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon"></a>
+            <a href="https://x.com/freedomlabnyc" target="_blank" class="footer-social-link" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/company/freedom-lab-nyc/" target="_blank" class="footer-social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        </div>
+    </footer>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); mobileOverlay.classList.toggle('active'); document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : ''; });
+        mobileOverlay.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); mobileOverlay.classList.remove('active'); document.body.style.overflow = ''; });
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); mobileOverlay.classList.remove('active'); document.body.style.overflow = ''; }); });
+        document.querySelectorAll('.tutorial-toc a').forEach(link => { link.addEventListener('click', (e) => { e.preventDefault(); const targetId = link.getAttribute('href').slice(1); const target = document.getElementById(targetId); if (target) { target.scrollIntoView({ behavior: 'smooth' }); history.pushState(null, null, '#' + targetId); } }); });
+        // Image lightbox
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = '<img src="" alt="">';
+        document.body.appendChild(lightbox);
+        const lightboxImg = lightbox.querySelector('img');
+        document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    </script>
+    <script src="../../js/social-config.js"></script>
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Build a Bitcoin Hardware Wallet - Learn to build a functional Bitcoin hardware wallet by flashing open-source Jade firmware onto a $15 LilyGO T-Display board.">
+    <title>Bitcoin Hardware Wallet · Beginner Build | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide"></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="http://2iyutqpfixbdpgwd7so7zuodvqqanpjssv54fyqaessxfv6z3d7egjyd.onion" class="nav-link nav-link-onion" target="_blank">Onion Site</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+        <div class="tutorial-support-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <p>These tutorials are written by Freedom Lab members in their free time. If you find them helpful, please consider <a href="/donate/">supporting our work</a>.</p>
+        </div>
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>Bitcoin Hardware Wallet · Beginner Build</span>
+            </div>
+            <h1 class="tutorial-title">Bitcoin Hardware Wallet · Beginner Build</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag class">Class</span>
+                <span class="tutorial-tag">Bitcoin</span>
+                <span class="tutorial-tag">Hardware Wallet</span>
+            </div>
+            <p class="tutorial-intro"><strong>Audience:</strong> Curious builders with little-to-no embedded experience.</p>
+            <p><strong>Duration:</strong> 2 hours (flexible)</p>
+            <p><strong>Outcomes:</strong> By the end, students will:</p>
+            <ul>
+                <li>Recognize the security model of DIY hardware wallets versus commercial devices.</li>
+                <li>Assemble a microcontroller-based signing device.</li>
+                <li>Flash open-source firmware and verify the build checksum.</li>
+                <li>Sign and broadcast a mainnet transaction using their new device.</li>
+            </ul>
+            <img src="assets/hardware_wallet.webp" alt="DIY hardware wallet build on a workbench" style="width: 100%;">
+        </div>
+
+        <nav class="tutorial-toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#concept-primer">Concept Primer</a></li>
+                <li><a href="#what-are-we-building">What Are We Building?</a></li>
+                <li><a href="#physical-setup">Physical Set Up</a></li>
+                <li><a href="#easy-way-hard-way">The Easy Way or the Hard Way</a></li>
+                <li><a href="#the-easy-way">The Easy Way</a></li>
+                <li><a href="#setting-up-jade">Setting up the Jade Wallet</a></li>
+                <li><a href="#practice-signing">Practice Signing</a></li>
+                <li><a href="#troubleshooting">Troubleshooting Guide</a></li>
+                <li><a href="#stretch-goals">Stretch Goals & Next Steps</a></li>
+                <li><a href="#instructor-notes">Instructor Notes</a></li>
+            </ol>
+        </nav>
+
+        <section class="tutorial-section" id="abstract">
+            <h2>Abstract</h2>
+            <p>This 2-hour workshop teaches beginners to build a functional Bitcoin hardware wallet by flashing open-source Jade firmware onto a $15 LilyGO T-Display board. Students transform generic development hardware into a signing device comparable to commercial wallets costing $150, learning security fundamentals through hands-on experience rather than theory alone.</p>
+
+            <h3>Philosophy</h3>
+            <p>Building your own signing device isn't just about saving money—it's about understanding the technology protecting your Bitcoin. This workshop embraces "security through understanding" over black-box trust. By sourcing components, flashing open-source firmware, and generating entropy themselves, students reduce supply chain risk while learning to evaluate security claims critically. The goal is informed autonomy: students should understand both the power and limitations of their DIY device compared to hardened commercial alternatives.</p>
+        </section>
+
+        <section class="tutorial-section" id="concept-primer">
+            <h2>Concept Primer (15 min)</h2>
+
+            <h3>What is Self-Custody and Why Does it Matter?</h3>
+            <p>Bitcoin was created to remove the need for trusted third parties, like banks and corporations from our money system. Instead of using trust, bitcoin uses math, physics, and cryptography to allow anyone the power to own and control their money without needing anyone's permission.</p>
+
+            <p>The way this works is that bitcoin exists on a global digital ledger called the blockchain aka the bitcoin timechain, which is a public and transparent ledger run by computers, instead of a centralized ledger like a bank account.</p>
+
+            <p>The important thing to understand is that in order to move bitcoin from one place to another, you have to sign that transaction with what's called a private key. Think of it like unlocking a vault with a password, and moving the bitcoin to someone else's vault. Bitcoin gives you the power to hold the keys to that vault yourself, instead of relying on a bank to move your money for you.</p>
+
+            <p>With great power comes great responsibility, lose your keys and your funds are gone forever. In this way, you can think of the keys to the vault as the money itself. While keys are not the same thing as bitcoin, they are the mechanism to move your funds and are therefore extremely important to protect. This is why we say "not your keys, not your coins".</p>
+
+            <p>The term self-custody might sound confusing, but all it means is holding your own private keys, and controlling your own bitcoin. If you don't hold that key, you're trusting someone else to hold it for you. If your bitcoin is in an ETF or on an exchange (Mt. Gox, FTX, Coinbase, Binance, etc.), you don't own bitcoin, you own a claim to bitcoin. This introduces all kinds of risks, like exchanges getting hacked and losing your bitcoin or companies lending out your money and giving you only a fraction in reserve. Additionally trusted third parties would have full control of your money and could limit or freeze withdrawals.</p>
+
+            <img width="450" height="600" alt="image" src="https://github.com/user-attachments/assets/3c52f49e-0c49-4937-bac7-b6c91238e822">
+
+            <p>With self-custody you remove trust from the equation. No one can freeze your funds or deny a transaction, you can send money across borders, to anyone, at any time, and you don't need a bank account, an ID, or anyone's approval. No one can stop you, censor you, or steal from you, unlocking the full power of bitcoin as freedom money. This is why we say, with bitcoin you can be your own bank.</p>
+
+            <p>Bitcoin was created to solve the problem of the manipulation of trust and money, an opt out of our current system, but the exit only works if you take the keys. This is why self-custody is so important.</p>
+
+            <h3>What is a Wallet?</h3>
+            <p>The term wallet is a bit of a misnomer and therefore can be confusing. Yes it's true that a bitcoin wallet, like a physical wallet, stores value. But the main difference is that bitcoin wallets don't actually store any bitcoin.</p>
+
+            <p>Bitcoin only exists as a ledger entry on the public blockchain, or within the metaphorical vaults in cyberspace. Remember to move bitcoin you have to use your keys to unlock the vault and move the coins somewhere else, the private keys are what is used spend bitcoin. When you make a transaction with your wallet, you're really just using your keys to sign the transaction. This is how you show proof that you own the money and have the right to spend those coins.</p>
+
+            <p>Bitcoin wallets really just store your private keys, so it would be more accurate to call them keychains.</p>
+
+            <h3>Hot vs Cold Wallets</h3>
+            <p>A hot wallet is a software app on your phone or computer. It's connected to the internet, so it's easier to use and quicker to sign transactions, but this also means it's more exposed to hackers, malware, and phishing. It's called "hot" because it's connected to the internet, is plugged in and powered on. An example would be a phone wallet or a browser wallet.</p>
+
+            <img width="600" height="337" alt="image" src="https://github.com/user-attachments/assets/a7cfe81b-462a-4b00-bb66-2221985e5365">
+
+            <p>On the other hand a cold wallet, or hardware wallet, is a device that creates and stores your key offline. This removes the ability for someone to hack your funds and is much safer for long-term savings, however it's a device that is needed to sign every transaction and can be less convenient.</p>
+
+            <h3>Hardware Wallet Threat Model</h3>
+            <p>Hardware wallets exist to solve a fundamental problem: how do you sign Bitcoin transactions without exposing your private keys to an internet-connected computer that could be compromised by malware or remote attackers? The core threat model assumes your everyday laptop or phone is potentially hostile. A hardware wallet creates an isolated environment where private keys never leave the device, and transaction signing happens in a secure element or microcontroller that only communicates the signature back to the host computer, not the key itself. Even if your computer is completely compromised, an attacker can't steal your Bitcoin without physical access to the device and your PIN.</p>
+
+            <p>However, hardware wallets introduce their own threats. You must trust the manufacturer hasn't introduced backdoors, the supply chain hasn't been tampered with, and the random number generation is truly random. Physical attackers might extract keys through side-channel attacks or chip manipulation, and someone with temporary access could modify your device. Building your own hardware wallet helps you understand these tradeoffs—you'll make decisions about secure elements versus general-purpose microcontrollers, how to verify transactions on a display, and how to protect against both remote and physical threats. The goal isn't perfect security, but understanding which threats you're protecting against and which ones remain.</p>
+
+            <h3>Key Concepts</h3>
+            <ul>
+                <li><strong>Entropy and seed phrases:</strong> Your wallet is only as safe as the randomness that births it. We will mix the device's random number generator with human-friendly tricks like dice rolls, convert that entropy into a 12- or 24-word <a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki" target="_blank">BIP39 phrase</a>, and leave the room with a written or metal backup you trust.</li>
+                <li><strong>Seed phrase hygiene:</strong> Treat the seed like master keys to your savings. Never type the words into a phone or computer—keyloggers, screenshots, and cloud backups can leak it forever. Keep the phrase offline, store it somewhere only you can access, and practice reading it back aloud before you leave.</li>
+                <li><strong>Secure element + microcontroller:</strong> Think of the secure element as the vault and the microcontroller as the brains. The secure element guards private keys with tamper resistance, while the microcontroller handles the screen, buttons, and firmware logic. Note that the hardware wallets we are building today do not have a secure element. This doesn't mean it's insecure, just that it has one less level of protection.</li>
+                <li><strong>Trusting firmware:</strong> Firmware is the invisible operating system of the wallet. Always download from tagged releases, check the published hash, and understand that reproducible builds let multiple people compile the same code and arrive at the exact same binary. If the checksum does not match, you do not sign.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="what-are-we-building">
+            <h2>What Are We Building?</h2>
+            <p>We are taking generic hardware, the LilyGo T-Display, and flashing Jade SDK firmware on it. The <a href="https://blockstream.com/jade/jade-plus/" target="_blank">Jade Plus</a> is an open-source wallet, which typically costs $150:</p>
+
+            <img src="assets/blockstream_jade_plus.webp" alt="Blockstream Jade Plus hardware wallet">
+
+            <p>Today, we'll be flashing their firmware onto a $15 hardware instead.</p>
+
+            <h3>What to Buy</h3>
+
+            <img src="assets/LILYGO-T-DISPLAY.jpg" alt="LilyGO T-Display development board" style="width: 70%;">
+
+            <ul>
+                <li><strong>LilyGO T-Display (16MB with shell, model K164)</strong> — <a href="https://lilygo.cc/products/t-display?srsltid=AfmBOornob5U3FzZifuSwBBOdeXKcdPDqkYEnAVYKBLdzl0BPyNglGBR" target="_blank">Order direct from LilyGO</a> for about $15. This ESP32 board provides the display, buttons, and USB interface that mirror Blockstream's Jade Plus. The onboard ESP32 also includes Wi-Fi and Bluetooth radios; we won't be disabling those capabilities in this class, but it is possible to disable them with other firmware updates. Additional capabilities for your hardware wallet expand so your threat surface area, so keep that in mind when selecting a hardware wallet.</li>
+                <li><strong>USB-C cable</strong> — Bring a data-capable cable so you can flash firmware and power the board straight from your laptop (totally fine for class use).</li>
+            </ul>
+
+            <h3>Why Build Your Own Hardware Wallet?</h3>
+            <ul>
+                <li>Save roughly $135 versus buying a commercial device.</li>
+                <li>Build comfort with firmware flashing, secure elements, and wallet hygiene.</li>
+                <li>Spin up additional signing devices to spread savings across multiple wallets.</li>
+                <li>Reduce supply chain risk by sourcing and assembling every component yourself.</li>
+                <li>Keep Lopp's mantra in mind: sovereignty and convenience are always at odds.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="physical-setup">
+            <h2>Physical Set Up</h2>
+
+            <h3>Prepare Your Case</h3>
+            <p>You have two options for housing your LilyGO T-Display board: a 3D printed case or the official LilyGO enclosure. The printed case can be found and printed from <a href="https://www.printables.com/model/119144-lilygo-ttgo-t-display-enclosure" target="_blank">this model</a>. It offers a lightweight and customizable shell for your device.</p>
+
+            <img src="assets/lilygo_case_printed.jpg" alt="3D printed LilyGO case">
+
+            <p>Alternatively, you can use the official LilyGO case, which provides a slightly different fit and finish, offering more robust protection and a polished look.</p>
+
+            <img src="assets/lilygo_case_official.png" alt="Official LilyGO case">
+
+            <p>Note that the printed and official cases differ slightly in design and assembly. Whichever option you choose, ensure the board is properly seated inside the case to avoid loose connections or damage.</p>
+
+            <h3>Inspect the Board</h3>
+            <p>Before proceeding, carefully inspect your LilyGO T-Display board for any visible defects or debris. Check that the display, buttons, and USB-C port are clean and free of dust or solder splashes. Handle the board with care, and observe electrostatic discharge (ESD) safety by grounding yourself or using an ESD wrist strap to prevent damage to sensitive components.</p>
+
+            <h3>Connect to Your Laptop</h3>
+            <p>Using a data-capable USB-C cable, connect the LilyGO board to your laptop. This connection will provide power and allow you to flash the firmware.</p>
+
+            <p>On boot, you will be greeted with the following screen:</p>
+
+            <img src="assets/lilygo_start_up_screen.png" alt="LilyGO boot screen">
+
+            <p>When powered on, the LilyGO will display a color test screen cycling through solid colors. This confirms the display and board are functioning correctly before flashing firmware.</p>
+
+            <p>Once the color test completes, the screen will settle on a default state, indicating the board is ready for the next steps in the build process.</p>
+
+            <img src="assets/settled_screen.png" alt="LilyGO plugged into laptop">
+        </section>
+
+        <section class="tutorial-section" id="easy-way-hard-way">
+            <h2>The Easy Way or the Hard Way</h2>
+            <p>There are two main approaches to flashing your hardware wallet firmware: the easy way and the hard way. The easy way utilizes pre-configured tools or web-based flashers that automatically load the firmware onto your device with minimal input. This method is ideal for beginners who want a quick win or prefer to avoid the complexities of debugging and command-line interactions. It simplifies the process and gets you up and running faster, making it accessible for those new to embedded development or hardware wallets.</p>
+
+            <p>The hard way, on the other hand, involves manually using command-line tools to flash the firmware. This approach requires verifying firmware signatures and checksums to ensure authenticity and integrity, giving you a deeper understanding of the flashing process and how the firmware interacts with the hardware. While it demands more effort and familiarity with terminal commands, it offers greater control, transparency, and confidence in your device's security.</p>
+
+            <p>Each method has its tradeoffs: the easy way sacrifices some degree of trust and understanding for speed and convenience, whereas the hard way requires more time and technical skill but rewards you with flexibility and a stronger grasp of the underlying technology. Instructors should encourage students to choose the path that best aligns with their comfort level and curiosity, fostering both confidence and exploration.</p>
+        </section>
+
+        <section class="tutorial-section" id="the-easy-way">
+            <h2>The Easy Way</h2>
+            <p>The easiest way to flash a ESP32</p>
+
+            <ol>
+                <li>Go to the official Blockstream Github: <a href="https://github.com/Blockstream/jadediyflasher" target="_blank">https://github.com/Blockstream/jadediyflasher</a><br>
+                <img src="assets/blockstream_github.jpeg" alt="Blockstream Github"></li>
+
+                <li>You can download the source file and run the website locally, but GitHub already hosts it at <a href="https://blockstream.github.io/jadediyflasher/" target="_blank">https://blockstream.github.io/jadediyflasher/</a>. GitHub serves the HTML, CSS, JavaScript, etc. directly to your browser so you can flash the device without installing developer tools.<br>
+                <img src="assets/blockstream_jade_diy_flasher.jpeg" alt="Blockstream Jade DIY Flasher"></li>
+
+                <li>Open the dropdown menu (it likely defaults to <code>M5Stack Core2</code>) and select your development board — for this class, pick <code>LILYGO T-Display</code>.<br>
+                <img src="assets/diy_dropdown_menu.jpeg" alt="DIY Dropdown Menu"></li>
+
+                <li>When you click flash this is going to appear. In order to know which device is the LILYGO, unplug the lilygo and plug it back in. The com port that the lilygo will appear and disappear. Click the COM port that the Jade is plugged into<br>
+                <img src="assets/connect_to_a_serial_port.jpeg" alt="Connect to a serial port"></li>
+
+                <li>That's it a progress bar should show up and when it's finish your ready to set it up</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="setting-up-jade">
+            <h2>Setting up the Jade Wallet</h2>
+            <p>Once the firmware is successfully flashed, your LilyGO T-Display is now a fully functional Jade hardware wallet. This section will walk you through the initial setup process, from generating your seed phrase to connecting the device with wallet software like Sparrow or the Blockstream Green mobile app.</p>
+
+            <h3>Initial Boot and Device Setup</h3>
+            <ol>
+                <li><strong>Power on the device:</strong> With the LilyGO still connected to your laptop via USB-C, the Jade firmware should boot automatically. You'll see the Jade logo appear on the display.</li>
+
+                <li><strong>Enter setup mode:</strong> The device will present you with an initial menu. Use the two physical buttons on the board to navigate:
+                    <ul>
+                        <li><strong>Left button:</strong> Move up/back</li>
+                        <li><strong>Right button:</strong> Move down/forward</li>
+                        <li><strong>Both buttons simultaneously:</strong> Select/confirm</li>
+                    </ul>
+                </li>
+
+                <li><strong>Select "Setup":</strong> Navigate to the Setup option and press both buttons to confirm. The device will guide you through the initial configuration process.</li>
+            </ol>
+
+            <h3>Creating Your Wallet</h3>
+            <ol start="4">
+                <li><strong>Choose "Begin Setup":</strong> The device will prompt you to begin the wallet creation process. Confirm your selection.</li>
+
+                <li><strong>Select "Create New Wallet":</strong> You'll be presented with two options:
+                    <ul>
+                        <li><strong>Create New Wallet:</strong> Generates a fresh seed phrase (choose this for the workshop)</li>
+                        <li><strong>Restore Wallet:</strong> Recover an existing wallet from a seed phrase (for advanced users)</li>
+                    </ul>
+                    Select "Create New Wallet" and confirm.
+                </li>
+
+                <li><strong>Generate entropy:</strong> The device will use its random number generator to create cryptographic entropy. This process takes a few seconds as the device gathers randomness from multiple sources.</li>
+            </ol>
+
+            <h3>Recording Your Seed Phrase</h3>
+            <ol start="7">
+                <li><strong>Write down your seed phrase:</strong> The device will now display a 12-word BIP39 seed phrase, one word at a time. This is the most critical step in the entire process.
+
+                    <p><strong>Important security practices:</strong></p>
+                    <ul>
+                        <li>Write each word clearly on paper (use the provided seed phrase cards if available)</li>
+                        <li>Double-check each word as you write it</li>
+                        <li>Never photograph the seed phrase with your phone</li>
+                        <li>Never type the words into any computer or phone</li>
+                        <li>Keep your seed phrase private—don't share your screen or show others</li>
+                    </ul>
+                </li>
+
+                <li><strong>Verify your seed phrase:</strong> After writing down all 12 words, the device will ask you to confirm several words from the phrase to ensure you recorded them correctly. Use the buttons to select the correct word for each prompt.
+
+                    <p><strong>Pro tip:</strong> Before moving on, practice reading your seed phrase back to yourself aloud (quietly, so others can't hear). This helps catch any handwriting errors or ambiguities.</p>
+                </li>
+            </ol>
+
+            <h3>Connection Method</h3>
+            <ol start="9">
+                <li><strong>Choose connection type:</strong> The Jade firmware supports two connection methods:
+                    <ul>
+                        <li><strong>USB:</strong> Wired connection via USB-C cable (recommended for this workshop)</li>
+                        <li><strong>Bluetooth:</strong> Wireless connection to mobile devices</li>
+                    </ul>
+                    Select <strong>USB</strong> for now, as it's the most straightforward option for desktop wallet software and doesn't introduce wireless attack vectors.
+                </li>
+
+                <li><strong>Device naming:</strong> The Jade will display a unique identifier like "Connect Jade A7D924". This identifier helps you distinguish between multiple hardware wallets if you end up building more than one. Make a note of this identifier if desired.</li>
+            </ol>
+
+            <h3>Connecting to Wallet Software</h3>
+            <p>You now have two main options for interfacing with your newly created hardware wallet: the Blockstream Green mobile app (for on-the-go use) or Sparrow Wallet (for desktop use with more advanced features). For this workshop, we'll focus on Sparrow Wallet, as it offers better visibility into the technical details of Bitcoin transactions.</p>
+
+            <h4>Option 1: Blockstream Green Mobile App (Quick Start)</h4>
+            <p>If you want to test your device quickly with a mobile device:</p>
+            <ol>
+                <li>Download the <strong>Blockstream Green</strong> app from the App Store (iOS) or Google Play (Android)</li>
+                <li>Open the app and select "Connect Hardware Wallet"</li>
+                <li>Choose "Jade" from the list of supported devices</li>
+                <li>Plug your Jade into your phone using a USB-C to USB-C cable (or USB-C to Lightning adapter for iPhone 15+)</li>
+                <li>Follow the on-screen prompts to connect and create your first wallet</li>
+            </ol>
+
+            <p><strong>Note about Liquid:</strong> The Blockstream Green app supports both Bitcoin and Liquid (a Bitcoin sidechain). If you're using Liquid features, you may be prompted to "Export master blinding key"—this allows the app to see transaction amounts on the Liquid network, which are otherwise confidential. For this workshop, you can skip Liquid features and focus on standard Bitcoin transactions.</p>
+
+            <h4>Option 2: Sparrow Wallet (Recommended for Workshop)</h4>
+            <p>Sparrow Wallet is a powerful desktop application that gives you granular control over your Bitcoin transactions and connects seamlessly with your Jade hardware wallet.</p>
+
+            <p><strong>Installation:</strong></p>
+            <ol>
+                <li>Download Sparrow Wallet from the official website: <a href="https://sparrowwallet.com" target="_blank">sparrowwallet.com</a></li>
+                <li>Verify the download signature (see the Sparrow documentation for details)</li>
+                <li>Install and launch the application</li>
+            </ol>
+
+            <p><strong>Connecting Your Jade to Sparrow:</strong></p>
+            <ol>
+                <li>In Sparrow, go to <strong>File → New Wallet</strong></li>
+                <li>Give your wallet a name (e.g., "My Jade Wallet")</li>
+                <li>Click <strong>Connected Hardware Wallet</strong></li>
+                <li>Sparrow should automatically detect your plugged-in Jade device</li>
+                <li>If prompted, confirm the connection on the Jade display by pressing both buttons</li>
+                <li>Select your desired script type:
+                    <ul>
+                        <li><strong>Native Segwit (P2WPKH):</strong> Recommended for beginners—lowest fees, widest compatibility with modern wallets</li>
+                        <li><strong>Nested Segwit (P2SH-P2WPKH):</strong> For compatibility with older services</li>
+                        <li><strong>Taproot (P2TR):</strong> Most advanced, offers best privacy and lowest fees, but requires cutting-edge wallet support</li>
+                    </ul>
+                </li>
+                <li>Click <strong>Import Keystore</strong> to complete the connection</li>
+            </ol>
+
+            <p><strong>Configuring Sparrow's Server Connection:</strong></p>
+            <p>Before you can see your balance or broadcast transactions, Sparrow needs to connect to a Bitcoin node to fetch blockchain data. You have several options, each with different tradeoffs between convenience, privacy, and trust:</p>
+
+            <ul>
+                <li><strong>Public Electrum Server (Easiest, least private):</strong> Connects to a public server operated by a third party. Quick to set up, but the server can see your wallet's addresses and potentially link them to your IP address. Good for testing on testnet.
+                    <ul>
+                        <li>In Sparrow, go to <strong>Tools → Preferences → Server</strong></li>
+                        <li>Select <strong>Public Server</strong> and choose a server from the list</li>
+                        <li>Click <strong>Test Connection</strong> to verify</li>
+                    </ul>
+                </li>
+
+                <li><strong>Bitcoin Core or Knots Node (Most private, most work):</strong> Run your own full Bitcoin node. This is the gold standard for privacy and verification, as you're validating every transaction yourself and not trusting anyone else's server. However, it requires downloading the entire blockchain (~600GB) and keeping your node synced.
+                    <ul>
+                        <li>Install and sync Bitcoin Core or Knots</li>
+                        <li>In Sparrow, go to <strong>Tools → Preferences → Server</strong></li>
+                        <li>Select <strong>Bitcoin Core or Knots</strong> and enter your node's connection details</li>
+                    </ul>
+                </li>
+
+                <li><strong>Private Electrum Server (Good balance):</strong> Host your own Electrum server (like Fulcrum or Electrs) connected to your Bitcoin Core or Knots node. Offers full privacy without needing to run Sparrow on the same machine as your node.
+                    <ul>
+                        <li>Set up an Electrum server pointing to your Bitcoin Core or Knots node</li>
+                        <li>In Sparrow, go to <strong>Tools → Preferences → Server</strong></li>
+                        <li>Select <strong>Private Electrum</strong> and enter your server's URL</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <p>For this workshop, using a <strong>Public Electrum Server</strong> is perfectly fine for testnet transactions. In a production environment with real funds, you'd want to consider running your own node or using a trusted private server for maximum privacy.</p>
+
+            <h4>Option 3: Blockstream Green Desktop App (Quick Start)</h4>
+            <p>Blockstream Green is the software to finish setting up the JadeDIY and it must be with the desktop version</p>
+
+            <ol>
+                <li>Get the official Blockstream application — this is the link to it from their website. When you're there click <a href="https://blockstream.com/app/" target="_blank">Download now</a>.<br>
+                <img src="assets/blockstream website.jpg" alt="Blockstream website"></li>
+
+                <li>Depending on where your downloads go, most likely the file will be in your Downloads folder. Check there and double-click the executable file to install the software.<br>
+                <img src="assets/downloads folder.png" alt="Downloads folder example"></li>
+
+                <li>You might have to give admin rights to run the installer. Once you do, a window will pop up that should look like the following picture — click <strong>Next</strong>.<br>
+                <img src="assets/blockstream install1.png" alt="Blockstream installer step 1"></li>
+
+                <li>Choose where you want the installed application to reside (a location with your other programs or somewhere easy to find), then click <strong>Next</strong>.<br>
+                <img src="assets/blockstream install2.png" alt="Blockstream installer step 2"></li>
+
+                <li>The installer will ask for a shortcut name. Enter one or keep the default, then click <strong>Next</strong>.<br>
+                <img src="assets/blockstream install3.png" alt="Blockstream installer step 3"></li>
+
+                <li>If you want a desktop shortcut, check the box; otherwise click <strong>Next</strong>.<br>
+                <img src="assets/blockstream install4.png" alt="Blockstream installer step 4"></li>
+
+                <li>Finally, click <strong>Install</strong> and wait a few minutes for the installation to complete.<br>
+                <img src="assets/blockstream install5.png" alt="Blockstream installer installing"></li>
+
+                <li>The progress bar should fill to the end.<br>
+                <img src="assets/blockstream install6.png" alt="Blockstream installer progress"></li>
+
+                <li>When it finishes, a new page will appear — click <strong>Finish</strong>.<br>
+                <img src="assets/blockstream install7.png" alt="Blockstream installer finish"></li>
+
+                <li>Find your newly installed Blockstream application (example shown in the Windows 11 Start menu).<br>
+                <img src="assets/blockstream install8.png" alt="Blockstream in Start menu"></li>
+
+                <li>Once you find it, click to launch — a splash screen should appear.</li>
+            </ol>
+
+            <h3>Verifying Your Setup</h3>
+            <p>Once connected to Sparrow (or another wallet application):</p>
+            <ol>
+                <li><strong>Check your addresses:</strong> Sparrow will display receiving addresses derived from your seed phrase. You can verify an address on your Jade device by going to the "Receive" tab in Sparrow and clicking "Display Address"—the address should appear on both your computer screen and the Jade display.</li>
+
+                <li><strong>Generate a receiving address:</strong> Click the <strong>Receive</strong> tab in Sparrow and copy your first Bitcoin receiving address.</li>
+
+                <li><strong>Ready for transactions:</strong> Your hardware wallet is now fully configured and ready to receive and sign Bitcoin transactions. Proceed to the next section to practice signing a testnet transaction.</li>
+            </ol>
+
+            <h3>Quick Setup Checklist</h3>
+            <ul class="task-list" style="list-style: none; padding-left: 0;">
+                <li><label><input type="checkbox"> Jade firmware boots successfully</label></li>
+                <li><label><input type="checkbox"> New wallet created with 12-word seed phrase</label></li>
+                <li><label><input type="checkbox"> Seed phrase written down clearly and verified</label></li>
+                <li><label><input type="checkbox"> USB connection mode selected</label></li>
+                <li><label><input type="checkbox"> Wallet software (Sparrow) installed and connected</label></li>
+                <li><label><input type="checkbox"> Server connection configured (public Electrum for mainnet)</label></li>
+                <li><label><input type="checkbox"> First receiving address generated and verified on device</label></li>
+            </ul>
+
+            <p>If all items are checked, you're ready to move on to the signing practice section!</p>
+        </section>
+
+        <section class="tutorial-section" id="practice-signing">
+            <h2>Practice Signing (30 min)</h2>
+            <p>Walk through creating a testnet transaction, signing it with the new device, and broadcasting via Sparrow or Specter.</p>
+        </section>
+
+        <section class="tutorial-section" id="troubleshooting">
+            <h2>Troubleshooting Guide</h2>
+            <p>Provide quick fixes for common hardware issues (bad solder joints, loose ribbon cables) and firmware hiccups (driver install, boot loops).</p>
+        </section>
+
+        <section class="tutorial-section" id="stretch-goals">
+            <h2>Stretch Goals & Next Steps</h2>
+            <ul>
+                <li>Integrate multisig support.</li>
+                <li>Explore alternative firmware (e.g., Krux, SeedSigner forks).</li>
+                <li>Harden the physical enclosure and tamper seals.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="instructor-notes">
+            <h2>Instructor Notes</h2>
+            <ul>
+                <li>Time checkpoints for each section.</li>
+                <li>Recommendations for assistant instructors.</li>
+                <li>Follow-up resources for students (reading list, firmware repos, community chats).</li>
+            </ul>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/resources/" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Tutorials</a>
+        </nav>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-social">
+            <a href="/contact/" class="footer-social-link" aria-label="Email"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+            <a href="https://primal.net/p/nprofile1qqsrzwgcg39ck26lc3e2yfjhntgcecnlgy9evsuxrfsxx6p46r5s3pgzdvhyj" target="_blank" class="footer-social-link" aria-label="Nostr"><img src="../../static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon"></a>
+            <a href="https://x.com/freedomlabnyc" target="_blank" class="footer-social-link" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/company/freedom-lab-nyc/" target="_blank" class="footer-social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        </div>
+    </footer>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        document.querySelectorAll('.tutorial-toc a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').slice(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    history.pushState(null, null, `#${targetId}`);
+                }
+            });
+        });
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = '<img src="" alt="">';
+        document.body.appendChild(lightbox);
+        const lightboxImg = lightbox.querySelector('img');
+        document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    </script>
+</body>
+</html>

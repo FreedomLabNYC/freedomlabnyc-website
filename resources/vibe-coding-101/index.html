@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vibe Coding 101 - Learn how to build and deploy a real website using only your web browser and natural language prompts with AI-assisted coding.">
+    <title>Vibe Coding 101 · Getting Started | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide"></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="http://2iyutqpfixbdpgwd7so7zuodvqqanpjssv54fyqaessxfv6z3d7egjyd.onion" class="nav-link nav-link-onion" target="_blank">Onion Site</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+        <div class="tutorial-support-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <p>These tutorials are written by Freedom Lab members in their free time. If you find them helpful, please consider <a href="/donate/">supporting our work</a>.</p>
+        </div>
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>Vibe Coding 101 · Getting Started</span>
+            </div>
+            <h1 class="tutorial-title">Vibe Coding 101 · Getting Started</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag class">Class</span>
+                <span class="tutorial-tag">AI</span>
+            </div>
+            <p class="tutorial-intro"><strong>Audience:</strong> Beginner — no coding experience required</p>
+            <p><strong>Duration:</strong> 120 min (2 hours)</p>
+            <p><strong>Outcomes:</strong> By the end, students will:</p>
+            <ul>
+                <li>Understand what vibe coding is and how it enables anyone to build software through AI prompts</li>
+                <li>Create a GitHub account and set up a free GitHub Pages website</li>
+                <li>Use GitHub Codespaces with AI agent mode to build a website entirely in the browser</li>
+                <li>Deploy a live website to the internet without writing any code manually</li>
+                <li>Understand that different AI models excel at different tasks</li>
+            </ul>
+            <img src="assets/vibecode.png" alt="Vibe Coding workshop cover image" style="width: 100%;">
+        </div>
+
+        <nav class="tutorial-toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#concept-primer">Concept Primer</a></li>
+                <li><a href="#agenda">Agenda</a></li>
+                <li><a href="#prerequisites">Prerequisites</a></li>
+                <li><a href="#section-1">Section 1: Create a GitHub Account</a></li>
+                <li><a href="#section-2">Section 2: Create Repository & Enable GitHub Pages</a></li>
+                <li><a href="#section-3">Section 3: Your First Vibe Coded Website</a></li>
+                <li><a href="#section-4">Section 4: Customizing Your Site</a></li>
+                <li><a href="#section-5">Section 5: Improving the Design with Gemini</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#homework">Homework / Further Study</a></li>
+                <li><a href="#instructor-notes">Instructor Notes</a></li>
+            </ol>
+        </nav>
+
+        <section class="tutorial-section" id="abstract">
+            <h2>Abstract</h2>
+            <p>Vibe coding is a revolutionary approach that has emerged in the past year, allowing anyone to create software without technical experience — simply by having a conversation with AI. This workshop teaches participants how to build and deploy a real website using only their web browser and natural language prompts. By the end of the 2-hour session, every student will have a live website on the internet that they created through AI-assisted "vibe coding." No software installation or payment required.</p>
+        </section>
+
+        <section class="tutorial-section" id="concept-primer">
+            <h2>Concept Primer (10–15 min)</h2>
+
+            <h3>What is Vibe Coding?</h3>
+            <p>Vibe coding is the practice of creating software by describing what you want in plain English (or any language) to an AI assistant. Instead of learning programming languages, syntax, and frameworks, you simply tell the AI what you want to build, and it writes the code for you.</p>
+
+            <p><strong>Key benefits:</strong></p>
+            <ul>
+                <li>No coding experience required — just describe what you want</li>
+                <li>Rapid iteration — see changes instantly</li>
+                <li>Accessible to everyone — if you can describe it, you can build it</li>
+            </ul>
+
+            <p><strong>The Magic of Vibe Coding</strong></p>
+            <p>The truly magical experience is the <strong>tight feedback loop</strong>:</p>
+            <ol>
+                <li>You describe what you want in plain English</li>
+                <li>The AI writes the code</li>
+                <li>You see the result instantly in a preview</li>
+                <li>You describe what to change</li>
+                <li>You see those changes immediately</li>
+            </ol>
+            <p>This instant back-and-forth conversation with an AI that can actually <em>build things</em> for you is what makes vibe coding feel like magic. By the end of this workshop, you'll experience this for yourself!</p>
+
+            <h3>What is a Repository?</h3>
+            <p>A <strong>repository</strong> (or "repo") is simply a folder where your code lives on GitHub. Think of it as a project folder in the cloud that:</p>
+            <ul>
+                <li>Stores all your website files</li>
+                <li>Keeps track of every change you make (like a super-powered undo button)</li>
+                <li>Can be shared with others or kept private</li>
+            </ul>
+
+            <h3>What is GitHub Pages?</h3>
+            <p>GitHub Pages is a free service that lets you host a website directly from a GitHub repository.</p>
+            <p><strong>What you get:</strong></p>
+            <ul>
+                <li>A free URL like <code>yourusername.github.io/your-repo</code></li>
+                <li>Free hosting — no credit card required</li>
+                <li>Automatic updates — push code, site updates automatically</li>
+            </ul>
+            <p><strong>📍 Example:</strong> See a <a href="https://sat-engineer.github.io/github-launchpage-test/" target="_blank">sample vibe-coded website</a> built with this approach!</p>
+
+            <h3>Why Build a Website?</h3>
+            <p>Web development is the most flexible starting point for vibe coding because:</p>
+            <ul>
+                <li><strong>Cross-platform:</strong> Works on any device with a browser — phones, tablets, computers</li>
+                <li><strong>Instant sharing:</strong> Just send someone a link</li>
+                <li><strong>Visual feedback:</strong> You can see your changes immediately</li>
+                <li><strong>No app stores:</strong> No approval process, no fees, instant publishing</li>
+            </ul>
+
+            <p><strong>What is a "static" website?</strong></p>
+            <p>A static website displays the same content to everyone. Think of it like a digital flyer or brochure. You can have:</p>
+            <ul>
+                <li>✅ Text, images, animations, hover effects</li>
+                <li>✅ Links to other pages or sites</li>
+                <li>✅ Beautiful, professional designs</li>
+                <li>❌ User accounts, comments, or forms that save data</li>
+                <li>❌ Content that changes based on who's viewing</li>
+            </ul>
+            <p>For most personal projects, portfolios, and simple business pages, static is perfect!</p>
+
+            <h3>Different AI Models, Different Strengths</h3>
+            <p>Not all AI models are created equal. During this workshop, you'll learn that:</p>
+            <ul>
+                <li><strong>GitHub Codespaces (auto mode)</strong> — Great for general coding tasks, free to use</li>
+                <li><strong>Google Gemini</strong> — Excellent for creating beautiful UI/visual designs</li>
+                <li><strong>Claude, ChatGPT, etc.</strong> — Each has strengths in different areas</li>
+            </ul>
+            <p><strong>Pro tip:</strong> If your website looks too generic or plain, try asking Gemini to redesign the HTML and then paste it back into your project.</p>
+
+            <p><strong>A note on AI costs (for your future reference):</strong></p>
+            <p>In this workshop, we use free tools. But as you explore vibe coding further, you'll encounter paid options:</p>
+            <ul>
+                <li>More powerful AI models (like Claude Opus or GPT-4) cost more "credits" or "tokens" per use</li>
+                <li>Simpler tasks don't need the most powerful models — you can save credits by using lighter models for basic work</li>
+                <li>Tools like Cursor ($20/month) give you access to multiple models and more advanced features</li>
+            </ul>
+            <p>For today, everything is free! But understanding that "different models = different costs" will help you make smart choices later.</p>
+        </section>
+
+        <section class="tutorial-section" id="agenda">
+            <h2>Agenda (suggested timing)</h2>
+            <ol>
+                <li><strong>Welcome & Concepts</strong> (15 min)</li>
+                <li><strong>Create GitHub Account</strong> (10 min)</li>
+                <li><strong>Set Up Repository & GitHub Pages</strong> (15 min)</li>
+                <li><strong>Your First Vibe Coded Website</strong> (30 min)</li>
+                <li><strong>Customizing Your Site</strong> (25 min)</li>
+                <li><strong>Improving the Design with Gemini</strong> (15 min)</li>
+                <li><strong>Q&A / Troubleshooting</strong> (10 min)</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="prerequisites">
+            <h2>Prerequisites (tell students ahead)</h2>
+            <ul>
+                <li><strong>Laptop</strong> — Required (any operating system works)</li>
+                <li><strong>Email address</strong> — For creating a GitHub account</li>
+                <li>No coding experience needed</li>
+                <li>No software installation required</li>
+                <li>No payment or credit card required</li>
+            </ul>
+            <p><strong>Instructor prep</strong></p>
+            <ul>
+                <li>Test the full workflow before class on a fresh browser/incognito</li>
+                <li>Have the Luma event link ready to display</li>
+                <li>Prepare a sample "pizza website" prompt for demonstration</li>
+                <li>Have screenshots ready of each step in case of technical difficulties</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="section-1">
+            <h2>Section 1: Create a GitHub Account (10 min)</h2>
+            <p>If you don't already have a GitHub account, let's create one.</p>
+            <ol>
+                <li>Go to <a href="https://github.com" target="_blank">github.com</a></li>
+                <li>Click <strong>Sign up</strong></li>
+                <li>Enter your email address</li>
+                <li>Create a password</li>
+                <li>Choose a username (this will be part of your website URL!)</li>
+                <li>Complete the verification puzzle</li>
+                <li>Check your email for a verification code and enter it</li>
+            </ol>
+            <p><strong>⚠️ Troubleshooting:</strong></p>
+            <ul>
+                <li>If the verification email doesn't appear, check your spam folder</li>
+                <li>The visual puzzles may require multiple attempts — this is normal</li>
+                <li>If using a temporary email, verification may be slower</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="section-2">
+            <h2>Section 2: Create Repository & Enable GitHub Pages (15 min)</h2>
+            <p>Now we'll create a place to store our website code and enable free hosting.</p>
+
+            <h3>Create a New Repository</h3>
+            <ol>
+                <li>In the top-right corner of GitHub, click the <strong>+</strong> button</li>
+                <li>Select <strong>New repository</strong></li>
+                <li>Name your repository (e.g., <code>my-website</code>, <code>pizza-shop</code>, <code>portfolio</code>)</li>
+                <li>Leave it as <strong>Public</strong> (required for free GitHub Pages)</li>
+                <li>✅ Check <strong>Add a README file</strong></li>
+                <li>Click <strong>Create repository</strong></li>
+            </ol>
+            <div class="callout callout-note">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>📝 Public vs Private:</strong> Public repositories let anyone see your code — this is required for free GitHub Pages hosting. For a simple website with no sensitive information, public is perfectly fine! If you later work on projects with passwords or private data, you'd want private repositories (which require a paid GitHub plan for Pages hosting).</p>
+                </div>
+            </div>
+
+            <h3>Enable GitHub Pages</h3>
+            <ol>
+                <li>In your new repository, click <strong>Settings</strong> (gear icon)</li>
+                <li>In the left sidebar, click <strong>Pages</strong></li>
+                <li>Under "Build and deployment", click the <strong>Source</strong> dropdown</li>
+                <li>Select <strong>GitHub Actions</strong></li>
+                <li>Click <strong>Configure</strong> next to "Static HTML"</li>
+                <li>Click <strong>Commit changes</strong> (don't modify any code)</li>
+                <li>Click <strong>Commit changes</strong> again in the popup</li>
+            </ol>
+            <p>Your GitHub Pages site is now being set up! It will be live at:<br>
+            <code>https://YOUR-USERNAME.github.io/YOUR-REPO-NAME</code></p>
+        </section>
+
+        <section class="tutorial-section" id="section-3">
+            <h2>Section 3: Your First Vibe Coded Website (30 min)</h2>
+            <p>Here's where the magic happens. We'll use GitHub's built-in AI coding assistant to create a website just by describing what we want.</p>
+
+            <h3>Start the AI Coding Environment</h3>
+            <ol>
+                <li>In your repository, click the <strong>Issues</strong> tab</li>
+                <li>Click <strong>New issue</strong></li>
+                <li>Give it a title like "Create pizza website"</li>
+                <li>In the description, write what you want to build. Example:
+<pre><code>Create a pizza website called "Toshi's Pizzeria" that gives a 
+nod to Bitcoin and Pizza Day. Make it fun and colorful.</code></pre>
+                </li>
+                <li>Click <strong>Submit new issue</strong></li>
+                <li>Look for the <strong>Code with Agent mode</strong> button and click it</li>
+                <li>If prompted to sign in or authorize, click through the prompts</li>
+                <li>Select <strong>auto</strong> for the model (it's free!)</li>
+            </ol>
+
+            <h3>Watch the AI Build Your Website</h3>
+            <p>The AI will:</p>
+            <ul>
+                <li>Analyze your request</li>
+                <li>Write the HTML, CSS, and JavaScript code</li>
+                <li>Show you what it's creating</li>
+            </ul>
+            <p>When it presents changes:</p>
+            <ol>
+                <li>Click <strong>Keep</strong> to accept the changes</li>
+                <li>Say: "Can you open a preview of my site?"</li>
+                <li>Click <strong>Allow</strong> when it asks to run a command</li>
+                <li>Click <strong>Open in Browser</strong> to see your website!</li>
+            </ol>
+
+            <h3>Deploy Your Website to the Internet</h3>
+            <p>Now let's make it live:</p>
+            <ol>
+                <li>Ask the AI: "Please give me the terminal commands to commit and push these changes. Be direct and opinionated. I will paste them in myself."</li>
+                <li>Click the <strong>Insert into terminal</strong> button (or copy the commands)</li>
+                <li>Press <strong>Enter</strong> in the terminal to run them</li>
+                <li>Go back to your repository on GitHub (the main Code tab)</li>
+                <li>Look for the <strong>deployment indicator</strong> next to your latest commit:
+                    <ul>
+                        <li>🟡 <strong>Yellow dot</strong> = Still deploying (wait...)</li>
+                        <li>✅ <strong>Green checkmark</strong> = Deployed! Your site is ready</li>
+                    </ul>
+                </li>
+                <li>Once you see the green checkmark, visit <code>https://YOUR-USERNAME.github.io/YOUR-REPO-NAME</code></li>
+            </ol>
+            <div class="callout callout-tip">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>💡 Tip:</strong> The yellow dot usually turns green within 30-60 seconds. If you visit your site too early, you'll see the old version. Just wait for the green checkmark!</p>
+                </div>
+            </div>
+            <p>🎉 <strong>Congratulations! Your website is live on the internet!</strong></p>
+        </section>
+
+        <section class="tutorial-section" id="section-4">
+            <h2>Section 4: Customizing Your Site (25 min)</h2>
+            <p>Let's make changes to personalize your website.</p>
+
+            <h3>Making More Changes</h3>
+            <p>Each time you want to make changes after committing:</p>
+            <ol>
+                <li>Go to your repository's <strong>Issues</strong> tab</li>
+                <li>Create a <strong>New issue</strong> describing what you want</li>
+                <li>Click <strong>Code with Agent mode</strong></li>
+                <li>Describe your changes</li>
+                <li>Preview → Keep → Commit → Push</li>
+            </ol>
+            <div class="callout callout-tip">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>💡 Why create a new Issue each time?</strong><br>
+                    Creating a new Issue and clicking "Code with Agent mode" gives you a fresh Codespace that has all your latest code. This avoids sync problems and ensures you're always working with the most up-to-date version of your site.</p>
+                </div>
+            </div>
+
+            <p><strong>Example prompts to try:</strong></p>
+            <ul>
+                <li>"Add a contact section with my email"</li>
+                <li>"Change the color scheme to blue and gold"</li>
+                <li>"Add a photo gallery section"</li>
+                <li>"Make the navigation menu sticky at the top"</li>
+            </ul>
+
+            <h3>Adding Images</h3>
+            <p>To add images to your website:</p>
+            <ol>
+                <li>Find or create an image you want to use</li>
+                <li>Go to your repository on GitHub</li>
+                <li>Click <strong>Add file</strong> → <strong>Upload files</strong></li>
+                <li>Drag and drop your image</li>
+                <li>Click <strong>Commit changes</strong></li>
+                <li>Create a new issue and ask: "Add the image I just uploaded as a header"</li>
+            </ol>
+
+            <p><strong>Tip:</strong> You can generate custom images using AI tools like:</p>
+            <ul>
+                <li><a href="https://gemini.google.com" target="_blank">Gemini</a> — Free image generation</li>
+                <li><a href="https://chat.openai.com" target="_blank">ChatGPT</a> with DALL-E</li>
+                <li><a href="https://grok.x.ai" target="_blank">Grok</a> — No watermarks</li>
+            </ul>
+
+            <p><strong>🧠 Pro tip — Using AI to write prompts for AI:</strong></p>
+            <p>Not sure how to describe the image you want? Ask one AI to write the prompt for another! For example, in your Codespace, ask:</p>
+<pre><code>Give me a prompt for an image header for this site. 
+I'll paste it into an image generation AI.</code></pre>
+            <p>Then copy that prompt into Gemini or another image generator. This "AI writing prompts for AI" technique is surprisingly effective!</p>
+        </section>
+
+        <section class="tutorial-section" id="section-5">
+            <h2>Section 5: Improving the Design with Gemini (15 min)</h2>
+            <p>If your website looks too plain or generic, Google Gemini can help create more polished designs.</p>
+
+            <h3>The Gemini Workflow</h3>
+            <ol>
+                <li>Go to <a href="https://gemini.google.com" target="_blank">gemini.google.com</a></li>
+                <li>Copy your current <code>index.html</code> content</li>
+                <li>Paste it into Gemini with a prompt like:
+<pre><code>Here is my HTML for a website. Can you make it look pretty 
+and professional? Give me back a new HTML file that I can paste 
+into my project. Make it look like a modern pizzeria website 
+with a hero section, menu cards, and a footer.</code></pre>
+                </li>
+                <li>Copy Gemini's response</li>
+                <li>Go back to your GitHub Codespace</li>
+                <li>Select all the content in <code>index.html</code></li>
+                <li>Paste the new HTML from Gemini</li>
+                <li>Save and preview</li>
+                <li>Commit and push</li>
+            </ol>
+
+            <p><strong>Why use Gemini for design?</strong></p>
+            <p>Different AI models have different strengths. Gemini is particularly good at creating visually appealing, well-structured HTML layouts. The model in GitHub Codespaces is great for general tasks but may produce more basic designs.</p>
+        </section>
+
+        <section class="tutorial-section" id="troubleshooting">
+            <h2>Troubleshooting</h2>
+            <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                <thead>
+                    <tr style="background: rgba(255,255,255,0.1);">
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid rgba(255,255,255,0.2);">Issue</th>
+                        <th style="padding: 0.75rem; text-align: left; border: 1px solid rgba(255,255,255,0.2);">Solution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">"Too many codespaces open"</td>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Go to <a href="https://github.com/codespaces" target="_blank">github.com/codespaces</a>, delete old ones</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Site not updating</td>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Wait for green checkmark on repository; hard refresh (Ctrl+Shift+R)</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Can't find "Code with Agent mode"</td>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Make sure you're on an Issue page, not the main repository</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Terminal commands won't run</td>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Copy the commands manually and paste into terminal</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Preview won't open</td>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Ask AI: "Can you open a preview of my site?"</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">GitHub verification stuck</td>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Check spam folder; try a different browser</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">"Unable to read clipboard"</td>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Click the "Insert into terminal" button instead of copying</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Codespace seems stuck or confused</td>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Close it and create a new Issue to start fresh</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Changes not showing in Codespace</td>
+                        <td style="padding: 0.75rem; border: 1px solid rgba(255,255,255,0.2);">Your local code may be out of sync; create a new Issue to get a fresh Codespace</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Managing Your Codespaces</h3>
+            <p>GitHub gives you a limited number of free Codespaces. Here's how to manage them:</p>
+
+            <p><strong>After each set of changes:</strong></p>
+            <ol>
+                <li>Once you've committed and pushed your changes, you can close the Codespace browser tab</li>
+                <li>When you want to make more changes, create a <strong>new Issue</strong> and click <strong>Code with Agent mode</strong> again</li>
+                <li>This gives you a fresh environment with all your latest code</li>
+            </ol>
+
+            <p><strong>If you see "Too many codespaces" error:</strong></p>
+            <ol>
+                <li>Go to <a href="https://github.com/codespaces" target="_blank">github.com/codespaces</a></li>
+                <li>You'll see a list of all your active Codespaces</li>
+                <li>Click the <strong>...</strong> menu next to old Codespaces</li>
+                <li>Select <strong>Delete</strong> to remove ones you're no longer using</li>
+                <li>Go back to your repository and try "Code with Agent mode" again</li>
+            </ol>
+            <div class="callout callout-warning">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>⚠️ Important:</strong> Don't worry about deleting Codespaces — your actual code is safely stored in your GitHub repository. Codespaces are just temporary workspaces for editing.</p>
+                </div>
+            </div>
+
+            <h3>Understanding Commits (The Magic Undo Button)</h3>
+            <p>When you "commit and push" your changes, you're creating a <strong>checkpoint</strong> — like saving your game in a video game.</p>
+            <ul>
+                <li>Every commit is saved forever in your repository's history</li>
+                <li>If you ever mess something up badly, you can go back to a previous checkpoint</li>
+                <li>This is called <strong>version control</strong> — it's like having an infinite undo button</li>
+            </ul>
+            <p>You don't need to understand the technical details for this workshop, but knowing that your work is safely checkpointed every time you commit should give you confidence to experiment!</p>
+        </section>
+
+        <section class="tutorial-section" id="homework">
+            <h2>Homework / Further Study</h2>
+            <p>Now that you have a live website, here are ways to expand your skills:</p>
+            <ul>
+                <li><strong>Custom domain:</strong> Purchase a domain (e.g., from Namecheap, GoDaddy) and connect it via GitHub Pages settings</li>
+                <li><strong>Add more pages:</strong> Ask the AI to create an "About" page or "Contact" page</li>
+                <li><strong>Experiment with prompts:</strong> Try building different types of sites (portfolio, blog, business)</li>
+                <li><strong>Try different AI models:</strong> Compare results from Gemini, ChatGPT, Claude, and Codespaces</li>
+                <li><strong>Learn the basics:</strong> If you're curious, start learning HTML/CSS to better understand what the AI is creating</li>
+            </ul>
+
+            <h3>Reference Links</h3>
+            <ul>
+                <li>GitHub Pages documentation: <a href="https://docs.github.com/en/pages" target="_blank">https://docs.github.com/en/pages</a></li>
+                <li>GitHub Codespaces: <a href="https://github.com/codespaces" target="_blank">https://github.com/codespaces</a></li>
+                <li>Google Gemini: <a href="https://gemini.google.com" target="_blank">https://gemini.google.com</a></li>
+                <li>Domain registrars: <a href="https://porkbun.com" target="_blank">Porkbun</a>, <a href="https://namecheap.com" target="_blank">Namecheap</a>, <a href="https://www.cloudflare.com/products/registrar/" target="_blank">Cloudflare</a></li>
+                <li>HTML basics: <a href="https://developer.mozilla.org/en-US/docs/Learn/HTML" target="_blank">https://developer.mozilla.org/en-US/docs/Learn/HTML</a></li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="instructor-notes">
+            <h2>Instructor Notes</h2>
+            <p><strong>Target flow:</strong> intro (15) → GitHub setup (25) → first website (30) → customize (25) → design polish (15) → Q&A (10)</p>
+
+            <p><strong>Key teaching moments:</strong></p>
+            <ul>
+                <li>The "magic moment" is when students see their AI-generated website preview for the first time</li>
+                <li>Emphasize that different AI models have different strengths — this is important for their future vibe coding journey</li>
+                <li>When students ask "can I do X?", encourage them to just try asking the AI</li>
+            </ul>
+
+            <p><strong>Common friction points:</strong></p>
+            <ol>
+                <li>GitHub account creation — verification puzzles can be frustrating</li>
+                <li>Understanding when to make a new Issue vs continuing in same Codespace</li>
+                <li>Remembering to commit and push after making changes</li>
+                <li>"Too many codespaces" error — walk students through <a href="https://github.com/codespaces" target="_blank">github.com/codespaces</a> to delete old ones</li>
+                <li>Codespace getting out of sync — always create a new Issue to get a fresh Codespace with latest code</li>
+            </ol>
+
+            <p><strong>Prompting tips to share:</strong></p>
+            <ul>
+                <li>Be specific about what you want</li>
+                <li>If the AI gives you multiple options, tell it: "Please be direct and opinionated and only give one option"</li>
+                <li>If something looks wrong, just tell the AI what's wrong in plain English</li>
+            </ul>
+
+            <p><strong>If students want to go deeper (Cursor):</strong></p>
+            <p>Some students may ask about more advanced tools like Cursor. Explain that:</p>
+            <ul>
+                <li>Cursor requires a $20/month subscription for full features</li>
+                <li>It's installed software (not browser-based)</li>
+                <li>It offers more power but more complexity</li>
+                <li>Great for a future "Part 2" workshop!</li>
+            </ul>
+
+            <p><strong>Gauge interest for Part 2:</strong></p>
+            <p>At the end of the session, consider asking: "Who would be interested in a Part 2 workshop where we use Cursor and learn more advanced vibe coding techniques?" This helps plan future classes and identifies engaged students.</p>
+
+            <p><strong>Sample pizza website prompt that works well:</strong></p>
+<pre><code>Turn index.html into a fake pizza website called Toshi's Pizzeria 
+that gives a nod to Bitcoin and Pizza Day. Make it fun and include 
+a menu section, contact info, and a hero banner.</code></pre>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/resources/" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Tutorials</a>
+        </nav>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-social">
+            <a href="/contact/" class="footer-social-link" aria-label="Email"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+            <a href="https://primal.net/p/nprofile1qqsrzwgcg39ck26lc3e2yfjhntgcecnlgy9evsuxrfsxx6p46r5s3pgzdvhyj" target="_blank" class="footer-social-link" aria-label="Nostr"><img src="../../static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon"></a>
+            <a href="https://x.com/freedomlabnyc" target="_blank" class="footer-social-link" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/company/freedom-lab-nyc/" target="_blank" class="footer-social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        </div>
+    </footer>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        document.querySelectorAll('.tutorial-toc a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').slice(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    history.pushState(null, null, `#${targetId}`);
+                }
+            });
+        });
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = '<img src="" alt="">';
+        document.body.appendChild(lightbox);
+        const lightboxImg = lightbox.querySelector('img');
+        document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Freedom Lab NYC tutorials - learn about open source, decentralization, encryption, and privacy tools. Step-by-step guides for freedom tech.">
+    <title>Resources | Freedom Lab NYC</title>
+    <link rel="icon" href="../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/tutorials.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=block" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Silkscreen&family=Space+Grotesk:wght@300;400;500;600;700&display=block" rel="stylesheet">
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="logo">
+            <img src="../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+        </a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="http://2iyutqpfixbdpgwd7so7zuodvqqanpjssv54fyqaessxfv6z3d7egjyd.onion" class="nav-link nav-link-onion" target="_blank">Onion Site</a>
+            <a href="/join/" class="nav-btn">Join</a>
+            
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="tutorials-content">
+        <!-- Hero Section -->
+        <section class="tutorials-hero">
+            <div class="tutorials-hero-content">
+                <h1>Resources</h1>
+                <p>Classes and tutorials on open source, decentralization, encryption, and privacy.</p>
+            </div>
+        </section>
+
+        <!-- Support Banner -->
+        <div class="tutorials-filters-container">
+            <div class="tutorial-support-banner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <p>These tutorials are written by Freedom Lab members in their free time. If you find them helpful, please consider <a href="/donate/">supporting our work</a>.</p>
+            </div>
+        </div>
+
+        <!-- Search and Filters Section -->
+        <section class="tutorials-filters-section">
+            <div class="tutorials-filters-container">
+                <!-- Search Bar -->
+                <div class="tutorials-search-box">
+                    <input type="text" id="tutorialSearch" placeholder="Search resources..." aria-label="Search resources">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                </div>
+
+                <!-- Type Filter -->
+                <div class="tutorials-type-filter">
+                    <span class="tags-label">Filter by type:</span>
+                    <div class="type-list">
+                        <button class="type-pill active" data-type="tutorial">Tutorials</button>
+                        <button class="type-pill active" data-type="class">Classes</button>
+                    </div>
+                </div>
+
+                <!-- Tags Filter -->
+                <div class="tutorials-tags">
+                    <span class="tags-label">Filter by topic:</span>
+                    <div class="tags-list">
+                        <button class="tag-pill active" data-tag="all">All</button>
+                        <button class="tag-pill" data-tag="linux">Linux</button>
+                        <button class="tag-pill" data-tag="self-hosting">Self-hosting</button>
+                        <button class="tag-pill" data-tag="privacy">Privacy</button>
+                        <button class="tag-pill" data-tag="bitcoin">Bitcoin</button>
+                        <button class="tag-pill" data-tag="security">Security</button>
+                        <button class="tag-pill" data-tag="encryption">Encryption</button>
+                        <button class="tag-pill" data-tag="networking">Networking</button>
+                        <button class="tag-pill" data-tag="mining">Mining</button>
+                        <button class="tag-pill" data-tag="ai">AI</button>
+                        <button class="tag-pill" data-tag="lightning">Lightning</button>
+                        <button class="tag-pill" data-tag="hardware-wallet">Hardware Wallet</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tutorials Grid Section -->
+        <section class="tutorials-grid-section">
+            <div class="tutorials-grid-container">
+                <!-- Tutorial Cards Grid -->
+                <div class="tutorials-grid" id="tutorialsGrid">
+                    <!-- Bitcoin Node StartOS Class -->
+                    <article class="tutorial-card" data-tags="bitcoin,self-hosting" data-type="class">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type class">Class</span>
+                            <span class="tutorial-card-tag">Bitcoin</span>
+                            <span class="tutorial-card-tag">Self-hosting</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/bitcoin-node-startos/">Bitcoin Node · Getting Started</a>
+                            </h3>
+                            <p class="tutorial-card-description">Run a Bitcoin Node (Umbrel/Start9). Learn what a Bitcoin node is and why to run one, boot a node with StartOS, install Bitcoin Core or Knots, and connect Sparrow Wallet.</p>
+                        </div>
+                    </article>
+
+                    <!-- Bitcoin Node Umbrel Tutorial -->
+                    <article class="tutorial-card" data-tags="bitcoin,self-hosting" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Bitcoin</span>
+                            <span class="tutorial-card-tag">Self-hosting</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/bitcoin-node-umbrel/">Bitcoin Node Setup with Umbrel OS</a>
+                            </h3>
+                            <p class="tutorial-card-description">Setup your own Bitcoin node on a Raspberry Pi the easy way using Umbrel OS. Includes Electrum server setup for wallet connections.</p>
+                        </div>
+                    </article>
+
+                    <!-- Bitcoin Node from Source Tutorial -->
+                    <article class="tutorial-card" data-tags="bitcoin,linux,self-hosting" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Bitcoin</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                            <span class="tutorial-card-tag">Self-hosting</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/bitcoin-node-from-source/">Setup your Bitcoin node from source</a>
+                            </h3>
+                            <p class="tutorial-card-description">Build your own Bitcoin node from scratch. Compile Bitcoin Core, setup Electrs, BTC RPC Explorer, and connect through Tor.</p>
+                        </div>
+                    </article>
+
+                    <!-- Lightning Node Umbrel Tutorial -->
+                    <article class="tutorial-card" data-tags="lightning,bitcoin,self-hosting" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Lightning</span>
+                            <span class="tutorial-card-tag">Bitcoin</span>
+                            <span class="tutorial-card-tag">Self-hosting</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/lightning-node-umbrel/">Lightning node with Umbrel</a>
+                            </h3>
+                            <p class="tutorial-card-description">Setup your own Lightning node on a Raspberry Pi using Umbrel. Includes mobile wallet setup with BlueWallet and channel management.</p>
+                        </div>
+                    </article>
+
+                    <!-- Vibe Coding 101 Class -->
+                    <article class="tutorial-card" data-tags="ai" data-type="class">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type class">Class</span>
+                            <span class="tutorial-card-tag">AI</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/vibe-coding-101/">Vibe Coding 101 · Getting Started</a>
+                            </h3>
+                            <p class="tutorial-card-description">Build and deploy a real website using only your web browser and natural language prompts with AI-assisted coding. No coding experience required.</p>
+                        </div>
+                    </article>
+
+                    <!-- DIY Hardware Wallet Class -->
+                    <article class="tutorial-card" data-tags="bitcoin,hardware-wallet" data-type="class">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type class">Class</span>
+                            <span class="tutorial-card-tag">Bitcoin</span>
+                            <span class="tutorial-card-tag">Hardware Wallet</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/diy-hardware-wallet/">Bitcoin Hardware Wallet · Beginner Build</a>
+                            </h3>
+                            <p class="tutorial-card-description">Build a functional Bitcoin hardware wallet by flashing open-source Jade firmware onto a $15 LilyGO T-Display board.</p>
+                        </div>
+                    </article>
+
+                    <!-- Jade Hardware Wallet Tutorial -->
+                    <article class="tutorial-card" data-tags="bitcoin,hardware-wallet" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Bitcoin</span>
+                            <span class="tutorial-card-tag">Hardware Wallet</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/jade-wallet/">Jade Hardware Wallet</a>
+                            </h3>
+                            <p class="tutorial-card-description">Setup a bitcoin hardware wallet with Blockstream's Jade. Learn how to create, use, and secure your wallet with Green wallet app.</p>
+                        </div>
+                    </article>
+
+                    <!-- Remote Mining Tutorial -->
+                    <article class="tutorial-card" data-tags="bitcoin,mining" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Bitcoin</span>
+                            <span class="tutorial-card-tag">Mining</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/remote-mining/">Remote Mining</a>
+                            </h3>
+                            <p class="tutorial-card-description">Get into Bitcoin mining without worrying about hardware installation and maintenance. Learn about hashrate, efficiency, and remote mining farms.</p>
+                        </div>
+                    </article>
+
+                    <!-- Bitaxe Miners Tutorial -->
+                    <article class="tutorial-card" data-tags="bitcoin,mining,linux" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Bitcoin</span>
+                            <span class="tutorial-card-tag">Mining</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/bitaxe-miners/">Bitaxe Miners</a>
+                            </h3>
+                            <p class="tutorial-card-description">Set up Bitaxe miners - quiet, cool, low-power, and fully open-source Bitcoin miners you can run at home.</p>
+                        </div>
+                    </article>
+
+                    <!-- Encrypt Drive Tutorial -->
+                    <article class="tutorial-card" data-tags="encryption,linux,security" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Encryption</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                            <span class="tutorial-card-tag">Security</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/encrypt-drive/">Encrypt Your Drive</a>
+                            </h3>
+                            <p class="tutorial-card-description">Encrypt your drive to safely store sensitive data using the AES-256 encryption algorithm with LUKS.</p>
+                        </div>
+                    </article>
+
+                    <!-- Change LUKS Password Tutorial -->
+                    <article class="tutorial-card" data-tags="encryption,linux,security" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Encryption</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                            <span class="tutorial-card-tag">Security</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/change-luks-password/">Change LUKS Password</a>
+                            </h3>
+                            <p class="tutorial-card-description">Change the encryption passphrase on a LUKS-encrypted drive.</p>
+                        </div>
+                    </article>
+
+                    <!-- Tor vs VPN Tutorial -->
+                    <article class="tutorial-card" data-tags="privacy,networking,security" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Privacy</span>
+                            <span class="tutorial-card-tag">Networking</span>
+                            <span class="tutorial-card-tag">Security</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/tor-vs-vpn/">Tor vs VPN</a>
+                            </h3>
+                            <p class="tutorial-card-description">Understanding the difference between Tor and VPNs, and when to use each.</p>
+                        </div>
+                    </article>
+
+                    <!-- Tor Relay Tutorial -->
+                    <article class="tutorial-card" data-tags="privacy,linux,self-hosting" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Privacy</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                            <span class="tutorial-card-tag">Self-hosting</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/tor-relay/">Setup a Tor Middle/Guard Relay</a>
+                            </h3>
+                            <p class="tutorial-card-description">Deploy a fully operational Tor Middle/Guard relay on Debian/Ubuntu.</p>
+                        </div>
+                    </article>
+
+                    <!-- VPN Over Tor Tutorial -->
+                    <article class="tutorial-card" data-tags="privacy,networking,self-hosting,linux" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Privacy</span>
+                            <span class="tutorial-card-tag">Networking</span>
+                            <span class="tutorial-card-tag">Self-hosting</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/vpn-over-tor/">VPN Over Tor</a>
+                            </h3>
+                            <p class="tutorial-card-description">Route your VPN traffic through Tor for enhanced privacy with your own OpenVPN server.</p>
+                        </div>
+                    </article>
+
+                    <!-- USBGuard Tutorial -->
+                    <article class="tutorial-card" data-tags="linux,security" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                            <span class="tutorial-card-tag">Security</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/usbguard/">USBGuard</a>
+                            </h3>
+                            <p class="tutorial-card-description">Protect your Linux system from unauthorized USB devices and BadUSB attacks.</p>
+                        </div>
+                    </article>
+
+                    <!-- Linux 2FA Tutorial -->
+                    <article class="tutorial-card" data-tags="linux,security" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                            <span class="tutorial-card-tag">Security</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/linux-2fa/">Two-Factor Authentication for Linux Login</a>
+                            </h3>
+                            <p class="tutorial-card-description">Add 2FA to your Linux desktop login for enhanced security using Google Authenticator.</p>
+                        </div>
+                    </article>
+
+                    <!-- XMPP Server Tutorial -->
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Self-hosting</span>
+                            <span class="tutorial-card-tag">Privacy</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/xmpp-server/">Self-Hosted XMPP Server</a>
+                            </h3>
+                            <p class="tutorial-card-description">Run your own XMPP server for private, federated messaging with Prosody.</p>
+                        </div>
+                    </article>
+
+                    <!-- Mailcow Email Server Tutorial -->
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Self-hosting</span>
+                            <span class="tutorial-card-tag">Privacy</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/mailcow/">Self-Hosted Email Server</a>
+                            </h3>
+                            <p class="tutorial-card-description">Run your own email server with Mailcow for full control over your communications.</p>
+                        </div>
+                    </article>
+
+                    <!-- SimpleX SMP Server Tutorial -->
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Self-hosting</span>
+                            <span class="tutorial-card-tag">Privacy</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/simplex-smp/">Self-Hosted SimpleX SMP Server</a>
+                            </h3>
+                            <p class="tutorial-card-description">Run your own SimpleX SMP server for private, decentralized messaging with Tor support.</p>
+                        </div>
+                    </article>
+
+                    <!-- Matrix Synapse Server Tutorial -->
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Self-hosting</span>
+                            <span class="tutorial-card-tag">Privacy</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/matrix-synapse/">Self-Hosted Matrix Server</a>
+                            </h3>
+                            <p class="tutorial-card-description">Run your own Matrix homeserver with Synapse for private, federated communication.</p>
+                        </div>
+                    </article>
+
+                    <!-- Self-Host AI Models Tutorial -->
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,ai,linux" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Self-hosting</span>
+                            <span class="tutorial-card-tag">Privacy</span>
+                            <span class="tutorial-card-tag">AI</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/self-host-ai/">Self-Hosting AI Models</a>
+                            </h3>
+                            <p class="tutorial-card-description">Run your own AI inference server by renting GPU hardware and deploying open-source models.</p>
+                        </div>
+                    </article>
+
+                    <!-- Anonymous Vibecoding Tutorial -->
+                    <article class="tutorial-card" data-tags="privacy,ai,linux" data-type="tutorial">
+                        <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
+                            <span class="tutorial-card-tag">Privacy</span>
+                            <span class="tutorial-card-tag">AI</span>
+                            <span class="tutorial-card-tag">Linux</span>
+                        </div>
+                        <div class="tutorial-card-body">
+                            <h3 class="tutorial-card-title">
+                                <a href="/resources/anonymous-vibecoding/">Anonymous Vibecoding: Zero-KYC Guide</a>
+                            </h3>
+                            <p class="tutorial-card-description">Set up a fully anonymous AI code editor with zero KYC requirements using Monero, VSCodium, and Cline.</p>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- No Results State (shown when search/filter has no matches) -->
+                <div class="tutorials-no-results" id="tutorialsNoResults">
+                    <p>No tutorials found matching your search.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-social">
+            <a href="/contact/" class="footer-social-link" aria-label="Email">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg">
+                    <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                </svg>
+            </a>
+            <a href="https://primal.net/p/nprofile1qqsrzwgcg39ck26lc3e2yfjhntgcecnlgy9evsuxrfsxx6p46r5s3pgzdvhyj" target="_blank" class="footer-social-link" aria-label="Nostr">
+                <img src="../static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon">
+            </a>
+            <a href="https://x.com/freedomlabnyc" target="_blank" class="footer-social-link" aria-label="X">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/company/freedom-lab-nyc/" target="_blank" class="footer-social-link" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Tutorial filtering
+        const tutorialCards = document.querySelectorAll('.tutorial-card');
+        const noResults = document.getElementById('tutorialsNoResults');
+        let selectedTags = new Set();
+        let selectedTypes = new Set(['tutorial', 'class']); // Both selected by default
+        let currentSearch = '';
+
+        function filterTutorials() {
+            let visibleCount = 0;
+            tutorialCards.forEach(card => {
+                const cardTags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+                const cardType = card.dataset.type || 'tutorial';
+                const title = card.querySelector('.tutorial-card-title').textContent.toLowerCase();
+                const description = card.querySelector('.tutorial-card-description').textContent.toLowerCase();
+                
+                // Match type filter
+                const matchesType = selectedTypes.has(cardType);
+                
+                // Match if no tags selected OR card has ALL selected tags
+                const matchesTag = selectedTags.size === 0 || 
+                    [...selectedTags].every(tag => cardTags.includes(tag));
+                const matchesSearch = !currentSearch || 
+                    title.includes(currentSearch) || 
+                    description.includes(currentSearch);
+                
+                if (matchesType && matchesTag && matchesSearch) {
+                    card.style.display = '';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // Type Filter Functionality
+        const typePills = document.querySelectorAll('.type-pill');
+        typePills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                const type = pill.dataset.type;
+                
+                if (selectedTypes.has(type)) {
+                    // Don't allow deselecting if it's the only one selected
+                    if (selectedTypes.size > 1) {
+                        selectedTypes.delete(type);
+                        pill.classList.remove('active');
+                    }
+                } else {
+                    selectedTypes.add(type);
+                    pill.classList.add('active');
+                }
+                
+                filterTutorials();
+            });
+        });
+
+        // Tag Filter Functionality (multi-select)
+        const tagPills = document.querySelectorAll('.tag-pill');
+        const allPill = document.querySelector('.tag-pill[data-tag="all"]');
+        
+        tagPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                const tag = pill.dataset.tag;
+                
+                if (tag === 'all') {
+                    // Clear all selections
+                    selectedTags.clear();
+                    tagPills.forEach(p => p.classList.remove('active'));
+                    allPill.classList.add('active');
+                } else {
+                    // Toggle this tag
+                    allPill.classList.remove('active');
+                    
+                    if (selectedTags.has(tag)) {
+                        selectedTags.delete(tag);
+                        pill.classList.remove('active');
+                    } else {
+                        selectedTags.add(tag);
+                        pill.classList.add('active');
+                    }
+                    
+                    // If no tags selected, activate "All"
+                    if (selectedTags.size === 0) {
+                        allPill.classList.add('active');
+                    }
+                }
+                
+                filterTutorials();
+            });
+        });
+
+        // Search Functionality
+        const searchInput = document.getElementById('tutorialSearch');
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value.toLowerCase();
+            filterTutorials();
+        });
+
+        // Make entire tutorial card clickable
+        document.querySelectorAll('.tutorial-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const link = card.querySelector('.tutorial-card-title a');
+                if (link) {
+                    window.location.href = link.href;
+                }
+            });
+        });
+    </script>
+    <script src="../js/social-config.js"></script>
+</body>
+</html>

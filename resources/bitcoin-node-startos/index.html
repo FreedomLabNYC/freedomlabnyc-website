@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Run a Bitcoin Node (Umbrel/Start9) - Learn what a Bitcoin node is and why to run one, boot a node with StartOS, install Bitcoin Core or Knots, and connect Sparrow Wallet.">
+    <title>Run a Bitcoin Node (Umbrel/Start9) | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide"></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="http://2iyutqpfixbdpgwd7so7zuodvqqanpjssv54fyqaessxfv6z3d7egjyd.onion" class="nav-link nav-link-onion" target="_blank">Onion Site</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+        <div class="tutorial-support-banner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <p>These tutorials are written by Freedom Lab members in their free time. If you find them helpful, please consider <a href="/donate/">supporting our work</a>.</p>
+        </div>
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>Bitcoin Node · Getting Started</span>
+            </div>
+            <h1 class="tutorial-title">Bitcoin Node · Getting Started</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag class">Class</span>
+                <span class="tutorial-tag">Bitcoin</span>
+                <span class="tutorial-tag">Self-hosting</span>
+            </div>
+            <p class="tutorial-intro"><strong>Audience:</strong> Beginner–intermediate</p>
+            <p><strong>Duration:</strong> 90–121 min (see timing in Agenda)</p>
+            <p><strong>Outcomes:</strong> By the end, students will:</p>
+            <ul>
+                <li>Understand what a Bitcoin node is and why to run one (sovereignty, privacy, security).</li>
+                <li>Boot a node with StartOS, complete initial setup, and understand CA trust.</li>
+                <li>Install Bitcoin Core <strong>or</strong> Bitcoin Knots and understand their relationship.</li>
+                <li>Connect electrs and Sparrow Wallet to their own node.</li>
+                <li>Send/receive a small on-chain transaction and inspect it.</li>
+            </ul>
+            <img src="assets/bitcoin_node.webp" alt="Hands-on Bitcoin node setup on a workbench" style="width: 100%;">
+        </div>
+
+        <nav class="tutorial-toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#concept-primer">Concept Primer</a></li>
+                <li><a href="#agenda">Agenda</a></li>
+                <li><a href="#prerequisites">Prerequisites</a></li>
+                <li><a href="#hardware-prep">Hardware Prep</a></li>
+                <li><a href="#flash-startos">Flash StartOS</a></li>
+                <li><a href="#initial-setup">Initial Setup & Trusting the CA</a></li>
+                <li><a href="#install-services">Install Services: Bitcoin Core/Knots, electrs, Sparrow</a></li>
+                <li><a href="#hands-on">Hands-On: Send/Receive & Inspect</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#homework">Homework / Further Study</a></li>
+                <li><a href="#instructor-notes">Instructor Notes</a></li>
+            </ol>
+        </nav>
+
+        <section class="tutorial-section" id="abstract">
+            <h2>Abstract</h2>
+            <p>Running a Bitcoin node means operating Bitcoin's rules yourself. Your machine downloads the entire blockchain, verifies every transaction, and enforces the consensus rules—like the 21 million BTC cap—so you decide what counts as Bitcoin. With a node you gain monetary sovereignty, unlock self-custodial Lightning and other apps, protect your privacy, and help keep the network decentralized by relaying honest data and rejecting invalid blocks.</p>
+        </section>
+
+        <section class="tutorial-section" id="concept-primer">
+            <h2>Concept Primer (10–15 min)</h2>
+
+            <h3>What is a node?</h3>
+            <p>A Bitcoin node is your personal referee for the network:</p>
+            <ul>
+                <li>Runs the Bitcoin protocol and participates as a peer in the P2P network.</li>
+                <li>Downloads, maintains, and verifies the entire blockchain history from genesis onward.</li>
+                <li>Validates every transaction and block, enforcing the consensus rules (supply cap, issuance schedule, difficulty adjustment, double-spend prevention).</li>
+                <li>Rejects invalid data, keeping Bitcoin decentralized, secure, and honest.</li>
+            </ul>
+
+            <h3>Node types</h3>
+            <ul>
+                <li><strong>Full / Archival:</strong> Checks every rule from genesis, stores the complete blockchain plus the live UTXO set.</li>
+                <li><strong>Pruned:</strong> Validates like a full node but deletes old block files to save disk space while retaining the UTXO set.</li>
+                <li><strong>Light (SPV):</strong> Downloads only block headers and trusts full nodes for details—convenient but not trustless.</li>
+                <li><strong>Mining node:</strong> A full node that also builds candidate blocks, hashes nonces, and collects block rewards when it wins.</li>
+            </ul>
+
+            <h3>Advanced technical summary</h3>
+            <ul>
+                <li>Stores and syncs the blockchain tip-to-genesis while maintaining the UTXO set.</li>
+                <li>Verifies signatures, scripts, and absence of double spends before accepting data.</li>
+                <li>Enforces the 21 million BTC supply, halving schedule, and difficulty adjustments every 2,016 blocks.</li>
+                <li>Filters out invalid transactions/blocks before they propagate to honest peers.</li>
+                <li>Relays valid transactions and new blocks across the network to keep other nodes up to date.</li>
+            </ul>
+
+            <h3>Why run your own node?</h3>
+            <p><strong>TL;DR:</strong> You enforce the rules, verify your money, and unlock self-custodial services.</p>
+
+            <h4>Sovereignty & trustlessness</h4>
+            <ul>
+                <li>If you're not running your own node, you're trusting someone else's view of Bitcoin—and that means you are not sovereign.</li>
+                <li>Your node chooses which consensus rules to enforce; no one can force upgrades or rule changes on you.</li>
+                <li>Example: When you plug in a hardware wallet, the companion app might claim you received 0.01 BTC. Without your own node, you cannot prove whether that is BTC, BCH, or fake data.</li>
+                <li>If centralized providers mistakenly or maliciously accept a 25 million coin supply, your node rejects it and defends the 21 million cap.</li>
+                <li>Running your own node keeps you anchored to the canonical ledger governed by the rules you select.</li>
+            </ul>
+
+            <h4>Self-custodial Lightning & apps</h4>
+            <ul>
+                <li>Lightning custody requires liveness—only your own node gives you trust-minimized Lightning channels.</li>
+                <li>Your node is a platform for sovereign services: Mempool.space, BTCPay Server, JoinMarket, RoboSats, Bisq, Sparrow Wallet, Sphinx Chat, Datum Gateway for mining templates, private cloud tooling, password managers, IPFS podcasting, Nostr clients, GPT-style models, and more.</li>
+            </ul>
+
+            <h4>Privacy</h4>
+            <ul>
+                <li>Without your own node, wallets leak your IP address and XPUB to someone else's server, linking all past and future transactions.</li>
+                <li>With your node, no external party learns which addresses you control or the destinations of your payments; you browse the chain locally and keep network metadata private.</li>
+            </ul>
+
+            <h4>Security</h4>
+            <ul>
+                <li>Full nodes remove third-party risk that plagues SPV wallets or hosted services.</li>
+                <li>You independently verify every transaction affecting your balance, so fake coins and invalid spends never fool you.</li>
+            </ul>
+
+            <h4>Help the network stay honest</h4>
+            <ul>
+                <li>By running a node you enforce the ruleset you choose—including supply cap, block timing, and difficulty.</li>
+                <li>You relay valid transactions and blocks (including newly mined blocks), reject invalid ones, and provide historical data to peers that are syncing or returning online.</li>
+                <li>Lightweight wallets rely on your node for filtered block data, transaction broadcasts, and archival history.</li>
+                <li>Economic nodes that secure their own coins raise the cost for adversaries trying to co-opt Bitcoin.</li>
+            </ul>
+
+            <h4>Game theory & governance</h4>
+            <ul>
+                <li>Bitcoin's checks and balances involve developers, miners, and node operators—nodes decide what software (and thus what rules) they accept.</li>
+                <li>Node runners are the referees: if someone tries to "move a pawn three squares," your node refuses to play along and disconnects.</li>
+                <li>The collective judgment of many independent nodes keeps Bitcoin decentralized and censorship resistant.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="agenda">
+            <h2>Agenda (suggested timing)</h2>
+            <ol>
+                <li><strong>Concepts & motivation</strong> (15)</li>
+                <li><strong>Hardware prep</strong> (10)</li>
+                <li><strong>Flash StartOS & boot</strong> (20)</li>
+                <li><strong>Initial setup & CA trust</strong> (15)</li>
+                <li><strong>Install services (Core/Knots, electrs) & connect Sparrow</strong> (20)</li>
+                <li><strong>Hands‑on send/receive & mempool</strong> (15)</li>
+                <li><strong>Q&A / Troubleshooting</strong> (5–10)</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="prerequisites">
+            <h2>Prerequisites (tell students ahead)</h2>
+            <ul>
+                <li>Laptop + admin rights; charger.</li>
+                <li>Optional: small SSD if building a dedicated box (pruned nodes work on smaller disks).</li>
+                <li>A phone for 2FA/seed backups if you'll demo wallets.</li>
+            </ul>
+            <p><strong>Instructor prep</strong></p>
+            <ul>
+                <li>Bring a small "class treasury" UTXO for test sends.</li>
+                <li>Confirm current StartOS release and links before class.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="hardware-prep">
+            <h2>Hardware Prep (if using a dedicated mini‑PC) (10 min)</h2>
+            <ol>
+                <li>Power down; open the case.</li>
+                <li>Install the SSD/NVMe (e.g., 2TB) in the M.2 slot; secure the screw.</li>
+                <li>Reassemble and connect Ethernet (preferred) or be ready with a display/keyboard.</li>
+            </ol>
+            <div class="callout callout-note">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <div class="callout-content">
+                    <p>If repurposing an existing machine, plan for a <strong>fresh install</strong>. Keep blockchain data on the internal drive if space allows; otherwise run pruned.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tutorial-section" id="flash-startos">
+            <h2>Flash StartOS (20 min)</h2>
+            <p><strong>You'll need:</strong> a USB drive (≥8GB), a laptop, and Balena Etcher.</p>
+            <ol>
+                <li><strong>Download StartOS ISO</strong> (verify you use the current stable release):
+                    <ul>
+                        <li>Releases: <a href="https://github.com/Start9Labs/start-os/releases" target="_blank">https://github.com/Start9Labs/start-os/releases</a></li>
+                        <li>Example v0.3.5.1 ISO (x86_64): <a href="https://github.com/Start9Labs/start-os/releases/tag/v0.3.5.1" target="_blank">https://github.com/Start9Labs/start-os/releases/tag/v0.3.5.1</a></li>
+                    </ul>
+                </li>
+                <li><strong>Download Etcher:</strong> <a href="https://etcher.balena.io/" target="_blank">https://etcher.balena.io/</a></li>
+                <li><strong>Flash the USB:</strong>
+                    <ul>
+                        <li>Open Etcher → <em>Flash from file</em> → select the StartOS ISO → select target USB → <em>Flash</em> → wait for completion.</li>
+                    </ul>
+                </li>
+            </ol>
+            <h3>Boot the node from USB</h3>
+            <ul>
+                <li>Insert the flashed USB into the mini‑PC. Attach a display and keyboard to the mini‑PC — you'll need them to access the BIOS/boot menu and select the USB as the boot device or otherwise specify the boot image.</li>
+                <li>Enter BIOS/boot menu if needed; choose the USB drive.</li>
+                <li>Follow on‑screen prompts to install StartOS to disk. When complete, remove the USB and reboot.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="initial-setup">
+            <h2>Initial Setup & Trusting the CA (15 min)</h2>
+            <ol>
+                <li>Connect the node to your LAN (Ethernet recommended).</li>
+                <li>From a laptop on the <strong>same Wi‑Fi or LAN network as the node</strong>, visit <code>http://start.local</code> (or use the IP address if mDNS isn't resolving).</li>
+                <li>Click <strong>Reinstall</strong> (for fresh setup) if prompted, then set an <strong>owner password</strong>.</li>
+                <li>Download the <strong>Certificate Authority (CA)</strong> bundle when prompted.</li>
+                <li>Install/Trust the CA on your laptop so your browser will trust the node's HTTPS:
+                    <ul>
+                        <li>macOS guide: <a href="https://docs.start9.com/0.3.5.x/device-guides/mac/ca-mac.html" target="_blank">https://docs.start9.com/0.3.5.x/device-guides/mac/ca-mac.html</a></li>
+                        <li>General getting started: <a href="https://docs.start9.com/0.3.4.x/user-manual/getting-started/initial-setup" target="_blank">https://docs.start9.com/0.3.4.x/user-manual/getting-started/initial-setup</a></li>
+                    </ul>
+                </li>
+                <li>After trusting the CA, reconnect to your node's <code>.local</code> hostname or its <code>.onion</code> URL via Tor (as documented by Start9).</li>
+            </ol>
+            <div class="callout callout-tip">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                </svg>
+                <div class="callout-content">
+                    <p>If <code>start.local</code> doesn't resolve, check Bonjour/mDNS support or navigate via the device's LAN IP.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tutorial-section" id="install-services">
+            <h2>Install Services: Bitcoin Core/Knots, electrs, Sparrow (20–25 min)</h2>
+            <p>Inside StartOS:</p>
+            <ol>
+                <li><strong>Install Bitcoin Core or Bitcoin Knots.</strong> Start the service and begin initial block download (IBD). Choose <strong>pruned</strong> if disk is limited.</li>
+                <li><strong>Install electrs</strong> (Electrum server) and point it at your Core/Knots instance.</li>
+                <li>On your laptop, install <strong>Sparrow Wallet</strong> (<a href="https://sparrowwallet.com/" target="_blank">https://sparrowwallet.com/</a>) and configure <strong>Server</strong> → <strong>Type: Electrum</strong> → host = your node (LAN IP/hostname or Tor, with the correct port). Save and test connection.</li>
+            </ol>
+            <h3>Notes</h3>
+            <ul>
+                <li>IBD can take many hours/days for archival; a pruned node begins usable operation earlier.</li>
+                <li>For demo purposes, you can keep Core/Knots running and proceed with wallet connection while syncs continue; some features will be limited until headers/IBD progress sufficiently.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="hands-on">
+            <h2>Hands‑On: Send/Receive & Inspect (15 min)</h2>
+            <ol>
+                <li>In Sparrow, create or import a test wallet; write down the seed <em>offline</em>.</li>
+                <li><strong>Receive</strong> a small amount (1–5k sats) from instructor treasury; label the transaction.</li>
+                <li><strong>Inspect</strong> the mempool and confirmations using your own node (and compare with a public explorer): <a href="https://mempool.space/" target="_blank">https://mempool.space/</a></li>
+                <li><strong>Send</strong> a small amount back; discuss fees (sats/vB), mempool backlog, and confirmation targets.</li>
+            </ol>
+            <h3>Safety checklist</h3>
+            <ul>
+                <li>Two physical backups of the seed; no screenshots/cloud.</li>
+                <li>Device lock; beware fake apps/QR phishing.</li>
+                <li>Test restores with tiny funds before moving meaningful value.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="troubleshooting">
+            <h2>Troubleshooting</h2>
+            <ul>
+                <li><code>start.local</code> not found → use LAN IP; verify mDNS; check cable.</li>
+                <li>Browser shows cert warning → CA not installed/trusted; repeat CA steps.</li>
+                <li>electrs won't index → wait for Core/Knots headers; confirm RPC/auth configuration.</li>
+                <li>Sparrow cannot connect → verify host/port, firewall, Tor settings, and electrs status.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="homework">
+            <h2>Homework / Further Study</h2>
+            <ul>
+                <li>Finish IBD</li>
+                <li>Open port 8333 and verify peers</li>
+                <li>Explore your node's <strong>logs</strong>, peers, and disk usage; try pruned vs archival settings.</li>
+                <li>Optional: install extra services (Mempool, BTCPay Server, JoinMarket, RoboSats) and learn their threat models.</li>
+            </ul>
+            <h3>Reference Links</h3>
+            <ul>
+                <li>StartOS flashing guides: <a href="https://docs.start9.com/0.3.5.x/flashing-guides/" target="_blank">https://docs.start9.com/0.3.5.x/flashing-guides/</a></li>
+                <li>StartOS releases: <a href="https://github.com/Start9Labs/start-os/releases" target="_blank">https://github.com/Start9Labs/start-os/releases</a></li>
+                <li>Initial setup (user manual): <a href="https://docs.start9.com/0.3.4.x/user-manual/getting-started/initial-setup" target="_blank">https://docs.start9.com/0.3.4.x/user-manual/getting-started/initial-setup</a></li>
+                <li>macOS CA trust: <a href="https://docs.start9.com/0.3.5.x/device-guides/mac/ca-mac.html" target="_blank">https://docs.start9.com/0.3.5.x/device-guides/mac/ca-mac.html</a></li>
+                <li>Balena Etcher: <a href="https://etcher.balena.io/" target="_blank">https://etcher.balena.io/</a></li>
+                <li>Sparrow Wallet: <a href="https://sparrowwallet.com/" target="_blank">https://sparrowwallet.com/</a></li>
+                <li>Mempool explorer: <a href="https://mempool.space/" target="_blank">https://mempool.space/</a></li>
+                <li>Bitcoin Knots: <a href="https://bitcoinknots.org/" target="_blank">https://bitcoinknots.org/</a></li>
+                <li>Bitcoin Core: <a href="https://bitcoincore.org/" target="_blank">https://bitcoincore.org/</a></li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="instructor-notes">
+            <h2>Instructor Notes</h2>
+            <ul>
+                <li>Target flow: intro (15) → install (20) → setup/CA (15) → services + Sparrow (25) → hands‑on (15) → Q&A (10).</li>
+                <li>Bring a spare USB and a pre‑flashed StartOS stick for anyone stuck.</li>
+                <li>If mempool is busy, pre‑fund a small LN channel for quick demos or warn about higher on‑chain fees.</li>
+                <li>Consider screenshots/GIFs for each critical step in a future revision.</li>
+            </ul>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/resources/" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Tutorials</a>
+        </nav>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-social">
+            <a href="/contact/" class="footer-social-link" aria-label="Email"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></a>
+            <a href="https://primal.net/p/nprofile1qqsrzwgcg39ck26lc3e2yfjhntgcecnlgy9evsuxrfsxx6p46r5s3pgzdvhyj" target="_blank" class="footer-social-link" aria-label="Nostr"><img src="../../static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon"></a>
+            <a href="https://x.com/freedomlabnyc" target="_blank" class="footer-social-link" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a href="https://www.linkedin.com/company/freedom-lab-nyc/" target="_blank" class="footer-social-link" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        </div>
+    </footer>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        document.querySelectorAll('.tutorial-toc a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').slice(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    history.pushState(null, null, `#${targetId}`);
+                }
+            });
+        });
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = '<img src="" alt="">';
+        document.body.appendChild(lightbox);
+        const lightboxImg = lightbox.querySelector('img');
+        document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    </script>
+</body>
+</html>
