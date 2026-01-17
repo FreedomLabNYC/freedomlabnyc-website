@@ -69,6 +69,15 @@
                     </svg>
                 </div>
 
+                <!-- Type Filter -->
+                <div class="tutorials-type-filter">
+                    <span class="tags-label">Filter by type:</span>
+                    <div class="type-list">
+                        <button class="type-pill active" data-type="tutorial">Tutorials</button>
+                        <button class="type-pill active" data-type="class">Classes</button>
+                    </div>
+                </div>
+
                 <!-- Tags Filter -->
                 <div class="tutorials-tags">
                     <span class="tags-label">Filter by topic:</span>
@@ -95,9 +104,10 @@
             <div class="tutorials-grid-container">
                 <!-- Tutorial Cards Grid -->
                 <div class="tutorials-grid" id="tutorialsGrid">
-                    <!-- Bitcoin Node StartOS Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,self-hosting">
+                    <!-- Bitcoin Node StartOS Class -->
+                    <article class="tutorial-card" data-tags="bitcoin,self-hosting" data-type="class">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type class">Class</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                         </div>
@@ -110,8 +120,9 @@
                     </article>
 
                     <!-- Bitcoin Node Umbrel Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,self-hosting">
+                    <article class="tutorial-card" data-tags="bitcoin,self-hosting" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                         </div>
@@ -124,8 +135,9 @@
                     </article>
 
                     <!-- Bitcoin Node from Source Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,linux,self-hosting">
+                    <article class="tutorial-card" data-tags="bitcoin,linux,self-hosting" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Linux</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
@@ -139,8 +151,9 @@
                     </article>
 
                     <!-- Lightning Node Umbrel Tutorial -->
-                    <article class="tutorial-card" data-tags="lightning,bitcoin,self-hosting">
+                    <article class="tutorial-card" data-tags="lightning,bitcoin,self-hosting" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Lightning</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
@@ -153,9 +166,10 @@
                         </div>
                     </article>
 
-                    <!-- Vibe Coding 101 Tutorial -->
-                    <article class="tutorial-card" data-tags="ai">
+                    <!-- Vibe Coding 101 Class -->
+                    <article class="tutorial-card" data-tags="ai" data-type="class">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type class">Class</span>
                             <span class="tutorial-card-tag">AI</span>
                         </div>
                         <div class="tutorial-card-body">
@@ -166,9 +180,10 @@
                         </div>
                     </article>
 
-                    <!-- DIY Hardware Wallet Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,hardware-wallet">
+                    <!-- DIY Hardware Wallet Class -->
+                    <article class="tutorial-card" data-tags="bitcoin,hardware-wallet" data-type="class">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type class">Class</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Hardware Wallet</span>
                         </div>
@@ -181,8 +196,9 @@
                     </article>
 
                     <!-- Jade Hardware Wallet Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,hardware-wallet">
+                    <article class="tutorial-card" data-tags="bitcoin,hardware-wallet" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Hardware Wallet</span>
                         </div>
@@ -195,8 +211,9 @@
                     </article>
 
                     <!-- Remote Mining Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,mining">
+                    <article class="tutorial-card" data-tags="bitcoin,mining" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Mining</span>
                         </div>
@@ -209,8 +226,9 @@
                     </article>
 
                     <!-- Bitaxe Miners Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,mining,linux">
+                    <article class="tutorial-card" data-tags="bitcoin,mining,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Mining</span>
                             <span class="tutorial-card-tag">Linux</span>
@@ -224,8 +242,9 @@
                     </article>
 
                     <!-- Encrypt Drive Tutorial -->
-                    <article class="tutorial-card" data-tags="encryption,linux,security">
+                    <article class="tutorial-card" data-tags="encryption,linux,security" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Encryption</span>
                             <span class="tutorial-card-tag">Linux</span>
                             <span class="tutorial-card-tag">Security</span>
@@ -239,8 +258,9 @@
                     </article>
 
                     <!-- Change LUKS Password Tutorial -->
-                    <article class="tutorial-card" data-tags="encryption,linux,security">
+                    <article class="tutorial-card" data-tags="encryption,linux,security" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Encryption</span>
                             <span class="tutorial-card-tag">Linux</span>
                             <span class="tutorial-card-tag">Security</span>
@@ -254,8 +274,9 @@
                     </article>
 
                     <!-- Tor vs VPN Tutorial -->
-                    <article class="tutorial-card" data-tags="privacy,networking,security">
+                    <article class="tutorial-card" data-tags="privacy,networking,security" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Networking</span>
                             <span class="tutorial-card-tag">Security</span>
@@ -269,8 +290,9 @@
                     </article>
 
                     <!-- Tor Relay Tutorial -->
-                    <article class="tutorial-card" data-tags="privacy,linux,self-hosting">
+                    <article class="tutorial-card" data-tags="privacy,linux,self-hosting" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Linux</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
@@ -284,8 +306,9 @@
                     </article>
 
                     <!-- VPN Over Tor Tutorial -->
-                    <article class="tutorial-card" data-tags="privacy,networking,self-hosting,linux">
+                    <article class="tutorial-card" data-tags="privacy,networking,self-hosting,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Networking</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
@@ -300,8 +323,9 @@
                     </article>
 
                     <!-- USBGuard Tutorial -->
-                    <article class="tutorial-card" data-tags="linux,security">
+                    <article class="tutorial-card" data-tags="linux,security" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Linux</span>
                             <span class="tutorial-card-tag">Security</span>
                         </div>
@@ -314,8 +338,9 @@
                     </article>
 
                     <!-- Linux 2FA Tutorial -->
-                    <article class="tutorial-card" data-tags="linux,security">
+                    <article class="tutorial-card" data-tags="linux,security" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Linux</span>
                             <span class="tutorial-card-tag">Security</span>
                         </div>
@@ -328,8 +353,9 @@
                     </article>
 
                     <!-- XMPP Server Tutorial -->
-                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux">
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Linux</span>
@@ -343,8 +369,9 @@
                     </article>
 
                     <!-- Mailcow Email Server Tutorial -->
-                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux">
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Linux</span>
@@ -358,8 +385,9 @@
                     </article>
 
                     <!-- SimpleX SMP Server Tutorial -->
-                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux">
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Linux</span>
@@ -373,8 +401,9 @@
                     </article>
 
                     <!-- Matrix Synapse Server Tutorial -->
-                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux">
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Linux</span>
@@ -388,8 +417,9 @@
                     </article>
 
                     <!-- Self-Host AI Models Tutorial -->
-                    <article class="tutorial-card" data-tags="self-hosting,privacy,ai,linux">
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,ai,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">AI</span>
@@ -404,8 +434,9 @@
                     </article>
 
                     <!-- Anonymous Vibecoding Tutorial -->
-                    <article class="tutorial-card" data-tags="privacy,ai,linux">
+                    <article class="tutorial-card" data-tags="privacy,ai,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
+                            <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">AI</span>
                             <span class="tutorial-card-tag">Linux</span>
@@ -484,14 +515,19 @@
         const tutorialCards = document.querySelectorAll('.tutorial-card');
         const noResults = document.getElementById('tutorialsNoResults');
         let selectedTags = new Set();
+        let selectedTypes = new Set(['tutorial', 'class']); // Both selected by default
         let currentSearch = '';
 
         function filterTutorials() {
             let visibleCount = 0;
             tutorialCards.forEach(card => {
                 const cardTags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+                const cardType = card.dataset.type || 'tutorial';
                 const title = card.querySelector('.tutorial-card-title').textContent.toLowerCase();
                 const description = card.querySelector('.tutorial-card-description').textContent.toLowerCase();
+                
+                // Match type filter
+                const matchesType = selectedTypes.has(cardType);
                 
                 // Match if no tags selected OR card has ALL selected tags
                 const matchesTag = selectedTags.size === 0 || 
@@ -500,7 +536,7 @@
                     title.includes(currentSearch) || 
                     description.includes(currentSearch);
                 
-                if (matchesTag && matchesSearch) {
+                if (matchesType && matchesTag && matchesSearch) {
                     card.style.display = '';
                     visibleCount++;
                 } else {
@@ -510,6 +546,27 @@
             
             noResults.style.display = visibleCount === 0 ? 'block' : 'none';
         }
+
+        // Type Filter Functionality
+        const typePills = document.querySelectorAll('.type-pill');
+        typePills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                const type = pill.dataset.type;
+                
+                if (selectedTypes.has(type)) {
+                    // Don't allow deselecting if it's the only one selected
+                    if (selectedTypes.size > 1) {
+                        selectedTypes.delete(type);
+                        pill.classList.remove('active');
+                    }
+                } else {
+                    selectedTypes.add(type);
+                    pill.classList.add('active');
+                }
+                
+                filterTutorials();
+            });
+        });
 
         // Tag Filter Functionality (multi-select)
         const tagPills = document.querySelectorAll('.tag-pill');
