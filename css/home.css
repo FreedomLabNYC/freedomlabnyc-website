@@ -584,13 +584,8 @@
     align-items: center;
     justify-content: center;
     color: var(--secondary);
-    transition: transform 0.3s ease;
     overflow: visible;
     padding: 4px;
-}
-
-.tech-card:hover .tech-icon {
-    transform: scale(1.15);
 }
 
 .tech-icon svg {
