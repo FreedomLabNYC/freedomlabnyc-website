@@ -223,6 +223,60 @@
     font-weight: 500;
 }
 
+/* === Bitcoin Tag Tree Structure === */
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: flex-start;
+}
+
+/* Bitcoin main tag styling when active */
+.bitcoin-main-tag.active {
+    background: var(--secondary) !important;
+    color: var(--primary) !important;
+    border-color: var(--secondary) !important;
+}
+
+.bitcoin-sub-tag {
+    display: none !important;
+    padding: 0.5rem 1rem;
+    background: rgba(50, 208, 17, 0.05);
+    border: 1px solid rgba(50, 208, 17, 0.5);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-family: 'Space Grotesk', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+/* Show sub-tags when Bitcoin is expanded */
+.tags-list.bitcoin-expanded .bitcoin-sub-tag {
+    display: inline-flex !important;
+}
+
+.bitcoin-sub-tag:hover {
+    background: rgba(50, 208, 17, 0.15);
+    border-color: var(--secondary);
+    color: var(--secondary);
+}
+
+.bitcoin-sub-tag.active {
+    background: rgba(50, 208, 17, 0.2);
+    border-color: var(--secondary);
+    color: var(--secondary);
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .bitcoin-sub-tag {
+        font-size: 0.85rem;
+        padding: 0.45rem 0.85rem;
+    }
+}
+
 /* === Tutorials Grid Section === */
 .tutorials-grid-section {
     padding: 0 2rem;
