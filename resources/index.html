@@ -532,26 +532,52 @@
         let selectedTypes = new Set(['tutorial', 'class']); // Both selected by default
         let currentSearch = '';
 
+        // Parent-child tag configuration (add new parent tags here in the future)
+        // Format: { parentTag: { mainTagClass: 'class-name', subTagClass: 'class-name', expandedClass: 'class-name' } }
+        const parentTagConfig = {
+            'bitcoin': {
+                mainTagClass: 'bitcoin-main-tag',
+                subTagClass: 'bitcoin-sub-tag',
+                expandedClass: 'bitcoin-expanded'
+            }
+            // Add more parent tags here in the future, e.g.:
+            // 'privacy': { mainTagClass: 'privacy-main-tag', subTagClass: 'privacy-sub-tag', expandedClass: 'privacy-expanded' }
+        };
+
         // Check for tag parameter in URL and apply after page loads
         function applyUrlTag() {
             const urlParams = new URLSearchParams(window.location.search);
             const urlTag = urlParams.get('tag');
             if (urlTag) {
-                const tagPill = document.querySelector(`.tag-pill[data-tag="${urlTag}"], .bitcoin-sub-tag[data-tag="${urlTag}"]`);
+                const tagPill = document.querySelector(`.tag-pill[data-tag="${urlTag}"], [class*="-sub-tag"][data-tag="${urlTag}"]`);
                 if (tagPill) {
                     selectedTags.add(urlTag);
                     tagPill.classList.add('active');
                     const allPill = document.querySelector('.tag-pill[data-tag="all"]');
                     if (allPill) allPill.classList.remove('active');
                     
-                    // If it's a bitcoin sub-tag, expand the bitcoin tree
-                    if (tagPill.classList.contains('bitcoin-sub-tag')) {
+                    // Check if it's a parent tag - if so, expand its sub-tags
+                    if (parentTagConfig[urlTag]) {
+                        const config = parentTagConfig[urlTag];
                         const tagsList = document.querySelector('.tags-list');
-                        const bitcoinMainTag = document.querySelector('.bitcoin-main-tag');
-                        if (tagsList) tagsList.classList.add('bitcoin-expanded');
-                        if (bitcoinMainTag) {
-                            bitcoinMainTag.classList.add('active');
-                            selectedTags.add('bitcoin');
+                        if (tagsList) {
+                            tagsList.classList.add(config.expandedClass);
+                            isBitcoinExpanded = (urlTag === 'bitcoin'); // Update state for bitcoin
+                        }
+                    }
+                    
+                    // Check if it's a sub-tag - if so, expand its parent tree
+                    for (const [parentTag, config] of Object.entries(parentTagConfig)) {
+                        if (tagPill.classList.contains(config.subTagClass)) {
+                            const tagsList = document.querySelector('.tags-list');
+                            const parentMainTag = document.querySelector(`.${config.mainTagClass}`);
+                            if (tagsList) tagsList.classList.add(config.expandedClass);
+                            if (parentMainTag) {
+                                parentMainTag.classList.add('active');
+                                selectedTags.add(parentTag);
+                            }
+                            if (parentTag === 'bitcoin') isBitcoinExpanded = true;
+                            break;
                         }
                     }
                     
