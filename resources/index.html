@@ -83,17 +83,21 @@
                     <span class="tags-label">Filter by topic:</span>
                     <div class="tags-list">
                         <button class="tag-pill active" data-tag="all">All</button>
+                        <button class="tag-pill bitcoin-main-tag" data-tag="bitcoin">Bitcoin</button>
                         <button class="tag-pill" data-tag="linux">Linux</button>
+                        <button class="tag-pill" data-tag="open-source-ai">Open-source AI</button>
+                        <button class="tag-pill" data-tag="tor">Tor</button>
                         <button class="tag-pill" data-tag="self-hosting">Self-hosting</button>
+                        <button class="tag-pill" data-tag="open-source-hardware">Open-source hardware</button>
+                        <!-- Bitcoin Sub-tags (inline, shown when Bitcoin is clicked) -->
+                        <button class="bitcoin-sub-tag" data-tag="hardware-wallet">Hardware Wallet</button>
+                        <button class="bitcoin-sub-tag" data-tag="mining">Mining</button>
+                        <button class="bitcoin-sub-tag" data-tag="lightning">Lightning</button>
+                        <!-- End Bitcoin Sub-tags -->
                         <button class="tag-pill" data-tag="privacy">Privacy</button>
-                        <button class="tag-pill" data-tag="bitcoin">Bitcoin</button>
                         <button class="tag-pill" data-tag="security">Security</button>
                         <button class="tag-pill" data-tag="encryption">Encryption</button>
                         <button class="tag-pill" data-tag="networking">Networking</button>
-                        <button class="tag-pill" data-tag="mining">Mining</button>
-                        <button class="tag-pill" data-tag="ai">AI</button>
-                        <button class="tag-pill" data-tag="lightning">Lightning</button>
-                        <button class="tag-pill" data-tag="hardware-wallet">Hardware Wallet</button>
                     </div>
                 </div>
             </div>
@@ -105,11 +109,12 @@
                 <!-- Tutorial Cards Grid -->
                 <div class="tutorials-grid" id="tutorialsGrid">
                     <!-- Bitcoin Node StartOS Class -->
-                    <article class="tutorial-card" data-tags="bitcoin,self-hosting" data-type="class">
+                    <article class="tutorial-card" data-tags="bitcoin,self-hosting,linux" data-type="class">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type class">Class</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
+                            <span class="tutorial-card-tag">Linux</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -120,11 +125,12 @@
                     </article>
 
                     <!-- Bitcoin Node Umbrel Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,self-hosting" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="bitcoin,self-hosting,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
+                            <span class="tutorial-card-tag">Linux</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -135,12 +141,13 @@
                     </article>
 
                     <!-- Bitcoin Node from Source Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,linux,self-hosting" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="bitcoin,linux,self-hosting,tor" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Linux</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
+                            <span class="tutorial-card-tag">Tor</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -151,12 +158,13 @@
                     </article>
 
                     <!-- Lightning Node Umbrel Tutorial -->
-                    <article class="tutorial-card" data-tags="lightning,bitcoin,self-hosting" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="lightning,bitcoin,self-hosting,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Lightning</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
+                            <span class="tutorial-card-tag">Linux</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -167,10 +175,10 @@
                     </article>
 
                     <!-- Vibe Coding 101 Class -->
-                    <article class="tutorial-card" data-tags="ai" data-type="class">
+                    <article class="tutorial-card" data-tags="open-source-ai" data-type="class">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type class">Class</span>
-                            <span class="tutorial-card-tag">AI</span>
+                            <span class="tutorial-card-tag">Open-source AI</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -181,11 +189,12 @@
                     </article>
 
                     <!-- DIY Hardware Wallet Class -->
-                    <article class="tutorial-card" data-tags="bitcoin,hardware-wallet" data-type="class">
+                    <article class="tutorial-card" data-tags="bitcoin,hardware-wallet,open-source-hardware" data-type="class">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type class">Class</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Hardware Wallet</span>
+                            <span class="tutorial-card-tag">Open-source hardware</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -196,11 +205,12 @@
                     </article>
 
                     <!-- Jade Hardware Wallet Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,hardware-wallet" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="bitcoin,hardware-wallet,open-source-hardware" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Hardware Wallet</span>
+                            <span class="tutorial-card-tag">Open-source hardware</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -211,11 +221,12 @@
                     </article>
 
                     <!-- Remote Mining Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,mining" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="bitcoin,mining,open-source-hardware" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Mining</span>
+                            <span class="tutorial-card-tag">Open-source hardware</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -226,12 +237,13 @@
                     </article>
 
                     <!-- Bitaxe Miners Tutorial -->
-                    <article class="tutorial-card" data-tags="bitcoin,mining,linux" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="bitcoin,mining,linux,open-source-hardware" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Bitcoin</span>
                             <span class="tutorial-card-tag">Mining</span>
                             <span class="tutorial-card-tag">Linux</span>
+                            <span class="tutorial-card-tag">Open-source hardware</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -274,12 +286,13 @@
                     </article>
 
                     <!-- Tor vs VPN Tutorial -->
-                    <article class="tutorial-card" data-tags="privacy,networking,security" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="privacy,networking,security,tor" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Networking</span>
                             <span class="tutorial-card-tag">Security</span>
+                            <span class="tutorial-card-tag">Tor</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -290,12 +303,13 @@
                     </article>
 
                     <!-- Tor Relay Tutorial -->
-                    <article class="tutorial-card" data-tags="privacy,linux,self-hosting" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="privacy,linux,self-hosting,tor" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Linux</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
+                            <span class="tutorial-card-tag">Tor</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -306,13 +320,14 @@
                     </article>
 
                     <!-- VPN Over Tor Tutorial -->
-                    <article class="tutorial-card" data-tags="privacy,networking,self-hosting,linux" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="privacy,networking,self-hosting,linux,tor" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Networking</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                             <span class="tutorial-card-tag">Linux</span>
+                            <span class="tutorial-card-tag">Tor</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -353,12 +368,13 @@
                     </article>
 
                     <!-- XMPP Server Tutorial -->
-                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux,encryption" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Linux</span>
+                            <span class="tutorial-card-tag">Encryption</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -385,12 +401,14 @@
                     </article>
 
                     <!-- SimpleX SMP Server Tutorial -->
-                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux,encryption,tor" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Linux</span>
+                            <span class="tutorial-card-tag">Encryption</span>
+                            <span class="tutorial-card-tag">Tor</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -401,12 +419,13 @@
                     </article>
 
                     <!-- Matrix Synapse Server Tutorial -->
-                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,linux,encryption" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                             <span class="tutorial-card-tag">Privacy</span>
                             <span class="tutorial-card-tag">Linux</span>
+                            <span class="tutorial-card-tag">Encryption</span>
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
@@ -417,12 +436,12 @@
                     </article>
 
                     <!-- Self-Host AI Models Tutorial -->
-                    <article class="tutorial-card" data-tags="self-hosting,privacy,ai,linux" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="self-hosting,privacy,open-source-ai,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Self-hosting</span>
                             <span class="tutorial-card-tag">Privacy</span>
-                            <span class="tutorial-card-tag">AI</span>
+                            <span class="tutorial-card-tag">Open-source AI</span>
                             <span class="tutorial-card-tag">Linux</span>
                         </div>
                         <div class="tutorial-card-body">
@@ -434,11 +453,11 @@
                     </article>
 
                     <!-- Anonymous Vibecoding Tutorial -->
-                    <article class="tutorial-card" data-tags="privacy,ai,linux" data-type="tutorial">
+                    <article class="tutorial-card" data-tags="privacy,open-source-ai,linux" data-type="tutorial">
                         <div class="tutorial-card-header">
                             <span class="tutorial-card-type tutorial">Tutorial</span>
                             <span class="tutorial-card-tag">Privacy</span>
-                            <span class="tutorial-card-tag">AI</span>
+                            <span class="tutorial-card-tag">Open-source AI</span>
                             <span class="tutorial-card-tag">Linux</span>
                         </div>
                         <div class="tutorial-card-body">
@@ -568,8 +587,83 @@
             });
         });
 
+        // Bitcoin Tag Tree Functionality
+        const bitcoinMainTag = document.querySelector('.bitcoin-main-tag');
+        const bitcoinSubTags = document.querySelectorAll('.bitcoin-sub-tag');
+        const tagsList = document.querySelector('.tags-list');
+        
+        let isBitcoinExpanded = false;
+        
+        if (bitcoinMainTag && tagsList) {
+            // Handle Bitcoin main tag click
+            bitcoinMainTag.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const tag = bitcoinMainTag.dataset.tag;
+                const allPill = document.querySelector('.tag-pill[data-tag="all"]');
+                
+                // Toggle expansion
+                isBitcoinExpanded = !isBitcoinExpanded;
+                tagsList.classList.toggle('bitcoin-expanded', isBitcoinExpanded);
+                
+                if (isBitcoinExpanded) {
+                    // Expand and filter by Bitcoin
+                    allPill.classList.remove('active');
+                    selectedTags.clear();
+                    selectedTags.add(tag);
+                    bitcoinMainTag.classList.add('active');
+                    
+                    // Clear sub-tag selections
+                    bitcoinSubTags.forEach(st => st.classList.remove('active'));
+                } else {
+                    // Collapse
+                    selectedTags.delete(tag);
+                    bitcoinMainTag.classList.remove('active');
+                    
+                    // If no tags selected, activate "All"
+                    if (selectedTags.size === 0) {
+                        allPill.classList.add('active');
+                    }
+                }
+                
+                filterTutorials();
+            });
+            
+            // Handle sub-tag clicks
+            bitcoinSubTags.forEach(subTag => {
+                subTag.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const tag = subTag.dataset.tag;
+                    const allPill = document.querySelector('.tag-pill[data-tag="all"]');
+                    
+                    // Toggle sub-tag
+                    allPill.classList.remove('active');
+                    
+                    if (selectedTags.has(tag)) {
+                        selectedTags.delete(tag);
+                        subTag.classList.remove('active');
+                    } else {
+                        selectedTags.add(tag);
+                        subTag.classList.add('active');
+                    }
+                    
+                    // Always include Bitcoin when selecting sub-tags
+                    if (!selectedTags.has('bitcoin')) {
+                        selectedTags.add('bitcoin');
+                        bitcoinMainTag.classList.add('active');
+                    }
+                    
+                    // If no tags selected, activate "All"
+                    if (selectedTags.size === 0) {
+                        allPill.classList.add('active');
+                    }
+                    
+                    filterTutorials();
+                });
+            });
+        }
+        
         // Tag Filter Functionality (multi-select)
-        const tagPills = document.querySelectorAll('.tag-pill');
+        const tagPills = document.querySelectorAll('.tag-pill:not(.bitcoin-main-tag)');
         const allPill = document.querySelector('.tag-pill[data-tag="all"]');
         
         tagPills.forEach(pill => {
@@ -580,9 +674,20 @@
                     // Clear all selections
                     selectedTags.clear();
                     tagPills.forEach(p => p.classList.remove('active'));
+                    if (bitcoinSubTags) {
+                        bitcoinSubTags.forEach(st => st.classList.remove('active'));
+                    }
+                    if (bitcoinMainTag) {
+                        bitcoinMainTag.classList.remove('active');
+                    }
+                    // Collapse Bitcoin tree
+                    if (tagsList) {
+                        tagsList.classList.remove('bitcoin-expanded');
+                        isBitcoinExpanded = false;
+                    }
                     allPill.classList.add('active');
                 } else {
-                    // Toggle this tag
+                    // Toggle this tag (multi-select behavior)
                     allPill.classList.remove('active');
                     
                     if (selectedTags.has(tag)) {
@@ -593,9 +698,14 @@
                         pill.classList.add('active');
                     }
                     
-                    // If no tags selected, activate "All"
+                    // If no tags selected, activate "All" and collapse Bitcoin tree
                     if (selectedTags.size === 0) {
                         allPill.classList.add('active');
+                        // Collapse Bitcoin tree when nothing selected
+                        if (tagsList) {
+                            tagsList.classList.remove('bitcoin-expanded');
+                            isBitcoinExpanded = false;
+                        }
                     }
                 }
                 
