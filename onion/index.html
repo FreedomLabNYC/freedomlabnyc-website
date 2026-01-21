@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Access Freedom Lab NYC via the Tor network for enhanced privacy.">
+    <title>Onion Site | Freedom Lab NYC</title>
+    <link rel="icon" href="../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=block" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=block" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation (loaded from js/nav.js) -->
+    <div id="nav-placeholder"></div>
+    <script src="../js/nav.js"></script>
+    <script>renderNav('onion');</script>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Onion Site</h1>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="content-section">
+            <div class="onion-info-box">
+                <p class="onion-address">
+                    <a href="http://2iyutqpfixbdpgwd7so7zuodvqqanpjssv54fyqaessxfv6z3d7egjyd.onion" target="_blank">
+                        <code>2iyutqpfixbdpgwd7so7zuodvqqanpjssv54fyqaessxfv6z3d7egjyd.onion</code>
+                    </a>
+                </p>
+                <p class="info-note">To access .onion sites, you'll need the <a href="https://www.torproject.org/download/" target="_blank">Tor Browser</a>.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (loaded from js/footer.js) -->
+    <div id="footer-placeholder"></div>
+    <script src="../js/footer.js"></script>
+
+    <style>
+        .content-section {
+            padding: 4rem 0;
+        }
+
+        .onion-info-box {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            text-align: center;
+        }
+
+        .onion-address {
+            margin-bottom: 1.5rem;
+        }
+
+        .onion-address a {
+            text-decoration: none;
+        }
+
+        .onion-address code {
+            display: inline-block;
+            padding: 1rem 1.5rem;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-family: monospace;
+            font-size: 1rem;
+            color: var(--secondary);
+            word-break: break-all;
+            transition: all 0.3s ease;
+        }
+
+        .onion-address a:hover code {
+            border-color: var(--secondary);
+            background: rgba(50, 208, 17, 0.1);
+        }
+
+        .info-note {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .info-note a {
+            color: var(--secondary);
+        }
+
+        .info-note a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</body>
+</html>
