@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Tag Tree Options | Freedom Lab NYC</title>
+    <link rel="icon" href="static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            padding: 2rem;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .options-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+        }
+        
+        .option-section {
+            margin-bottom: 5rem;
+            padding: 2rem;
+            background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+        }
+        
+        .option-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--secondary);
+            text-align: center;
+        }
+        
+        .demo-area {
+            min-height: 300px;
+            padding: 2rem;
+            background: rgba(50, 208, 17, 0.02);
+            border: 1px dashed rgba(50, 208, 17, 0.3);
+            border-radius: var(--radius);
+            position: relative;
+        }
+        
+        /* Base tag styles */
+        .tag-pill {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(50, 208, 17, 0.1);
+            border: 1px solid #32D011;
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tag-pill:hover {
+            background: rgba(50, 208, 17, 0.2);
+            border-color: #4ae025;
+        }
+        
+        .tag-pill.active {
+            background: #32D011;
+            color: var(--bg-dark);
+        }
+        
+        .sub-tag {
+            background: rgba(50, 208, 17, 0.05);
+            border-color: rgba(50, 208, 17, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* Option 1: Horizontal Tree */
+        .option-1 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .option-1 .bitcoin-tag {
+            font-size: 1.2rem;
+            padding: 0.75rem 1.5rem;
+        }
+        
+        .option-1 .sub-tags-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .option-1 .connection-line {
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, #32D011, transparent);
+            margin: 0 auto;
+        }
+        
+        /* Option 2: Radial Tree */
+        .option-2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+        
+        .option-2 .bitcoin-tag {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            padding: 0.75rem 1.5rem;
+            z-index: 10;
+        }
+        
+        .option-2 .sub-tag {
+            position: absolute;
+        }
+        
+        .option-2 .sub-tag:nth-child(2) {
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .option-2 .sub-tag:nth-child(3) {
+            top: 50%;
+            right: 10%;
+            transform: translateY(-50%);
+        }
+        
+        .option-2 .sub-tag:nth-child(4) {
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .option-2 .connection-line {
+            position: absolute;
+            background: #32D011;
+            opacity: 0.4;
+        }
+        
+        .option-2 .line-1 {
+            top: 30%;
+            left: 50%;
+            width: 2px;
+            height: 15%;
+            transform: translateX(-50%);
+        }
+        
+        .option-2 .line-2 {
+            top: 50%;
+            left: 50%;
+            width: 25%;
+            height: 2px;
+            transform: translateY(-50%);
+        }
+        
+        .option-2 .line-3 {
+            bottom: 30%;
+            left: 50%;
+            width: 2px;
+            height: 15%;
+            transform: translateX(-50%);
+        }
+        
+        /* Option 3: Vertical Tree with Branches */
+        .option-3 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .option-3 .bitcoin-tag {
+            font-size: 1.2rem;
+            padding: 0.75rem 1.5rem;
+        }
+        
+        .option-3 .sub-tags-container {
+            display: flex;
+            gap: 3rem;
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .option-3 .connection-line-vertical {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, #32D011, transparent);
+            transform: translateX(-50%);
+        }
+        
+        .option-3 .connection-line-horizontal {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #32D011 20%, #32D011 80%, transparent);
+            transform: translateY(-50%);
+        }
+        
+        .option-3 .sub-tag {
+            position: relative;
+            z-index: 5;
+        }
+        
+        /* Option 4: Animated Expanding Tree */
+        .option-4 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .option-4 .bitcoin-tag {
+            font-size: 1.2rem;
+            padding: 0.75rem 1.5rem;
+        }
+        
+        .option-4 .sub-tags-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.4s ease;
+        }
+        
+        .option-4.active .sub-tags-container {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .option-4 .connection-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+        }
+        
+        .option-4 .line {
+            position: absolute;
+            background: #32D011;
+            opacity: 0.3;
+        }
+        
+        .option-4 .line-vertical {
+            top: -2rem;
+            left: 50%;
+            width: 2px;
+            height: 2rem;
+            transform: translateX(-50%);
+        }
+        
+        .option-4 .line-horizontal-1 {
+            top: 50%;
+            left: 16.66%;
+            width: 16.66%;
+            height: 2px;
+            transform: translateY(-50%);
+        }
+        
+        .option-4 .line-horizontal-2 {
+            top: 50%;
+            right: 16.66%;
+            width: 16.66%;
+            height: 2px;
+            transform: translateY(-50%);
+        }
+        
+        .option-4 .line-diagonal-1 {
+            top: -2rem;
+            left: 50%;
+            width: 2px;
+            height: calc(50% + 2rem);
+            transform: translateX(-50%) rotate(-30deg);
+            transform-origin: top center;
+        }
+        
+        .option-4 .line-diagonal-2 {
+            top: -2rem;
+            left: 50%;
+            width: 2px;
+            height: calc(50% + 2rem);
+            transform: translateX(-50%) rotate(30deg);
+            transform-origin: top center;
+        }
+        
+        /* Option 5: Minimalist with Glow */
+        .option-5 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .option-5 .bitcoin-tag {
+            font-size: 1.2rem;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 0 20px rgba(50, 208, 17, 0.3);
+        }
+        
+        .option-5 .sub-tags-container {
+            display: flex;
+            gap: 2rem;
+            position: relative;
+            padding-top: 1rem;
+        }
+        
+        .option-5 .connection-line {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 1rem;
+            background: linear-gradient(to bottom, #32D011, rgba(50, 208, 17, 0.3));
+            box-shadow: 0 0 10px rgba(50, 208, 17, 0.5);
+            transform: translateX(-50%);
+        }
+        
+        .option-5 .sub-tag {
+            border-color: rgba(50, 208, 17, 0.6);
+            box-shadow: 0 0 10px rgba(50, 208, 17, 0.2);
+        }
+        
+        .option-5 .sub-tag:hover {
+            box-shadow: 0 0 15px rgba(50, 208, 17, 0.4);
+        }
+        
+        /* Option 6: Circuit Board Style */
+        .option-6 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            position: relative;
+        }
+        
+        .option-6 .bitcoin-tag {
+            font-size: 1.2rem;
+            padding: 0.75rem 1.5rem;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .option-6 .sub-tags-container {
+            display: flex;
+            gap: 2rem;
+            position: relative;
+            padding: 2rem;
+        }
+        
+        .option-6 .circuit-board {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.3;
+        }
+        
+        .option-6 .circuit-line {
+            position: absolute;
+            background: #32D011;
+            border-radius: 2px;
+        }
+        
+        .option-6 .line-main {
+            top: -2rem;
+            left: 50%;
+            width: 3px;
+            height: 2rem;
+            transform: translateX(-50%);
+        }
+        
+        .option-6 .line-branch-1 {
+            top: 0;
+            left: 50%;
+            width: calc(33.33% - 1rem);
+            height: 3px;
+            transform: translateX(-100%);
+        }
+        
+        .option-6 .line-branch-2 {
+            top: 0;
+            left: 50%;
+            width: 3px;
+            height: 2rem;
+            transform: translateX(-50%);
+        }
+        
+        .option-6 .line-branch-3 {
+            top: 0;
+            left: 50%;
+            width: calc(33.33% - 1rem);
+            height: 3px;
+            transform: translateX(0);
+        }
+        
+        .option-6 .sub-tag {
+            position: relative;
+            z-index: 5;
+            margin-top: 2rem;
+        }
+        
+        .description {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(50, 208, 17, 0.05);
+            border-left: 3px solid #32D011;
+            border-radius: var(--radius);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="options-container">
+        <h1>Bitcoin Tag Tree Visual Options</h1>
+        
+        <!-- Option 1: Simple Vertical Tree -->
+        <div class="option-section">
+            <h2 class="option-title">Option 1: Simple Vertical Tree</h2>
+            <div class="demo-area option-1">
+                <div class="tag-pill bitcoin-tag active">Bitcoin</div>
+                <div class="connection-line"></div>
+                <div class="sub-tags-container">
+                    <div class="tag-pill sub-tag">Hardware Wallet</div>
+                    <div class="tag-pill sub-tag">Mining</div>
+                    <div class="tag-pill sub-tag">Lightning</div>
+                </div>
+            </div>
+            <div class="description">
+                Clean vertical layout with a single connecting line. Simple and straightforward.
+            </div>
+        </div>
+        
+        <!-- Option 2: Radial Tree -->
+        <div class="option-section">
+            <h2 class="option-title">Option 2: Radial Tree</h2>
+            <div class="demo-area option-2">
+                <div class="tag-pill bitcoin-tag active">Bitcoin</div>
+                <div class="connection-line line-1"></div>
+                <div class="connection-line line-2"></div>
+                <div class="connection-line line-3"></div>
+                <div class="tag-pill sub-tag">Hardware Wallet</div>
+                <div class="tag-pill sub-tag">Mining</div>
+                <div class="tag-pill sub-tag">Lightning</div>
+            </div>
+            <div class="description">
+                Bitcoin tag in center with sub-tags arranged around it. Creates a hub-and-spoke visual.
+            </div>
+        </div>
+        
+        <!-- Option 3: Vertical Tree with Horizontal Branches -->
+        <div class="option-section">
+            <h2 class="option-title">Option 3: Vertical Tree with Horizontal Branches</h2>
+            <div class="demo-area option-3">
+                <div class="tag-pill bitcoin-tag active">Bitcoin</div>
+                <div class="sub-tags-container">
+                    <div class="connection-line-vertical"></div>
+                    <div class="connection-line-horizontal"></div>
+                    <div class="tag-pill sub-tag">Hardware Wallet</div>
+                    <div class="tag-pill sub-tag">Mining</div>
+                    <div class="tag-pill sub-tag">Lightning</div>
+                </div>
+            </div>
+            <div class="description">
+                Tree structure with a vertical trunk and horizontal branches. Classic tree visualization.
+            </div>
+        </div>
+        
+        <!-- Option 4: Animated Expanding Tree -->
+        <div class="option-section">
+            <h2 class="option-title">Option 4: Animated Expanding Tree</h2>
+            <div class="demo-area option-4 active">
+                <div class="tag-pill bitcoin-tag active">Bitcoin</div>
+                <div class="sub-tags-container">
+                    <div class="connection-lines">
+                        <div class="line line-vertical"></div>
+                        <div class="line line-horizontal-1"></div>
+                        <div class="line line-horizontal-2"></div>
+                        <div class="line line-diagonal-1"></div>
+                        <div class="line line-diagonal-2"></div>
+                    </div>
+                    <div class="tag-pill sub-tag">Hardware Wallet</div>
+                    <div class="tag-pill sub-tag">Mining</div>
+                    <div class="tag-pill sub-tag">Lightning</div>
+                </div>
+            </div>
+            <div class="description">
+                Sub-tags expand with animation when Bitcoin tag is clicked. Includes diagonal connection lines for visual interest.
+            </div>
+        </div>
+        
+        <!-- Option 5: Minimalist with Glow -->
+        <div class="option-section">
+            <h2 class="option-title">Option 5: Minimalist with Glow</h2>
+            <div class="demo-area option-5">
+                <div class="tag-pill bitcoin-tag active">Bitcoin</div>
+                <div class="sub-tags-container">
+                    <div class="connection-line"></div>
+                    <div class="tag-pill sub-tag">Hardware Wallet</div>
+                    <div class="tag-pill sub-tag">Mining</div>
+                    <div class="tag-pill sub-tag">Lightning</div>
+                </div>
+            </div>
+            <div class="description">
+                Clean design with subtle glow effects on tags and connection lines. Modern and elegant.
+            </div>
+        </div>
+        
+        <!-- Option 6: Circuit Board Style -->
+        <div class="option-section">
+            <h2 class="option-title">Option 6: Circuit Board Style</h2>
+            <div class="demo-area option-6">
+                <div class="tag-pill bitcoin-tag active">Bitcoin</div>
+                <div class="sub-tags-container">
+                    <div class="circuit-board">
+                        <div class="circuit-line line-main"></div>
+                        <div class="circuit-line line-branch-1"></div>
+                        <div class="circuit-line line-branch-2"></div>
+                        <div class="circuit-line line-branch-3"></div>
+                    </div>
+                    <div class="tag-pill sub-tag">Hardware Wallet</div>
+                    <div class="tag-pill sub-tag">Mining</div>
+                    <div class="tag-pill sub-tag">Lightning</div>
+                </div>
+            </div>
+            <div class="description">
+                Tech-inspired design with thicker connection lines resembling circuit board traces. Fits the tech aesthetic.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
