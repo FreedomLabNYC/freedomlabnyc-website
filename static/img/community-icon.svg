@@ -1,0 +1,22 @@
+<svg width="32" height="24" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#b8e986;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5cb025;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Left figure (behind) -->
+  <g opacity="0.75">
+    <circle cx="7" cy="6" r="3.5" fill="url(#greenGradient)"/>
+    <ellipse cx="7" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+  </g>
+  <!-- Center figure (prominent, forward) -->
+  <circle cx="16" cy="5" r="4.5" fill="url(#greenGradient)"/>
+  <ellipse cx="16" cy="16" rx="5" ry="6" fill="url(#greenGradient)"/>
+  <!-- Right figure (behind) -->
+  <g opacity="0.75">
+    <circle cx="25" cy="6" r="3.5" fill="url(#greenGradient)"/>
+    <ellipse cx="25" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+  </g>
+</svg>
+
