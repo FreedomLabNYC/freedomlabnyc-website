@@ -549,6 +549,11 @@
     overflow: visible;
 }
 
+a.tech-card {
+    text-decoration: none;
+    color: inherit;
+}
+
 .tech-card {
     display: flex;
     flex-direction: column;

@@ -532,6 +532,34 @@
         let selectedTypes = new Set(['tutorial', 'class']); // Both selected by default
         let currentSearch = '';
 
+        // Check for tag parameter in URL and apply after page loads
+        function applyUrlTag() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlTag = urlParams.get('tag');
+            if (urlTag) {
+                const tagPill = document.querySelector(`.tag-pill[data-tag="${urlTag}"], .bitcoin-sub-tag[data-tag="${urlTag}"]`);
+                if (tagPill) {
+                    selectedTags.add(urlTag);
+                    tagPill.classList.add('active');
+                    const allPill = document.querySelector('.tag-pill[data-tag="all"]');
+                    if (allPill) allPill.classList.remove('active');
+                    
+                    // If it's a bitcoin sub-tag, expand the bitcoin tree
+                    if (tagPill.classList.contains('bitcoin-sub-tag')) {
+                        const tagsList = document.querySelector('.tags-list');
+                        const bitcoinMainTag = document.querySelector('.bitcoin-main-tag');
+                        if (tagsList) tagsList.classList.add('bitcoin-expanded');
+                        if (bitcoinMainTag) {
+                            bitcoinMainTag.classList.add('active');
+                            selectedTags.add('bitcoin');
+                        }
+                    }
+                    
+                    filterTutorials();
+                }
+            }
+        }
+
         function filterTutorials() {
             let visibleCount = 0;
             tutorialCards.forEach(card => {
@@ -724,6 +752,9 @@
                 }
             });
         });
+
+        // Apply URL tag filter on page load
+        applyUrlTag();
     </script>
     <script src="../js/social-config.js"></script>
 </body>
