@@ -546,7 +546,7 @@
     justify-content: center;
     width: 100%;
     max-width: 100%;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .tech-card {
@@ -558,6 +558,15 @@
     background: transparent;
     border: 1px solid #32D011;
     border-radius: var(--radius);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    overflow: visible;
+}
+
+.tech-card:hover {
+    background: rgba(50, 208, 17, 0.1);
+    border-color: #4ae025;
+    transform: translateY(-4px);
 }
 
 /* Remove option classes - using unified transparent + green outline */
@@ -575,6 +584,13 @@
     align-items: center;
     justify-content: center;
     color: var(--secondary);
+    transition: transform 0.3s ease;
+    overflow: visible;
+    padding: 4px;
+}
+
+.tech-card:hover .tech-icon {
+    transform: scale(1.15);
 }
 
 .tech-icon svg {
@@ -600,6 +616,11 @@
     color: var(--text-primary);
     font-size: 0.95rem;
     text-align: center;
+    transition: color 0.3s ease;
+}
+
+.tech-card:hover span {
+    color: #32D011;
 }
 
 /* === Mission Section === */
