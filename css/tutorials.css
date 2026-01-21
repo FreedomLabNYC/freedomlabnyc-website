@@ -15,8 +15,9 @@
 
 .tutorial-support-banner svg {
     flex-shrink: 0;
-    width: 18px;
-    height: 18px;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
     color: #f7931a;
 }
 
@@ -34,6 +35,20 @@
 
 .tutorial-support-banner a:hover {
     opacity: 0.8;
+}
+
+/* Green variant of support banner */
+.tutorial-support-banner.green {
+    background: linear-gradient(135deg, rgba(50, 208, 17, 0.08) 0%, rgba(50, 208, 17, 0.03) 100%);
+    border: 1px solid rgba(50, 208, 17, 0.2);
+}
+
+.tutorial-support-banner.green svg {
+    color: #32D011;
+}
+
+.tutorial-support-banner.green a {
+    color: #32D011;
 }
 
 @media (max-width: 600px) {
