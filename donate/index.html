@@ -48,9 +48,41 @@
 
     <!-- Main Content -->
     <main class="donate-content">
+        <!-- Support Our Mission Section (from join page) -->
+        <section class="donate-section">
+            <div class="section-box dashed-background">
+                <h2>Support Our Mission</h2>
+                <p class="section-description">Your donation helps us continue providing Freedom Tech education, hosting community events, and building a more sovereign future together.</p>
+                
+                <div class="donation-form-container">
+                    <form method="POST" action="https://btcpay.freedomlab.nyc/api/v1/invoices" class="btcpay-form btcpay-form--block">
+                        <input type="hidden" name="storeId" value="Cfd8fkouRCqasW7CysoVR31Lf9Xbb8zJVYJsbRHGbpwv" />
+                        <input type="hidden" name="orderId" value="website_donation" />
+                        <input type="hidden" name="checkoutDesc" value="Thank you for supporting us!" />
+                        <input type="hidden" name="browserRedirect" value="https://freedomlab.nyc/thankyou/" />
+                        <div class="btcpay-custom-container">
+                            <div class="btcpay-custom">
+                                <input class="btcpay-input-price" type="number" name="price" min="1" max="1000000" step="1" value="10" data-price="10" />
+                            </div>
+                            <select name="currency">
+                                <option value="USD" selected>USD</option>
+                                <option value="GBP">GBP</option>
+                                <option value="EUR">EUR</option>
+                                <option value="BTC">BTC</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit" name="submit" title="Pay with BTCPay Server, a Self-Hosted Bitcoin Payment Processor">
+                            <span>Donate with</span>
+                            <img src="https://btcpay.freedomlab.nyc/img/paybutton/logo.svg" alt="BTCPay">
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
         <!-- Why Donate Section -->
         <section class="why-section">
-            <div class="section-box">
+            <div class="section-box dashed-background">
                 <h2>Why Donate?</h2>
                 <p class="section-description">Your contribution directly supports our community initiatives.</p>
                 
