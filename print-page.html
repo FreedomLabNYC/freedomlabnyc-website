@@ -223,8 +223,8 @@
         .column {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
+            align-items: flex-start;
+            text-align: left;
             padding: 0 20px;
             min-height: 0;
         }
@@ -242,6 +242,7 @@
             color: var(--primary);
             margin-bottom: 10px;
             margin-top: 0;
+            align-self: center;
         }
 
         .column-text {
@@ -251,6 +252,8 @@
             margin-bottom: 8px;
             text-align: left;
             width: 100%;
+            padding-left: 0;
+            margin-left: 0;
         }
 
         .qr-code {
@@ -261,6 +264,7 @@
             align-items: center;
             gap: 6px;
             width: 100%;
+            align-self: center;
         }
 
         .qr-code img {
@@ -402,7 +406,7 @@
         <!-- Header -->
         <header class="header">
             <div class="logo-section">
-                <img src="static/img/FL Signature Rectangular2.png" alt="Freedom Lab NYC">
+                <img src="/static/img/FL Signature Rectangular2.png" alt="Freedom Lab NYC">
             </div>
             <p class="header-subtitle">Your Freedom Tech Community in NYC</p>
         </header>
@@ -424,13 +428,13 @@
                     <div class="column">
                         <h3>Become a Member</h3>
                         <p class="column-text" style="margin-bottom: 6px;">
-                            for $20/mo to join our community and:
+                            Join our end-to-end encrypted and self-hosted Matrix server (like Slack but sovereign) for $20/mo to join our community and:
                         </p>
-                        <ul class="column-text" style="margin-top: 0; margin-bottom: 10px; padding-left: 1.2rem;">
+                        <ul class="column-text" style="margin-top: 0; margin-bottom: 10px; padding-left: 0; list-style-position: inside;">
                             <li style="margin-bottom: 5px;">Receive technical support</li>
+                            <li style="margin-bottom: 5px;">Receive early access to events</li>
                             <li style="margin-bottom: 5px;">Work on freedom tech projects together</li>
                             <li style="margin-bottom: 5px;">Contribute to Freedom Lab together</li>
-                            <li style="margin-bottom: 5px;">Receive early access to events</li>
                             <li style="margin-bottom: 5px;">Discuss freedom tech news of the day</li>
                             <li style="margin-bottom: 5px;">And more!</li>
                         </ul>
@@ -443,13 +447,14 @@
                     <div class="column">
                         <h3>Volunteer</h3>
                         <p class="column-text" style="margin-bottom: 6px;">
-                            Paid membership helps our freedom tech community grow, but isn't the only way to get involved. We also welcome volunteering such as:
+                            Paid membership helps our community grow, but isn't the only way to get involved! We also welcome volunteering such as:
                         </p>
-                        <ul class="column-text" style="margin-top: 0; margin-bottom: 10px; padding-left: 1.2rem;">
+                        <ul class="column-text" style="margin-top: 0; margin-bottom: 10px; padding-left: 0; list-style-position: inside;">
                             <li style="margin-bottom: 5px;">Finding more spaces to host with us</li>
                             <li style="margin-bottom: 5px;">Teaching classes and hosting events</li>
                             <li style="margin-bottom: 5px;">Video editing and social media</li>
                             <li style="margin-bottom: 5px;">Software engineering and hardware</li>
+                            <li style="margin-bottom: 5px;">Graphic and creative design</li>
                             <li style="margin-bottom: 5px;">Any other skills you'd like to bring!</li>
                         </ul>
                         <div class="qr-code">
