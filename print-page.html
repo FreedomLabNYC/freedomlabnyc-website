@@ -229,9 +229,10 @@
         }
 
         .column-divider {
-            width: 1px;
-            background: var(--border);
+            width: 0;
+            border-left: 2px solid #aaa;
             height: 100%;
+            min-height: 100%;
         }
 
         .column h3 {
@@ -366,7 +367,12 @@
             }
 
             .column-divider {
-                background: #ddd;
+                width: 0 !important;
+                border-left: 2px solid #333 !important;
+                min-height: 100% !important;
+                height: 100% !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
 
             .qr-code img {
