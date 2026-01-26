@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freedom Lab NYC | Print Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&display=block" rel="stylesheet">
+    <style>
+        /* === CSS Variables (matching Freedom Lab website) === */
+        :root {
+            --primary: #006608;
+            --secondary: #32D011;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --bg-elevated: #1a1a1a;
+            --border: #2a2a2a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666;
+            --radius: 8px;
+            --radius-lg: 12px;
+        }
+
+        /* === Reset === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* === Screen Styles === */
+        @media screen {
+            body {
+                font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+                background: var(--bg-dark);
+                color: var(--text-primary);
+                line-height: 1.6;
+                padding: 2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+
+            .print-container {
+                background: white;
+                color: #0a0a0a;
+                width: 8.5in !important;
+                height: 11in !important;
+                max-width: 8.5in !important;
+                max-height: 11in !important;
+                min-width: 8.5in !important;
+                min-height: 11in !important;
+                padding: 40px 0.6in 40px 0.6in;
+                box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+                margin: 0 auto;
+                overflow: hidden;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .print-preview-note {
+                background: #fff3cd;
+                border: 2px solid #ffc107;
+                border-radius: 8px;
+                padding: 1rem;
+                margin-bottom: 2rem;
+                color: #856404;
+                text-align: center;
+            }
+        }
+
+        /* === Print Styles === */
+        @media print {
+            @page {
+                size: 8.5in 11in;
+                margin: 0.75in;
+            }
+
+            body {
+                background: white;
+                color: #0a0a0a;
+                font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+                line-height: 1.6;
+                width: 8.5in;
+                height: 11in;
+                margin: 0;
+                padding: 0;
+            }
+
+            .print-container {
+                width: 8.5in !important;
+                height: 11in !important;
+                max-width: 8.5in !important;
+                max-height: 11in !important;
+                min-width: 8.5in !important;
+                min-height: 11in !important;
+                padding: 40px 0.6in 40px 0.6in;
+                margin: 0;
+                overflow: hidden;
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .print-preview-note {
+                display: none;
+            }
+
+            /* Prevent page breaks inside important sections */
+            .section-box,
+            .content-block {
+                page-break-inside: avoid;
+            }
+
+            /* Allow page breaks between sections */
+            .section {
+                page-break-after: auto;
+            }
+        }
+
+        /* === Typography === */
+        h1 {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-top: 16px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 6px;
+        }
+
+        h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* === Header === */
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 0;
+        }
+
+        .logo-section {
+            margin-bottom: 12px;
+        }
+
+        .logo-section img {
+            max-width: 400px;
+            width: 400px;
+            height: auto;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .header-title {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-bottom: 4px;
+        }
+
+        .header-subtitle {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            font-weight: 400;
+            margin-top: 14px;
+            white-space: nowrap;
+        }
+
+        /* === Content Sections === */
+        .section {
+            margin-bottom: 0;
+        }
+
+        .section:last-child {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* === Two Column Layout === */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1px 1fr;
+            gap: 0;
+            margin-top: 16px;
+            position: relative;
+            flex: 1;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            min-height: 0;
+        }
+
+        .column-divider {
+            width: 1px;
+            background: var(--border);
+            height: 100%;
+        }
+
+        .column h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .column-text {
+            font-size: 0.85rem;
+            line-height: 1.45;
+            color: #333;
+            margin-bottom: 8px;
+            text-align: left;
+            width: 100%;
+        }
+
+        .qr-code {
+            margin-top: auto;
+            padding-top: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            width: 100%;
+        }
+
+        .qr-code img {
+            width: 130px;
+            height: 130px;
+            border: none;
+            border-radius: 0;
+            background: white;
+        }
+
+        .qr-link {
+            color: var(--secondary);
+            font-size: 0.8rem;
+            text-decoration: none;
+        }
+
+        .qr-link:hover {
+            text-decoration: underline;
+        }
+
+        .section-box {
+            background: #f8f9fa;
+            border: 2px solid var(--border);
+            border-left: 4px solid var(--secondary);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-sizing: border-box;
+            overflow: hidden;
+            word-wrap: break-word;
+        }
+
+        .content-block {
+            margin-bottom: 1.5rem;
+        }
+
+        /* === Lists === */
+        ul, ol {
+            margin-left: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        li {
+            margin-bottom: 4px;
+            line-height: 1.45;
+        }
+
+        /* === Footer === */
+        .footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid var(--border);
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .footer a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        /* === Accent Elements === */
+        .accent-line {
+            height: 3px;
+            background: var(--secondary);
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box {
+            background: rgba(50, 208, 17, 0.1);
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: var(--radius);
+        }
+
+        /* === Print-specific adjustments === */
+        @media print {
+            h1 {
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 1.1rem;
+            }
+
+            h3 {
+                font-size: 1rem;
+            }
+
+            .section-box {
+                background: white;
+                border: 1px solid #ddd;
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr 1px 1fr;
+                gap: 0;
+            }
+
+            .column-divider {
+                background: #ddd;
+            }
+
+            .qr-code img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .qr-link {
+                color: var(--primary);
+                font-size: 0.75rem;
+            }
+
+            a {
+                color: var(--primary);
+                text-decoration: underline;
+            }
+
+            /* Ensure good contrast for printing */
+            .header-title,
+            h1,
+            h2,
+            h3 {
+                color: #000;
+            }
+
+            .header-subtitle {
+                color: var(--secondary);
+                font-family: 'Press Start 2P', monospace;
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="print-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <img src="static/img/FL Signature Rectangular2.png" alt="Freedom Lab NYC">
+            </div>
+            <p class="header-subtitle">Your Freedom Tech Community in NYC</p>
+        </header>
+
+        <!-- Main Content -->
+        <main style="flex: 1; display: flex; flex-direction: column;">
+            <!-- Section 1 -->
+            <section class="section">
+                <h2>What is Freedom Lab?</h2>
+                <p>
+                    Freedom Lab is a NYC group for freedom tech enthusiasts to come together to learn, build, and explore technologies that preserve our digital sovereignty. Whether you're a beginner or experienced developer, into Bitcoin, privacy, or open-source solutions, this is where we can all work to become freer together.
+                </p>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="section">
+                <h2>How to Get Involved</h2>
+                <div class="two-columns">
+                    <div class="column">
+                        <h3>Become a Member</h3>
+                        <p class="column-text" style="margin-bottom: 6px;">
+                            Join our end-to-end encrypted and self-hosted Matrix server (like Slack but sovereign) for $20/mo to:
+                        </p>
+                        <ul class="column-text" style="margin-top: 0; margin-bottom: 10px; padding-left: 1.2rem;">
+                            <li style="margin-bottom: 5px;">Receive technical support</li>
+                            <li style="margin-bottom: 5px;">Work on freedom tech projects together</li>
+                            <li style="margin-bottom: 5px;">Contribute to Freedom Lab together</li>
+                            <li style="margin-bottom: 5px;">Receive early access to events</li>
+                            <li style="margin-bottom: 5px;">Discuss freedom tech news of the day</li>
+                            <li style="margin-bottom: 5px;">And more!</li>
+                        </ul>
+                        <div class="qr-code">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://freedomlab.nyc/join/" alt="QR Code - Join Freedom Lab NYC">
+                            <a href="https://freedomlab.nyc/join/" class="qr-link">freedomlab.nyc/join/</a>
+                        </div>
+                    </div>
+                    <div class="column-divider"></div>
+                    <div class="column">
+                        <h3>Volunteer</h3>
+                        <p class="column-text" style="margin-bottom: 6px;">
+                            Paid membership helps our freedom tech community grow, but isn't the only way to get involved. We also welcome volunteering such as:
+                        </p>
+                        <ul class="column-text" style="margin-top: 0; margin-bottom: 10px; padding-left: 1.2rem;">
+                            <li style="margin-bottom: 5px;">Finding more spaces to host with us</li>
+                            <li style="margin-bottom: 5px;">Teaching classes and hosting events</li>
+                            <li style="margin-bottom: 5px;">Video editing and social media</li>
+                            <li style="margin-bottom: 5px;">Software engineering and hardware</li>
+                            <li style="margin-bottom: 5px;">Any other skills you'd like to bring!</li>
+                        </ul>
+                        <div class="qr-code">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://freedomlab.nyc/contact/" alt="QR Code - Contact Freedom Lab NYC">
+                            <a href="https://freedomlab.nyc/contact/" class="qr-link">freedomlab.nyc/contact/</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
+
