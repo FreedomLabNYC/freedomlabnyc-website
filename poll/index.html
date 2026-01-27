@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Share your feedback with Freedom Lab NYC - help us shape the future of Freedom Tech education in NYC.">
+    <title>Poll | Freedom Lab NYC</title>
+    <link rel="icon" href="../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/poll.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=block" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=block" rel="stylesheet">
+    
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="logo">
+            <img src="../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+        </a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link">Resources</a>
+            
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/join/" class="nav-btn">Join</a>
+            
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Poll</h1>
+    </section>
+
+    <!-- Main Content -->
+    <main class="poll-content">
+        <!-- Poll Section -->
+        <section class="poll-section">
+            <div class="section-box dashed-background">
+                <h2>Share Your Feedback</h2>
+                <p class="section-description">Help us shape the future of Freedom Lab NYC. Your input matters!</p>
+                
+                <!-- Formbricks Link Survey Embed -->
+                <div class="poll-embed-container">
+                    <iframe 
+                        src="https://app.formbricks.com/s/cmkwa2tl67bq5ad014gqtajr1"
+                        frameborder="0"
+                        class="formbricks-embed"
+                        allow="clipboard-write"
+                    ></iframe>
+                </div>
+                <p class="poll-fallback">Having trouble viewing? <a href="https://app.formbricks.com/s/cmkwa2tl67bq5ad014gqtajr1" target="_blank">Open poll in new tab →</a></p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (loaded from js/footer.js) -->
+    <div id="footer-placeholder"></div>
+    <script src="../js/footer.js"></script>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Enable animations
+        document.body.classList.add('animate-ready');
+        
+        // Entrance animations for all section boxes (staggered)
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        document.querySelectorAll('.poll-content .section-box').forEach((el, i) => {
+            setTimeout(() => {
+                sectionObserver.observe(el);
+            }, i * 100);
+        });
+    </script>
+    <script src="../js/social-config.js"></script>
+</body>
+</html>
+
