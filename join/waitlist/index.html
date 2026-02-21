@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join the waitlist for Freedom Lab NYC's upcoming freedom tech hackerspace in New York City.">
+    <title>Hackerspace Waitlist | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/contact.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=block" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=block" rel="stylesheet">
+    <style>
+        .waitlist-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .page-description {
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 550px;
+            margin: 0 auto;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .waitlist-content .section-box {
+            background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .waitlist-content .section-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #28a00e, #32D011, #28a00e);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .waitlist-content .section-box h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            text-align: center;
+        }
+
+        .waitlist-content .section-description {
+            color: var(--text-secondary);
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .waitlist-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .waitlist-form label {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: -0.25rem;
+        }
+
+        .waitlist-form input {
+            padding: 0.9rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .waitlist-form input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .waitlist-form input:focus {
+            outline: none;
+            border-color: #32D011;
+        }
+
+        .required-star {
+            color: #ff4444;
+            font-weight: 600;
+        }
+
+        .field-hint {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: -0.5rem;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: #32D011;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper label {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .field-asterisk {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-style: italic;
+            margin-top: -0.25rem;
+        }
+
+        .price-input-wrapper {
+            position: relative;
+        }
+
+        .price-input-wrapper .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1rem;
+            pointer-events: none;
+        }
+
+        .price-input-wrapper input {
+            padding-left: 1.75rem;
+            -moz-appearance: textfield;
+        }
+
+        .price-input-wrapper input::-webkit-outer-spin-button,
+        .price-input-wrapper input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .waitlist-submit {
+            padding: 1rem 2.5rem;
+            background: #32D011;
+            color: var(--bg-dark);
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .waitlist-submit:hover {
+            background: #4ae025;
+            transform: translateY(-2px);
+        }
+
+        .waitlist-success {
+            color: #32D011;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .info-box h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .info-box .features {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .info-box .features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        .info-box .features li:last-child {
+            border-bottom: none;
+        }
+
+        /* Entrance animation */
+        .animate-ready .waitlist-content .section-box {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .animate-ready .waitlist-content .section-box.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .waitlist-content {
+                padding: 1rem;
+            }
+
+            .waitlist-content .section-box {
+                padding: 1.5rem;
+            }
+
+            .waitlist-content .section-box h2 {
+                font-size: 1.35rem;
+            }
+
+            .waitlist-form input,
+            .waitlist-submit {
+                min-height: 48px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="logo">
+            <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+        </a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Join the Waitlist</h1>
+    </section>
+
+    <!-- Main Content -->
+    <main class="waitlist-content">
+        <p class="page-description">Subscribe to the waitlist for early access and discounted membership to our dedicated freedom tech hackerspace in New York City.</p>
+
+        <section>
+            <div class="section-box">
+                <form class="waitlist-form" id="waitlistForm">
+                    <label for="name">Name <span class="required-star">*</span></label>
+                    <input type="text" id="name" name="Name" required>
+
+                    <label for="email">Email <span class="required-star">*</span></label>
+                    <input type="email" id="email" name="Email" required>
+
+                    <label for="budget">Monthly Membership Fee <span class="required-star">*</span></label>
+                    <p class="field-hint">We're polling to see how much we should charge for membership. The more members are willing to pay, the higher quality location and space we can afford.</p>
+                    <div class="price-input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="budget" name="Monthly Budget" min="0" step="1" required>
+                    </div>
+                    <p class="field-asterisk">*This is for polling purposes and not a commitment to pay a certain amount.</p>
+
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="updates" name="Updates Opt-in" value="Yes" required checked>
+                        <label for="updates">I'd like to receive updates about the hackerspace and membership opportunities</label>
+                    </div>
+
+                    <button type="submit" class="waitlist-submit">Subscribe to the Waitlist</button>
+                    <p class="waitlist-success" id="successMsg">You're on the list! We'll be in touch.</p>
+                </form>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-box info-box">
+                <h2>Coming to NYC</h2>
+                <ul class="features">
+                    <li><strong style="color: white;">Physical Space</strong>: A dedicated freedom tech hackerspace in New York City — open 24/7 to members as a place to build, learn, and collaborate in person.</li>
+                    <li><strong style="color: white;">Co-Working & Workshops</strong>: Work alongside other freedom tech builders to workshops and hands-on classes.</li>
+                    <li><strong style="color: white;">Everything in Digital</strong>: Access to the private community server for early access to events, share progress on projects, ask for help, and discuss the latest news.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (loaded from js/footer.js) -->
+    <div id="footer-placeholder"></div>
+    <script src="../../js/footer.js"></script>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Enable animations
+        document.body.classList.add('animate-ready');
+        
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        document.querySelectorAll('.waitlist-content .section-box').forEach((el, i) => {
+            setTimeout(() => {
+                sectionObserver.observe(el);
+            }, i * 100);
+        });
+
+        // Form submission to Google Sheets
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyDDn0cRv9xF6JV_dfeer0B81Uq_q_vkRtuoZ8iQct5aH1_icPEfD66Im5X6Fk444eHKQ/exec';
+        const form = document.getElementById('waitlistForm');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+            
+            const formData = new FormData(form);
+            formData.append('formType', 'Hackerspace Waitlist');
+            
+            // If checkbox unchecked, it won't be in FormData — add "No"
+            if (!form.querySelector('#updates').checked) {
+                formData.set('Updates Opt-in', 'No');
+            }
+            
+            try {
+                await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
+                document.getElementById('successMsg').style.display = 'block';
+                btn.style.display = 'none';
+                form.querySelectorAll('input').forEach(i => i.disabled = true);
+            } catch (error) {
+                btn.disabled = false;
+                btn.textContent = 'Subscribe to the Waitlist';
+                alert('Something went wrong. Please try again.');
+            }
+        });
+    </script>
+    <script src="../../js/social-config.js"></script>
+</body>
+</html>
