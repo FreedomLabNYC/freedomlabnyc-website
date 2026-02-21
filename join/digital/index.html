@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Request access to Freedom Lab NYC's private digital community for freedom tech builders.">
+    <title>Request Access | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=block" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&display=block" rel="stylesheet">
+    <style>
+        .request-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .page-description {
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 550px;
+            margin: 0 auto;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .request-content .section-box {
+            background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .request-content .section-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #28a00e, #32D011, #28a00e);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+        }
+
+        .request-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .request-form label {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: -0.25rem;
+        }
+
+        .request-form input,
+        .request-form textarea {
+            padding: 0.9rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            width: 100%;
+        }
+
+        .request-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .request-form input::placeholder,
+        .request-form textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .request-form input:focus,
+        .request-form textarea:focus {
+            outline: none;
+            border-color: #32D011;
+        }
+
+        .required-star {
+            color: var(--required, #e05555);
+            font-weight: 600;
+        }
+
+        .field-hint {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: -0.5rem;
+        }
+
+        .onboarding-note {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 0.25rem;
+            font-style: italic;
+        }
+
+        .request-submit {
+            padding: 1rem 2.5rem;
+            background: #32D011;
+            color: var(--bg-dark);
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .request-submit:hover {
+            background: #4ae025;
+            transform: translateY(-2px);
+        }
+
+        .request-success {
+            color: #32D011;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        /* Info box */
+        .info-box h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .info-box .features {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .info-box .features li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        .info-box .features li:last-child {
+            border-bottom: none;
+        }
+
+        .sub-features {
+            list-style: none;
+            margin: 0.4rem 0 0 0;
+            padding: 0;
+            text-align: left;
+        }
+
+        .sub-features li {
+            padding: 0.2rem 0;
+            padding-left: 1rem;
+            position: relative;
+            border-bottom: none !important;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .sub-features li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #32D011;
+        }
+
+        /* Entrance animation */
+        .animate-ready .request-content .section-box {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .animate-ready .request-content .section-box.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .request-content {
+                padding: 1rem;
+            }
+
+            .request-content .section-box {
+                padding: 1.5rem;
+            }
+
+            .request-form input,
+            .request-form textarea,
+            .request-submit {
+                min-height: 48px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="logo">
+            <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+        </a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Request Access</h1>
+    </section>
+
+    <!-- Main Content -->
+    <main class="request-content">
+        <p class="page-description">Request access to our private freedom tech community server. Members get access to dedicated channels, early event access, and curated FreedomTech News.</p>
+
+        <section>
+            <div class="section-box">
+                <form class="request-form" id="requestForm">
+                    <label for="name">Name <span class="required-star">*</span></label>
+                    <input type="text" id="name" name="Name" required>
+
+                    <label for="email">Email <span class="required-star">*</span></label>
+                    <input type="email" id="email" name="Email" required>
+
+                    <label for="about">Tell us a little about yourself and why you're interested in joining <span class="required-star">*</span></label>
+                    <textarea id="about" name="About" required></textarea>
+
+                    <button type="submit" class="request-submit">Request Access</button>
+                    <p class="onboarding-note">If approved, we will reach out via email to onboard you onto the system.</p>
+                    <p class="request-success" id="successMsg">Request submitted! We'll be in touch.</p>
+                </form>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-box info-box">
+                <h2>What You Get</h2>
+                <ul class="features">
+                    <li><strong style="color: white;">Private Community Server</strong>: Join our end-to-end encrypted server with dedicated channels to:
+                        <ul class="sub-features">
+                            <li>Share what you're building</li>
+                            <li>Ask for help and receive support</li>
+                            <li>Keep up to date with the latest Freedom Tech developments</li>
+                        </ul>
+                    </li>
+                    <li><strong style="color: white;">Early Access to Events</strong>: Be notified ahead of time on classes, workshops, and events with limited slots available.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (loaded from js/footer.js) -->
+    <div id="footer-placeholder"></div>
+    <script src="../../js/footer.js"></script>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Enable animations
+        document.body.classList.add('animate-ready');
+        
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        document.querySelectorAll('.request-content .section-box').forEach((el, i) => {
+            setTimeout(() => {
+                sectionObserver.observe(el);
+            }, i * 100);
+        });
+
+        // Form submission to Google Sheets
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyDDn0cRv9xF6JV_dfeer0B81Uq_q_vkRtuoZ8iQct5aH1_icPEfD66Im5X6Fk444eHKQ/exec';
+        const form = document.getElementById('requestForm');
+        
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+            
+            const formData = new FormData(form);
+            formData.append('formType', 'Digital Members');
+            
+            try {
+                await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
+                document.getElementById('successMsg').style.display = 'block';
+                btn.style.display = 'none';
+                document.querySelector('.onboarding-note').style.display = 'none';
+                form.querySelectorAll('input, textarea').forEach(i => i.disabled = true);
+            } catch (error) {
+                btn.disabled = false;
+                btn.textContent = 'Request Access';
+                alert('Something went wrong. Please try again.');
+            }
+        });
+    </script>
+    <script src="../../js/social-config.js"></script>
+</body>
+</html>
