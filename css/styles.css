@@ -11,6 +11,7 @@
     --text-primary: #f0f0f0;
     --text-secondary: #a0a0a0;
     --text-muted: #666;
+    --required: #e05555;
     --radius: 8px;
     --radius-lg: 12px;
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
