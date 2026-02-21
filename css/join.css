@@ -60,6 +60,13 @@
     transition: all 0.3s ease;
 }
 
+.pricing-card .price {
+    min-height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .pricing-card-green {
     border-color: #32D011;
     box-shadow: none;
@@ -141,6 +148,7 @@
     border-bottom: 1px solid var(--border);
     color: var(--text-secondary);
     font-size: 0.95rem;
+    text-align: left;
 }
 
 .features li:last-child {
@@ -181,6 +189,41 @@
     color: var(--bg-dark);
     transform: translateY(-2px);
     box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+}
+
+/* === Sub-features (nested bullets) === */
+.sub-features {
+    list-style: none;
+    margin: 0.4rem 0 0 0;
+    padding: 0;
+    text-align: left;
+}
+
+.sub-features li {
+    padding: 0.2rem 0;
+    padding-left: 1rem;
+    position: relative;
+    border-bottom: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.sub-features li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #32D011;
+}
+
+/* === Waitlist Note === */
+.waitlist-note {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+    max-width: 320px;
 }
 
 /* === Subscribe Section === */
