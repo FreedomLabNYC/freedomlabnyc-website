@@ -1,0 +1,8 @@
+{
+    "callback": "https://btcpay.freedomlab.nyc/BTC/UILNURL/pay/lnaddress/donate",
+    "metadata": "[[\"text/identifier\",\"donate@freedomlab.nyc\"],[\"text/plain\",\"Paid to Freedom Lab NYC\"]]",
+    "tag": "payRequest",
+    "minSendable": 100000,
+    "maxSendable": 612000000000,
+    "commentAllowed": 2000
+}
