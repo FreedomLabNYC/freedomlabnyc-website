@@ -54,15 +54,6 @@
                 <h2>Support Our Mission</h2>
                 <p class="section-description">Your donation helps us continue providing Freedom Tech education, hosting community events, and building a more sovereign future together.</p>
                 
-                <!-- Lightning Address -->
-                <div class="lightning-address-container" style="margin-bottom: 2rem; padding: 1.5rem; border: 1px solid rgba(76, 175, 80, 0.3); border-radius: 12px; background: rgba(76, 175, 80, 0.05); text-align: center;">
-                    <p style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: rgba(255,255,255,0.7);">⚡ Send sats directly via Lightning Address:</p>
-                    <code style="font-size: 1.1rem; color: #4CAF50; background: rgba(76, 175, 80, 0.1); padding: 0.5rem 1rem; border-radius: 8px; display: inline-block; user-select: all; cursor: pointer;" onclick="navigator.clipboard.writeText('donate@freedomlab.nyc').then(() => { this.style.color='#81C784'; this.textContent='Copied!'; setTimeout(() => { this.style.color='#4CAF50'; this.textContent='donate@freedomlab.nyc'; }, 2000); })">donate@freedomlab.nyc</code>
-                    <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem; color: rgba(255,255,255,0.4);">Click to copy · Works with any Lightning wallet</p>
-                </div>
-
-                <p style="text-align: center; color: rgba(255,255,255,0.4); margin-bottom: 1.5rem; font-size: 0.85rem;">— or donate a custom amount —</p>
-
                 <div class="donation-form-container">
                     <form method="POST" action="https://btcpay.freedomlab.nyc/api/v1/invoices" class="btcpay-form btcpay-form--block">
                         <input type="hidden" name="storeId" value="Cfd8fkouRCqasW7CysoVR31Lf9Xbb8zJVYJsbRHGbpwv" />
@@ -85,6 +76,15 @@
                             <img src="https://btcpay.freedomlab.nyc/img/paybutton/logo.svg" alt="BTCPay">
                         </button>
                     </form>
+                </div>
+
+                <p style="text-align: center; color: rgba(255,255,255,0.4); margin: 1.5rem 0; font-size: 0.85rem;">— or send sats directly —</p>
+
+                <!-- Lightning Address -->
+                <div class="lightning-address-container" style="padding: 1.5rem; border: 1px solid rgba(76, 175, 80, 0.3); border-radius: 12px; background: rgba(76, 175, 80, 0.05); text-align: center;">
+                    <p style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: rgba(255,255,255,0.7);">⚡ Lightning Address:</p>
+                    <code style="font-size: 1.1rem; color: #4CAF50; background: rgba(76, 175, 80, 0.1); padding: 0.5rem 1rem; border-radius: 8px; display: inline-block; user-select: all; cursor: pointer;" onclick="navigator.clipboard.writeText('donate@freedomlab.nyc').then(() => { this.style.color='#81C784'; this.textContent='Copied!'; setTimeout(() => { this.style.color='#4CAF50'; this.textContent='donate@freedomlab.nyc'; }, 2000); })">donate@freedomlab.nyc</code>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.8rem; color: rgba(255,255,255,0.4);">Click to copy · Works with any Lightning wallet</p>
                 </div>
             </div>
         </section>
