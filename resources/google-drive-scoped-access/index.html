@@ -234,7 +234,12 @@ print(f"Refresh token: {creds.refresh_token}")</code></pre>
 
         <section class="tutorial-section" id="step-6-shared-folder">
             <h2>Step 6 — Create a Shared Folder</h2>
-            <p>Create a folder in Google Drive (e.g., "AI Agent"). Your agent will create all new files inside this folder, keeping things organized and easy to find.</p>
+            <p>Create a <strong>single dedicated folder</strong> in Google Drive (e.g., "AI Agent"). Your agent will create all new files inside this folder, keeping things organized and easy to find.</p>
+            <div class="callout">
+                <div class="callout-content">
+                    <p><strong>Security recommendation:</strong> Only give your agent access to one folder. Even though <code>drive.file</code> already limits scope, funneling everything through a single folder gives you a clear boundary — you can see exactly what your agent has touched, revoke access by unsharing one folder, and avoid files scattering across your Drive. If the agent needs to read existing files, share them <em>into</em> this folder rather than granting broader access. One folder = one kill switch.</p>
+                </div>
+            </div>
             <p>To get the folder ID: open the folder in Drive, look at the URL — the ID is the long string after <code>/folders/</code>:</p>
             <pre><code>https://drive.google.com/drive/folders/1gKS5aeDY5vjjS...
                                         ^^^^^^^^^^^^^^^ this part</code></pre>

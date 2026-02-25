@@ -1,0 +1,38 @@
+# Freedom Lab NYC
+
+> Freedom tech education — Bitcoin, open-source AI, Linux, privacy, encryption, self-hosting, and decentralization. Based in NYC.
+
+## Resources & Tutorials
+
+- [Resources Index](https://freedomlab.nyc/resources/): All tutorials and class materials
+- [Bitcoin Node (StartOS)](https://freedomlab.nyc/resources/bitcoin-node-startos/): Run a Bitcoin node with StartOS
+- [Bitcoin Node (Umbrel)](https://freedomlab.nyc/resources/bitcoin-node-umbrel/): Bitcoin node on Raspberry Pi with Umbrel
+- [Bitcoin Node from Source](https://freedomlab.nyc/resources/bitcoin-node-from-source/): Compile Bitcoin Core, Electrs, BTC RPC Explorer over Tor
+- [Lightning Node (Umbrel)](https://freedomlab.nyc/resources/lightning-node-umbrel/): Lightning node on Raspberry Pi
+- [Vibe Coding 101](https://freedomlab.nyc/resources/vibe-coding-101/): Build websites with AI-assisted coding
+- [DIY Hardware Wallet](https://freedomlab.nyc/resources/diy-hardware-wallet/): Flash Jade firmware onto a LilyGO board
+- [Jade Hardware Wallet](https://freedomlab.nyc/resources/jade-wallet/): Setup Blockstream Jade wallet
+- [Remote Mining](https://freedomlab.nyc/resources/remote-mining/): Bitcoin mining without hardware
+- [Bitaxe Miners](https://freedomlab.nyc/resources/bitaxe-miners/): Open-source Bitcoin miners at home
+- [Encrypt Your Drive](https://freedomlab.nyc/resources/encrypt-drive/): LUKS full-disk encryption
+- [Change LUKS Password](https://freedomlab.nyc/resources/change-luks-password/): Change encryption passphrase
+- [Tor vs VPN](https://freedomlab.nyc/resources/tor-vs-vpn/): When to use Tor vs a VPN
+- [Tor Relay](https://freedomlab.nyc/resources/tor-relay/): Deploy a Tor middle/guard relay
+- [VPN Over Tor](https://freedomlab.nyc/resources/vpn-over-tor/): Route VPN through Tor with OpenVPN
+- [USBGuard](https://freedomlab.nyc/resources/usbguard/): Protect Linux from BadUSB attacks
+- [Linux 2FA](https://freedomlab.nyc/resources/linux-2fa/): Two-factor auth for Linux login
+- [XMPP Server](https://freedomlab.nyc/resources/xmpp-server/): Self-hosted federated messaging with Prosody
+- [Email Server (Mailcow)](https://freedomlab.nyc/resources/mailcow/): Self-hosted email
+- [SimpleX SMP Server](https://freedomlab.nyc/resources/simplex-smp/): Decentralized messaging with Tor
+- [Matrix Server](https://freedomlab.nyc/resources/matrix-synapse/): Self-hosted Matrix with Synapse
+- [Self-Hosting AI Models](https://freedomlab.nyc/resources/self-host-ai/): Rent GPUs, deploy models with Ollama and Open WebUI
+- [Anonymous Vibecoding](https://freedomlab.nyc/resources/anonymous-vibecoding/): Zero-KYC AI coding with Monero
+- [Scoped Google Drive for AI Agents](https://freedomlab.nyc/resources/google-drive-scoped-access/): Least-privilege Google Drive access for AI agents
+
+## About
+
+- [Home](https://freedomlab.nyc/): About Freedom Lab NYC
+- [Classes & Events](https://freedomlab.nyc/classes-events/): Upcoming classes and workshops
+- [Join](https://freedomlab.nyc/join/): Membership and community
+- [Contact](https://freedomlab.nyc/contact/): Get in touch
+- [Donate](https://freedomlab.nyc/donate/): Support Freedom Lab

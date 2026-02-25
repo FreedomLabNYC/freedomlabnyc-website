@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://freedomlab.nyc/</loc><priority>1.0</priority></url>
+  <url><loc>https://freedomlab.nyc/classes-events/</loc><priority>0.9</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/</loc><priority>0.9</priority></url>
+  <url><loc>https://freedomlab.nyc/contact/</loc><priority>0.7</priority></url>
+  <url><loc>https://freedomlab.nyc/donate/</loc><priority>0.7</priority></url>
+  <url><loc>https://freedomlab.nyc/join/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/join/digital/</loc><priority>0.7</priority></url>
+  <url><loc>https://freedomlab.nyc/join/waitlist/</loc><priority>0.7</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/anonymous-vibecoding/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/bitaxe-miners/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/bitcoin-node-from-source/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/bitcoin-node-startos/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/bitcoin-node-umbrel/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/change-luks-password/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/diy-hardware-wallet/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/encrypt-drive/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/google-drive-scoped-access/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/jade-wallet/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/lightning-node-umbrel/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/linux-2fa/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/mailcow/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/matrix-synapse/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/remote-mining/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/self-host-ai/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/simplex-smp/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/tor-relay/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/tor-vs-vpn/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/usbguard/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/vibe-coding-101/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/vpn-over-tor/</loc><priority>0.8</priority></url>
+  <url><loc>https://freedomlab.nyc/resources/xmpp-server/</loc><priority>0.8</priority></url>
+</urlset>
