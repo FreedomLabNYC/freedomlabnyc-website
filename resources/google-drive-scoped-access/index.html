@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Give your AI agent scoped Google Drive access using OAuth with drive.file scope — no blanket access to your entire Drive.">
+    <title>Scoped Google Drive Access for AI Agents | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide"></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+            
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+        <div class="tutorial-support-banner green">
+            <svg viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#b8e986;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#5cb025;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g opacity="0.75">
+                    <circle cx="7" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="7" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+                <circle cx="16" cy="5" r="4.5" fill="url(#greenGradient)"/>
+                <ellipse cx="16" cy="16" rx="5" ry="6" fill="url(#greenGradient)"/>
+                <g opacity="0.75">
+                    <circle cx="25" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="25" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+            </svg>
+            <p>These resources are written by Freedom Lab members. <a href="/join/">Join our Freedom Lab server</a> to be a part of the community and receive support directly.</p>
+        </div>
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>Scoped Google Drive Access for AI Agents</span>
+            </div>
+            <h1 class="tutorial-title">Scoped Google Drive Access for AI Agents</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Tutorial</span>
+                <span class="tutorial-tag">Open-source AI</span>
+                <span class="tutorial-tag">Privacy</span>
+                <span class="tutorial-tag">Security</span>
+            </div>
+            <p class="tutorial-intro">Give your AI agent read/write access to Google Drive — scoped to only the files it creates or you explicitly share with it. No blanket access to your entire Drive.</p>
+            <p>Your AI agent becomes dramatically more useful when it can create documents, spreadsheets, and presentations on your behalf. But handing over full Drive access is a privacy nightmare — especially if you're running open-source tools where you control the keys.</p>
+            <p>The <code>drive.file</code> scope is the sweet spot: your agent can create new files and access files you deliberately share with it, but it can't browse or read anything else in your Drive. Least privilege, maximum utility.</p>
+        </div>
+
+        <nav class="tutorial-toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#why-not-service-account">Why Not Just Use a Service Account?</a></li>
+                <li><a href="#scopes-explained">Scope Comparison</a></li>
+                <li><a href="#step-1-create-project">Step 1 — Create a Google Cloud Project</a></li>
+                <li><a href="#step-2-oauth-credentials">Step 2 — Create OAuth Credentials</a></li>
+                <li><a href="#step-3-consent-screen">Step 3 — Configure the Consent Screen</a></li>
+                <li><a href="#step-4-auth-flow">Step 4 — Run the Auth Flow</a></li>
+                <li><a href="#step-5-store-token">Step 5 — Store the Token</a></li>
+                <li><a href="#step-6-shared-folder">Step 6 — Create a Shared Folder</a></li>
+                <li><a href="#step-7-use-it">Step 7 — Use It</a></li>
+                <li><a href="#step-8-service-account">Step 8 — (Optional) Add a Service Account for Read-Only</a></li>
+                <li><a href="#token-refresh">Token Refresh</a></li>
+                <li><a href="#gotchas">Gotchas</a></li>
+                <li><a href="#privacy-model">Privacy Model</a></li>
+            </ol>
+        </nav>
+
+        <section class="tutorial-section" id="architecture">
+            <h2>Architecture</h2>
+            <p>The setup uses two credentials with two purposes:</p>
+            <pre><code>AI Agent (your machine)
+    │
+    ├── OAuth Token (~/.your-agent/google-oauth-token.json)
+    │     └── Scope: drive.file (only files agent creates or you share)
+    │
+    ├── Service Account (read-only fallback)
+    │     └── Can read shared folder contents, zero storage quota
+    │
+    └── Shared Folder ("AI Agent" on Google Drive)
+          └── Agent creates files here, you share existing files here</code></pre>
+            <ul>
+                <li><strong>OAuth token</strong> — your personal Google account's permission, scoped to <code>drive.file</code>. This is what the agent uses to <em>create</em> files (docs, sheets, slides). It can only touch files it made or files you explicitly shared.</li>
+                <li><strong>Service account</strong> — a separate Google-managed identity. You share a folder with it, and it can <em>read</em> that folder's contents. But service accounts have zero storage quota — they literally cannot create files. Use this as a read-only fallback.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="why-not-service-account">
+            <h2>Why Not Just Use a Service Account?</h2>
+            <p>Service accounts seem simpler — no browser auth, no token refresh. But they have a fatal limitation: <strong>zero Drive storage quota</strong>. They can read files shared with them, but they can't create anything. For an agent that needs to generate documents, you need OAuth.</p>
+        </section>
+
+        <section class="tutorial-section" id="scopes-explained">
+            <h2>Scope Comparison</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Scope</th>
+                            <th>What it can access</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>drive</code></td>
+                            <td>Every file in your entire Google Drive</td>
+                        </tr>
+                        <tr>
+                            <td><code>drive.file</code></td>
+                            <td>Only files the app created + files you explicitly opened/shared with it</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>If your agent's OAuth token ever leaks, <code>drive.file</code> means the attacker can only see files your agent made — not your tax returns, medical records, or anything else. This is the principle of least privilege in practice.</p>
+        </section>
+
+        <section class="tutorial-section" id="step-1-create-project">
+            <h2>Step 1 — Create a Google Cloud Project</h2>
+            <ol>
+                <li>Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+                <li>Create a new project (e.g., "ai-agent")</li>
+                <li>Enable these APIs:
+                    <ul>
+                        <li>Google Drive API</li>
+                        <li>Google Docs API</li>
+                        <li>Google Sheets API</li>
+                        <li>Google Slides API (optional, for presentation support)</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="step-2-oauth-credentials">
+            <h2>Step 2 — Create OAuth Credentials</h2>
+            <ol>
+                <li>Go to <strong>APIs &amp; Services → Credentials</strong></li>
+                <li>Click <strong>Create Credentials → OAuth client ID</strong></li>
+                <li>Application type: <strong>Desktop app</strong></li>
+                <li>Name it something descriptive (e.g., "AI Agent Desktop")</li>
+                <li>Download the client secret JSON — you'll need the <code>client_id</code> and <code>client_secret</code></li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="step-3-consent-screen">
+            <h2>Step 3 — Configure the Consent Screen</h2>
+            <ol>
+                <li>Go to <strong>APIs &amp; Services → OAuth consent screen</strong></li>
+                <li>User type: <strong>External</strong> (unless you have a Workspace org)</li>
+                <li>Fill in the required fields (app name, support email)</li>
+                <li>Add the scope: <code>https://www.googleapis.com/auth/drive.file</code></li>
+                <li>Add yourself as a test user</li>
+            </ol>
+            <div class="callout">
+                <div class="callout-content">
+                    <p><strong>Note:</strong> While your app is in "Testing" mode, tokens expire after 7 days. You'll need to re-auth weekly until you publish the app (which requires Google's review). This is annoying but manageable — just re-run the auth flow when your token expires.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tutorial-section" id="step-4-auth-flow">
+            <h2>Step 4 — Run the Auth Flow (On a Separate Device)</h2>
+            <p>This is the security-conscious part. If your AI agent runs on a machine you don't want logged into your Google account (shared server, always-on box), do the auth on a different device.</p>
+            <p>First, install the required Python libraries:</p>
+            <pre><code>pip install google-api-python-client google-auth-oauthlib</code></pre>
+            <p>Then run this script:</p>
+            <pre><code>#!/usr/bin/env python3
+"""Generate OAuth token for Google Drive (drive.file scope)."""
+
+from google_auth_oauthlib.flow import InstalledAppFlow
+
+CLIENT_CONFIG = {
+    "installed": {
+        "client_id": "YOUR_CLIENT_ID.apps.googleusercontent.com",
+        "client_secret": "YOUR_CLIENT_SECRET",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "redirect_uris": ["urn:ietf:wg:oauth:2.0:oob"]
+    }
+}
+
+SCOPES = ["https://www.googleapis.com/auth/drive.file"]
+
+flow = InstalledAppFlow.from_client_config(CLIENT_CONFIG, SCOPES)
+auth_url, _ = flow.authorization_url(prompt="consent")
+print(f"\nOpen this URL in a browser:\n{auth_url}\n")
+code = input("Paste the authorization code here: ")
+
+flow.fetch_token(code=code)
+creds = flow.credentials
+
+print(f"\nAccess token: {creds.token}")
+print(f"Refresh token: {creds.refresh_token}")</code></pre>
+            <p>The key trick: using <code>urn:ietf:wg:oauth:2.0:oob</code> as the redirect URI means Google shows you an auth code instead of redirecting to localhost. You can open the auth URL on your phone, sign in there, and paste the code back to your agent's machine. <strong>Your Google password never touches the agent's machine.</strong></p>
+        </section>
+
+        <section class="tutorial-section" id="step-5-store-token">
+            <h2>Step 5 — Store the Token</h2>
+            <p>Save the credentials as JSON for your agent to use:</p>
+            <pre><code>{
+    "access_token": "ya29...",
+    "refresh_token": "1//0e...",
+    "client_id": "YOUR_CLIENT_ID.apps.googleusercontent.com",
+    "client_secret": "YOUR_CLIENT_SECRET"
+}</code></pre>
+            <p>Store this at a known path (e.g., <code>~/.your-agent/google-oauth-token.json</code>). Your agent reads this file when it needs to call Google APIs.</p>
+            <p>Set permissions to owner-only:</p>
+            <pre><code>chmod 600 ~/.your-agent/google-oauth-token.json</code></pre>
+            <div class="callout">
+                <div class="callout-content">
+                    <p><strong>Security note:</strong> This file contains your refresh token — treat it like a password. Anyone with it can create and access files as your app.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tutorial-section" id="step-6-shared-folder">
+            <h2>Step 6 — Create a Shared Folder</h2>
+            <p>Create a folder in Google Drive (e.g., "AI Agent"). Your agent will create all new files inside this folder, keeping things organized and easy to find.</p>
+            <p>To get the folder ID: open the folder in Drive, look at the URL — the ID is the long string after <code>/folders/</code>:</p>
+            <pre><code>https://drive.google.com/drive/folders/1gKS5aeDY5vjjS...
+                                        ^^^^^^^^^^^^^^^ this part</code></pre>
+            <p>Save this folder ID in your agent's config — it'll use this as the default parent for new files.</p>
+        </section>
+
+        <section class="tutorial-section" id="step-7-use-it">
+            <h2>Step 7 — Use It</h2>
+            <p>Here's a minimal example of creating a Google Doc in your shared folder:</p>
+            <pre><code>import json
+from pathlib import Path
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
+
+TOKEN_PATH = Path.home() / ".your-agent" / "google-oauth-token.json"
+
+def get_credentials():
+    with open(TOKEN_PATH) as f:
+        token_data = json.load(f)
+    return Credentials(
+        token=token_data.get("access_token") or token_data.get("token"),
+        refresh_token=token_data["refresh_token"],
+        token_uri="https://oauth2.googleapis.com/token",
+        client_id=token_data["client_id"],
+        client_secret=token_data["client_secret"],
+        scopes=["https://www.googleapis.com/auth/drive.file"],
+    )
+
+creds = get_credentials()
+drive = build("drive", "v3", credentials=creds)
+docs = build("docs", "v1", credentials=creds)
+
+# Create a new doc in your shared folder
+file_metadata = {
+    "name": "Meeting Notes - 2026-02-25",
+    "mimeType": "application/vnd.google-apps.document",
+    "parents": ["YOUR_FOLDER_ID"]
+}
+
+file = drive.files().create(body=file_metadata, fields="id").execute()
+doc_id = file["id"]
+print(f"Created doc: https://docs.google.com/document/d/{doc_id}")
+
+# Write to it
+docs.documents().batchUpdate(
+    documentId=doc_id,
+    body={"requests": [{
+        "insertText": {
+            "location": {"index": 1},
+            "text": "Hello from your AI agent!\n"
+        }
+    }]}
+).execute()</code></pre>
+        </section>
+
+        <section class="tutorial-section" id="step-8-service-account">
+            <h2>Step 8 — (Optional) Add a Service Account for Read-Only</h2>
+            <p>If you also want your agent to read files you didn't create through the agent:</p>
+            <ol>
+                <li>In Google Cloud Console: <strong>IAM &amp; Admin → Service Accounts → Create</strong></li>
+                <li>Download the JSON key file</li>
+                <li>Save it (e.g., <code>~/.your-agent/google-service-account.json</code>)</li>
+                <li>Share your Drive folder with the service account's email address (it looks like <code>name@project.iam.gserviceaccount.com</code>)</li>
+            </ol>
+            <p>The service account can now list and read files in that folder. Use OAuth for creating, service account for reading — belt and suspenders.</p>
+        </section>
+
+        <section class="tutorial-section" id="token-refresh">
+            <h2>Token Refresh</h2>
+            <p>The access token expires after ~1 hour. The Google Python client handles refresh automatically using the refresh token — you don't need to manage this manually. Just make sure the refresh token is in your stored JSON.</p>
+            <p>The <strong>refresh token itself</strong> lasts until you revoke it — unless your app is in "Testing" mode on Google Cloud, in which case it expires after 7 days. When that happens, re-run the auth flow from Step 4.</p>
+        </section>
+
+        <section class="tutorial-section" id="gotchas">
+            <h2>Gotchas</h2>
+            <ul>
+                <li><strong>Testing mode = 7-day token expiry.</strong> Publishing your app removes this limit but requires Google review. For personal use, just re-auth weekly.</li>
+                <li><strong>Service accounts can't create files.</strong> They have zero storage quota. Don't waste time trying to make this work — use OAuth for file creation.</li>
+                <li><strong><code>drive.file</code> scope is per-app, not per-folder.</strong> The agent can access ANY file it created, regardless of folder. The shared folder is just for organization.</li>
+                <li><strong>Token file is sensitive.</strong> Anyone with your refresh token can create/access files as your app. Protect it accordingly.</li>
+                <li><strong>Python version matters.</strong> The Google auth libraries throw <code>FutureWarning</code> on Python 3.9 and below. Use 3.10+ if possible.</li>
+                <li><strong>The <code>oob</code> redirect flow is deprecated for new apps</strong> as of 2022, but still works for existing OAuth clients created before the cutoff. If creating a fresh client, you may need to use <code>http://localhost</code> redirect instead and run a brief local server during auth.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="privacy-model">
+            <h2>Privacy Model</h2>
+            <pre><code>Your Google Drive
+├── Personal files       ← Agent CANNOT see these
+├── Work files           ← Agent CANNOT see these
+└── Shared "AI Agent" folder
+    ├── Files you share here  ← Agent CAN read (via service account)
+    └── Files agent creates   ← Agent CAN read/write (via OAuth)</code></pre>
+            <p>This is the same principle as giving someone a key to one room in your house instead of the master key. The agent is powerful where you need it, blind everywhere else.</p>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/resources/" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Resources</a>
+        </nav>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="../../js/footer.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = '<img src="" alt="">';
+        document.body.appendChild(lightbox);
+        const lightboxImg = lightbox.querySelector('img');
+        document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    </script>
+</body>
+</html>
