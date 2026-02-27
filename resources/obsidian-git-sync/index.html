@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sync your Obsidian vault across devices using GitHub — free, open-source, and you control your data. No paid Obsidian Sync needed.">
+    <title>Sync Obsidian Across Devices with GitHub | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide"></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+            
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+        <div class="tutorial-support-banner green">
+            <svg viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#b8e986;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#5cb025;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g opacity="0.75">
+                    <circle cx="7" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="7" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+                <circle cx="16" cy="5" r="4.5" fill="url(#greenGradient)"/>
+                <ellipse cx="16" cy="16" rx="5" ry="6" fill="url(#greenGradient)"/>
+                <g opacity="0.75">
+                    <circle cx="25" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="25" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+            </svg>
+            <p>These resources are written by Freedom Lab members. <a href="/join/">Join our Freedom Lab server</a> to be a part of the community and receive support directly.</p>
+        </div>
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>Sync Obsidian Across Devices with GitHub</span>
+            </div>
+            <h1 class="tutorial-title">Sync Obsidian Across Devices with GitHub</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Tutorial</span>
+                <span class="tutorial-tag">Privacy</span>
+                <span class="tutorial-tag">Open-source</span>
+                <span class="tutorial-tag">Self-hosting</span>
+            </div>
+            <p class="tutorial-intro">Sync your Obsidian vault across Mac, Windows, and Linux using a private GitHub repository — free, open-source, and you control your data. No paid Obsidian Sync needed.</p>
+            <p>Your notes are yours. Using GitHub instead of a proprietary sync service means you own the infrastructure, every change is version-tracked, and it works on any device with Git. No subscription fees, no vendor lock-in.</p>
+        </div>
+
+        <nav class="tutorial-toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#create-repo">Create a Private GitHub Repository</a></li>
+                <li><a href="#first-device">Set Up Your First Device</a></li>
+                <li><a href="#install-plugin">Install the Obsidian Git Plugin</a></li>
+                <li><a href="#configure-sync">Configure Auto-Sync</a></li>
+                <li><a href="#second-device">Set Up Your Second Device</a></li>
+                <li><a href="#test-sync">Test the Sync</a></li>
+                <li><a href="#gotchas">Gotchas & Tips</a></li>
+                <li><a href="#what-youve-built">What You've Built</a></li>
+            </ol>
+        </nav>
+
+        <section class="tutorial-section" id="create-repo">
+            <h2>Step 1 — Create a Private GitHub Repository</h2>
+            <ol>
+                <li>Go to <a href="https://github.com/new" target="_blank">github.com/new</a></li>
+                <li>Name it (e.g., <code>my-obsidian-vault</code>)</li>
+                <li>Set it to <strong>Private</strong></li>
+                <li>Click <strong>Create repository</strong></li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="first-device">
+            <h2>Step 2 — Set Up Your First Device (Mac or Linux)</h2>
+            <p><strong>Install Git</strong> (if not already installed):</p>
+            <pre><code># Mac (with Homebrew)
+brew install git
+
+# Linux (Debian/Ubuntu)
+sudo apt install git</code></pre>
+            <p><strong>Clone the repo:</strong></p>
+            <pre><code>cd ~
+git clone https://github.com/YOUR-USERNAME/my-obsidian-vault.git</code></pre>
+            <p><strong>Open as Obsidian vault:</strong></p>
+            <ol>
+                <li>Open Obsidian</li>
+                <li>Click "Open folder as vault"</li>
+                <li>Select the cloned folder</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="install-plugin">
+            <h2>Step 3 — Install the Obsidian Git Plugin</h2>
+            <ol>
+                <li>In Obsidian, go to <strong>Settings → Community plugins</strong></li>
+                <li>Turn off <strong>Restricted mode</strong> if prompted</li>
+                <li>Click <strong>Browse</strong> → search for <strong>"Obsidian Git"</strong></li>
+                <li><strong>Install</strong> it, then <strong>Enable</strong> it</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="configure-sync">
+            <h2>Step 4 — Configure Auto-Sync</h2>
+            <p>Go to <strong>Settings → Obsidian Git</strong> and set:</p>
+            <ul>
+                <li><strong>Auto pull interval:</strong> <code>2</code> minutes (or your preference)</li>
+                <li><strong>Auto push interval:</strong> <code>2</code> minutes</li>
+                <li><strong>Pull on startup:</strong> ✅ enabled</li>
+                <li><strong>Push on startup:</strong> ✅ enabled</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="second-device">
+            <h2>Step 5 — Set Up Your Second Device</h2>
+            <p><strong>Install Git:</strong></p>
+            <ul>
+                <li><strong>Windows:</strong> Download from <a href="https://git-scm.com/download/win" target="_blank">git-scm.com</a> and run the installer with defaults</li>
+                <li><strong>Linux:</strong> <code>sudo apt install git</code></li>
+            </ul>
+            <p><strong>Clone the repo</strong> (open terminal or Command Prompt):</p>
+            <pre><code>git clone https://github.com/YOUR-USERNAME/my-obsidian-vault.git</code></pre>
+            <p><strong>Set your Git identity</strong> (first time only):</p>
+            <pre><code>git config --global user.name "Your Name"
+git config --global user.email "your-github-email@example.com"</code></pre>
+            <p><strong>Open in Obsidian</strong> → "Open folder as vault" → select the cloned folder.</p>
+            <p><strong>Install the Obsidian Git plugin</strong> (same as Step 3).</p>
+        </section>
+
+        <section class="tutorial-section" id="test-sync">
+            <h2>Step 6 — Test the Sync</h2>
+            <ol>
+                <li>Create a test note on Device A</li>
+                <li>Wait for the auto-push interval (or use Command Palette → "Obsidian Git: Push")</li>
+                <li>On Device B, wait for auto-pull (or manually pull)</li>
+                <li>The note should appear</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="gotchas">
+            <h2>Gotchas & Tips</h2>
+            <ul>
+                <li><strong>Large files:</strong> Add <code>*.mp4</code>, <code>*.zip</code>, and other large files to <code>.gitignore</code> — GitHub has a 100MB file limit and large files slow down sync</li>
+                <li><strong>Merge conflicts:</strong> If you edit the same file on two devices simultaneously, you may get conflicts. The plugin handles most cases, but avoid editing the same note on two devices at the same time</li>
+                <li><strong>Authentication:</strong> If <code>git push</code> asks for credentials repeatedly, set up a <a href="https://github.com/settings/tokens" target="_blank">Personal Access Token</a> for smoother auth</li>
+                <li><strong>.obsidian folder:</strong> This syncs your plugins and settings across devices too — that's a feature, not a bug</li>
+                <li><strong>Mobile:</strong> This method works on Android with Termux + Git, but iOS is trickier. Consider Obsidian's official sync for mobile if needed</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="what-youve-built">
+            <h2>What You've Built</h2>
+            <pre><code>Your Obsidian Vault
+    │
+    ├── Private GitHub Repo (you control it)
+    │     └── Full version history of every edit
+    │
+    ├── Device A (Mac / Linux / Windows)
+    │     └── Auto-sync every 2 minutes
+    │
+    └── Device B (any other machine)
+          └── Auto-sync every 2 minutes</code></pre>
+            <p>A free, self-sovereign note sync system. Your notes live in a Git repo you control, changes sync automatically, full version history of every edit, works on any device that runs Obsidian + Git. No subscription fees, no vendor lock-in.</p>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/resources/" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Resources</a>
+        </nav>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="../../js/footer.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = '<img src="" alt="">';
+        document.body.appendChild(lightbox);
+        const lightboxImg = lightbox.querySelector('img');
+        document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    </script>
+</body>
+</html>
