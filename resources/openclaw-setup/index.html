@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Set up your own AI assistant with OpenClaw — running on your machine, chatting through Telegram, remembering everything. Step-by-step for Mac, Linux, and Windows.">
+    <title>Setting Up OpenClaw | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide"></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+        <div class="tutorial-support-banner green">
+            <svg viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#b8e986;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#5cb025;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g opacity="0.75">
+                    <circle cx="7" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="7" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+                <circle cx="16" cy="5" r="4.5" fill="url(#greenGradient)"/>
+                <ellipse cx="16" cy="16" rx="5" ry="6" fill="url(#greenGradient)"/>
+                <g opacity="0.75">
+                    <circle cx="25" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="25" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+            </svg>
+            <p>These resources are written by Freedom Lab members. <a href="/join/">Join our Freedom Lab server</a> to be a part of the community and receive support directly.</p>
+        </div>
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>Setting Up OpenClaw</span>
+            </div>
+            <h1 class="tutorial-title">Setting Up OpenClaw: Your AI, Your Machine, Your Rules</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Tutorial</span>
+                <span class="tutorial-tag">AI</span>
+                <span class="tutorial-tag">Privacy</span>
+                <span class="tutorial-tag">Open-source</span>
+                <span class="tutorial-tag">Self-hosting</span>
+            </div>
+            <p class="tutorial-intro">A step-by-step guide to running your own personal AI assistant — on your own hardware, talking to you through Telegram, remembering everything you tell it, and acting on your behalf. Even while you sleep.</p>
+            <p>This guide covers setup on <strong>Mac</strong>, <strong>Linux</strong>, and <strong>Windows</strong>. If you can copy and paste, you can do this.</p>
+        </div>
+
+        <nav class="tutorial-toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#what-is-openclaw">What Is OpenClaw?</a></li>
+                <li><a href="#why-freedom-tech">Why This Is Freedom Tech</a></li>
+                <li><a href="#what-you-need">What You Need</a></li>
+                <li><a href="#choose-your-model">Choose Your AI Model</a></li>
+                <li><a href="#step-1-get-organized">Step 1 — Get Organized</a></li>
+                <li><a href="#step-2-install-openclaw">Step 2 — Install OpenClaw</a></li>
+                <li><a href="#step-3-onboarding">Step 3 — Onboarding</a></li>
+                <li><a href="#step-4-connect-telegram">Step 4 — Connect Telegram</a></li>
+                <li><a href="#step-5-first-conversation">Step 5 — Your First Conversation</a></li>
+                <li><a href="#step-6-make-it-yours">Step 6 — Make It Yours</a></li>
+                <li><a href="#security">Security: With Great Power...</a></li>
+                <li><a href="#common-mistakes">Common Mistakes</a></li>
+                <li><a href="#next-steps">Next Steps</a></li>
+            </ol>
+        </nav>
+
+        <!-- SECTION: What Is OpenClaw? -->
+        <section class="tutorial-section" id="what-is-openclaw">
+            <h2>What Is OpenClaw?</h2>
+            <p>To understand OpenClaw, it helps to think about the evolution of computing:</p>
+
+            <h3>Type 1: Programs (The Hands)</h3>
+            <p>A traditional computer program is like a recipe — exact steps, written by a human, followed by a machine. Powerful but rigid. It only does exactly what a programmer told it to do, nothing more.</p>
+
+            <h3>Type 2: LLMs (The Brains)</h3>
+            <p>Large Language Models take all the information on the internet, recognize patterns, and produce new content. Think ChatGPT. But they have no memory between conversations, no ability to act, no way to open a browser or send an email. Like having a brilliant advisor locked in a room who can only talk through a mail slot.</p>
+
+            <h3>Type 3: Agents (The Marriage)</h3>
+            <p>An agent is what happens when you combine old computing (tools, scripts, automation) with new computing (intelligence, reasoning, language). The old programs give it <strong>hands</strong> — the ability to search the web, control a browser, send a message, manage files. The new program gives it a <strong>brain</strong> — the ability to understand what you want and figure out how to get it done.</p>
+
+            <h3>Type 4: OpenClaw (The Breakthrough)</h3>
+            <p>OpenClaw is what happens when an agent gets hands — or "claws" — and is alive all the time, acting on its own. When you give it a <strong>soul</strong>, let it run on your own hardware, and let it wake up without prompting. It's a free, open-source AI assistant that:</p>
+            <ul>
+                <li><strong>Runs on your computer</strong> — not someone else's server</li>
+                <li><strong>Chats through Telegram</strong> (or 12+ other platforms)</li>
+                <li><strong>Remembers everything</strong> you tell it — permanently, as files on your disk</li>
+                <li><strong>Can actually do things</strong> — run commands, browse the web, send messages, manage files</li>
+                <li><strong>Works while you sleep</strong> — scheduled tasks, monitoring, recurring check-ins</li>
+            </ul>
+            <p>Stop thinking of it as a tool you type prompts into. Start thinking of it as an employee you're onboarding.</p>
+        </section>
+
+        <!-- SECTION: Why Freedom Tech -->
+        <section class="tutorial-section" id="why-freedom-tech">
+            <h2>Why This Is Freedom Tech</h2>
+            <p>This isn't just another AI tutorial. OpenClaw follows the same principles as running your own Bitcoin node or your own email server:</p>
+            <ul>
+                <li><strong>Your hardware:</strong> Runs on a machine you own, not rented cloud space</li>
+                <li><strong>Open source:</strong> 240,000+ lines of TypeScript on GitHub, MIT licensed. Anyone can read, fork, or modify the code. Forever.</li>
+                <li><strong>Local-first:</strong> Conversations, memory, config — all markdown files on your disk</li>
+                <li><strong>No kill switch:</strong> No company can turn off your agent or change how it behaves</li>
+                <li><strong>Model-agnostic:</strong> Claude, GPT, Gemini, DeepSeek, or fully offline via Ollama</li>
+            </ul>
+            <p>When you use ChatGPT, you're renting someone else's brain on someone else's hardware, and they own every word you say. When you use OpenClaw, your data lives on your laptop. The AI model processes your request and forgets it. You own the infrastructure.</p>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>ChatGPT</th>
+                            <th>OpenClaw</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Where does it live?</strong></td>
+                            <td>Their servers</td>
+                            <td>Your machine</td>
+                        </tr>
+                        <tr>
+                            <td><strong>How do you use it?</strong></td>
+                            <td>Open a website</td>
+                            <td>Text it on Telegram</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Does it remember you?</strong></td>
+                            <td>Barely</td>
+                            <td>Everything, permanently</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Can it do things?</strong></td>
+                            <td>Just talks</td>
+                            <td>Runs commands, browses, sends messages</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Works while you sleep?</strong></td>
+                            <td>No</td>
+                            <td>Yes — scheduled tasks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Who owns your data?</strong></td>
+                            <td>The company</td>
+                            <td>You</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cost</strong></td>
+                            <td>$20–200/month subscription</td>
+                            <td>Free software + $0–50/month for AI model</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SECTION: What You Need -->
+        <section class="tutorial-section" id="what-you-need">
+            <h2>What You Need</h2>
+            <p>Three things:</p>
+            <ol>
+                <li><strong>A computer that stays on</strong> — 8GB RAM minimum. An old laptop collecting dust? Perfect. That's your AI server now. A Mac Mini, a Linux box, a repurposed Windows machine — anything works.</li>
+                <li><strong>A Telegram account</strong> — free. This is how you'll talk to your agent.</li>
+                <li><strong>An AI brain</strong> — this is the model your agent uses to think. See the next section for your options.</li>
+            </ol>
+        </section>
+
+        <!-- SECTION: Choose Your Model -->
+        <section class="tutorial-section" id="choose-your-model">
+            <h2>Choose Your AI Model</h2>
+            <p>OpenClaw is model-agnostic — you're not locked into any one provider. Here are your paths, from free to fully private:</p>
+
+            <h3>🆓 Free: Google Gemini Flash</h3>
+            <p>250 requests per day, no credit card required. Good for getting started and experimenting. Sign up at <a href="https://aistudio.google.com/" target="_blank">aistudio.google.com</a> and grab an API key.</p>
+
+            <h3>💰 Cheap: MiniMax M2.5 or similar</h3>
+            <p>~$10/month for decent performance. Pay-per-use through providers like <a href="https://openrouter.ai/" target="_blank">OpenRouter</a>, which gives you access to dozens of models through a single API key.</p>
+
+            <h3>💎 Paid: Claude or GPT</h3>
+            <p>$5–50/month depending on usage. The highest quality models available. Two ways to access:</p>
+            <ul>
+                <li><strong>API (pay-per-use):</strong> Sign up at <a href="https://console.anthropic.com/" target="_blank">console.anthropic.com</a> or <a href="https://platform.openai.com/" target="_blank">platform.openai.com</a>. You pay for what you use. Most flexible and officially supported.</li>
+                <li><strong>Claude subscription token:</strong> Some users use their Claude Pro/Max subscription ($20–100/month) to get a session token for OpenClaw. This is cheaper for heavy usage, but <strong>comes with a risk</strong> — using the subscription token outside of claude.ai may violate Anthropic's terms of service, and your account could be banned. We mention this because it's a common approach in the community, but you should understand the tradeoff.</li>
+            </ul>
+
+            <h3>🔒 Fully Private: Ollama (Local)</h3>
+            <p>Install <a href="https://ollama.com/" target="_blank">Ollama</a>, download an open-source model, and nothing ever leaves your machine. Completely free, fully private. The trade-off: local models aren't as capable as cloud models yet — but they're getting better every month. If you have a machine with a decent GPU (or an Apple Silicon Mac), this is a serious option.</p>
+
+            <div class="callout-box">
+                <strong>Our recommendation:</strong> Start with Gemini Flash (free) to get everything set up and working. Once you're comfortable, upgrade to a paid model for better quality. If privacy is your top priority, go fully local with Ollama from the start.
+            </div>
+        </section>
+
+        <!-- SECTION: Step 1 -->
+        <section class="tutorial-section" id="step-1-get-organized">
+            <h2>Step 1 — Get Organized</h2>
+            <p>Before you open Terminal, have everything lined up. Trust us — having your keys ready saves you an hour of frustration mid-setup.</p>
+            <p><strong>Gather these before you start:</strong></p>
+            <ol>
+                <li><strong>Your AI model key</strong> — API key from whichever provider you chose above</li>
+                <li><strong>Brave Search API key</strong> (free) — lets your agent search the web. Sign up at <a href="https://brave.com/search/api" target="_blank">brave.com/search/api</a>. Takes two minutes.</li>
+                <li><strong>Telegram bot token</strong> — open Telegram, search for <strong>@BotFather</strong>, send <code>/newbot</code>. Pick a name and username (username must end in "bot"). BotFather gives you an API token. Copy it.</li>
+            </ol>
+            <p>Write them all down in a notes app. You'll need them during setup and it's annoying to go hunting mid-flow.</p>
+        </section>
+
+        <!-- SECTION: Step 2 -->
+        <section class="tutorial-section" id="step-2-install-openclaw">
+            <h2>Step 2 — Install OpenClaw</h2>
+            <p>Pick your operating system:</p>
+
+            <h3>Mac</h3>
+            <p>Open Terminal (Applications → Utilities → Terminal) and run:</p>
+            <pre><code>curl -fsSL https://openclaw.ai/install.sh | bash</code></pre>
+            <p>This installs Node.js (if needed) and OpenClaw in one step. If you're on an older Mac and don't have Homebrew yet, the script will install it for you.</p>
+
+            <h3>Linux</h3>
+            <p>Open a terminal and run the same command:</p>
+            <pre><code>curl -fsSL https://openclaw.ai/install.sh | bash</code></pre>
+            <p>Works on Ubuntu, Debian, Fedora, Pop!_OS, and most Linux distributions. The script handles Node.js installation via your package manager.</p>
+            <p>If you're setting up OpenClaw on a headless server (no monitor), you'll access it the same way — through Telegram. The machine just needs to stay on and connected to the internet.</p>
+
+            <h3>Windows</h3>
+            <p>OpenClaw on Windows runs through <strong>WSL2</strong> (Windows Subsystem for Linux). This gives you a real Linux environment inside Windows — one command to install.</p>
+            <p><strong>First, install WSL2.</strong> Open PowerShell as Administrator and run:</p>
+            <pre><code>wsl --install</code></pre>
+            <p>Reboot if Windows asks. This installs Ubuntu by default.</p>
+            <p><strong>Enable systemd</strong> (required for OpenClaw's background service). Open your WSL terminal and run:</p>
+            <pre><code>sudo tee /etc/wsl.conf >/dev/null &lt;&lt;'EOF'
+[boot]
+systemd=true
+EOF</code></pre>
+            <p>Then from PowerShell, restart WSL:</p>
+            <pre><code>wsl --shutdown</code></pre>
+            <p>Re-open Ubuntu. <strong>Now install OpenClaw</strong> inside WSL:</p>
+            <pre><code>curl -fsSL https://openclaw.ai/install.sh | bash</code></pre>
+            <p>Alternatively, if you prefer a native PowerShell install (without WSL):</p>
+            <pre><code>iwr -useb https://openclaw.ai/install.ps1 | iex</code></pre>
+            <p>We recommend WSL2 — it's more compatible and most skills/tools expect a Linux environment.</p>
+        </section>
+
+        <!-- SECTION: Step 3 -->
+        <section class="tutorial-section" id="step-3-onboarding">
+            <h2>Step 3 — Onboarding</h2>
+            <p>After installation, run the onboarding wizard:</p>
+            <pre><code>openclaw onboard --install-daemon</code></pre>
+            <p>This walks you through everything. A few tips for navigating the wizard:</p>
+            <ul>
+                <li><strong>Spacebar</strong> — select/deselect an option</li>
+                <li><strong>Arrow keys</strong> — move up/down through options</li>
+                <li><strong>Enter</strong> — confirm and move forward</li>
+            </ul>
+            <p>Hit <strong>Yes</strong> on the disclaimer, then select <strong>Quick Start</strong>.</p>
+
+            <h3>Model Setup</h3>
+            <p>The wizard asks which AI model provider to use. Select the one that matches the key you prepared:</p>
+            <ul>
+                <li><strong>Anthropic</strong> — for Claude (API key or subscription token)</li>
+                <li><strong>OpenAI</strong> — for GPT models</li>
+                <li><strong>Google</strong> — for Gemini</li>
+                <li><strong>OpenRouter</strong> — for MiniMax, DeepSeek, and other models via a single key</li>
+                <li><strong>Ollama</strong> — for fully local models (no key needed)</li>
+            </ul>
+            <p>Paste in your API key when prompted. <strong>Double-check for trailing spaces</strong> — this is the #1 source of setup errors. If you get an HTTPS error later, a space in your key is almost always the cause.</p>
+
+            <h3>Skills Setup</h3>
+            <p>The wizard will offer to install various skills. For now, <strong>skip them all</strong> — select "skip for now" or "no" when prompted. You can always install skills later, and it's better to get the basics working first.</p>
+
+            <h3>Hooks</h3>
+            <p>When asked about enabling hooks, <strong>select all three</strong> using spacebar and hit Enter. These are needed for core functionality.</p>
+            <p>After this, your gateway should start. You'll see Terminal do its thing — that's OpenClaw coming alive.</p>
+        </section>
+
+        <!-- SECTION: Step 4 -->
+        <section class="tutorial-section" id="step-4-connect-telegram">
+            <h2>Step 4 — Connect Telegram</h2>
+            <p>During onboarding, you'll see a list of communication platforms. Select <strong>Telegram</strong>.</p>
+            <p>Paste the bot token you got from BotFather earlier. That's it — Telegram is connected.</p>
+            <p>If you haven't created your bot yet:</p>
+            <ol>
+                <li>Open Telegram and search for <strong>@BotFather</strong></li>
+                <li>Send <code>/newbot</code></li>
+                <li>Pick a name (this is the display name)</li>
+                <li>Pick a username (must end in "bot")</li>
+                <li>BotFather gives you an API token — copy it</li>
+            </ol>
+            <p>Paste it back into Terminal for your OpenClaw onboarding.</p>
+        </section>
+
+        <!-- SECTION: Step 5 -->
+        <section class="tutorial-section" id="step-5-first-conversation">
+            <h2>Step 5 — Your First Conversation</h2>
+            <p>The moment of truth. Select <strong>"Hatch in TUI"</strong> in the onboarding wizard. This wakes your agent up for the first time inside Terminal.</p>
+            <p>If you get an HTTPS error here, check your AI model key for spaces. That's almost always the cause. Paste it again without trailing spaces — you may need to rerun onboarding.</p>
+            <p>Your agent will greet you and ask for a name. Tell it who you are and ask it to continue the conversation on Telegram:</p>
+            <pre><code>"Hey, your name is [bot name], my name is [your name]. 
+Let's continue this conversation on Telegram. 
+Here's my pairing key: [paste key]"</code></pre>
+            <p>Now open your bot's chat on Telegram (click the @username that BotFather gave you). It'll ask for a pairing key. Type it in. Telegram should connect and your bot will reply there.</p>
+            <p><strong>That's your "holy shit" moment.</strong> You now have a personal AI assistant running on your own hardware, talking to you through Telegram.</p>
+        </section>
+
+        <!-- SECTION: Step 6 -->
+        <section class="tutorial-section" id="step-6-make-it-yours">
+            <h2>Step 6 — Make It Yours</h2>
+            <p>This is the part that actually matters. Most people skip it and wonder why their agent sounds like a customer service bot.</p>
+            <p>OpenClaw uses three files that define who your agent is:</p>
+            <ul>
+                <li><strong>SOUL.md</strong> — your agent's personality. How it talks. What it cares about. Its style.</li>
+                <li><strong>USER.md</strong> — info about you. Your name, your job, your preferences, your goals.</li>
+                <li><strong>MEMORY.md</strong> — long-term memory. Your agent updates this over time so it remembers things between conversations.</li>
+            </ul>
+            <p>You could write all of these yourself. Or you could do what works best — <strong>let your agent interview you.</strong></p>
+            <p>Send something like this on Telegram:</p>
+            <pre><code>"You just came online for the first time. I want you to ask me 
+questions to get to know me — my name, what I do, my goals, 
+how I want you to talk to me, what tools I use daily, what I 
+need help with. Ask them one at a time. Then use my answers 
+to fill out SOUL.md and USER.md."</code></pre>
+            <p>Your agent will run through 10–15 questions. Answer honestly. Tell it your actual situation — your job, your side projects, your schedule, how casual you want it to be.</p>
+            <p><strong>Pro tip:</strong> Reply with voice notes. Way faster, and you'll give more natural answers than typing. Your agent can transcribe them automatically.</p>
+            <p>By the end of this, your agent has real context. It knows who you are. It remembers. This is the difference between a chatbot and something that actually feels like <em>yours</em>.</p>
+        </section>
+
+        <!-- SECTION: Security -->
+        <section class="tutorial-section" id="security">
+            <h2>Security: With Great Power...</h2>
+            <p>Your agent has access to your computer. That's powerful — and it means security matters. Here are the principles:</p>
+
+            <h3>Defense in Depth</h3>
+            <ul>
+                <li><strong>Separate computer, limit the blast radius.</strong> Got an old laptop? Use that as your dedicated AI machine. Don't run it on your primary work computer if you can avoid it.</li>
+                <li><strong>Don't expose it to the public internet.</strong> OpenClaw runs locally. Keep it that way.</li>
+                <li><strong>Be careful what you give it access to.</strong> Start with limited permissions and expand as you build trust.</li>
+                <li><strong>Limit write access.</strong> Read access is relatively safe. Write access (sending emails, posting online, modifying files) is where things can go wrong. Start slow.</li>
+            </ul>
+
+            <h3>Real Threats</h3>
+            <p>This isn't hypothetical. In February 2026:</p>
+            <ul>
+                <li>Over <strong>1,100 malicious skill packages</strong> were found on ClawHub (the community skill marketplace)</li>
+                <li>The <strong>#1 ranked skill</strong> had 9 vulnerabilities, 2 critical — it stole browser passwords, SSH keys, crypto wallets, and opened a reverse shell</li>
+                <li>Researchers from Northeastern, Stanford, and Harvard <strong>red-teamed 6 OpenClaw agents</strong> and found 11 vulnerability classes</li>
+            </ul>
+            <p>The five main threats: <strong>prompt injection, social engineering, data leakage, unauthorized actions,</strong> and <strong>supply chain attacks</strong> (malicious skills).</p>
+
+            <h3>What You Should Do</h3>
+            <ul>
+                <li><strong>Don't install random skills.</strong> Read the code first, or stick to skills from people you trust.</li>
+                <li><strong>Start with one core flow.</strong> Get Telegram working, get comfortable, then expand gradually.</li>
+                <li><strong>Review what your agent does.</strong> Check its memory files. Read its logs. Trust but verify.</li>
+                <li><strong>Keep OpenClaw updated.</strong> Security patches come through updates: <code>npm install -g openclaw@latest</code></li>
+            </ul>
+        </section>
+
+        <!-- SECTION: Common Mistakes -->
+        <section class="tutorial-section" id="common-mistakes">
+            <h2>Common Mistakes</h2>
+            <p>Learn from the community's expensive lessons:</p>
+            <ol>
+                <li><strong>Spaces in API keys.</strong> Copy-paste often adds a trailing space. Check for it. This causes HTTPS errors that look like something much worse.</li>
+                <li><strong>Running multiple agents before mastering one.</strong> One agent with proper configuration beats a squad of confused ones. Get one working well first.</li>
+                <li><strong>Skipping SOUL.md and USER.md.</strong> Your agent will sound generic until you fill these out. Night and day difference.</li>
+                <li><strong>Installing too many skills at once.</strong> Start clean. Add skills one at a time as you need them.</li>
+                <li><strong>Ignoring voice messages.</strong> Talking to your agent while you're on the move is a completely different experience. Set it up from day one.</li>
+                <li><strong>Overcomplicating the infrastructure.</strong> You don't need AWS. You don't need a complex server setup. A laptop next to your TV does the same job with less hassle.</li>
+                <li><strong>Not reading the security section.</strong> See above. The threats are real.</li>
+            </ol>
+        </section>
+
+        <!-- SECTION: Next Steps -->
+        <section class="tutorial-section" id="next-steps">
+            <h2>Next Steps</h2>
+            <p>You've got a working AI assistant. Here's where to go from here:</p>
+            <ul>
+                <li><strong>Add Brave Search:</strong> Tell your agent "Set up Brave Search — here's my API key" and paste your key. Your agent can now search the web.</li>
+                <li><strong>Explore the Control UI:</strong> Run <code>openclaw dashboard</code> to open the browser-based interface for configuration and monitoring.</li>
+                <li><strong>Check the docs:</strong> <a href="https://docs.openclaw.ai" target="_blank">docs.openclaw.ai</a> — comprehensive documentation for everything OpenClaw can do.</li>
+                <li><strong>Join Freedom Lab:</strong> <a href="https://t.me/+OAf7Uz8oxttmNTAx" target="_blank">Our Telegram group</a> is where you can ask questions and get help from people who've done this.</li>
+                <li><strong>Come to a class:</strong> Check <a href="/classes-events/">our events page</a> for upcoming hands-on workshops where we walk through this together.</li>
+            </ul>
+            <p>The key mindset shift: every hour you invest in teaching your agent pays dividends permanently. It doesn't forget. It compounds. Make it yours.</p>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/resources/" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Resources</a>
+        </nav>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="../../js/footer.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = '<img src="" alt="">';
+        document.body.appendChild(lightbox);
+        const lightboxImg = lightbox.querySelector('img');
+        document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    </script>
+</body>
+</html>
