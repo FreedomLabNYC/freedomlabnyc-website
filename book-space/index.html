@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Event Space | Fat Cat Fab Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-input: #0d1117;
+            --border: #30363d;
+            --border-focus: #58a6ff;
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent: #32D011;
+            --accent-dark: #28a00e;
+            --error: #f85149;
+            --radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .form-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .form-group label .required {
+            color: var(--error);
+            margin-left: 2px;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="date"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.25rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+            flex: 1;
+        }
+
+        .radio-option:hover {
+            border-color: var(--text-secondary);
+        }
+
+        .radio-option input[type="radio"] {
+            accent-color: var(--accent);
+            width: 16px;
+            height: 16px;
+        }
+
+        .radio-option.selected {
+            border-color: var(--accent);
+            background: rgba(50, 208, 17, 0.05);
+        }
+
+        .time-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .time-row .form-group {
+            flex: 1;
+        }
+
+        .summary-card {
+            background: rgba(50, 208, 17, 0.05);
+            border: 1px solid rgba(50, 208, 17, 0.2);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .summary-card.visible {
+            display: block;
+        }
+
+        .summary-card h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.35rem 0;
+            font-size: 0.95rem;
+        }
+
+        .summary-row .label {
+            color: var(--text-secondary);
+        }
+
+        .summary-row .value {
+            font-weight: 600;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid rgba(50, 208, 17, 0.2);
+            margin-top: 0.5rem;
+            padding-top: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        .summary-row.total .value {
+            color: var(--accent);
+        }
+
+        .deposit-note {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .min-notice {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: var(--radius);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent-dark);
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-message .checkmark {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-message h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .success-message p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .error-text {
+            color: var(--error);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .radio-group { flex-direction: column; }
+            .time-row { flex-direction: column; gap: 0; }
+            .form-card { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏭 Book Event Space</h1>
+            <p>Request to host an event or class at Fat Cat Fab Lab.<br>All requests require board approval (minimum 7 business days notice).</p>
+        </div>
+
+        <div class="form-card">
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Full Name <span class="required">*</span></label>
+                    <input type="text" name="name" required placeholder="Your full name">
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address <span class="required">*</span></label>
+                    <input type="email" name="email" required placeholder="you@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Event / Class Name <span class="required">*</span></label>
+                    <input type="text" name="eventName" required placeholder="e.g., Intro to 3D Printing">
+                </div>
+
+                <div class="form-group">
+                    <label>Event Description <span class="required">*</span></label>
+                    <textarea name="description" required placeholder="Describe your event or class — what will attendees learn or do?"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Which space? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option" id="opt-main">
+                            <input type="radio" name="space" value="Main Space" required>
+                            Main Space
+                        </label>
+                        <label class="radio-option" id="opt-event">
+                            <input type="radio" name="space" value="Event Space" required>
+                            Event Space
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Date <span class="required">*</span></label>
+                    <input type="date" name="date" id="dateField" required>
+                    <div class="min-notice">Must be at least 7 business days from today.</div>
+                    <div class="error-text" id="dateError">Please select a date at least 7 business days from now.</div>
+                </div>
+
+                <div class="time-row">
+                    <div class="form-group">
+                        <label>Start Time <span class="required">*</span></label>
+                        <select name="startTime" id="startTime" required>
+                            <option value="">Select start time</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>End Time <span class="required">*</span></label>
+                        <select name="endTime" id="endTime" required>
+                            <option value="">Select end time</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="error-text" id="timeError" style="margin-top:-1rem;margin-bottom:1rem;">End time must be after start time (minimum 1 hour).</div>
+
+                <div class="form-group">
+                    <label>Is this event free for FCFL members? <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label class="radio-option" id="opt-free">
+                            <input type="radio" name="isFree" value="yes" required>
+                            Yes, free
+                        </label>
+                        <label class="radio-option" id="opt-paid">
+                            <input type="radio" name="isFree" value="no" required>
+                            No, there's a fee
+                        </label>
+                    </div>
+                </div>
+
+                <div class="summary-card" id="summaryCard">
+                    <h3>Booking Summary</h3>
+                    <div class="summary-row">
+                        <span class="label">Duration</span>
+                        <span class="value" id="sumDuration">—</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Hosting Fee</span>
+                        <span class="value" id="sumHostingFee">$0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="label">Security Deposit</span>
+                        <span class="value">$50.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span class="label">Total due at booking</span>
+                        <span class="value" id="sumTotal">$50.00</span>
+                    </div>
+                    <div class="deposit-note">The $50 security deposit is automatically refunded 72 hours after your event, provided all rules are followed and the space is left clean.</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional Notes</label>
+                    <textarea name="notes" placeholder="Anything else the board should know? (optional)"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">Submit Booking Request</button>
+            </form>
+
+            <div class="success-message" id="successMsg">
+                <div class="checkmark">✅</div>
+                <h2>Booking Request Submitted!</h2>
+                <p>The FCFL board will review your request and you'll receive an email once approved. Approval typically takes a few business days.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // CONFIG — Update this URL after deploying Apps Script
+        // ============================================
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzh_P7Ppq7hRX43dRd2Yvhc4oNOkGMGhxFE6kdQuAQ4n8G7IfXP_DfQ_xtRKsfnhF471g/exec';
+
+        // ============================================
+        // TIME SLOTS
+        // ============================================
+        const weekdayStartTimes = [];
+        const weekdayEndTimes = [];
+        const weekendStartTimes = [];
+        const weekendEndTimes = [];
+
+        function generateTimes(startHour, endHour) {
+            const times = [];
+            for (let h = startHour; h <= endHour; h++) {
+                for (let m = 0; m < 60; m += 30) {
+                    if (h === endHour && m > 0) break;
+                    const hour12 = h > 12 ? h - 12 : h;
+                    const ampm = h >= 12 ? 'PM' : 'AM';
+                    const label = `${hour12}:${m === 0 ? '00' : '30'} ${ampm}`;
+                    times.push({ value: `${h}:${m === 0 ? '00' : '30'}`, label });
+                }
+            }
+            return times;
+        }
+
+        // Weekday: 5-9 PM start, 6-10 PM end
+        const wdStart = generateTimes(17, 21);  // 5PM - 9PM
+        const wdEnd = generateTimes(18, 22);    // 6PM - 10PM
+        // Weekend: 12-9 PM start, 1-10 PM end
+        const weStart = generateTimes(12, 21);  // 12PM - 9PM
+        const weEnd = generateTimes(13, 22);    // 1PM - 10PM
+
+        const startSelect = document.getElementById('startTime');
+        const endSelect = document.getElementById('endTime');
+        const dateField = document.getElementById('dateField');
+
+        function populateTimeDropdowns(startTimes, endTimes) {
+            startSelect.innerHTML = '<option value="">Select start time</option>';
+            endSelect.innerHTML = '<option value="">Select end time</option>';
+            startTimes.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.value;
+                opt.textContent = t.label;
+                startSelect.appendChild(opt);
+            });
+            endTimes.forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t.value;
+                opt.textContent = t.label;
+                endSelect.appendChild(opt);
+            });
+        }
+
+        function isWeekend(dateStr) {
+            const d = new Date(dateStr + 'T12:00:00');
+            return d.getDay() === 0 || d.getDay() === 6;
+        }
+
+        dateField.addEventListener('change', () => {
+            const val = dateField.value;
+            if (!val) return;
+            if (isWeekend(val)) {
+                populateTimeDropdowns(weStart, weEnd);
+            } else {
+                populateTimeDropdowns(wdStart, wdEnd);
+            }
+            updateSummary();
+        });
+
+        // Set min date (7 business days from now)
+        function addBusinessDays(date, days) {
+            let count = 0;
+            const result = new Date(date);
+            while (count < days) {
+                result.setDate(result.getDate() + 1);
+                if (result.getDay() !== 0 && result.getDay() !== 6) count++;
+            }
+            return result;
+        }
+
+        const minDate = addBusinessDays(new Date(), 7);
+        dateField.min = minDate.toISOString().split('T')[0];
+
+        // ============================================
+        // RADIO BUTTON STYLING
+        // ============================================
+        document.querySelectorAll('.radio-option input[type="radio"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                const group = radio.closest('.radio-group');
+                group.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
+                radio.closest('.radio-option').classList.add('selected');
+                updateSummary();
+            });
+        });
+
+        // ============================================
+        // SUMMARY CALCULATION
+        // ============================================
+        function timeToMinutes(timeStr) {
+            const [h, m] = timeStr.split(':').map(Number);
+            return h * 60 + m;
+        }
+
+        function updateSummary() {
+            const startVal = startSelect.value;
+            const endVal = endSelect.value;
+            const isFreeRadio = document.querySelector('input[name="isFree"]:checked');
+            const summaryCard = document.getElementById('summaryCard');
+
+            if (!startVal || !endVal || !isFreeRadio) {
+                summaryCard.classList.remove('visible');
+                return;
+            }
+
+            const startMin = timeToMinutes(startVal);
+            const endMin = timeToMinutes(endVal);
+            const durationMin = endMin - startMin;
+
+            if (durationMin < 60) {
+                summaryCard.classList.remove('visible');
+                return;
+            }
+
+            summaryCard.classList.add('visible');
+
+            const hours = durationMin / 60;
+            const isFree = isFreeRadio.value === 'yes';
+            const hostingFee = isFree ? 0 : hours * 20;
+            const deposit = 50;
+            const total = hostingFee + deposit;
+
+            document.getElementById('sumDuration').textContent = `${hours} hour${hours !== 1 ? 's' : ''}`;
+            document.getElementById('sumHostingFee').textContent = isFree ? '$0 (free event)' : `$${hostingFee.toFixed(2)} (${hours}hr × $20)`;
+            document.getElementById('sumTotal').textContent = `$${total.toFixed(2)}`;
+        }
+
+        startSelect.addEventListener('change', updateSummary);
+        endSelect.addEventListener('change', updateSummary);
+
+        // ============================================
+        // VALIDATION
+        // ============================================
+        function validateForm() {
+            let valid = true;
+
+            // Date validation
+            const dateVal = dateField.value;
+            const dateError = document.getElementById('dateError');
+            if (dateVal) {
+                const selected = new Date(dateVal + 'T12:00:00');
+                if (selected < minDate) {
+                    dateError.style.display = 'block';
+                    valid = false;
+                } else {
+                    dateError.style.display = 'none';
+                }
+            }
+
+            // Time validation
+            const startVal = startSelect.value;
+            const endVal = endSelect.value;
+            const timeError = document.getElementById('timeError');
+            if (startVal && endVal) {
+                const diff = timeToMinutes(endVal) - timeToMinutes(startVal);
+                if (diff < 60) {
+                    timeError.style.display = 'block';
+                    valid = false;
+                } else {
+                    timeError.style.display = 'none';
+                }
+            }
+
+            return valid;
+        }
+
+        // ============================================
+        // FORM SUBMISSION
+        // ============================================
+        document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!validateForm()) return;
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+
+            // Calculate duration and fees
+            const startMin = timeToMinutes(data.startTime);
+            const endMin = timeToMinutes(data.endTime);
+            const hours = (endMin - startMin) / 60;
+            const isFree = data.isFree === 'yes';
+            data.duration = hours;
+            data.hostingFee = isFree ? 0 : hours * 20;
+            data.deposit = 50;
+
+            // Format times for readability
+            function formatTime(val) {
+                const [h, m] = val.split(':').map(Number);
+                const hour12 = h > 12 ? h - 12 : h;
+                const ampm = h >= 12 ? 'PM' : 'AM';
+                return `${hour12}:${m === 0 ? '00' : '30'} ${ampm}`;
+            }
+            data.startTimeFormatted = formatTime(data.startTime);
+            data.endTimeFormatted = formatTime(data.endTime);
+
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(data).toString()
+                });
+
+                document.getElementById('bookingForm').style.display = 'none';
+                document.getElementById('successMsg').style.display = 'block';
+            } catch (err) {
+                alert('Something went wrong. Please try again or email info@fatcatfablab.org');
+                btn.disabled = false;
+                btn.textContent = 'Submit Booking Request';
+            }
+        });
+
+        // Initialize with default times
+        populateTimeDropdowns(wdStart, wdEnd);
+    </script>
+</body>
+</html>
