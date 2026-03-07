@@ -14,6 +14,7 @@
 .mission-section { margin-bottom: 3.5rem; }
 .visit-section { margin-bottom: 2rem; }
 .visit-section:last-child { margin-bottom: 0; }
+.dual-cta-section { margin-bottom: 0; }
 
 /* === Hero Section === */
 .hero-section {
@@ -1465,6 +1466,36 @@ a.tech-card {
 /* ============================================
    VISIT NYC SECTION OPTIONS
    ============================================ */
+
+/* === Dual CTA Section === */
+.dual-cta-section {
+    padding: 0 2rem;
+}
+
+.dual-cta-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.dual-cta-card {
+    flex: 1;
+    margin: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .dual-cta-section {
+        padding: 0;
+    }
+
+    .dual-cta-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .dual-cta-card {
+        margin: 0 1rem !important;
+    }
+}
 
 .visit-section {
     padding: 0;
