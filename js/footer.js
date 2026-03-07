@@ -11,7 +11,10 @@ function renderFooter() {
                 </svg>
             </a>
             <a href="https://primal.net/p/nprofile1qqsrzwgcg39ck26lc3e2yfjhntgcecnlgy9evsuxrfsxx6p46r5s3pgzdvhyj" target="_blank" class="footer-social-link" aria-label="Nostr">
-                <img src="${getBasePath()}static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon">
+                <picture>
+                    <source srcset="${getBasePath()}static/img/nostr_logo.webp" type="image/webp">
+                    <img src="${getBasePath()}static/img/nostr_logo.png" alt="Nostr" class="footer-social-icon">
+                </picture>
             </a>
             <a href="https://x.com/freedomlabnyc" target="_blank" class="footer-social-link" aria-label="X">
                 <svg viewBox="0 0 24 24" fill="currentColor" class="footer-social-svg">
@@ -24,7 +27,10 @@ function renderFooter() {
                 </svg>
             </a>
             <a href="/onion/" class="footer-social-link" aria-label="Onion Site">
-                <img src="${getBasePath()}static/img/tor_logo.png" alt="Tor" class="footer-social-icon">
+                <picture>
+                    <source srcset="${getBasePath()}static/img/tor_logo.webp" type="image/webp">
+                    <img src="${getBasePath()}static/img/tor_logo.png" alt="Tor" class="footer-social-icon">
+                </picture>
             </a>
         </div>
     </footer>`;

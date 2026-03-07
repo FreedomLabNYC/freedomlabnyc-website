@@ -70,7 +70,7 @@
                 <li>Flash open-source firmware and verify the build checksum.</li>
                 <li>Sign and broadcast a mainnet transaction using their new device.</li>
             </ul>
-            <img src="assets/hardware_wallet.webp" alt="DIY hardware wallet build on a workbench" style="width: 100%;">
+            <img loading="lazy" src="assets/hardware_wallet.webp" alt="DIY hardware wallet build on a workbench" style="width: 100%;">
         </div>
 
         <nav class="tutorial-toc">
@@ -112,7 +112,7 @@
 
             <p>The term self-custody might sound confusing, but all it means is holding your own private keys, and controlling your own bitcoin. If you don't hold that key, you're trusting someone else to hold it for you. If your bitcoin is in an ETF or on an exchange (Mt. Gox, FTX, Coinbase, Binance, etc.), you don't own bitcoin, you own a claim to bitcoin. This introduces all kinds of risks, like exchanges getting hacked and losing your bitcoin or companies lending out your money and giving you only a fraction in reserve. Additionally trusted third parties would have full control of your money and could limit or freeze withdrawals.</p>
 
-            <img width="450" height="600" alt="image" src="https://github.com/user-attachments/assets/3c52f49e-0c49-4937-bac7-b6c91238e822">
+            <img loading="lazy" width="450" height="600" alt="image" src="https://github.com/user-attachments/assets/3c52f49e-0c49-4937-bac7-b6c91238e822">
 
             <p>With self-custody you remove trust from the equation. No one can freeze your funds or deny a transaction, you can send money across borders, to anyone, at any time, and you don't need a bank account, an ID, or anyone's approval. No one can stop you, censor you, or steal from you, unlocking the full power of bitcoin as freedom money. This is why we say, with bitcoin you can be your own bank.</p>
 
@@ -128,7 +128,7 @@
             <h3>Hot vs Cold Wallets</h3>
             <p>A hot wallet is a software app on your phone or computer. It's connected to the internet, so it's easier to use and quicker to sign transactions, but this also means it's more exposed to hackers, malware, and phishing. It's called "hot" because it's connected to the internet, is plugged in and powered on. An example would be a phone wallet or a browser wallet.</p>
 
-            <img width="600" height="337" alt="image" src="https://github.com/user-attachments/assets/a7cfe81b-462a-4b00-bb66-2221985e5365">
+            <img loading="lazy" width="600" height="337" alt="image" src="https://github.com/user-attachments/assets/a7cfe81b-462a-4b00-bb66-2221985e5365">
 
             <p>On the other hand a cold wallet, or hardware wallet, is a device that creates and stores your key offline. This removes the ability for someone to hack your funds and is much safer for long-term savings, however it's a device that is needed to sign every transaction and can be less convenient.</p>
 
@@ -150,13 +150,13 @@
             <h2>What Are We Building?</h2>
             <p>We are taking generic hardware, the LilyGo T-Display, and flashing Jade SDK firmware on it. The <a href="https://blockstream.com/jade/jade-plus/" target="_blank">Jade Plus</a> is an open-source wallet, which typically costs $150:</p>
 
-            <img src="assets/blockstream_jade_plus.webp" alt="Blockstream Jade Plus hardware wallet">
+            <img loading="lazy" src="assets/blockstream_jade_plus.webp" alt="Blockstream Jade Plus hardware wallet">
 
             <p>Today, we'll be flashing their firmware onto a $15 hardware instead.</p>
 
             <h3>What to Buy</h3>
 
-            <img src="assets/LILYGO-T-DISPLAY.jpg" alt="LilyGO T-Display development board" style="width: 70%;">
+            <img loading="lazy" src="assets/LILYGO-T-DISPLAY.jpg" alt="LilyGO T-Display development board" style="width: 70%;">
 
             <ul>
                 <li><strong>LilyGO T-Display (16MB with shell, model K164)</strong> — <a href="https://lilygo.cc/products/t-display?srsltid=AfmBOornob5U3FzZifuSwBBOdeXKcdPDqkYEnAVYKBLdzl0BPyNglGBR" target="_blank">Order direct from LilyGO</a> for about $15. This ESP32 board provides the display, buttons, and USB interface that mirror Blockstream's Jade Plus. The onboard ESP32 also includes Wi-Fi and Bluetooth radios; we won't be disabling those capabilities in this class, but it is possible to disable them with other firmware updates. Additional capabilities for your hardware wallet expand so your threat surface area, so keep that in mind when selecting a hardware wallet.</li>
@@ -179,11 +179,11 @@
             <h3>Prepare Your Case</h3>
             <p>You have two options for housing your LilyGO T-Display board: a 3D printed case or the official LilyGO enclosure. The printed case can be found and printed from <a href="https://www.printables.com/model/119144-lilygo-ttgo-t-display-enclosure" target="_blank">this model</a>. It offers a lightweight and customizable shell for your device.</p>
 
-            <img src="assets/lilygo_case_printed.jpg" alt="3D printed LilyGO case">
+            <img loading="lazy" src="assets/lilygo_case_printed.jpg" alt="3D printed LilyGO case">
 
             <p>Alternatively, you can use the official LilyGO case, which provides a slightly different fit and finish, offering more robust protection and a polished look.</p>
 
-            <img src="assets/lilygo_case_official.png" alt="Official LilyGO case">
+            <picture><source srcset="assets/lilygo_case_official.webp" type="image/webp"><img loading="lazy" src="assets/lilygo_case_official.png" alt="Official LilyGO case"></picture>
 
             <p>Note that the printed and official cases differ slightly in design and assembly. Whichever option you choose, ensure the board is properly seated inside the case to avoid loose connections or damage.</p>
 
@@ -195,13 +195,13 @@
 
             <p>On boot, you will be greeted with the following screen:</p>
 
-            <img src="assets/lilygo_start_up_screen.png" alt="LilyGO boot screen">
+            <picture><source srcset="assets/lilygo_start_up_screen.webp" type="image/webp"><img loading="lazy" src="assets/lilygo_start_up_screen.png" alt="LilyGO boot screen"></picture>
 
             <p>When powered on, the LilyGO will display a color test screen cycling through solid colors. This confirms the display and board are functioning correctly before flashing firmware.</p>
 
             <p>Once the color test completes, the screen will settle on a default state, indicating the board is ready for the next steps in the build process.</p>
 
-            <img src="assets/settled_screen.png" alt="LilyGO plugged into laptop">
+            <picture><source srcset="assets/settled_screen.webp" type="image/webp"><img loading="lazy" src="assets/settled_screen.png" alt="LilyGO plugged into laptop"></picture>
         </section>
 
         <section class="tutorial-section" id="easy-way-hard-way">
@@ -219,16 +219,16 @@
 
             <ol>
                 <li>Go to the official Blockstream Github: <a href="https://github.com/Blockstream/jadediyflasher" target="_blank">https://github.com/Blockstream/jadediyflasher</a><br>
-                <img src="assets/blockstream_github.jpeg" alt="Blockstream Github"></li>
+                <img loading="lazy" src="assets/blockstream_github.jpeg" alt="Blockstream Github"></li>
 
                 <li>You can download the source file and run the website locally, but GitHub already hosts it at <a href="https://blockstream.github.io/jadediyflasher/" target="_blank">https://blockstream.github.io/jadediyflasher/</a>. GitHub serves the HTML, CSS, JavaScript, etc. directly to your browser so you can flash the device without installing developer tools.<br>
-                <img src="assets/blockstream_jade_diy_flasher.jpeg" alt="Blockstream Jade DIY Flasher"></li>
+                <img loading="lazy" src="assets/blockstream_jade_diy_flasher.jpeg" alt="Blockstream Jade DIY Flasher"></li>
 
                 <li>Open the dropdown menu (it likely defaults to <code>M5Stack Core2</code>) and select your development board — for this class, pick <code>LILYGO T-Display</code>.<br>
-                <img src="assets/diy_dropdown_menu.jpeg" alt="DIY Dropdown Menu"></li>
+                <img loading="lazy" src="assets/diy_dropdown_menu.jpeg" alt="DIY Dropdown Menu"></li>
 
                 <li>When you click flash this is going to appear. In order to know which device is the LILYGO, unplug the lilygo and plug it back in. The com port that the lilygo will appear and disappear. Click the COM port that the Jade is plugged into<br>
-                <img src="assets/connect_to_a_serial_port.jpeg" alt="Connect to a serial port"></li>
+                <img loading="lazy" src="assets/connect_to_a_serial_port.jpeg" alt="Connect to a serial port"></li>
 
                 <li>That's it a progress bar should show up and when it's finish your ready to set it up</li>
             </ol>
@@ -379,34 +379,34 @@
 
             <ol>
                 <li>Get the official Blockstream application — this is the link to it from their website. When you're there click <a href="https://blockstream.com/app/" target="_blank">Download now</a>.<br>
-                <img src="assets/blockstream website.jpg" alt="Blockstream website"></li>
+                <img loading="lazy" src="assets/blockstream website.jpg" alt="Blockstream website"></li>
 
                 <li>Depending on where your downloads go, most likely the file will be in your Downloads folder. Check there and double-click the executable file to install the software.<br>
-                <img src="assets/downloads folder.png" alt="Downloads folder example"></li>
+                <picture><source srcset="assets/downloads folder.webp" type="image/webp"><img loading="lazy" src="assets/downloads folder.png" alt="Downloads folder example"></picture></li>
 
                 <li>You might have to give admin rights to run the installer. Once you do, a window will pop up that should look like the following picture — click <strong>Next</strong>.<br>
-                <img src="assets/blockstream install1.png" alt="Blockstream installer step 1"></li>
+                <picture><source srcset="assets/blockstream install1.webp" type="image/webp"><img loading="lazy" src="assets/blockstream install1.png" alt="Blockstream installer step 1"></picture></li>
 
                 <li>Choose where you want the installed application to reside (a location with your other programs or somewhere easy to find), then click <strong>Next</strong>.<br>
-                <img src="assets/blockstream install2.png" alt="Blockstream installer step 2"></li>
+                <picture><source srcset="assets/blockstream install2.webp" type="image/webp"><img loading="lazy" src="assets/blockstream install2.png" alt="Blockstream installer step 2"></picture></li>
 
                 <li>The installer will ask for a shortcut name. Enter one or keep the default, then click <strong>Next</strong>.<br>
-                <img src="assets/blockstream install3.png" alt="Blockstream installer step 3"></li>
+                <picture><source srcset="assets/blockstream install3.webp" type="image/webp"><img loading="lazy" src="assets/blockstream install3.png" alt="Blockstream installer step 3"></picture></li>
 
                 <li>If you want a desktop shortcut, check the box; otherwise click <strong>Next</strong>.<br>
-                <img src="assets/blockstream install4.png" alt="Blockstream installer step 4"></li>
+                <picture><source srcset="assets/blockstream install4.webp" type="image/webp"><img loading="lazy" src="assets/blockstream install4.png" alt="Blockstream installer step 4"></picture></li>
 
                 <li>Finally, click <strong>Install</strong> and wait a few minutes for the installation to complete.<br>
-                <img src="assets/blockstream install5.png" alt="Blockstream installer installing"></li>
+                <picture><source srcset="assets/blockstream install5.webp" type="image/webp"><img loading="lazy" src="assets/blockstream install5.png" alt="Blockstream installer installing"></picture></li>
 
                 <li>The progress bar should fill to the end.<br>
-                <img src="assets/blockstream install6.png" alt="Blockstream installer progress"></li>
+                <picture><source srcset="assets/blockstream install6.webp" type="image/webp"><img loading="lazy" src="assets/blockstream install6.png" alt="Blockstream installer progress"></picture></li>
 
                 <li>When it finishes, a new page will appear — click <strong>Finish</strong>.<br>
-                <img src="assets/blockstream install7.png" alt="Blockstream installer finish"></li>
+                <picture><source srcset="assets/blockstream install7.webp" type="image/webp"><img loading="lazy" src="assets/blockstream install7.png" alt="Blockstream installer finish"></picture></li>
 
                 <li>Find your newly installed Blockstream application (example shown in the Windows 11 Start menu).<br>
-                <img src="assets/blockstream install8.png" alt="Blockstream in Start menu"></li>
+                <picture><source srcset="assets/blockstream install8.webp" type="image/webp"><img loading="lazy" src="assets/blockstream install8.png" alt="Blockstream in Start menu"></picture></li>
 
                 <li>Once you find it, click to launch — a splash screen should appear.</li>
             </ol>
@@ -498,7 +498,7 @@
         });
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img src="" alt="">';
+        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

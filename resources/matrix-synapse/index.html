@@ -357,7 +357,7 @@ sudo htpasswd -c /etc/nginx/.htpasswd yourusername</code></pre>
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img src="" alt="">';
+        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

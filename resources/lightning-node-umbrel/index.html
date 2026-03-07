@@ -160,7 +160,7 @@
                 <p>This is <strong>inbound liquidity</strong>, where locked funds are <strong>on the other side of the channel</strong>.</p>
             </blockquote>
             <p>Unless you know other node operators who are willing to open a channel to your node, we'll use a service called <a href="https://lnbig.com/#/" target="_blank">LNBig</a>. With LNBig, you can have inbound channels opened to your node in exchange for a small fee.</p>
-            <img src="assets/lnbig-inbound-channel.jpg" alt="LNBig Inbound Channel">
+            <img loading="lazy" src="assets/lnbig-inbound-channel.jpg" alt="LNBig Inbound Channel">
             <p>To purchase an inbound channel, go to <a href="https://lnbig.com/#/open-channel" target="_blank">this page</a> and follow the steps below:</p>
             <ol>
                 <li>Select how much BTC you want LNBig to lock into the channel
@@ -224,7 +224,7 @@
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img src="" alt="">';
+        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

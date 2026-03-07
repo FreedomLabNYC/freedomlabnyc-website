@@ -84,7 +84,7 @@
                 <p>Bitaxe is a Bitcoin miner based on an open-source design and a modern mining ASIC, offering efficiency and customization for users.</p>
                 <p>The open-source nature allows users to inspect, modify, and enhance the hardware and software to optimize performance based on specific needs or mining environments. Bitaxe is ideal for miners looking for greater control over their operations while contributing to the decentralization of the Bitcoin network.</p>
             </blockquote>
-            <img src="assets/bitaxe-supra-miners.jpg" alt="Bitaxe Supra Miners">
+            <img loading="lazy" src="assets/bitaxe-supra-miners.jpg" alt="Bitaxe Supra Miners">
             <p><em>My two Bitaxe Supra 401 miners running at home.</em></p>
             <div class="callout callout-note"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><div class="callout-content"><p>To me, this project is all green lights. Both the hardware and firmware are open source. You can run them at home, they won't take much space, won't consume much power and won't make much noise.</p></div></div>
             <p>Initiatives like this help the fight against <a href="https://mempool.space/graphs/mining/pools" target="_blank">mining centralization</a>. You can make a donation <a href="https://bitaxe.org/#donation" target="_blank">here</a>.</p>
@@ -158,7 +158,7 @@
             <h3>Step 1 - Find your model version</h3>
             <p>Bitaxe is under active development, with new features and bug fixes frequently released. In addition to your model, you must also note your version/revision number to ensure you flash the correct firmware in the next steps.</p>
             <p>In my case, my model is a <strong>Bitaxe Supra</strong>. My version/revision number is <strong>401</strong>. It can be found on the Bitaxe's motherboard:</p>
-            <img src="assets/bitaxe-supra-motherboard.png" alt="Bitaxe Supra Motherboard">
+            <picture><source srcset="assets/bitaxe-supra-motherboard.webp" type="image/webp"><img loading="lazy" src="assets/bitaxe-supra-motherboard.png" alt="Bitaxe Supra Motherboard"></picture>
             <p><em>Bitaxe Supra v401</em></p>
 
             <h3>Step 2 - Download the firmware</h3>
@@ -298,7 +298,7 @@ overheat_mode,data,u16,0</code></pre>
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img src="" alt="">';
+        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

@@ -69,7 +69,7 @@
                 <li>Deploy a live website to the internet without writing any code manually</li>
                 <li>Understand that different AI models excel at different tasks</li>
             </ul>
-            <img src="assets/vibecode.png" alt="Vibe Coding workshop cover image" style="width: 100%;">
+            <picture><source srcset="assets/vibecode.webp" type="image/webp"><img loading="lazy" src="assets/vibecode.png" alt="Vibe Coding workshop cover image" style="width: 100%;"></picture>
         </div>
 
         <nav class="tutorial-toc">
@@ -595,7 +595,7 @@ a menu section, contact info, and a hero banner.</code></pre>
         });
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img src="" alt="">';
+        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

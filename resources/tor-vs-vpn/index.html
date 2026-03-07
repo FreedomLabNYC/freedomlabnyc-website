@@ -79,7 +79,7 @@
         <section class="tutorial-section" id="vpn-virtual-private-network">
             <h2>VPN (Virtual Private Network)</h2>
             <p>A VPN encrypts your traffic and routes it through a single server operated by the VPN provider.</p>
-            <img src="assets/vpn-diagram.png" alt="VPN Diagram" style="max-width: 100%; width: 600px;">
+            <picture><source srcset="assets/vpn-diagram.webp" type="image/webp"><img loading="lazy" src="assets/vpn-diagram.png" alt="VPN Diagram" style="max-width: 100%; width: 600px;"></picture>
             <p><strong>How it works:</strong></p>
             <ul>
                 <li>Your traffic is encrypted and sent to the VPN server</li>
@@ -103,7 +103,7 @@
         <section class="tutorial-section" id="tor-the-onion-router">
             <h2>Tor (The Onion Router)</h2>
             <p>Tor encrypts your traffic in multiple layers and routes it through 3 random nodes (guard, middle, exit).</p>
-            <img src="assets/tor-diagram.png" alt="Tor Diagram" style="max-width: 100%; width: 600px;">
+            <picture><source srcset="assets/tor-diagram.webp" type="image/webp"><img loading="lazy" src="assets/tor-diagram.png" alt="Tor Diagram" style="max-width: 100%; width: 600px;"></picture>
             <p><strong>How it works:</strong></p>
             <ul>
                 <li>Your traffic is encrypted in 3 layers</li>
@@ -127,7 +127,7 @@
         <section class="tutorial-section" id="tor-over-vpn">
             <h2>Tor over VPN</h2>
             <p>Connect to VPN first, then use Tor.</p>
-            <img src="assets/tor-over-vpn-diagram.png" alt="Tor over VPN Diagram" style="max-width: 100%; width: 600px;">
+            <picture><source srcset="assets/tor-over-vpn-diagram.webp" type="image/webp"><img loading="lazy" src="assets/tor-over-vpn-diagram.png" alt="Tor over VPN Diagram" style="max-width: 100%; width: 600px;"></picture>
             <p><strong>How it works:</strong></p>
             <ul>
                 <li>Your traffic goes: You → VPN → Tor → Destination</li>
@@ -145,7 +145,7 @@
         <section class="tutorial-section" id="vpn-over-tor">
             <h2>VPN over Tor</h2>
             <p>Connect to Tor first, then use VPN.</p>
-            <img src="assets/vpn-over-tor-diagram.png" alt="VPN over Tor Diagram" style="max-width: 100%; width: 600px;">
+            <picture><source srcset="assets/vpn-over-tor-diagram.webp" type="image/webp"><img loading="lazy" src="assets/vpn-over-tor-diagram.png" alt="VPN over Tor Diagram" style="max-width: 100%; width: 600px;"></picture>
             <p><strong>How it works:</strong></p>
             <ul>
                 <li>Your traffic goes: You → Tor → VPN → Destination</li>
@@ -185,7 +185,7 @@
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img src="" alt="">';
+        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

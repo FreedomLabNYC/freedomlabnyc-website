@@ -79,7 +79,7 @@
         <section class="tutorial-section" id="introduction">
             <h2>Introduction</h2>
             <p>With remote mining you can get into Bitcoin mining without worrying about hardware installation and maintenance.</p>
-            <img src="assets/remote-mining-miners.png" alt="My S21 Pro Bitcoin miners">
+            <picture><source srcset="assets/remote-mining-miners.webp" type="image/webp"><img loading="lazy" src="assets/remote-mining-miners.png" alt="My S21 Pro Bitcoin miners"></picture>
             <p><em>My S21 Pro Bitcoin miners, running remotely at Cyberian Mine. January 2025.</em></p>
         </section>
 
@@ -90,7 +90,7 @@
                 <li><strong>Diversification</strong>: In terms of energy flow, I like the idea of a small continuous amount of Bitcoin flowing into my wallet. I believe in redundancy and I don't want 100% of my Bitcoin sitting in cold storage.</li>
                 <li><strong>Acquisition</strong>: Getting your hands on new Bitcoins could become much harder as countries fomo into it. The available supply of BTC on exchanges is continuously decreasing:</li>
             </ol>
-            <img src="assets/bitcoin-exchange-reserve.png" alt="Bitcoin Exchange Reserve">
+            <picture><source srcset="assets/bitcoin-exchange-reserve.webp" type="image/webp"><img loading="lazy" src="assets/bitcoin-exchange-reserve.png" alt="Bitcoin Exchange Reserve"></picture>
             <p><em><a href="https://cryptoquant.com/asset/btc/chart/exchange-flows/exchange-reserve?exchange=all_exchange&window=DAY&sma=0&ema=0&priceScale=log&metricScale=linear&chartStyle=line" target="_blank">Bitcoin Exchange Reserve</a></em></p>
         </section>
 
@@ -147,7 +147,7 @@
 
             <h3>Cyberian Mine</h3>
             <p><a href="https://cyberianmine.de/" target="_blank">Cyberian Mine</a> is a german company with mining farms located in Siberia (Russia).</p>
-            <img src="assets/cyberian-mine-logo.png" alt="Cyberian Mine">
+            <picture><source srcset="assets/cyberian-mine-logo.webp" type="image/webp"><img loading="lazy" src="assets/cyberian-mine-logo.png" alt="Cyberian Mine"></picture>
 
             <h4>Pros</h4>
             <ul>
@@ -172,7 +172,7 @@
                 <li>You have a claim to the miner but do not own it physically (it cannot be shipped to you)</li>
                 <li>Location (Russian laws & regulations can be unstable and change quickly)</li>
             </ul>
-            <img src="assets/cyberian-mine-challenges.png" alt="Cyberian Mine Challenges">
+            <picture><source srcset="assets/cyberian-mine-challenges.webp" type="image/webp"><img loading="lazy" src="assets/cyberian-mine-challenges.png" alt="Cyberian Mine Challenges"></picture>
             <p><em>Cyberian Mine is facing minor challenges in Russia. To balance the risk, they're expanding to Ethiopia and the USA.</em></p>
 
             <h4>How to start mining with Cyberian Mine</h4>
@@ -181,7 +181,7 @@
                 <li>Fund your account with crypto or fiat</li>
                 <li>Go to the store</li>
             </ol>
-            <img src="assets/cyberian-mine-store.png" alt="Cyberian Mine Store">
+            <picture><source srcset="assets/cyberian-mine-store.webp" type="image/webp"><img loading="lazy" src="assets/cyberian-mine-store.png" alt="Cyberian Mine Store"></picture>
             <p><em>The most recent Antminers are available for purchase.</em></p>
             <ol start="4">
                 <li>Buy a full or partial miner</li>
@@ -189,7 +189,7 @@
             </ol>
             <div class="callout callout-warning"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><div class="callout-content"><p>Cyberian charges <strong>daily</strong> for the electricity (called the <em>hosting fee</em>). Make sure you keep enough cash in your balance to avoid interruptions.</p></div></div>
             <p>Once your miner is live, you're able to see your performance metrics:</p>
-            <img src="assets/cyberian-mine-metrics.png" alt="Cyberian Mine Metrics">
+            <picture><source srcset="assets/cyberian-mine-metrics.webp" type="image/webp"><img loading="lazy" src="assets/cyberian-mine-metrics.png" alt="Cyberian Mine Metrics"></picture>
             <p><em>My mining performance metrics in January 2025. Notice I kept enough in my balance for 1 year of electricity.</em></p>
             <div class="callout callout-tip"><svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg><div class="callout-content"><p>Notice the <em><strong>Open F2Pool</strong></em> button. It opens your dedicated F2Pool page where you can view your hashrate performances live.</p></div></div>
             <p>More metrics are also available on your Cyberian Dashboard, such as the <strong>hashrate report, Bitcoin earnings and pool payout schedule</strong>. You will also find your <strong>invoices for the electricity</strong> (hosting fee) with a daily breakdown in your profile's settings.</p>
@@ -227,7 +227,7 @@
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img src="" alt="">';
+        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

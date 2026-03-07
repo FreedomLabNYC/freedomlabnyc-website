@@ -119,7 +119,7 @@
         <section class="tutorial-section" id="step-1-getting-monero">
             <h2>Step 1 - Getting Monero (XMR)</h2>
             <p>Monero is a private and untraceable cryptocurrency, essentially a "dark bitcoin." When you transact in Monero, nobody can see who you are transacting with or the amounts involved. (<a href="https://www.getmonero.org/" target="_blank">getmonero.org</a>)</p>
-            <img src="assets/monero.jpeg" alt="Monero Explained" style="max-width: 600px;">
+            <img loading="lazy" src="assets/monero.jpeg" alt="Monero Explained" style="max-width: 600px;">
             <p>First, get yourself a wallet (<a href="https://www.getmonero.org/downloads/" target="_blank">download</a>) and backup your seed safely.</p>
 
             <h3>Option 1: The KYC Route (If available)</h3>
@@ -163,7 +163,7 @@
             <h2>Step 4 - Install VSCodium</h2>
             <p>Cursor, Windsurf, and similar tools are all based on Microsoft's proprietary software, Visual Studio Code.</p>
             <p>VSCodium is a free, open-source version of Visual Studio Code with all of Microsoft's telemetry removed.</p>
-            <img src="assets/vscodium.png" alt="VSCodium" style="max-width: 600px;">
+            <picture><source srcset="assets/vscodium.webp" type="image/webp"><img loading="lazy" src="assets/vscodium.png" alt="VSCodium" style="max-width: 600px;"></picture>
             <ul>
                 <li><a href="https://vscodium.com/" target="_blank">vscodium.com</a></li>
                 <li><a href="https://github.com/VSCodium/vscodium/" target="_blank">GitHub</a></li>
@@ -175,7 +175,7 @@
         <section class="tutorial-section" id="step-5-install-cline">
             <h2>Step 5 - Install Cline</h2>
             <p>Cline is a free, open-source AI agent that transforms VSCodium from a basic code editor into a fully autonomous AI editor. (<a href="https://github.com/cline/cline" target="_blank">GitHub</a>)</p>
-            <img src="assets/vscodium_cline_extension.png" alt="Cline Extension" style="max-width: 600px;">
+            <picture><source srcset="assets/vscodium_cline_extension.webp" type="image/webp"><img loading="lazy" src="assets/vscodium_cline_extension.png" alt="Cline Extension" style="max-width: 600px;"></picture>
             <ol>
                 <li>In VSCodium, click the <strong>Extensions</strong> icon on the left sidebar.</li>
                 <li>Search for "Cline" and install it.</li>
@@ -187,7 +187,7 @@
             <h2>Step 6 - Get an API Key on OpenRouter.ai</h2>
             <p>Cline itself is just an empty agent; it needs to connect to an AI model to function. For this, we must choose a provider, get an API key, and add funds to our balance.</p>
             <p>OpenRouter is a unified interface that gives you access to almost every AI model (including Claude and GPT) through a single API key and supports crypto payments. (<a href="https://openrouter.ai/" target="_blank">openrouter.ai</a>)</p>
-            <img src="assets/openrouter.jpg" alt="OpenRouter" style="max-width: 600px;">
+            <img loading="lazy" src="assets/openrouter.jpg" alt="OpenRouter" style="max-width: 600px;">
 
             <h3>Create an account</h3>
             <p>Sign up to OpenRouter.ai with a fake email. If you want a reusable one with a good privacy track record, use <a href="https://tuta.com/" target="_blank">Tuta</a>.</p>
@@ -258,7 +258,7 @@
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img src="" alt="">';
+        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
