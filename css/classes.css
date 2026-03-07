@@ -258,7 +258,7 @@
 
 .event-card-cover {
     width: 100%;
-    height: 150px;
+    aspect-ratio: 1 / 1;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -431,6 +431,6 @@
     }
     
     .event-card-cover {
-        height: 130px;
+        aspect-ratio: 1 / 1;
     }
 }
