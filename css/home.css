@@ -3,9 +3,17 @@
 .home-content {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 0;
     padding-bottom: 3rem;
 }
+
+/* Varied spacing rhythm between sections */
+.hero-section { margin-bottom: 3rem; }
+.accessible-section { margin-bottom: 3.5rem; }
+.freedomtech-section { margin-bottom: 4rem; }
+.mission-section { margin-bottom: 3.5rem; }
+.visit-section { margin-bottom: 2rem; }
+.visit-section:last-child { margin-bottom: 0; }
 
 /* === Hero Section === */
 .hero-section {
