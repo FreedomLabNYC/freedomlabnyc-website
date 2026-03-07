@@ -1,0 +1,70 @@
+name: Update Event Archive
+
+on:
+  schedule:
+    # Mon, Wed, Fri at 6:00 AM UTC (1:00 AM ET)
+    - cron: '0 6 * * 1,3,5'
+  workflow_dispatch: # Manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-events:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch events from Luma
+        run: |
+          # Fetch past events
+          curl -s "https://api.lu.ma/calendar/get-items?calendar_api_id=cal-ZGCxlwslp1K0wqD&pagination_limit=100&period=past" \
+            -H "Accept: application/json" \
+            -o /tmp/luma-past.json
+
+          # Extract and transform to clean JSON
+          node -e "
+            const raw = require('/tmp/luma-past.json');
+            const events = (raw.entries || []).map(e => ({
+              name: e.event.name,
+              date: e.event.start_at,
+              end: e.event.end_at,
+              cover: e.event.cover_url || null,
+              url: 'https://lu.ma/' + e.event.url,
+              venue: e.event.geo_address_info?.address || null,
+              location: e.event.geo_address_info?.short_address || null,
+              price: e.ticket_info?.is_free ? 'Free' : e.ticket_info?.price ? ('$' + (e.ticket_info.price.cents / 100).toFixed(0)) : null
+            }));
+            // Sort newest first
+            events.sort((a, b) => new Date(b.date) - new Date(a.date));
+            const output = { updated: new Date().toISOString(), count: events.length, events };
+            require('fs').writeFileSync('classes-events/events.json', JSON.stringify(output, null, 2));
+            console.log('Wrote ' + events.length + ' events');
+          "
+
+      - name: Check for changes
+        id: diff
+        run: |
+          git diff --quiet classes-events/events.json && echo "changed=false" >> "$GITHUB_OUTPUT" || echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Health check — verify Luma embed loads
+        run: |
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://lu.ma/embed/calendar/cal-ZGCxlwslp1K0wqD/events")
+          if [ "$STATUS" != "200" ]; then
+            echo "⚠️ Luma embed returned HTTP $STATUS — embed may be broken"
+            echo "embed_healthy=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "✅ Luma embed healthy (HTTP 200)"
+            echo "embed_healthy=true" >> "$GITHUB_OUTPUT"
+          fi
+        id: health
+
+      - name: Commit and push
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add classes-events/events.json
+          git commit -m "Update event archive $(date -u +%Y-%m-%d)"
+          git push

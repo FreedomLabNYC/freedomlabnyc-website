@@ -203,6 +203,134 @@
 }
 
 /* ============================================
+   Event Archive — Card Grid
+   ============================================ */
+.event-archive-section {
+    padding: 0 2rem;
+    max-width: 900px;
+    margin: 2rem auto 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.event-archive-container {
+    position: relative;
+}
+
+.event-archive-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.event-archive-header h2 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.event-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+}
+
+.event-card {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.event-card:hover {
+    border-color: #32D011;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(50, 208, 17, 0.15);
+}
+
+.event-card-cover {
+    width: 100%;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    flex-shrink: 0;
+}
+
+.event-card-body {
+    padding: 1rem 1.15rem 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+}
+
+.event-card-date {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #32D011;
+    letter-spacing: 0.04em;
+}
+
+.event-card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.event-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+}
+
+.event-card-venue {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.event-card-price {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background: rgba(50, 208, 17, 0.1);
+    border: 1px solid rgba(50, 208, 17, 0.2);
+    border-radius: 4px;
+    padding: 0.15rem 0.5rem;
+    margin-left: auto;
+}
+
+/* Skeleton loading */
+.event-cards-loading {
+    display: contents;
+}
+
+.event-card-skeleton {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    height: 280px;
+    background: linear-gradient(90deg, #0d1117 25%, #161b22 50%, #0d1117 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+/* ============================================
    Loading Shimmer
    ============================================ */
 .embed-loading {
@@ -287,5 +415,22 @@
         flex-direction: column;
         gap: 1rem;
         align-items: flex-start;
+    }
+    
+    .event-archive-section {
+        padding: 0 1rem;
+    }
+    
+    .event-archive-header h2 {
+        font-size: 0.7rem;
+    }
+    
+    .event-cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .event-card-cover {
+        height: 130px;
     }
 }
