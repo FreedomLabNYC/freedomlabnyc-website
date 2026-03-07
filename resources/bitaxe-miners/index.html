@@ -10,12 +10,15 @@
     <link rel="stylesheet" href="../../css/tutorial-page.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=block" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="mobile-overlay" id="mobileOverlay"></div>
     <header class="header">
-        <a href="/" class="logo"><img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide"></a>
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
         <nav class="nav-menu" id="navMenu">
             <a href="/classes-events/" class="nav-link">Classes & Events</a>
             <a href="/resources/" class="nav-link active">Resources</a>
