@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Freedom Lab NYC consulting — helping local businesses onboard onto the latest and greatest in Freedom Tech.">
+    <title>Consulting | Freedom Lab NYC</title>
+    <link rel="icon" href="../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preload" href="../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../css/fonts.css">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freedomlab.nyc/consulting/">
+    <meta property="og:title" content="Consulting | Freedom Lab NYC">
+    <meta property="og:description" content="Helping local businesses onboard onto the latest and greatest in Freedom Tech.">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/Freedom%20Lab%20NYC%20Logo%20-%20Circle.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Consulting | Freedom Lab NYC">
+    <meta name="twitter:description" content="Helping local businesses onboard onto the latest and greatest in Freedom Tech.">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/Freedom%20Lab%20NYC%20Logo%20-%20Circle.png">
+
+    <style>
+        .consulting-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding-bottom: 3rem;
+        }
+
+        .consulting-section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .consulting-module {
+            background: linear-gradient(135deg, rgba(50, 208, 17, 0.08) 0%, rgba(50, 208, 17, 0.03) 100%);
+            border: 1px solid rgba(50, 208, 17, 0.2);
+            border-radius: 8px;
+            padding: 2rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .consulting-module svg {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            color: #32D011;
+        }
+
+        .consulting-module p {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.5;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        @media (max-width: 600px) {
+            .consulting-module {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .consulting-module p {
+                font-size: 1.1rem;
+            }
+
+            .consulting-section {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="/" class="logo">
+            <picture>
+                <source srcset="../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture>
+        </a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link">Resources</a>
+            
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+            
+        </nav>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1>Consulting</h1>
+        <p style="margin-top: 1.5rem;">Helping local businesses onboard onto the latest and greatest in Freedom Tech.</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="consulting-content">
+        <section class="consulting-section">
+            <div class="consulting-module">
+                <svg viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#b8e986;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#5cb025;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <g opacity="0.75">
+                        <circle cx="7" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                        <ellipse cx="7" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                    </g>
+                    <circle cx="16" cy="5" r="4.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="16" cy="16" rx="5" ry="6" fill="url(#greenGradient)"/>
+                    <g opacity="0.75">
+                        <circle cx="25" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                        <ellipse cx="25" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                    </g>
+                </svg>
+                <p>Get onboarded to OpenClaw: Your all-in-one personal open source AI assistant.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (loaded from js/footer.js) -->
+    <div id="footer-placeholder"></div>
+    <script src="../js/footer.js"></script>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+    <script src="../js/social-config.js"></script>
+</body>
+</html>
