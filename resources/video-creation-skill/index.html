@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An OpenClaw skill for programmatic video creation — Three.js camera pipelines, headless browser capture, Remotion templates, FFmpeg assembly, and camera composition math.">
+    <title>Video Creation Skill | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+        <div class="tutorial-support-banner green">
+            <svg viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#b8e986;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#5cb025;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g opacity="0.75">
+                    <circle cx="7" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="7" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+                <circle cx="16" cy="5" r="4.5" fill="url(#greenGradient)"/>
+                <ellipse cx="16" cy="16" rx="5" ry="6" fill="url(#greenGradient)"/>
+                <g opacity="0.75">
+                    <circle cx="25" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="25" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+            </svg>
+            <p>These resources are written by Freedom Lab members. <a href="/join/">Join our Freedom Lab server</a> to be a part of the community and receive support directly.</p>
+        </div>
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>Video Creation Skill</span>
+            </div>
+            <h1 class="tutorial-title">Video Creation Skill for OpenClaw</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Skill</span>
+                <span class="tutorial-tag">AI</span>
+                <span class="tutorial-tag">Video</span>
+                <span class="tutorial-tag">Open-source</span>
+                <span class="tutorial-tag">OpenClaw</span>
+            </div>
+            <p class="tutorial-intro">Teach your AI agent to create videos programmatically — camera-based animations, branded intros, narrated explainers, and more. No GUI editors required.</p>
+        </div>
+
+        <!-- Download Section -->
+        <section class="tutorial-section">
+            <h2 id="download">Download</h2>
+            <p><a href="video-creation.skill" download style="display:inline-block;padding:12px 24px;background:#32d011;color:#000;font-weight:bold;border-radius:6px;text-decoration:none;font-size:1.1em;">⬇ Download video-creation.skill</a></p>
+            <p>Install with OpenClaw:</p>
+            <pre><code>openclaw skill install video-creation.skill</code></pre>
+            <p>Or drop the file into your <code>~/.openclaw/skills/</code> directory.</p>
+        </section>
+
+        <!-- Skill Overview (agent-crawlable) -->
+        <section class="tutorial-section">
+            <h2 id="what-it-does">What This Skill Does</h2>
+            <p>This skill gives your OpenClaw agent the procedural knowledge to create videos using code-first tools. It covers:</p>
+            <ul>
+                <li><strong>Tool selection</strong> — choosing between Three.js, Remotion, Motion Canvas, FFmpeg, and AI generation based on the task</li>
+                <li><strong>Three.js + headless Chrome capture</strong> — rendering 3D browser scenes to video via Puppeteer frame capture</li>
+                <li><strong>Camera composition math</strong> — edge-anchoring, FOV geometry, foreground layer visibility control, easing curves</li>
+                <li><strong>Remotion templates</strong> — data-driven narrated explainers, social clips, branded content</li>
+                <li><strong>FFmpeg patterns</strong> — encoding, subtitles, audio mixing, multi-format export, concatenation</li>
+            </ul>
+            <p>The skill includes a reusable <code>capture-frames.mjs</code> script that handles the Puppeteer → FFmpeg pipeline out of the box.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="when-to-use">When Your Agent Uses It</h2>
+            <p>The skill triggers automatically when you ask your agent to:</p>
+            <ul>
+                <li>Make a video, animate a scene, or create an intro/outro</li>
+                <li>Render a Three.js or browser-based animation to MP4</li>
+                <li>Solve camera framing problems (edge anchoring, breathing room, reveal timing)</li>
+                <li>Choose between video creation approaches</li>
+                <li>Debug blank WebGL renders in headless Chrome</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="tool-selection">Tool Selection Guide</h2>
+            <table style="width:100%;border-collapse:collapse;margin:1em 0;">
+                <thead>
+                    <tr style="border-bottom:2px solid rgba(50,208,17,0.3);">
+                        <th style="text-align:left;padding:8px;">You want to make…</th>
+                        <th style="text-align:left;padding:8px;">Best tool</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">Branded intro with camera moves</td>
+                        <td style="padding:8px;">Three.js + Puppeteer + FFmpeg</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">Narrated explainer with slides</td>
+                        <td style="padding:8px;">Remotion + FFmpeg</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">Technical diagram animation</td>
+                        <td style="padding:8px;">Motion Canvas + FFmpeg</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">AI-generated footage</td>
+                        <td style="padding:8px;">Replicate + FFmpeg</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px;">Stitch, subtitle, or transcode clips</td>
+                        <td style="padding:8px;">FFmpeg only</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="whats-inside">What's in the Package</h2>
+            <pre><code>video-creation/
+├── SKILL.md                           # Core instructions + tool selection
+├── references/
+│   ├── threejs-capture.md             # Headless Chrome WebGL pipeline
+│   ├── camera-composition.md          # FOV math, edge anchoring, easing
+│   ├── remotion-guide.md              # Template-driven video authoring
+│   └── ffmpeg-patterns.md             # Encoding, subtitles, multi-format
+└── scripts/
+    └── capture-frames.mjs             # Generic Puppeteer frame capture</code></pre>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="requirements">Requirements</h2>
+            <ul>
+                <li><strong>OpenClaw</strong> — any recent version</li>
+                <li><strong>Node.js</strong> — v18+</li>
+                <li><strong>FFmpeg</strong> — installed and in PATH</li>
+                <li><strong>Google Chrome</strong> — for headless WebGL capture</li>
+                <li><strong>puppeteer-core</strong> — npm package (installed per-project)</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="background">Background</h2>
+            <p>This skill was built from real production experience creating a branded intro video for Freedom Lab NYC. Through 11 iterations, we discovered and solved problems that no documentation covers well — like WebGL failing silently in headless Chrome, the right way to hide foreground layers during camera pullbacks, and how to anchor asset edges to frame edges using perspective geometry instead of trial-and-error nudging.</p>
+            <p>The lessons are generalized here so any agent can use them for any video project.</p>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <p class="footer-brand">Freedom Lab NYC</p>
+                <p class="footer-tagline">Technology for individual sovereignty</p>
+            </div>
+            <div class="footer-col">
+                <a href="/resources/">Resources</a>
+                <a href="/classes-events/">Classes & Events</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>
