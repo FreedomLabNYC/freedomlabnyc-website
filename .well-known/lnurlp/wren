@@ -1,0 +1,7 @@
+{
+    "callback": "https://harrisons-macbook-air.tail323ae0.ts.net/ln/lnurlp/wren/callback",
+    "metadata": "[[\"text/identifier\",\"wren@freedomlab.nyc\"],[\"text/plain\",\"Fund Wren's Lightning wallet\"]]",
+    "tag": "payRequest",
+    "minSendable": 1000,
+    "maxSendable": 100000000
+}
