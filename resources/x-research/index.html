@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An OpenClaw skill for researching X/Twitter accounts, mapping trust networks, and finding real recommendations. Bird CLI, Playwright, Grok API — with honest trade-offs.">
+    <title>X/Twitter Research & Trust Network Mapping | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>X/Twitter Research & Trust Networks</span>
+            </div>
+            <h1 class="tutorial-title">X/Twitter Research & Trust Network Mapping</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Skill</span>
+                <span class="tutorial-tag">AI</span>
+                <span class="tutorial-tag">Research</span>
+                <span class="tutorial-tag">OSINT</span>
+                <span class="tutorial-tag">OpenClaw</span>
+            </div>
+            <p class="tutorial-intro">Teach your AI agent to research X/Twitter accounts, map trust networks between influencers, and find real product recommendations — not hallucinated ones. Three methods compared with honest trade-offs.</p>
+        </div>
+
+        <!-- Download Section -->
+        <section class="tutorial-section">
+            <h2 id="download">Download</h2>
+            <p><a href="x-research.skill" download style="display:inline-block;padding:12px 24px;background:#32d011;color:#000;font-weight:bold;border-radius:6px;text-decoration:none;font-size:1.1em;">⬇ Download x-research.skill</a></p>
+            <p>Install with OpenClaw:</p>
+            <pre><code>openclaw skill install x-research.skill</code></pre>
+            <p>Or drop the file into your <code>~/.openclaw/skills/</code> directory.</p>
+        </section>
+
+        <!-- What It Does -->
+        <section class="tutorial-section">
+            <h2 id="what-it-does">What This Skill Does</h2>
+            <p>This skill gives your OpenClaw agent the ability to research people and topics on X/Twitter by searching real tweets, not asking an LLM to guess. It covers:</p>
+            <ul>
+                <li><strong>Account research</strong> — what does @someone actually say about a topic? Find real tweets with URLs.</li>
+                <li><strong>Trust network mapping</strong> — trace who recommends what to whom. Follow reply chains to discover accounts and products you'd never find through search.</li>
+                <li><strong>Method selection</strong> — bird CLI vs Playwright vs Grok API, with honest benchmarks on speed, accuracy, and failure modes.</li>
+                <li><strong>Cross-referencing</strong> — combine X findings with Reddit community consensus for stronger signal.</li>
+                <li><strong>Product discovery</strong> — from trusted endorsements, not ads. Verify stores, check prices, trace the recommendation chain.</li>
+            </ul>
+        </section>
+
+        <!-- When to Use -->
+        <section class="tutorial-section">
+            <h2 id="when-to-use">When Your Agent Uses It</h2>
+            <p>The skill triggers when you ask your agent to:</p>
+            <ul>
+                <li>Research what specific X accounts think about something</li>
+                <li>Find product recommendations from people you trust</li>
+                <li>Map who endorses whom in a community</li>
+                <li>Cross-reference claims across multiple accounts</li>
+                <li>Verify whether someone actually said something on X</li>
+            </ul>
+        </section>
+
+        <!-- The Key Insight -->
+        <section class="tutorial-section">
+            <h2 id="key-insight">The Key Insight: Reply Chains > Direct Search</h2>
+            <p>The most valuable technique isn't searching what someone says — it's searching what others recommend <em>to</em> them.</p>
+            <p>When a trusted account asks "looking for a good shampoo," the replies are a curated recommendation list from their community. That's higher-signal than any search engine result because:</p>
+            <ul>
+                <li>The recommenders self-selected (they follow the account, share values)</li>
+                <li>The recommendations are specific (real products, real experiences)</li>
+                <li>You can trace the recommender's credibility (check their profile too)</li>
+            </ul>
+            <pre><code># The magic query: what do people recommend TO an account?
+bird search "to:TrustedAccount recommend OR try OR use"
+
+# Then trace each recommender
+bird about RecommenderAccount
+bird search "from:RecommenderAccount topic"</code></pre>
+        </section>
+
+        <!-- Method Comparison -->
+        <section class="tutorial-section">
+            <h2 id="methods">Method Comparison</h2>
+            <table style="width:100%;border-collapse:collapse;margin:1em 0;">
+                <thead>
+                    <tr style="border-bottom:2px solid rgba(50,208,17,0.3);">
+                        <th style="text-align:left;padding:8px;">Method</th>
+                        <th style="text-align:left;padding:8px;">Speed</th>
+                        <th style="text-align:left;padding:8px;">Accuracy</th>
+                        <th style="text-align:left;padding:8px;">Auth</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;"><strong>bird CLI search</strong></td>
+                        <td style="padding:8px;">5-10s/query</td>
+                        <td style="padding:8px;">✅ Exact tweets with URLs</td>
+                        <td style="padding:8px;">ct0 cookie</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">Playwright scroll</td>
+                        <td style="padding:8px;">45s/100 tweets</td>
+                        <td style="padding:8px;">✅ Real but capped at ~100</td>
+                        <td style="padding:8px;">None needed</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">Grok API (grok-3)</td>
+                        <td style="padding:8px;">15-20s</td>
+                        <td style="padding:8px;">❌ Fabricates tweets</td>
+                        <td style="padding:8px;">API key</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">X Search (browser)</td>
+                        <td style="padding:8px;">—</td>
+                        <td style="padding:8px;">—</td>
+                        <td style="padding:8px;">❌ Login wall</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px;">Grok (browser)</td>
+                        <td style="padding:8px;">—</td>
+                        <td style="padding:8px;">—</td>
+                        <td style="padding:8px;">❌ Login wall</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>The Grok API warning is critical.</strong> In testing, Grok confidently invented example tweets, fabricated product endorsements, and got an account's stance on DHT blockers exactly backwards. It has a training cutoff and no real-time X access. Never use it to determine what someone actually said on X.</p>
+        </section>
+
+        <!-- What's Inside -->
+        <section class="tutorial-section">
+            <h2 id="whats-inside">What's in the Package</h2>
+            <pre><code>x-research/
+├── SKILL.md                              # Core instructions, method selection, search patterns
+└── references/
+    └── trust-network-example.md          # Full worked example with real data</code></pre>
+        </section>
+
+        <!-- Requirements -->
+        <section class="tutorial-section">
+            <h2 id="requirements">Requirements</h2>
+            <ul>
+                <li><strong>OpenClaw</strong> — any recent version</li>
+                <li><strong>bird CLI</strong> — <code>npm install -g bird</code> — X/Twitter API access via ct0 cookie auth</li>
+                <li><strong>Playwright</strong> (optional) — <code>pip install playwright && playwright install chromium</code> — for profile scraping and store verification</li>
+                <li><strong>xAI API key</strong> (optional) — for Grok queries on non-X topics only</li>
+            </ul>
+        </section>
+
+        <!-- Background -->
+        <section class="tutorial-section">
+            <h2 id="background">Background</h2>
+            <p>This skill was built from a real research session: finding the best shampoo by mapping the trust network of eight health influencer accounts on X. The process discovered FountainHead Hair — a brand that never would have appeared in a Google search — by tracing reply chains from @Tallowtwins' community.</p>
+            <p>Along the way, we tested every available method side-by-side: bird CLI, manual Playwright scrolling, X Search, browser Grok, and the Grok API. The results were stark — bird CLI outperformed everything else by a wide margin, and Grok API actively produced harmful misinformation.</p>
+            <p>The trust network methodology generalizes beyond product recommendations. It works for finding developers, evaluating projects, sourcing information, or mapping any community where who-endorses-whom matters more than what-ranks-highest.</p>
+        </section>
+
+        <!-- Freedom Tech Perspective -->
+        <section class="tutorial-section">
+            <h2 id="freedom-tech">Freedom Tech Perspective</h2>
+            <p>Traditional product research routes you through affiliate-driven review sites, SEO-optimized listicles, and paid placements. The trust network approach inverts this — you start from people you actually trust and follow the signal.</p>
+            <ul>
+                <li><strong>No algorithmic curation</strong> — you choose the seed accounts, not a recommendation engine</li>
+                <li><strong>Verifiable chains</strong> — every claim links to a real tweet URL you can check</li>
+                <li><strong>Anti-hallucination by design</strong> — bird CLI returns real data; the skill explicitly warns against Grok's fabrication tendency</li>
+                <li><strong>Runs locally</strong> — bird CLI and Playwright run on your machine. The xAI API is the only external call, and it's optional</li>
+                <li><strong>Web of Trust model</strong> — the same concept behind PGP key signing and Nostr verification, applied to product recommendations</li>
+            </ul>
+            <p>This is how research worked before search engines: you asked people you trusted, who pointed you to people they trusted. The tools just make it faster.</p>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <p class="footer-brand">Freedom Lab NYC</p>
+                <p class="footer-tagline">Technology for individual sovereignty</p>
+            </div>
+            <div class="footer-col">
+                <a href="/resources/">Resources</a>
+                <a href="/classes-events/">Classes & Events</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>
