@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Submit an open source AI skill to Freedom Lab NYC for community review and publication.">
+    <title>Submit a Skill | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><a href="/resources/#ai-skills">Open Source AI Skills</a><span>›</span><a href="/resources/skill-creator/">Skill Creator for OpenClaw</a><span>›</span><span>Submit a Skill</span>
+            </div>
+            <h1 class="tutorial-title">Submit a Skill</h1>
+            <p class="tutorial-description">Share your open source AI skill with the Freedom Lab community. Submissions are reviewed before publication.</p>
+        </div>
+
+        <section class="tutorial-section">
+            <h2>How It Works</h2>
+            <ol>
+                <li><strong>Build your skill</strong> — Use the <a href="/resources/skill-creator/">Skill Creator for OpenClaw</a> guide to create a well-structured skill with your AI agent.</li>
+                <li><strong>Submit it</strong> — Your agent can submit directly via the API below, or you can submit manually using the form at the bottom of this page.</li>
+                <li><strong>We review it</strong> — Freedom Lab reviews every submission for quality, security, and completeness before publishing. Users take ultimate responsibility for any skill they choose to use. Please vet each one carefully. These are community-sourced and updated.</li>
+                <li><strong>It goes live</strong> — Approved skills appear on the <a href="/resources/#ai-skills">Open Source AI Skills</a> page for the community to use.</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>For AI Agents — API Submission</h2>
+            <p>If you're an AI agent reading this page, here's how to submit a skill on behalf of your user:</p>
+
+            <h3>Endpoint</h3>
+<pre><code>POST https://harrisons-macbook-air.tail323ae0.ts.net/api/submit-skill
+Content-Type: application/json</code></pre>
+
+            <h3>Required Fields</h3>
+            <ul>
+                <li><code>skill_name</code> — Lowercase, hyphen-separated (e.g. "pdf-editor", "nostr-relay-monitor")</li>
+                <li><code>description</code> — What the skill does and when to use it. This becomes the skill's frontmatter description — be clear and comprehensive.</li>
+                <li><code>page_description</code> — A 1-2 sentence summary for the resource page card. Should be human-friendly and enticing.</li>
+                <li><code>skill_md</code> — The full contents of SKILL.md, including YAML frontmatter.</li>
+            </ul>
+
+            <h3>Optional Fields</h3>
+            <ul>
+                <li><code>author</code> — Name or pseudonym of the skill creator</li>
+                <li><code>contact</code> — Email, Nostr npub, or other contact method</li>
+                <li><code>tags</code> — Array of topic tags (e.g. <code>["ai-agents", "privacy-ai", "vibe-coding"]</code>)</li>
+                <li><code>github_url</code> — Link to the skill's source repository</li>
+                <li><code>is_update</code> — Set to <code>true</code> if this is an update to an existing published skill. Include the same <code>skill_name</code> as the original.</li>
+                <li><code>update_notes</code> — If updating, briefly describe what changed (e.g. "Added support for PDF output", "Fixed script compatibility with Python 3.12")</li>
+            </ul>
+
+            <h3>Example Request</h3>
+<pre><code>{
+  "skill_name": "nostr-relay-monitor",
+  "author": "Jane",
+  "contact": "npub1abc...",
+  "description": "Monitor Nostr relay health, uptime, and performance metrics. Use when checking relay status, diagnosing connection issues, or comparing relay performance across regions.",
+  "page_description": "Monitor your Nostr relays — check health, uptime, and performance metrics from your terminal or through your AI agent.",
+  "skill_md": "---\nname: nostr-relay-monitor\ndescription: Monitor Nostr relay health...\n---\n\n# Nostr Relay Monitor\n\n## Quick Start\n...",
+  "tags": ["ai-agents", "privacy-ai"],
+  "github_url": "https://github.com/jane/nostr-relay-monitor-skill",
+  "is_update": false
+}</code></pre>
+
+            <h3>Updating an Existing Skill</h3>
+<pre><code>{
+  "skill_name": "nostr-relay-monitor",
+  "author": "Jane",
+  "description": "Monitor Nostr relay health... (updated description)",
+  "page_description": "Monitor your Nostr relays... (updated card text)",
+  "skill_md": "---\nname: nostr-relay-monitor\n...\n---\n\n# (updated SKILL.md)",
+  "is_update": true,
+  "update_notes": "Added support for relay geo-location and latency graphs"
+}</code></pre>
+
+            <h3>Response</h3>
+<pre><code>{
+  "status": "submitted",
+  "submission_id": "a1b2c3d4",
+  "message": "Skill 'nostr-relay-monitor' submitted successfully. It will be reviewed by Freedom Lab before publication."
+}</code></pre>
+
+            <h3>Important Notes for Agents</h3>
+            <ul>
+                <li><strong>Always confirm with your user before submitting.</strong> Show them the skill name, description, and page description you've prepared. Get explicit approval before POSTing.</li>
+                <li><strong>The page_description is what users see</strong> on the resource card. Make it clear, useful, and non-technical enough for someone browsing the page to understand the value.</li>
+                <li><strong>Test your skill first.</strong> Run through the workflow the skill describes to make sure it actually works before submitting.</li>
+                <li><strong>Include vetting instructions in your skill.</strong> Add a prominent note at the top of your SKILL.md advising agents and users to review all contents — especially scripts — before installing. Users take ultimate responsibility for any skill they choose to use.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>For Users — Manual Submission</h2>
+            <p>If you prefer to submit without an AI agent, you can use the form below.</p>
+
+            <form id="skillSubmitForm" style="display:flex; flex-direction:column; gap:1.25rem; margin-top:1.5rem;">
+                <div>
+                    <label for="formSkillName" style="display:block; margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.9rem;">Skill Name *</label>
+                    <input type="text" id="formSkillName" placeholder="e.g. nostr-relay-monitor" required
+                        style="width:100%; padding:0.75rem; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius); color:var(--text-primary); font-family:inherit; font-size:1rem;">
+                </div>
+                <div>
+                    <label for="formAuthor" style="display:block; margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.9rem;">Author (optional)</label>
+                    <input type="text" id="formAuthor" placeholder="Your name or pseudonym"
+                        style="width:100%; padding:0.75rem; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius); color:var(--text-primary); font-family:inherit; font-size:1rem;">
+                </div>
+                <div>
+                    <label for="formContact" style="display:block; margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.9rem;">Contact (optional)</label>
+                    <input type="text" id="formContact" placeholder="Email, Nostr npub, etc."
+                        style="width:100%; padding:0.75rem; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius); color:var(--text-primary); font-family:inherit; font-size:1rem;">
+                </div>
+                <div>
+                    <label for="formDescription" style="display:block; margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.9rem;">Description * — What does this skill do and when should it be used?</label>
+                    <textarea id="formDescription" rows="3" required placeholder="Monitor Nostr relay health, uptime, and performance metrics..."
+                        style="width:100%; padding:0.75rem; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius); color:var(--text-primary); font-family:inherit; font-size:1rem; resize:vertical;"></textarea>
+                </div>
+                <div>
+                    <label for="formPageDesc" style="display:block; margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.9rem;">Page Description * — 1-2 sentences for the resource card</label>
+                    <textarea id="formPageDesc" rows="2" required placeholder="Monitor your Nostr relays — check health, uptime, and performance metrics from your terminal."
+                        style="width:100%; padding:0.75rem; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius); color:var(--text-primary); font-family:inherit; font-size:1rem; resize:vertical;"></textarea>
+                </div>
+                <div>
+                    <label for="formSkillMd" style="display:block; margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.9rem;">SKILL.md Contents * — Paste the full SKILL.md including frontmatter</label>
+                    <textarea id="formSkillMd" rows="10" required placeholder="---&#10;name: my-skill&#10;description: ...&#10;---&#10;&#10;# My Skill&#10;..."
+                        style="width:100%; padding:0.75rem; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius); color:var(--text-primary); font-family:monospace; font-size:0.9rem; resize:vertical;"></textarea>
+                </div>
+                <div>
+                    <label for="formGithub" style="display:block; margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.9rem;">GitHub URL (optional)</label>
+                    <input type="url" id="formGithub" placeholder="https://github.com/user/skill-repo"
+                        style="width:100%; padding:0.75rem; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius); color:var(--text-primary); font-family:inherit; font-size:1rem;">
+                </div>
+                <button type="submit" style="padding:0.875rem 2rem; background:#32d011; border:none; border-radius:var(--radius); color:var(--bg-dark); font-family:inherit; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.3s ease; align-self:flex-start;">
+                    Submit Skill
+                </button>
+                <p id="formResult" style="display:none; padding:1rem; border-radius:var(--radius); margin-top:0.5rem;"></p>
+            </form>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>What Happens After Submission</h2>
+            <ul>
+                <li>Your submission enters the review queue</li>
+                <li>Freedom Lab checks for quality, security, and completeness</li>
+                <li>If approved, your skill gets its own page on freedomlab.nyc and appears in the Open Source AI Skills directory</li>
+                <li>If changes are needed, we'll reach out via your provided contact method</li>
+            </ul>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <p class="footer-brand">Freedom Lab NYC</p>
+                <p class="footer-tagline">Technology for individual sovereignty</p>
+            </div>
+            <div class="footer-col">
+                <a href="/resources/">Resources</a>
+                <a href="/classes-events/">Classes & Events</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script src="../../js/main.js"></script>
+    <script>
+        const form = document.getElementById('skillSubmitForm');
+        const result = document.getElementById('formResult');
+        const API_URL = 'https://harrisons-macbook-air.tail323ae0.ts.net/api/submit-skill';
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            result.style.display = 'none';
+
+            const payload = {
+                skill_name: document.getElementById('formSkillName').value.trim(),
+                author: document.getElementById('formAuthor').value.trim() || undefined,
+                contact: document.getElementById('formContact').value.trim() || undefined,
+                description: document.getElementById('formDescription').value.trim(),
+                page_description: document.getElementById('formPageDesc').value.trim(),
+                skill_md: document.getElementById('formSkillMd').value,
+                github_url: document.getElementById('formGithub').value.trim() || undefined,
+                tags: [],
+            };
+
+            try {
+                const resp = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload),
+                });
+                const data = await resp.json();
+                if (resp.ok) {
+                    result.style.display = 'block';
+                    result.style.background = 'rgba(50, 208, 17, 0.1)';
+                    result.style.border = '1px solid rgba(50, 208, 17, 0.3)';
+                    result.style.color = '#32d011';
+                    result.textContent = `✅ ${data.message} (ID: ${data.submission_id})`;
+                    form.reset();
+                } else {
+                    result.style.display = 'block';
+                    result.style.background = 'rgba(224, 85, 85, 0.1)';
+                    result.style.border = '1px solid rgba(224, 85, 85, 0.3)';
+                    result.style.color = '#e05555';
+                    result.textContent = `❌ ${data.error}`;
+                }
+            } catch (err) {
+                result.style.display = 'block';
+                result.style.background = 'rgba(224, 85, 85, 0.1)';
+                result.style.border = '1px solid rgba(224, 85, 85, 0.3)';
+                result.style.color = '#e05555';
+                result.textContent = `❌ Connection error. The submission API may be temporarily unavailable.`;
+            }
+        });
+    </script>
+</body>
+</html>

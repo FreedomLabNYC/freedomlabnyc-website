@@ -573,3 +573,176 @@
         font-size: 0.8rem;
     }
 }
+
+/* === AI Skills Button === */
+.ai-skills-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    background: linear-gradient(135deg, rgba(50, 208, 17, 0.12) 0%, rgba(50, 208, 17, 0.04) 100%);
+    border: 1px solid rgba(50, 208, 17, 0.3);
+    border-radius: 8px;
+    color: #32d011;
+    font-family: 'Press Start 2P', monospace;
+    font-size: var(--text-title3, 1.27rem);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: var(--lh-heading, 1.272);
+}
+
+.ai-skills-btn:hover {
+    background: linear-gradient(135deg, rgba(50, 208, 17, 0.2) 0%, rgba(50, 208, 17, 0.08) 100%);
+    border-color: rgba(50, 208, 17, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(50, 208, 17, 0.15);
+}
+
+.ai-skills-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.ai-skills-btn:hover svg {
+    transform: translateX(4px);
+}
+
+/* === AI Skills View === */
+.ai-skills-view {
+    display: none;
+}
+
+body.ai-skills-mode .ai-skills-view {
+    display: block;
+}
+
+body.ai-skills-mode .resources-default-view {
+    display: none;
+}
+
+body.ai-skills-mode .ai-skills-btn {
+    background: linear-gradient(135deg, rgba(50, 208, 17, 0.2) 0%, rgba(50, 208, 17, 0.08) 100%);
+    border-color: rgba(50, 208, 17, 0.5);
+    cursor: default;
+}
+
+body.ai-skills-mode .ai-skills-btn svg {
+    display: none;
+}
+
+/* Active pills - all go green */
+.ai-skills-view .type-pill.active,
+.ai-skills-view .tag-pill.active:not([data-tag="all"]) {
+    background: #32d011;
+    border-color: #32d011;
+    color: var(--bg-dark);
+    font-weight: 500;
+    box-shadow: 0 0 12px rgba(50, 208, 17, 0.4);
+}
+
+/* === AI Skills Description === */
+.ai-skills-description {
+    background: rgba(50, 208, 17, 0.04);
+    border: 1px solid rgba(50, 208, 17, 0.15);
+    border-radius: 8px;
+    padding: var(--space-lg, 1.6rem);
+    color: var(--text-secondary, #9da89a);
+    font-size: var(--text-body, 1rem);
+    line-height: var(--lh-body, 1.618);
+}
+
+.ai-skills-description strong {
+    color: var(--text-primary, #eff0ee);
+}
+
+.ai-skills-description em {
+    color: #e8c547;
+    font-style: normal;
+    font-weight: 700;
+    font-size: var(--text-body, 1rem);
+}
+
+.ai-skills-description p {
+    margin-bottom: var(--space-sm, 0.8rem);
+}
+
+.ai-skills-description p:last-child {
+    margin-bottom: 0;
+}
+
+.ai-skills-view .tutorials-filters-section {
+    margin-top: var(--space-lg, 1.6rem);
+}
+
+/* === View Toggle Row === */
+.view-toggle-row {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.view-toggle-row .ai-skills-btn {
+    flex: 1;
+}
+
+.back-to-resources-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1rem;
+    background: linear-gradient(135deg, rgba(138, 92, 246, 0.12) 0%, rgba(138, 92, 246, 0.04) 100%);
+    border: 1px solid rgba(138, 92, 246, 0.3);
+    border-radius: 8px;
+    color: #a78bfa;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.back-to-resources-btn span {
+    white-space: pre-line;
+    line-height: 1.3;
+}
+
+.back-to-resources-btn:hover {
+    background: linear-gradient(135deg, rgba(138, 92, 246, 0.2) 0%, rgba(138, 92, 246, 0.08) 100%);
+    border-color: rgba(138, 92, 246, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(138, 92, 246, 0.15);
+}
+
+.back-to-resources-btn svg {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.back-to-resources-btn:hover svg {
+    transform: translateX(-4px);
+}
+
+body.ai-skills-mode .back-to-resources-btn {
+    display: flex;
+}
+
+body.ai-skills-mode .ai-skills-btn svg {
+    display: none;
+}
+
+body.ai-skills-mode .ai-skills-btn {
+    cursor: default;
+    pointer-events: none;
+}
+
+/* Spacing between filters and grid */
+.tutorials-filters-section + .tutorials-grid-section {
+    margin-top: var(--space-lg, 1.6rem);
+}
+
+.ai-skills-view .tutorials-filters-section + .tutorials-grid-section {
+    margin-top: var(--space-lg, 1.6rem);
+}

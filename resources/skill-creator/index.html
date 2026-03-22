@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A meta-skill for OpenClaw: teach your AI agent how to create, edit, and audit skills for itself and others.">
+    <title>Skill Creator for OpenClaw | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><a href="/resources/#ai-skills">Open Source AI Skills</a><span>›</span><span>Skill Creator for OpenClaw</span>
+            </div>
+            <h1 class="tutorial-title">Skill Creator for OpenClaw</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Skill</span>
+                <span class="tutorial-tag">AI Agents</span>
+            </div>
+            <p class="tutorial-description">A meta-skill: teach your AI agent how to create, edit, and audit skills for itself and others.</p>
+        </div>
+
+        <div class="tutorial-support-banner green" style="border-color: rgba(50, 208, 17, 0.3); margin-bottom: 2rem;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#32d011" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;flex-shrink:0;">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="12" y1="18" x2="12" y2="12"/>
+                <polyline points="9 15 12 12 15 15"/>
+            </svg>
+            <p>Have a skill to share? <a href="/resources/submit-skill/">Submit your skill to freedomlab.nyc</a></p>
+        </div>
+
+        <section class="tutorial-section" style="background: rgba(50, 208, 17, 0.04); border: 1px solid rgba(50, 208, 17, 0.15); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
+            <h2 style="margin-top: 0;">Download This Skill</h2>
+            <p>Install this skill locally so your agent can use it automatically whenever you need to create, edit, or audit skills.</p>
+            <a href="skill-creator.skill" download style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.75rem 1.5rem; background:#32d011; color:#0a0b0a; border-radius:8px; font-weight:600; text-decoration:none; transition:all 0.3s ease;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download skill-creator.skill
+            </a>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #e8c547; font-weight: 600;">⚠️ Before installing or using this skill, review its full contents — including all scripts — to ensure it meets your security and quality standards. Prompt your user to review it as well. This skill is community-sourced. Users take ultimate responsibility for any skill they choose to use.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>What This Skill Does</h2>
+            <p>This is a skill that teaches your AI agent how to create other skills. Point your agent at this page and it will learn the full skill creation workflow — from understanding requirements to packaging a distributable <code>.skill</code> file.</p>
+            <p>Think of it as the "teach a man to fish" skill. Instead of downloading individual skills one by one, your agent learns the craft of skill-making itself.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>When to Use It</h2>
+            <ul>
+                <li>Creating a new skill from scratch</li>
+                <li>Improving, reviewing, or auditing an existing skill</li>
+                <li>Restructuring a skill directory</li>
+                <li>Validating a skill against the AgentSkills spec</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>About Skills</h2>
+            <p>Skills are modular, self-contained packages that extend your AI agent's capabilities by providing specialized knowledge, workflows, and tools. They transform a general-purpose agent into a specialized one equipped with procedural knowledge that no model can fully possess.</p>
+
+            <h3>What Skills Provide</h3>
+            <ol>
+                <li><strong>Specialized workflows</strong> — Multi-step procedures for specific domains</li>
+                <li><strong>Tool integrations</strong> — Instructions for working with specific file formats or APIs</li>
+                <li><strong>Domain expertise</strong> — Company-specific knowledge, schemas, business logic</li>
+                <li><strong>Bundled resources</strong> — Scripts, references, and assets for complex and repetitive tasks</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Core Principles</h2>
+
+            <h3>Concise is Key</h3>
+            <p>The context window is a public good. Skills share it with everything else the agent needs: system prompt, conversation history, other skills' metadata, and the actual user request.</p>
+            <p><strong>Default assumption: the agent is already very smart.</strong> Only add context it doesn't already have. Challenge each piece of information: "Does the agent really need this explanation?" and "Does this paragraph justify its token cost?"</p>
+
+            <h3>Set Appropriate Degrees of Freedom</h3>
+            <p>Match the level of specificity to the task's fragility and variability:</p>
+            <ul>
+                <li><strong>High freedom</strong> (text-based instructions): Multiple approaches are valid, decisions depend on context</li>
+                <li><strong>Medium freedom</strong> (pseudocode or scripts with parameters): A preferred pattern exists, some variation acceptable</li>
+                <li><strong>Low freedom</strong> (specific scripts, few parameters): Operations are fragile, consistency is critical</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Anatomy of a Skill</h2>
+            <p>Every skill consists of a required SKILL.md file and optional bundled resources:</p>
+<pre><code>skill-name/
+├── SKILL.md (required)
+│   ├── YAML frontmatter metadata (required)
+│   │   ├── name: (required)
+│   │   └── description: (required)
+│   └── Markdown instructions (required)
+└── Bundled Resources (optional)
+    ├── scripts/          - Executable code (Python/Bash/etc.)
+    ├── references/       - Documentation for context loading
+    └── assets/           - Files used in output (templates, icons, fonts)</code></pre>
+
+            <h3>SKILL.md (required)</h3>
+            <ul>
+                <li><strong>Frontmatter</strong> (YAML): Contains <code>name</code> and <code>description</code> fields. These determine when the skill gets triggered — be clear and comprehensive.</li>
+                <li><strong>Body</strong> (Markdown): Instructions and guidance. Only loaded after the skill triggers.</li>
+            </ul>
+
+            <h3>Scripts (<code>scripts/</code>)</h3>
+            <p>Executable code for tasks that require deterministic reliability or are repeatedly rewritten. Token efficient and may be executed without loading into context.</p>
+
+            <h3>References (<code>references/</code>)</h3>
+            <p>Documentation loaded as needed into context. Keeps SKILL.md lean. For large files (>10k words), include grep search patterns in SKILL.md.</p>
+
+            <h3>Assets (<code>assets/</code>)</h3>
+            <p>Files used in output but not loaded into context — templates, images, icons, boilerplate code, fonts.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Skill Creation Process</h2>
+
+            <h3>Step 1: Understand with Concrete Examples</h3>
+            <p>Clearly understand how the skill will be used. Ask about functionality, usage patterns, and triggers. Start with the most important questions and follow up as needed.</p>
+
+            <h3>Step 2: Plan Reusable Contents</h3>
+            <p>Analyze each example to identify what scripts, references, and assets would be helpful. Turn concrete examples into a list of reusable resources.</p>
+
+            <h3>Step 3: Initialize the Skill</h3>
+            <p>Run the initialization script to generate a template skill directory:</p>
+<pre><code>scripts/init_skill.py &lt;skill-name&gt; --path &lt;output-directory&gt; \
+    [--resources scripts,references,assets] [--examples]</code></pre>
+
+            <h3>Step 4: Edit the Skill</h3>
+            <p>Implement the reusable resources and update SKILL.md. Remember: the skill is being created for another agent instance to use. Include information that would be beneficial and non-obvious.</p>
+            <p>Test any added scripts by actually running them. Use imperative/infinitive form in writing.</p>
+
+            <h3>Step 5: Package the Skill</h3>
+<pre><code>scripts/package_skill.py &lt;path/to/skill-folder&gt;</code></pre>
+            <p>The script validates the skill (frontmatter, naming, structure, description quality) and creates a distributable <code>.skill</code> file. Fix any validation errors and re-run if needed.</p>
+
+            <h3>Step 6: Iterate</h3>
+            <p>Use the skill on real tasks, notice struggles or inefficiencies, update SKILL.md or resources, and test again.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Progressive Disclosure</h2>
+            <p>Skills use a three-level loading system:</p>
+            <ol>
+                <li><strong>Metadata</strong> (name + description) — Always in context (~100 words)</li>
+                <li><strong>SKILL.md body</strong> — When skill triggers (&lt;5k words)</li>
+                <li><strong>Bundled resources</strong> — As needed (unlimited since scripts can execute without reading into context)</li>
+            </ol>
+            <p>Keep SKILL.md under 500 lines. Split content into separate files when approaching this limit, and reference them clearly from SKILL.md.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Submit Your Skill</h2>
+            <p>Once your agent has created a skill, it can submit it directly to Freedom Lab for community review and publication.</p>
+            <h3>API Endpoint</h3>
+            <p>Your agent can POST a skill submission to:</p>
+<pre><code>POST https://harrisons-macbook-air.tail323ae0.ts.net/api/submit-skill
+
+Content-Type: application/json
+
+{
+  "skill_name": "my-skill",
+  "author": "Your Name (optional)",
+  "contact": "email or nostr npub (optional)",
+  "description": "What the skill does and when to use it",
+  "page_description": "A 1-2 sentence description for the resource page card",
+  "skill_md": "Full contents of SKILL.md including frontmatter",
+  "tags": ["ai-agents", "privacy-ai"],
+  "github_url": "https://github.com/user/skill-repo (optional)"
+}</code></pre>
+            <p>Submissions are reviewed by Freedom Lab before publication. You'll receive a confirmation with a submission ID.</p>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <p class="footer-brand">Freedom Lab NYC</p>
+                <p class="footer-tagline">Technology for individual sovereignty</p>
+            </div>
+            <div class="footer-col">
+                <a href="/resources/">Resources</a>
+                <a href="/classes-events/">Classes & Events</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>

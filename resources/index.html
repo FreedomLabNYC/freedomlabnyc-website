@@ -61,31 +61,173 @@
             </div>
         </section>
 
-        <!-- Support Banner -->
+        <!-- View Toggle Buttons -->
         <div class="tutorials-filters-container">
-            <div class="tutorial-support-banner green">
-                <svg viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#b8e986;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#5cb025;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <g opacity="0.75">
-                        <circle cx="7" cy="6" r="3.5" fill="url(#greenGradient)"/>
-                        <ellipse cx="7" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
-                    </g>
-                    <circle cx="16" cy="5" r="4.5" fill="url(#greenGradient)"/>
-                    <ellipse cx="16" cy="16" rx="5" ry="6" fill="url(#greenGradient)"/>
-                    <g opacity="0.75">
-                        <circle cx="25" cy="6" r="3.5" fill="url(#greenGradient)"/>
-                        <ellipse cx="25" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
-                    </g>
-                </svg>
-                <p>These resources are written by Freedom Lab members. <a href="/join/">Join our Freedom Lab server</a> to be a part of the community and receive support directly.</p>
+            <div class="view-toggle-row">
+                <button class="back-to-resources-btn" id="backToResourcesBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+                    <span>All<br>Resources</span>
+                </button>
+                <button class="ai-skills-btn" id="aiSkillsBtn">
+                    <span class="ai-skills-btn-text">Open Source AI Skills</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
             </div>
         </div>
 
+
+
+        <!-- AI Skills View (hidden by default) -->
+        <div class="ai-skills-view">
+            <div class="tutorials-filters-container">
+                <div class="ai-skills-description">
+                    <p>AI agents can read Skills in order to learn new capabilities and use tools they wouldn't otherwise know how to operate.</p>
+<p>Click on a skill to read a description and relevant context for yourself and your agent.</p>
+<p>Direct your agent to the page to analyze and download it if desired.</p>
+<p><em>Please carefully vet each skill you use — these are community-sourced and updated.</em></p>
+                </div>
+            </div>
+            <section class="tutorials-filters-section">
+                <div class="tutorials-filters-container">
+                    <div class="tutorials-search-box">
+                        <input type="text" id="aiSkillsSearch" placeholder="Search open source AI skills..." aria-label="Search open source AI skills">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="M21 21l-4.35-4.35"/>
+                        </svg>
+                    </div>
+
+                    <div class="tutorials-type-filter">
+                        <span class="tags-label">Filter by type:</span>
+                        <div class="type-list">
+                            <button class="type-pill" data-type="open-source-ai">Open Source AI</button>
+                            <button class="type-pill active" data-type="skill">Skills</button>
+                            <button class="type-pill active" data-type="setting-up-openclaw">Setting up OpenClaw</button>
+                        </div>
+                    </div>
+
+                    <div class="tutorials-tags">
+                        <span class="tags-label">Filter by topic:</span>
+                        <div class="tags-list">
+                            <button class="tag-pill active" data-tag="all">All</button>
+                            <button class="tag-pill" data-tag="video">Video</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="tutorials-grid-section">
+                <div class="tutorials-grid-container">
+                    <div class="tutorials-grid" id="aiSkillsGrid">
+                        <!-- Vibe Coding 101 -->
+                        <article class="tutorial-card" data-tags="vibe-coding" data-type="open-source-ai">
+                            <div class="tutorial-card-header">
+                                <span class="tutorial-card-type class">Open Source AI</span>
+                                <span class="tutorial-card-tag">Vibe Coding</span>
+                            </div>
+                            <div class="tutorial-card-body">
+                                <h3 class="tutorial-card-title">
+                                    <a href="/resources/vibe-coding-101/">Vibe Coding 101 · Getting Started</a>
+                                </h3>
+                                <p class="tutorial-card-description">Build and deploy a real website using only your web browser and natural language prompts with AI-assisted coding. No coding experience required.</p>
+                            </div>
+                        </article>
+
+                        <!-- OpenClaw Setup -->
+                        <article class="tutorial-card" data-tags="ai-agents,local-ai,privacy-ai" data-type="open-source-ai,setting-up-openclaw">
+                            <div class="tutorial-card-header">
+                                <span class="tutorial-card-type class">Open Source AI</span>
+                                <span class="tutorial-card-tag">AI Agents</span>
+                                <span class="tutorial-card-tag">Local AI</span>
+                                <span class="tutorial-card-tag">Privacy</span>
+                            </div>
+                            <div class="tutorial-card-body">
+                                <h3 class="tutorial-card-title">
+                                    <a href="/resources/openclaw-setup/">Setting Up OpenClaw</a>
+                                </h3>
+                                <p class="tutorial-card-description">Your own personal AI assistant — running on your hardware, chatting through Telegram, remembering everything. Step-by-step for Mac, Linux, and Windows.</p>
+                            </div>
+                        </article>
+
+                        <!-- Self-Host AI -->
+                        <article class="tutorial-card" data-tags="local-ai,open-source-models,privacy-ai" data-type="open-source-ai">
+                            <div class="tutorial-card-header">
+                                <span class="tutorial-card-type class">Open Source AI</span>
+                                <span class="tutorial-card-tag">Local AI</span>
+                                <span class="tutorial-card-tag">Open Source Models</span>
+                                <span class="tutorial-card-tag">Privacy</span>
+                            </div>
+                            <div class="tutorial-card-body">
+                                <h3 class="tutorial-card-title">
+                                    <a href="/resources/self-host-ai/">Self-Host AI</a>
+                                </h3>
+                                <p class="tutorial-card-description">Run open-source AI models locally on your own hardware. No cloud, no data collection, full control.</p>
+                            </div>
+                        </article>
+
+                        <!-- Anonymous Vibe Coding -->
+                        <article class="tutorial-card" data-tags="vibe-coding,privacy-ai" data-type="open-source-ai">
+                            <div class="tutorial-card-header">
+                                <span class="tutorial-card-type class">Open Source AI</span>
+                                <span class="tutorial-card-tag">Vibe Coding</span>
+                                <span class="tutorial-card-tag">Privacy</span>
+                            </div>
+                            <div class="tutorial-card-body">
+                                <h3 class="tutorial-card-title">
+                                    <a href="/resources/anonymous-vibecoding/">Anonymous Vibe Coding</a>
+                                </h3>
+                                <p class="tutorial-card-description">Build and deploy applications anonymously using AI-assisted coding tools, privacy-focused infrastructure, and cryptocurrency payments.</p>
+                            </div>
+                        </article>
+
+                        <!-- Programmatic Video -->
+                        <article class="tutorial-card" data-tags="video" data-type="skill">
+                            <div class="tutorial-card-header">
+                                <span class="tutorial-card-type tutorial">Skill</span>
+                                <span class="tutorial-card-tag">Video</span>
+                            </div>
+                            <div class="tutorial-card-body">
+                                <h3 class="tutorial-card-title">
+                                    <a href="/resources/programmatic-video/">Programmatic Video for OpenClaw</a>
+                                </h3>
+                                <p class="tutorial-card-description">Create deterministic, code-driven video content using Three.js, Remotion, and FFmpeg — with AI agents handling the iteration.</p>
+                            </div>
+                        </article>
+
+                        <!-- Google Drive Scoped Access -->
+                        <article class="tutorial-card" data-tags="ai-agents,privacy-ai" data-type="open-source-ai">
+                            <div class="tutorial-card-header">
+                                <span class="tutorial-card-type class">Open Source AI</span>
+                                <span class="tutorial-card-tag">AI Agents</span>
+                                <span class="tutorial-card-tag">Privacy</span>
+                            </div>
+                            <div class="tutorial-card-body">
+                                <h3 class="tutorial-card-title">
+                                    <a href="/resources/google-drive-scoped-access/">Google Drive Scoped Access for AI</a>
+                                </h3>
+                                <p class="tutorial-card-description">Give your AI agent access to Google Drive, Docs, and Sheets without handing over your full account. Scoped OAuth setup.</p>
+                            </div>
+                        </article>
+                        <!-- Skill Creator -->
+                        <article class="tutorial-card" data-tags="" data-type="skill">
+                            <div class="tutorial-card-header">
+                                <span class="tutorial-card-type tutorial">Skill</span>
+                            </div>
+                            <div class="tutorial-card-body">
+                                <h3 class="tutorial-card-title">
+                                    <a href="/resources/skill-creator/">Skill Creator for OpenClaw</a>
+                                </h3>
+                                <p class="tutorial-card-description">A meta-skill: teach your AI agent how to create, edit, and audit skills for itself and others. The full skill creation workflow from requirements to packaging.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <p class="no-results" id="aiNoResults" style="display:none;">No matching skills found.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Default Resources View -->
+        <div class="resources-default-view">
         <!-- Search and Filters Section -->
         <section class="tutorials-filters-section">
             <div class="tutorials-filters-container">
@@ -129,59 +271,6 @@
                         <button class="tag-pill" data-tag="encryption">Encryption</button>
                         <button class="tag-pill" data-tag="networking">Networking</button>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Start Here Section -->
-        <section class="tutorials-grid-section" style="padding-bottom: 0;">
-            <div class="tutorials-grid-container">
-                <h2 style="color: var(--text-primary); font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; margin-bottom: 1rem; padding-left: 0.25rem;">⚡ Start Here</h2>
-                <div class="tutorials-grid" style="margin-bottom: 0;">
-                    <!-- OpenClaw Setup - Featured -->
-                    <article class="tutorial-card" data-tags="openclaw,ai,privacy,open-source,self-hosting" data-type="tutorial" style="border-color: rgba(50, 208, 17, 0.4);">
-                        <div class="tutorial-card-header">
-                            <span class="tutorial-card-type tutorial">Tutorial</span>
-                            <span class="tutorial-card-tag">OpenClaw</span>
-                            <span class="tutorial-card-tag">AI</span>
-                            <span class="tutorial-card-tag">Self-hosting</span>
-                        </div>
-                        <div class="tutorial-card-body">
-                            <h3 class="tutorial-card-title">
-                                <a href="/resources/openclaw-setup/">Setting Up OpenClaw</a>
-                            </h3>
-                            <p class="tutorial-card-description">Your own personal AI assistant — running on your hardware, chatting through Telegram, remembering everything. Step-by-step for Mac, Linux, and Windows.</p>
-                        </div>
-                    </article>
-
-                    <!-- Bitcoin Node - Featured -->
-                    <article class="tutorial-card" data-tags="bitcoin,self-hosting" data-type="tutorial" style="border-color: rgba(50, 208, 17, 0.4);">
-                        <div class="tutorial-card-header">
-                            <span class="tutorial-card-type tutorial">Tutorial</span>
-                            <span class="tutorial-card-tag">Bitcoin</span>
-                            <span class="tutorial-card-tag">Self-hosting</span>
-                        </div>
-                        <div class="tutorial-card-body">
-                            <h3 class="tutorial-card-title">
-                                <a href="/resources/bitcoin-node-startos/">Bitcoin Node · Getting Started</a>
-                            </h3>
-                            <p class="tutorial-card-description">Run a Bitcoin Node with StartOS. Learn what a Bitcoin node is, why to run one, and connect Sparrow Wallet.</p>
-                        </div>
-                    </article>
-
-                    <!-- Vibe Coding - Featured -->
-                    <article class="tutorial-card" data-tags="open-source-ai" data-type="class" style="border-color: rgba(50, 208, 17, 0.4);">
-                        <div class="tutorial-card-header">
-                            <span class="tutorial-card-type class">Class</span>
-                            <span class="tutorial-card-tag">Open-source AI</span>
-                        </div>
-                        <div class="tutorial-card-body">
-                            <h3 class="tutorial-card-title">
-                                <a href="/resources/vibe-coding-101/">Vibe Coding 101 · Getting Started</a>
-                            </h3>
-                            <p class="tutorial-card-description">Build and deploy a real website using only your browser and natural language prompts. No coding experience required.</p>
-                        </div>
-                    </article>
                 </div>
             </div>
         </section>
@@ -562,7 +651,7 @@
                         </div>
                         <div class="tutorial-card-body">
                             <h3 class="tutorial-card-title">
-                                <a href="/resources/programmatic-video/">Programmatic Video</a>
+                                <a href="/resources/programmatic-video/">Programmatic Video for OpenClaw</a>
                             </h3>
                             <p class="tutorial-card-description">Teach your AI agent to render animations into video — fully self-hosted with Three.js, Remotion, and FFmpeg. No cloud rendering required.</p>
                         </div>
@@ -623,6 +712,7 @@
                 </div>
             </div>
         </section>
+        </div><!-- end resources-default-view -->
     </main>
 
     <!-- Footer (loaded from js/footer.js) -->
@@ -914,6 +1004,127 @@
 
         // Apply URL tag filter on page load
         applyUrlTag();
+
+        // === AI Skills View ===
+        const aiSkillsBtn = document.getElementById('aiSkillsBtn');
+        const backBtn = document.getElementById('backToResourcesBtn');
+        if (aiSkillsBtn) {
+            aiSkillsBtn.addEventListener('click', () => {
+                document.body.classList.add('ai-skills-mode');
+                window.location.hash = 'ai-skills';
+                initAiSkillsFiltering();
+            });
+        }
+        if (backBtn) {
+            backBtn.addEventListener('click', () => {
+                document.body.classList.remove('ai-skills-mode');
+                window.location.hash = '';
+            });
+        }
+
+        // Check URL for ai-skills mode
+        if (window.location.hash === '#ai-skills') {
+            document.body.classList.add('ai-skills-mode');
+            initAiSkillsFiltering();
+        }
+
+        function initAiSkillsFiltering() {
+            const aiCards = document.querySelectorAll('.ai-skills-view .tutorial-card');
+            const aiSearch = document.getElementById('aiSkillsSearch');
+            const aiNoResults = document.getElementById('aiNoResults');
+            const aiTypePills = document.querySelectorAll('.ai-skills-view .type-pill');
+            const aiTagPills = document.querySelectorAll('.ai-skills-view .tag-pill');
+            let aiSelectedTypes = new Set(['skill', 'setting-up-openclaw']);
+            let aiSelectedTags = new Set();
+            let aiCurrentSearch = '';
+
+            function sortAiSkillsInner() {
+                const grid = document.getElementById('aiSkillsGrid');
+                const cards = [...grid.querySelectorAll('.tutorial-card')];
+                cards.sort((a, b) => {
+                    const getTitle = (el) => el.querySelector('.tutorial-card-title').textContent.trim();
+                    const getPriority = (el) => {
+                        const title = getTitle(el);
+                        const types = el.dataset.type ? el.dataset.type.split(',') : [];
+                        // Setting up OpenClaw pinned to top-left when its type is selected
+                        if (title.includes('Setting Up OpenClaw') && aiSelectedTypes.has('setting-up-openclaw')) return 0;
+                        // Skill Creator pinned to top-left (or second if OpenClaw is there)
+                        if (title.includes('Skill Creator')) return 1;
+                        return 2;
+                    };
+                    return getPriority(a) - getPriority(b);
+                });
+                cards.forEach(c => grid.appendChild(c));
+            }
+
+            function filterAiSkills() {
+                let visible = 0;
+                aiCards.forEach(card => {
+                    const tags = card.dataset.tags ? card.dataset.tags.split(',') : [];
+                    const types = card.dataset.type ? card.dataset.type.split(',') : ['skill'];
+                    const title = card.querySelector('.tutorial-card-title').textContent.toLowerCase();
+                    const desc = card.querySelector('.tutorial-card-description').textContent.toLowerCase();
+                    const matchType = [...aiSelectedTypes].some(t => types.includes(t));
+                    const matchTag = aiSelectedTags.size === 0 || [...aiSelectedTags].some(t => tags.includes(t));
+                    const matchSearch = !aiCurrentSearch || title.includes(aiCurrentSearch) || desc.includes(aiCurrentSearch);
+                    if (matchType && matchTag && matchSearch) {
+                        card.style.display = '';
+                        visible++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                if (aiNoResults) aiNoResults.style.display = visible === 0 ? 'block' : 'none';
+                sortAiSkillsInner();
+            }
+
+            aiTypePills.forEach(pill => {
+                pill.addEventListener('click', () => {
+                    const type = pill.dataset.type;
+                    if (aiSelectedTypes.has(type) && aiSelectedTypes.size > 1) {
+                        aiSelectedTypes.delete(type);
+                        pill.classList.remove('active');
+                    } else {
+                        aiSelectedTypes.add(type);
+                        pill.classList.add('active');
+                    }
+                    filterAiSkills();
+                });
+            });
+
+            aiTagPills.forEach(pill => {
+                pill.addEventListener('click', () => {
+                    const tag = pill.dataset.tag;
+                    const allPill = document.querySelector('.ai-skills-view .tag-pill[data-tag="all"]');
+                    if (tag === 'all') {
+                        aiSelectedTags.clear();
+                        aiTagPills.forEach(p => p.classList.remove('active'));
+                        allPill.classList.add('active');
+                    } else {
+                        allPill.classList.remove('active');
+                        if (aiSelectedTags.has(tag)) {
+                            aiSelectedTags.delete(tag);
+                            pill.classList.remove('active');
+                        } else {
+                            aiSelectedTags.add(tag);
+                            pill.classList.add('active');
+                        }
+                        if (aiSelectedTags.size === 0) allPill.classList.add('active');
+                    }
+                    filterAiSkills();
+                });
+            });
+
+            if (aiSearch) {
+                aiSearch.addEventListener('input', (e) => {
+                    aiCurrentSearch = e.target.value.toLowerCase().trim();
+                    filterAiSkills();
+                });
+            }
+
+            // Apply initial filter and sort
+            filterAiSkills();
+        }
     </script>
     <script src="../js/social-config.js"></script>
 </body>
