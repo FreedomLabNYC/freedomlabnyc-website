@@ -511,6 +511,37 @@
       backdrop-filter: blur(8px);
     }
 
+    .buy-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      font-family: inherit;
+    }
+
+    .buy-btn:hover { opacity: 0.85; }
+
+    .buy-btn-dm {
+      background: var(--surface);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+
+    .buy-btn-dm:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+      opacity: 1;
+    }
+
     @media (max-width: 640px) {
       .hero h1 { font-size: 1.6em; }
       .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
@@ -819,6 +850,14 @@
       }).join('');
     }
 
+    // Our pubkey — products from this key have checkout pages
+    const OUR_PUBKEY = '65e47b6367d94bb526163a293811ca5a83f4a50c605de64bb47127ffa10ac67c';
+
+    // Map our product IDs to checkout URLs
+    const CHECKOUT_URLS = {
+      'fl-sticker-01': 'https://harrison-f.github.io/peddler/',
+    };
+
     function showProduct(id, pubkey, kind) {
       const product = allProducts.find(p => p._id === id && p._pubkey === pubkey && p._kind === kind);
       if (!product) return;
@@ -826,6 +865,11 @@
       const img = getProductImage(product);
       const stall = product.stall_id ? allStalls[product.stall_id] : null;
       const merchantName = stall ? stall.name : npubShort(product._pubkey);
+
+      // Check if this product has a checkout page
+      const isOurs = product._pubkey === OUR_PUBKEY;
+      const checkoutUrl = CHECKOUT_URLS[product._id];
+      const hasCheckout = isOurs && checkoutUrl;
 
       const modal = document.getElementById('modal-content');
       modal.innerHTML = `
@@ -851,10 +895,22 @@
               <span class="modal-meta-value">⚡ Lightning Network</span>
             </div>
           </div>
+          ${hasCheckout
+            ? `<a href="${checkoutUrl}" class="buy-btn" target="_blank">⚡ Buy with Lightning</a>`
+            : `<button class="buy-btn buy-btn-dm" onclick="copyNpub('${product._pubkey}')">📩 Contact Merchant to Buy</button>`
+          }
         </div>
       `;
 
       document.getElementById('modal-overlay').classList.add('active');
+    }
+
+    function copyNpub(pubkey) {
+      // Convert hex to a note for now, just copy hex
+      navigator.clipboard.writeText(pubkey).then(() => {
+        const btn = document.querySelector('.buy-btn-dm');
+        if (btn) { btn.textContent = '✅ Merchant pubkey copied!'; setTimeout(() => btn.textContent = '📩 Contact Merchant to Buy', 2000); }
+      });
     }
 
     function closeModal() {
