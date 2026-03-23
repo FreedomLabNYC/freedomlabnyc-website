@@ -3,637 +3,881 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Freedom Lab NYC — Store</title>
+  <title>Peddler — Bitcoin Marketplace on Nostr</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
     :root {
-      --bg: #0a0a0a;
-      --surface: #141414;
-      --border: #2a2a2a;
-      --text: #e8e8e8;
-      --text-dim: #888;
+      --bg: #09090b;
+      --surface: #18181b;
+      --surface-hover: #1e1e22;
+      --border: #27272a;
+      --border-hover: #3f3f46;
+      --text: #fafafa;
+      --text-secondary: #a1a1aa;
+      --text-dim: #71717a;
       --accent: #f7931a;
-      --accent-dim: rgba(247, 147, 26, 0.15);
+      --accent-glow: rgba(247, 147, 26, 0.12);
       --green: #22c55e;
-      --green-dim: rgba(34, 197, 94, 0.15);
+      --radius: 12px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'Inter', -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 480px;
-      width: 100%;
-      padding: 24px 16px;
-    }
-
+    /* Header */
     .header {
-      text-align: center;
-      margin-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      background: rgba(9, 9, 11, 0.85);
+      backdrop-filter: blur(16px);
+      z-index: 50;
     }
 
-    .header h1 {
-      font-size: 1.5em;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .header p {
-      color: var(--text-dim);
-      font-size: 0.85em;
-    }
-
-    .product-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 24px;
-    }
-
-    .product-image {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: contain;
-      background: #1a1a1a;
-      padding: 24px;
-    }
-
-    .product-info {
-      padding: 20px;
-    }
-
-    .product-info h2 {
-      font-size: 1.2em;
-      margin-bottom: 8px;
-    }
-
-    .product-info .description {
-      color: var(--text-dim);
-      font-size: 0.9em;
-      line-height: 1.5;
-      margin-bottom: 16px;
-    }
-
-    .product-info .price {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .price .sats {
-      font-size: 1.4em;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    .price .usd {
-      color: var(--text-dim);
-      font-size: 0.85em;
-    }
-
-    .specs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    .spec {
-      background: var(--accent-dim);
-      color: var(--accent);
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 0.75em;
-      font-weight: 500;
-    }
-
-    /* Quantity selector */
-    .quantity-section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 20px;
-      margin-bottom: 16px;
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      height: 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .quantity-section label {
-      font-weight: 600;
-      font-size: 0.9em;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
     }
 
-    .qty-controls {
+    .logo-icon {
+      font-size: 1.4em;
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.15em;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-tag {
+      font-size: 0.7em;
+      color: var(--text-dim);
+      background: var(--surface);
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      font-weight: 500;
+    }
+
+    .header-right {
       display: flex;
       align-items: center;
       gap: 16px;
     }
 
-    .qty-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      font-size: 1.1em;
-      cursor: pointer;
+    .relay-status {
       display: flex;
       align-items: center;
-      justify-content: center;
-    }
-
-    .qty-btn:hover { border-color: var(--accent); }
-
-    #qty-display {
-      font-size: 1.1em;
-      font-weight: 600;
-      min-width: 20px;
-      text-align: center;
-    }
-
-    /* Shipping form */
-    .shipping-section {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 16px;
-    }
-
-    .shipping-section h3 {
-      font-size: 0.95em;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .form-row {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .form-row:last-child { margin-bottom: 0; }
-
-    .form-group {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .form-group label {
+      gap: 6px;
       font-size: 0.75em;
       color: var(--text-dim);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
 
-    .form-group input, .form-group select {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 12px;
-      color: var(--text);
-      font-size: 0.9em;
-      outline: none;
+    .relay-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: blink 3s infinite;
     }
 
-    .form-group input:focus, .form-group select:focus {
-      border-color: var(--accent);
+    @keyframes blink {
+      0%, 90%, 100% { opacity: 1; }
+      95% { opacity: 0.3; }
     }
 
-    /* Order summary */
-    .summary {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 24px;
-    }
-
-    .summary h3 {
-      font-size: 0.95em;
-      margin-bottom: 12px;
-    }
-
-    .summary-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 6px 0;
-      font-size: 0.9em;
-    }
-
-    .summary-row.total {
-      border-top: 1px solid var(--border);
-      margin-top: 8px;
-      padding-top: 12px;
-      font-weight: 700;
-      font-size: 1em;
-    }
-
-    .summary-row.total .sats {
-      color: var(--accent);
-    }
-
-    /* Pay button */
-    .pay-btn {
-      width: 100%;
-      padding: 16px;
+    .publish-btn {
       background: var(--accent);
       color: #000;
       border: none;
-      border-radius: 12px;
-      font-size: 1.05em;
-      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.85em;
       cursor: pointer;
-      transition: opacity 0.2s;
+      text-decoration: none;
+      transition: opacity 0.15s;
     }
 
-    .pay-btn:hover { opacity: 0.9; }
-    .pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .publish-btn:hover { opacity: 0.85; }
 
-    /* Payment modal */
-    .payment-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 100;
-      align-items: center;
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 56px 24px 40px;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 2.2em;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, var(--text) 0%, var(--text-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.05em;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .hero-badges {
+      display: flex;
       justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+      flex-wrap: wrap;
     }
 
-    .payment-overlay.active { display: flex; }
+    .badge {
+      font-size: 0.75em;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      background: var(--surface);
+      font-weight: 500;
+    }
 
-    .payment-modal {
+    .badge.accent {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    /* Filters */
+    .filters {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 24px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.82em;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      font-family: inherit;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    /* Product Grid */
+    .grid-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .product-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 20px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .product-card:hover {
+      border-color: var(--border-hover);
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+    }
+
+    .product-image-wrap {
+      aspect-ratio: 1;
+      background: #111;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+      opacity: 0.3;
+    }
+
+    .product-payment-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.7em;
+      font-weight: 600;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .product-info {
+      padding: 16px;
+    }
+
+    .product-merchant {
+      font-size: 0.72em;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .product-name {
+      font-weight: 600;
+      font-size: 0.95em;
+      margin-bottom: 4px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-description {
+      font-size: 0.8em;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-price {
+      font-weight: 700;
+      font-size: 1em;
+      color: var(--accent);
+    }
+
+    .product-price .currency {
+      font-size: 0.75em;
+      font-weight: 500;
+      color: var(--text-dim);
+      margin-left: 2px;
+    }
+
+    .product-category {
+      font-size: 0.7em;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: var(--accent-glow);
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    /* Loading state */
+    .loading {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text-dim);
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 12px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Stats bar */
+    .stats-bar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stats-left {
+      font-size: 0.82em;
+      color: var(--text-dim);
+    }
+
+    .stats-left strong {
+      color: var(--text-secondary);
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 80px 24px;
+    }
+
+    .empty-state .icon { font-size: 3em; margin-bottom: 16px; }
+    .empty-state h3 { color: var(--text-secondary); margin-bottom: 8px; }
+    .empty-state p { color: var(--text-dim); font-size: 0.9em; }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid var(--border);
       padding: 32px 24px;
-      max-width: 400px;
-      width: 90%;
       text-align: center;
     }
 
-    .payment-modal h3 {
-      margin-bottom: 8px;
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
     }
 
-    .payment-modal .amount {
-      font-size: 1.8em;
+    .footer-left {
+      font-size: 0.8em;
+      color: var(--text-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      font-size: 0.8em;
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 480px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-image {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+      background: #111;
+      border-radius: 16px 16px 0 0;
+      padding: 20px;
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    .modal-body h2 {
+      font-size: 1.3em;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .modal-body .description {
+      color: var(--text-secondary);
+      font-size: 0.9em;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .modal-price {
+      font-size: 1.6em;
       font-weight: 700;
       color: var(--accent);
       margin-bottom: 20px;
     }
 
-    .qr-container {
-      background: #fff;
-      border-radius: 12px;
-      padding: 16px;
-      display: inline-block;
-      margin-bottom: 16px;
-    }
-
-    .qr-container canvas {
-      display: block;
-    }
-
-    .invoice-text {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 12px;
-      font-size: 0.7em;
-      word-break: break-all;
-      color: var(--text-dim);
-      margin-bottom: 16px;
-      cursor: pointer;
-      max-height: 60px;
-      overflow: hidden;
-    }
-
-    .invoice-text:hover { color: var(--text); }
-
-    .copy-btn {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      padding: 8px 16px;
+    .modal-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
       font-size: 0.85em;
+    }
+
+    .modal-meta-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-meta-label { color: var(--text-dim); }
+    .modal-meta-value { color: var(--text-secondary); font-weight: 500; }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: none;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      font-size: 1.1em;
       cursor: pointer;
-      margin-bottom: 16px;
+      backdrop-filter: blur(8px);
     }
 
-    .status-waiting {
-      color: var(--accent);
-      font-size: 0.85em;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    /* Success */
-    .success-modal {
-      text-align: center;
-    }
-
-    .success-modal .checkmark {
-      font-size: 3em;
-      margin-bottom: 12px;
-    }
-
-    .success-modal h3 {
-      color: var(--green);
-      margin-bottom: 8px;
-    }
-
-    /* Nostr badge */
-    .nostr-badge {
-      text-align: center;
-      margin-top: 32px;
-      padding: 16px;
-      color: var(--text-dim);
-      font-size: 0.75em;
-    }
-
-    .nostr-badge a {
-      color: var(--accent);
-      text-decoration: none;
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.6em; }
+      .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+      .product-info { padding: 12px; }
+      .header-inner { padding: 0; }
+      .publish-btn { display: none; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>⚡ Freedom Lab NYC</h1>
-      <p>Freedom tech education & community</p>
-    </div>
 
-    <div class="product-card">
-      <img class="product-image" src="/sticker.png" alt="Freedom Lab NYC Sticker">
-      <div class="product-info">
-        <h2>Freedom Lab NYC Sticker</h2>
-        <p class="description">Pixel art Statue of Liberty torch sticker. Die-cut, weatherproof vinyl. ~3 inches. Rep freedom tech in NYC.</p>
-        <div class="price">
-          <span class="sats" id="unit-price">5,000 sats</span>
-          <span class="usd" id="unit-usd"></span>
+  <header class="header">
+    <div class="header-inner">
+      <a class="logo" href="#">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">Peddler</span>
+        <span class="logo-tag">beta</span>
+      </a>
+      <div class="header-right">
+        <div class="relay-status">
+          <span class="relay-dot"></span>
+          <span id="relay-count">Connecting...</span>
         </div>
-        <div class="specs">
-          <span class="spec">Weatherproof</span>
-          <span class="spec">Die-cut</span>
-          <span class="spec">~3 inches</span>
-        </div>
+        <a href="https://github.com/Harrison-F/peddler" class="publish-btn" target="_blank">List a Product</a>
       </div>
     </div>
+  </header>
 
-    <div class="quantity-section">
-      <label>Quantity</label>
-      <div class="qty-controls">
-        <button class="qty-btn" onclick="changeQty(-1)">−</button>
-        <span id="qty-display">1</span>
-        <button class="qty-btn" onclick="changeQty(1)">+</button>
-      </div>
+  <section class="hero">
+    <h1>Bitcoin commerce, no platform</h1>
+    <p>Real products from real merchants on Nostr. Pay with Lightning. No accounts, no middlemen, no permission needed.</p>
+    <div class="hero-badges">
+      <span class="badge accent">⚡ Lightning</span>
+      <span class="badge">NIP-15</span>
+      <span class="badge">NIP-99</span>
+      <span class="badge">No KYC</span>
     </div>
+  </section>
 
-    <div class="shipping-section">
-      <h3>📦 Shipping</h3>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Name</label>
-          <input type="text" id="ship-name" placeholder="Full name" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Address</label>
-          <input type="text" id="ship-address" placeholder="Street address" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>City</label>
-          <input type="text" id="ship-city" placeholder="City" required>
-        </div>
-        <div class="form-group" style="flex:0.5">
-          <label>State</label>
-          <input type="text" id="ship-state" placeholder="NY" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>ZIP</label>
-          <input type="text" id="ship-zip" placeholder="10001" required>
-        </div>
-        <div class="form-group">
-          <label>Country</label>
-          <select id="ship-country">
-            <option value="US" selected>United States</option>
-            <option value="INT">International</option>
-          </select>
-        </div>
-      </div>
-    </div>
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="food">Food & Drink</button>
+    <button class="filter-btn" data-filter="art">Art & Merch</button>
+    <button class="filter-btn" data-filter="physical">Physical Goods</button>
+    <button class="filter-btn" data-filter="digital">Digital</button>
+  </div>
 
-    <div class="summary">
-      <h3>Order Summary</h3>
-      <div class="summary-row">
-        <span>Sticker × <span id="sum-qty">1</span></span>
-        <span id="sum-subtotal">5,000 sats</span>
-      </div>
-      <div class="summary-row">
-        <span>Shipping (<span id="sum-ship-type">US Standard</span>)</span>
-        <span id="sum-shipping">2,000 sats</span>
-      </div>
-      <div class="summary-row total">
-        <span>Total</span>
-        <span class="sats" id="sum-total">7,000 sats</span>
-      </div>
-    </div>
-
-    <button class="pay-btn" onclick="startPayment()">⚡ Pay with Lightning</button>
-
-    <div class="nostr-badge">
-      Powered by Nostr · NIP-15 · 
-      <a href="https://shopstr.store/listing/Freedom-Lab-NYC-Sticker" target="_blank">Also on Shopstr</a>
+  <div class="stats-bar">
+    <div class="stats-left">
+      <strong id="listing-count">0</strong> listings from <strong id="merchant-count">0</strong> merchants
     </div>
   </div>
 
-  <!-- Payment overlay -->
-  <div class="payment-overlay" id="payment-overlay">
-    <div class="payment-modal" id="payment-content">
-      <!-- Filled dynamically -->
+  <div class="grid-container">
+    <div class="product-grid" id="product-grid">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <p>Querying Nostr relays...</p>
+      </div>
     </div>
   </div>
 
-  <!-- QR code library -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        Peddler — powered by Nostr protocol · Built by <a href="https://freedomlab.nyc" style="color:var(--accent);text-decoration:none;">Freedom Lab NYC</a>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/Harrison-F/peddler">GitHub</a>
+        <a href="https://freedomlab.nyc">Freedom Lab</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Product detail modal -->
+  <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal" id="modal-content"></div>
+  </div>
 
   <script>
-    const UNIT_PRICE = 5000;
-    const SHIPPING_US = 2000;
-    const SHIPPING_INT = 5000;
-    // Backend API for invoice generation (via Tailscale Funnel)
-    const API_BASE = 'https://harrisons-macbook-air.tail323ae0.ts.net/peddler-api';
+    const RELAYS = [
+      'wss://relay.damus.io',
+      'wss://nos.lol',
+      'wss://relay.primal.net',
+      'wss://relay.nostr.band',
+    ];
 
-    let quantity = 1;
+    let allProducts = [];
+    let allStalls = {};
+    let connectedRelays = 0;
+    let activeFilter = 'all';
 
-    function changeQty(delta) {
-      quantity = Math.max(1, Math.min(20, quantity + delta));
-      updateSummary();
-    }
+    // Connect to relays and query for products
+    function connectRelay(url) {
+      const ws = new WebSocket(url);
+      const subId = 'peddler-' + Math.random().toString(36).slice(2, 8);
 
-    function getShippingCost() {
-      return document.getElementById('ship-country').value === 'US' ? SHIPPING_US : SHIPPING_INT;
-    }
+      ws.onopen = () => {
+        connectedRelays++;
+        document.getElementById('relay-count').textContent = `${connectedRelays} relay${connectedRelays > 1 ? 's' : ''}`;
 
-    function fmt(sats) {
-      return sats.toLocaleString() + ' sats';
-    }
+        // Subscribe to NIP-15 stalls (kind 30017)
+        ws.send(JSON.stringify(['REQ', subId + '-stalls', {
+          kinds: [30017],
+          limit: 100,
+        }]));
 
-    function updateSummary() {
-      const subtotal = UNIT_PRICE * quantity;
-      const shipping = getShippingCost();
-      const total = subtotal + shipping;
-      const shipType = document.getElementById('ship-country').value === 'US' ? 'US Standard' : 'International';
+        // Subscribe to NIP-15 products (kind 30018)
+        ws.send(JSON.stringify(['REQ', subId + '-products', {
+          kinds: [30018],
+          limit: 200,
+        }]));
 
-      document.getElementById('qty-display').textContent = quantity;
-      document.getElementById('sum-qty').textContent = quantity;
-      document.getElementById('sum-subtotal').textContent = fmt(subtotal);
-      document.getElementById('sum-shipping').textContent = fmt(shipping);
-      document.getElementById('sum-ship-type').textContent = shipType;
-      document.getElementById('sum-total').textContent = fmt(total);
-    }
-
-    document.getElementById('ship-country').addEventListener('change', updateSummary);
-
-    function validateForm() {
-      const fields = ['ship-name', 'ship-address', 'ship-city', 'ship-state', 'ship-zip'];
-      for (const id of fields) {
-        if (!document.getElementById(id).value.trim()) {
-          document.getElementById(id).focus();
-          return false;
-        }
-      }
-      return true;
-    }
-
-    async function startPayment() {
-      if (!validateForm()) return;
-
-      const total = UNIT_PRICE * quantity + getShippingCost();
-      const shipping = {
-        name: document.getElementById('ship-name').value,
-        address: document.getElementById('ship-address').value,
-        city: document.getElementById('ship-city').value,
-        state: document.getElementById('ship-state').value,
-        zip: document.getElementById('ship-zip').value,
-        country: document.getElementById('ship-country').value,
+        // Subscribe to NIP-99 classifieds (kind 30402)
+        ws.send(JSON.stringify(['REQ', subId + '-classifieds', {
+          kinds: [30402],
+          limit: 200,
+        }]));
       };
 
-      // Show loading
-      const overlay = document.getElementById('payment-overlay');
-      const content = document.getElementById('payment-content');
-      overlay.classList.add('active');
-      content.innerHTML = '<p class="status-waiting">⚡ Generating invoice...</p>';
-
-      try {
-        // Request invoice from backend
-        const res = await fetch(API_BASE + '/api/invoice', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            product_id: 'fl-sticker-01',
-            quantity,
-            amount_sats: total,
-            shipping,
-          }),
-        });
-
-        const data = await res.json();
-        if (!data.invoice) throw new Error(data.error || 'Failed to generate invoice');
-
-        // Show QR code
-        content.innerHTML = `
-          <h3>Pay with Lightning</h3>
-          <div class="amount">${fmt(total)}</div>
-          <div class="qr-container">
-            <canvas id="qr-canvas"></canvas>
-          </div>
-          <div class="invoice-text" onclick="copyInvoice()" title="Click to copy">${data.invoice}</div>
-          <button class="copy-btn" onclick="copyInvoice()">📋 Copy Invoice</button>
-          <p class="status-waiting">Waiting for payment...</p>
-        `;
-
-        // Generate QR
-        QRCode.toCanvas(document.getElementById('qr-canvas'), data.invoice.toUpperCase(), {
-          width: 280,
-          margin: 0,
-          color: { dark: '#000', light: '#fff' },
-        });
-
-        // Poll for payment
-        pollPayment(data.payment_hash);
-
-      } catch (e) {
-        content.innerHTML = `<p style="color:#f85149">Error: ${e.message}</p>
-          <button class="copy-btn" onclick="document.getElementById('payment-overlay').classList.remove('active')">Close</button>`;
-      }
-    }
-
-    async function pollPayment(hash) {
-      const check = async () => {
+      ws.onmessage = (msg) => {
         try {
-          const res = await fetch(`${API_BASE}/api/invoice/${hash}`);
-          const data = await res.json();
-          if (data.paid) {
-            showSuccess();
-            return;
+          const data = JSON.parse(msg.data);
+          if (data[0] === 'EVENT') {
+            handleEvent(data[2]);
+          } else if (data[0] === 'EOSE') {
+            renderProducts();
           }
         } catch (e) {}
-        setTimeout(check, 3000);
       };
-      check();
+
+      ws.onerror = () => {};
+      ws.onclose = () => {
+        connectedRelays = Math.max(0, connectedRelays - 1);
+        document.getElementById('relay-count').textContent =
+          connectedRelays > 0 ? `${connectedRelays} relay${connectedRelays > 1 ? 's' : ''}` : 'Reconnecting...';
+      };
     }
 
-    function showSuccess() {
-      const content = document.getElementById('payment-content');
-      content.innerHTML = `
-        <div class="success-modal">
-          <div class="checkmark">✅</div>
-          <h3>Payment Received!</h3>
-          <p style="color:var(--text-dim);margin-top:8px;">Your Freedom Lab NYC stickers are on the way.<br>Thank you for supporting freedom tech.</p>
-          <button class="copy-btn" style="margin-top:20px" onclick="document.getElementById('payment-overlay').classList.remove('active')">Close</button>
+    function getTag(event, name) {
+      const tag = event.tags.find(t => t[0] === name);
+      return tag ? tag[1] : null;
+    }
+
+    function getAllTags(event, name) {
+      return event.tags.filter(t => t[0] === name).map(t => t[1]);
+    }
+
+    function handleEvent(event) {
+      if (event.kind === 30017) {
+        // Stall
+        try {
+          const stall = JSON.parse(event.content);
+          stall._pubkey = event.pubkey;
+          stall._id = getTag(event, 'd') || stall.id;
+          allStalls[stall._id] = stall;
+        } catch (e) {}
+      } else if (event.kind === 30018) {
+        // Product
+        try {
+          const product = JSON.parse(event.content);
+          product._pubkey = event.pubkey;
+          product._kind = 30018;
+          product._id = getTag(event, 'd') || product.id;
+          product._tags = event.tags;
+          product._created = event.created_at;
+
+          // Deduplicate by id
+          const existing = allProducts.findIndex(p => p._id === product._id && p._pubkey === product._pubkey);
+          if (existing >= 0) {
+            if (product._created > allProducts[existing]._created) {
+              allProducts[existing] = product;
+            }
+          } else {
+            allProducts.push(product);
+          }
+        } catch (e) {}
+      } else if (event.kind === 30402) {
+        // Classified listing
+        const product = {
+          _pubkey: event.pubkey,
+          _kind: 30402,
+          _id: getTag(event, 'd'),
+          _tags: event.tags,
+          _created: event.created_at,
+          name: getTag(event, 'title') || getTag(event, 'subject') || 'Untitled',
+          description: event.content,
+          images: getAllTags(event, 'image'),
+          price: parsePrice(getTag(event, 'price')),
+          currency: 'sats',
+        };
+
+        // Get image from tags
+        const imgTag = event.tags.find(t => t[0] === 'image');
+        if (imgTag) product.images = [imgTag[1]];
+
+        const existing = allProducts.findIndex(p => p._id === product._id && p._pubkey === product._pubkey && p._kind === 30402);
+        if (existing >= 0) {
+          if (product._created > allProducts[existing]._created) {
+            allProducts[existing] = product;
+          }
+        } else {
+          allProducts.push(product);
+        }
+      }
+    }
+
+    function parsePrice(priceStr) {
+      if (!priceStr) return null;
+      const num = parseFloat(priceStr);
+      return isNaN(num) ? null : num;
+    }
+
+    function formatPrice(product) {
+      if (product.price !== null && product.price !== undefined) {
+        const p = typeof product.price === 'object' ? product.price : { amount: product.price, currency: product.currency || 'sats' };
+        const amount = p.amount || product.price;
+        const currency = (p.currency || product.currency || 'sats').toUpperCase();
+        
+        if (currency === 'SAT' || currency === 'SATS' || currency === 'MSAT') {
+          return `${Number(amount).toLocaleString()} <span class="currency">sats</span>`;
+        }
+        return `${Number(amount).toLocaleString()} <span class="currency">${currency}</span>`;
+      }
+      return 'Price on request';
+    }
+
+    function getCategory(product) {
+      const cats = getAllTags({ tags: product._tags || [] }, 't');
+      if (cats.length > 0) return cats[0];
+      
+      const name = (product.name || '').toLowerCase();
+      const desc = (product.description || '').toLowerCase();
+      const combined = name + ' ' + desc;
+      
+      if (/coffee|tea|food|honey|sauce|butter|soap|chaga/.test(combined)) return 'food';
+      if (/art|print|sticker|poster|shirt|merch|hat/.test(combined)) return 'art';
+      if (/digital|ebook|pdf|software|code/.test(combined)) return 'digital';
+      return 'physical';
+    }
+
+    function getProductImage(product) {
+      if (product.images && product.images.length > 0) return product.images[0];
+      if (product.image) return product.image;
+      return null;
+    }
+
+    function truncate(str, len) {
+      if (!str) return '';
+      return str.length > len ? str.slice(0, len) + '…' : str;
+    }
+
+    function npubShort(pubkey) {
+      return pubkey ? pubkey.slice(0, 8) + '…' : 'Unknown';
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('product-grid');
+      
+      let filtered = allProducts;
+      if (activeFilter !== 'all') {
+        filtered = allProducts.filter(p => getCategory(p) === activeFilter);
+      }
+
+      const merchants = new Set(allProducts.map(p => p._pubkey));
+      document.getElementById('listing-count').textContent = allProducts.length;
+      document.getElementById('merchant-count').textContent = merchants.size;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-state" style="grid-column: 1/-1;">
+            <div class="icon">🔍</div>
+            <h3>No listings found</h3>
+            <p>Products will appear as they're discovered from Nostr relays</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(product => {
+        const img = getProductImage(product);
+        const cat = getCategory(product);
+        const stall = product.stall_id ? allStalls[product.stall_id] : null;
+        const merchantName = stall ? stall.name : npubShort(product._pubkey);
+
+        return `
+          <div class="product-card" onclick="showProduct('${product._id}', '${product._pubkey}', ${product._kind})">
+            <div class="product-image-wrap">
+              ${img
+                ? `<img src="${img}" alt="${product.name || ''}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=product-image-placeholder>📦</div>'">`
+                : '<div class="product-image-placeholder">📦</div>'
+              }
+              <div class="product-payment-badge">⚡ Lightning</div>
+            </div>
+            <div class="product-info">
+              <div class="product-merchant">👤 ${merchantName}</div>
+              <div class="product-name">${product.name || 'Untitled'}</div>
+              <div class="product-description">${truncate(product.description, 80)}</div>
+              <div class="product-footer">
+                <div class="product-price">${formatPrice(product)}</div>
+                <span class="product-category">${cat}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function showProduct(id, pubkey, kind) {
+      const product = allProducts.find(p => p._id === id && p._pubkey === pubkey && p._kind === kind);
+      if (!product) return;
+
+      const img = getProductImage(product);
+      const stall = product.stall_id ? allStalls[product.stall_id] : null;
+      const merchantName = stall ? stall.name : npubShort(product._pubkey);
+
+      const modal = document.getElementById('modal-content');
+      modal.innerHTML = `
+        ${img
+          ? `<img class="modal-image" src="${img}" alt="${product.name || ''}" onerror="this.style.display='none'">`
+          : ''
+        }
+        <div class="modal-body">
+          <h2>${product.name || 'Untitled'}</h2>
+          <p class="description">${product.description || 'No description'}</p>
+          <div class="modal-price">${formatPrice(product)}</div>
+          <div class="modal-meta">
+            <div class="modal-meta-row">
+              <span class="modal-meta-label">Merchant</span>
+              <span class="modal-meta-value">${merchantName}</span>
+            </div>
+            <div class="modal-meta-row">
+              <span class="modal-meta-label">Protocol</span>
+              <span class="modal-meta-value">${kind === 30018 ? 'NIP-15 (Product)' : 'NIP-99 (Classified)'}</span>
+            </div>
+            <div class="modal-meta-row">
+              <span class="modal-meta-label">Payment</span>
+              <span class="modal-meta-value">⚡ Lightning Network</span>
+            </div>
+          </div>
         </div>
       `;
+
+      document.getElementById('modal-overlay').classList.add('active');
     }
 
-    function copyInvoice() {
-      const text = document.querySelector('.invoice-text').textContent;
-      navigator.clipboard.writeText(text).then(() => {
-        document.querySelector('.copy-btn').textContent = '✅ Copied!';
-        setTimeout(() => document.querySelector('.copy-btn').textContent = '📋 Copy Invoice', 2000);
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // Filter buttons
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        renderProducts();
       });
-    }
+    });
 
-    // Init
-    updateSummary();
+    // Start connecting
+    RELAYS.forEach(connectRelay);
+
+    // Render after a timeout even if not all EOSE received
+    setTimeout(renderProducts, 8000);
   </script>
 </body>
 </html>
