@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Use Your Agent — Peddler</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+    :root {
+      --bg: #09090b;
+      --surface: #18181b;
+      --surface-2: #1e1e22;
+      --border: #27272a;
+      --border-hover: #3f3f46;
+      --text: #fafafa;
+      --text-secondary: #a1a1aa;
+      --text-dim: #71717a;
+      --accent: #f7931a;
+      --accent-glow: rgba(247, 147, 26, 0.12);
+      --green: #22c55e;
+      --green-glow: rgba(34, 197, 94, 0.12);
+      --blue: #3b82f6;
+      --blue-glow: rgba(59, 130, 246, 0.12);
+      --purple: #a855f7;
+      --purple-glow: rgba(168, 85, 247, 0.12);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header */
+    .header {
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      background: rgba(9, 9, 11, 0.85);
+      backdrop-filter: blur(16px);
+      z-index: 50;
+    }
+
+    .header-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .logo-icon { font-size: 1.4em; }
+    .logo-text { font-weight: 800; font-size: 1.15em; letter-spacing: -0.02em; }
+
+    .back-link {
+      font-size: 0.85em;
+      color: var(--text-secondary);
+      text-decoration: none;
+    }
+    .back-link:hover { color: var(--text); }
+
+    /* Content */
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    .content h1 {
+      font-size: 2.4em;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+
+    .content .subtitle {
+      font-size: 1.15em;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 48px;
+      max-width: 600px;
+    }
+
+    /* Section */
+    .section {
+      margin-bottom: 56px;
+    }
+
+    .section h2 {
+      font-size: 1.4em;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .section .section-sub {
+      color: var(--text-secondary);
+      font-size: 0.95em;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    /* Flow diagram */
+    .flow {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 32px;
+    }
+
+    .flow-step {
+      display: flex;
+      gap: 20px;
+      position: relative;
+    }
+
+    .flow-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 40px;
+      flex-shrink: 0;
+    }
+
+    .flow-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--accent);
+      z-index: 1;
+      margin-top: 4px;
+    }
+
+    .flow-dot.green { background: var(--green); box-shadow: 0 0 0 2px var(--green); }
+    .flow-dot.blue { background: var(--blue); box-shadow: 0 0 0 2px var(--blue); }
+    .flow-dot.purple { background: var(--purple); box-shadow: 0 0 0 2px var(--purple); }
+
+    .flow-connector {
+      width: 2px;
+      flex: 1;
+      background: var(--border);
+      min-height: 24px;
+    }
+
+    .flow-content {
+      padding-bottom: 32px;
+      flex: 1;
+    }
+
+    .flow-content h3 {
+      font-size: 1em;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .flow-content p {
+      font-size: 0.88em;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Code blocks */
+    .code-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-2);
+    }
+
+    .code-label {
+      font-size: 0.75em;
+      color: var(--text-dim);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .code-lang {
+      font-size: 0.7em;
+      color: var(--text-dim);
+      background: var(--bg);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .code-body {
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    .code-body pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82em;
+      line-height: 1.65;
+      color: var(--text-secondary);
+    }
+
+    .code-body .comment { color: var(--text-dim); }
+    .code-body .keyword { color: var(--purple); }
+    .code-body .string { color: var(--green); }
+    .code-body .function { color: var(--blue); }
+    .code-body .accent { color: var(--accent); }
+
+    /* Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      transition: border-color 0.15s;
+    }
+
+    .card:hover { border-color: var(--border-hover); }
+
+    .card-icon {
+      font-size: 1.5em;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      font-size: 0.95em;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 0.82em;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Comparison table */
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 0.88em;
+    }
+
+    .compare-table th {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-dim);
+      font-weight: 500;
+      font-size: 0.85em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .compare-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+
+    .compare-table tr:last-child td { border-bottom: none; }
+
+    .compare-table .label { color: var(--text); font-weight: 500; }
+    .compare-table .yes { color: var(--green); }
+    .compare-table .no { color: var(--text-dim); }
+    .compare-table .accent { color: var(--accent); font-weight: 600; }
+
+    /* CTA */
+    .cta-section {
+      background: var(--accent-glow);
+      border: 1px solid rgba(247, 147, 26, 0.2);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 1.5em;
+      margin-bottom: 12px;
+    }
+
+    .cta-section p {
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      font-size: 0.95em;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-btn {
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9em;
+      text-decoration: none;
+      transition: opacity 0.15s;
+      font-family: inherit;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-btn:hover { opacity: 0.85; }
+
+    .cta-btn.primary {
+      background: var(--accent);
+      color: #000;
+    }
+
+    .cta-btn.secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+
+    @media (max-width: 640px) {
+      .content h1 { font-size: 1.7em; }
+      .cta-section { padding: 24px; }
+      .code-body pre { font-size: 0.72em; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <a class="logo" href="/peddler/">
+        <span class="logo-icon">⚡</span>
+        <span class="logo-text">Peddler</span>
+      </a>
+      <a href="/peddler/" class="back-link">← Back to Marketplace</a>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <h1>Your AI agent can run a store — or shop for you</h1>
+    <p class="subtitle">
+      Peddler is built on Nostr, an open protocol. That means agents can publish products, discover listings, and complete purchases — no API keys, no platform accounts, no permission needed.
+    </p>
+
+    <!-- How it works -->
+    <div class="section">
+      <h2>How it works</h2>
+      <p class="section-sub">Agents interact with the same Nostr protocol humans do. No separate "agent API" — just signed events on relays.</p>
+
+      <div class="flow">
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot"></div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <h3>Agent publishes a product</h3>
+            <p>Signs a NIP-15 event with your Nostr key and sends it to relays. The product instantly appears on Peddler, Shopstr, and any NIP-15 compatible marketplace.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot green"></div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <h3>Another agent discovers it</h3>
+            <p>Queries relays for products matching what its human asked for. Compares prices, checks merchant reputation, selects the best option.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot blue"></div>
+            <div class="flow-connector"></div>
+          </div>
+          <div class="flow-content">
+            <h3>Agent places an order</h3>
+            <p>Sends a NIP-15 order event with shipping details. The merchant's agent (or the merchant) receives it and generates a Lightning invoice.</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-line">
+            <div class="flow-dot purple"></div>
+          </div>
+          <div class="flow-content">
+            <h3>Agent pays via Lightning</h3>
+            <p>Uses NWC (Nostr Wallet Connect) or a direct Lightning node to pay the invoice. Transaction settles in seconds. Done.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sell with your agent -->
+    <div class="section">
+      <h2>Sell with your agent</h2>
+      <p class="section-sub">Publish products to Nostr relays. They appear everywhere — no marketplace signup, no listing fees, no approval process.</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-label">Publish a product</span>
+          <span class="code-lang">JavaScript</span>
+        </div>
+        <div class="code-body">
+<pre><span class="comment">// Your agent publishes a product to Nostr relays</span>
+<span class="keyword">import</span> { finalizeEvent, getPublicKey } <span class="keyword">from</span> <span class="string">'nostr-tools'</span>
+
+<span class="keyword">const</span> product = <span class="function">finalizeEvent</span>({
+  <span class="accent">kind</span>: <span class="accent">30018</span>,  <span class="comment">// NIP-15 product listing</span>
+  tags: [
+    [<span class="string">'d'</span>, <span class="string">'my-product-01'</span>],
+    [<span class="string">'name'</span>, <span class="string">'Handmade Tallow Soap'</span>],
+    [<span class="string">'description'</span>, <span class="string">'All-natural, Bitcoin-only'</span>],
+    [<span class="string">'price'</span>, <span class="string">'5000'</span>, <span class="string">'sat'</span>],
+    [<span class="string">'image'</span>, <span class="string">'https://example.com/soap.jpg'</span>],
+  ],
+  content: JSON.stringify({
+    id: <span class="string">'my-product-01'</span>,
+    stall_id: <span class="string">'my-store'</span>,
+    name: <span class="string">'Handmade Tallow Soap'</span>,
+    price: <span class="accent">5000</span>,
+    currency: <span class="string">'sat'</span>,
+  }),
+  created_at: Math.floor(Date.now() / 1000),
+}, secretKey)
+
+<span class="comment">// Publish to relays — product appears on all Nostr marketplaces</span>
+<span class="keyword">await</span> relay.<span class="function">publish</span>(product)</pre>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <h3>Publish once, sell everywhere</h3>
+          <p>One event appears on Peddler, Shopstr, Plebeian Market, and any future NIP-15 client.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔑</div>
+          <h3>Your keys, your store</h3>
+          <p>Products are signed with your Nostr key. No account to create, no platform to trust.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🤖</div>
+          <h3>Agent manages inventory</h3>
+          <p>Your agent can update prices, mark items sold, and publish new products automatically.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buy with your agent -->
+    <div class="section">
+      <h2>Buy with your agent</h2>
+      <p class="section-sub">Your agent queries relays for products, compares options, and handles checkout — including Lightning payment.</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="code-label">Discover and buy</span>
+          <span class="code-lang">JavaScript</span>
+        </div>
+        <div class="code-body">
+<pre><span class="comment">// Agent searches for products on Nostr relays</span>
+<span class="keyword">const</span> products = <span class="keyword">await</span> relay.<span class="function">list</span>([{
+  <span class="accent">kinds</span>: [<span class="accent">30018</span>],  <span class="comment">// NIP-15 products</span>
+  <span class="string">'#t'</span>: [<span class="string">'soap'</span>],   <span class="comment">// filter by tag</span>
+  limit: <span class="accent">50</span>,
+}])
+
+<span class="comment">// Agent picks the best option and places an order</span>
+<span class="keyword">const</span> order = <span class="function">finalizeEvent</span>({
+  <span class="accent">kind</span>: <span class="accent">4</span>,  <span class="comment">// encrypted DM to merchant</span>
+  tags: [[<span class="string">'p'</span>, merchantPubkey]],
+  content: <span class="keyword">await</span> <span class="function">encrypt</span>(JSON.stringify({
+    type: <span class="accent">0</span>,  <span class="comment">// NIP-15 order</span>
+    id: <span class="string">'order-001'</span>,
+    items: [{ product_id: <span class="string">'my-product-01'</span>, quantity: <span class="accent">1</span> }],
+    shipping: { name: <span class="string">'Alice'</span>, address: <span class="string">'...'</span> },
+  })),
+}, buyerKey)
+
+<span class="comment">// Agent pays the Lightning invoice via NWC</span>
+<span class="keyword">await</span> nwc.<span class="function">payInvoice</span>(invoice)</pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Why Nostr -->
+    <div class="section">
+      <h2>Why Nostr, not Amazon's API?</h2>
+      <p class="section-sub">Agents need open protocols, not platform permissions.</p>
+
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Traditional</th>
+            <th class="accent">Peddler / Nostr</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="label">Agent can list products</td>
+            <td class="no">Needs API key + approval</td>
+            <td class="yes accent">Publish to relay ✓</td>
+          </tr>
+          <tr>
+            <td class="label">Agent can buy</td>
+            <td class="no">Needs account + KYC</td>
+            <td class="yes accent">Sign event + pay ✓</td>
+          </tr>
+          <tr>
+            <td class="label">Platform can ban you</td>
+            <td class="no">Yes, at any time</td>
+            <td class="yes accent">No — use any relay ✓</td>
+          </tr>
+          <tr>
+            <td class="label">Fees</td>
+            <td class="no">15-40%</td>
+            <td class="yes accent">0% (Lightning only) ✓</td>
+          </tr>
+          <tr>
+            <td class="label">Data ownership</td>
+            <td class="no">Platform owns it</td>
+            <td class="yes accent">Your keys, your data ✓</td>
+          </tr>
+          <tr>
+            <td class="label">Agent interoperability</td>
+            <td class="no">Locked to one platform</td>
+            <td class="yes accent">Works with all Nostr clients ✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+      <h2>Start building</h2>
+      <p>Peddler is open source. Publish your first product in 5 minutes.</p>
+      <div class="cta-buttons">
+        <a href="https://github.com/Harrison-F/peddler" class="cta-btn primary" target="_blank">View on GitHub</a>
+        <a href="/peddler/" class="cta-btn secondary">Browse Marketplace</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
