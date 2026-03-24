@@ -577,3 +577,6 @@
         justify-content: center;
     }
 }
+
+/* Footer */
+.footer{margin-top:var(--space-2xl);padding:var(--space-xl) var(--space-lg);border-top:1px solid var(--border);background:var(--bg-dark)}.footer-content{max-width:800px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-lg)}.footer-col{display:flex;flex-direction:column;gap:var(--space-xs)}.footer-col a{color:var(--text-secondary);font-size:var(--text-label);transition:color .2s}.footer-col a:hover{color:var(--secondary)}.footer-brand{font-family:'Press Start 2P',monospace;font-size:var(--text-caption);color:var(--text-primary)}.footer-tagline{color:var(--text-muted);font-size:var(--text-caption)}@media(max-width:768px){.footer-content{flex-direction:column;gap:var(--space-md);text-align:center;align-items:center}}
