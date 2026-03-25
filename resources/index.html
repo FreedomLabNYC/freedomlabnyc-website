@@ -1125,14 +1125,11 @@
                     const getPriority = (el) => {
                         const title = getTitle(el);
                         const types = el.dataset.type ? el.dataset.type.split(',') : [];
-                        // Setting up OpenClaw pinned to top when its type is selected
+                        // Setting up OpenClaw pinned to top-left when its type is selected
                         if (title.includes('Setting Up OpenClaw') && aiSelectedTypes.has('setting-up-openclaw')) return 0;
-                        // Skills (type=skill) come before other types
-                        if (types.includes('skill')) {
-                            if (title.includes('Skill Creator')) return 1;
-                            return 2;
-                        }
-                        return 3;
+                        // Skill Creator pinned to top-left (or second if OpenClaw is there)
+                        if (title.includes('Skill Creator')) return 1;
+                        return 2;
                     };
                     return getPriority(a) - getPriority(b);
                 });
