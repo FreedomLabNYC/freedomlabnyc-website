@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An OpenClaw skill for setting up a self-custodial Lightning Address backed by your own wallet. Phoenixd recommended, with honest trade-offs for every option.">
+    <title>Lightning Address Setup | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>Lightning Address Setup</span>
+            </div>
+            <h1 class="tutorial-title">Lightning Address Setup</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Skill</span>
+                <span class="tutorial-tag">Lightning</span>
+                <span class="tutorial-tag">Bitcoin</span>
+                <span class="tutorial-tag">Self-Custody</span>
+                <span class="tutorial-tag">OpenClaw</span>
+            </div>
+            <p class="tutorial-intro">Set up a self-custodial Lightning Address (like alice@yourdomain.com) backed by your own wallet. Your agent handles the LNURL proxy, wallet API, and public exposure — you get a human-readable payment endpoint where every sat goes directly to your keys.</p>
+        </div>
+
+        <!-- Download Section -->
+        <section class="tutorial-section">
+            <h2 id="download">Download</h2>
+            <p><a href="lightning-address.skill" download style="display:inline-block;padding:12px 24px;background:#32d011;color:#000;font-weight:bold;border-radius:6px;text-decoration:none;font-size:1.1em;">⬇ Download lightning-address.skill</a></p>
+            <p>Install with OpenClaw:</p>
+            <pre><code>openclaw skill install lightning-address.skill</code></pre>
+            <p>Or drop the file into your <code>~/.openclaw/skills/</code> directory.</p>
+        </section>
+
+        <!-- What It Does -->
+        <section class="tutorial-section">
+            <h2 id="what-it-does">What This Skill Does</h2>
+            <p>A Lightning Address is a human-readable payment endpoint. When someone pays <code>alice@example.com</code>, their wallet resolves it via LNURL-pay (LUD-16) to create a fresh invoice from the recipient's wallet. No intermediary holds funds.</p>
+            <p>This skill walks your agent through the full setup:</p>
+            <ul>
+                <li><strong>Wallet selection</strong> — phoenixd (recommended), Alby Hub, LND, or LNbits, with honest trade-offs</li>
+                <li><strong>LNURL proxy</strong> — bundled Python script that bridges Lightning Address requests to your wallet's invoice API</li>
+                <li><strong>Public exposure</strong> — Tailscale Funnel, Cloudflare Tunnel, or VPS reverse proxy</li>
+                <li><strong>DNS configuration</strong> — static well-known file on the domain</li>
+                <li><strong>End-to-end testing</strong> — curl verification + real wallet test</li>
+                <li><strong>Persistence</strong> — launchd (macOS) and systemd (Linux) service configs</li>
+            </ul>
+        </section>
+
+        <!-- Architecture -->
+        <section class="tutorial-section">
+            <h2 id="architecture">How It Works</h2>
+            <pre><code>Sender wallet → GET example.com/.well-known/lnurlp/alice
+                        ↓
+              Static JSON (returns callback URL)
+                        ↓
+Sender wallet → GET callback?amount=&lt;msats&gt;
+                        ↓
+              LNURL proxy → wallet createinvoice API
+                        ↓
+              Returns Lightning invoice (bolt11)
+                        ↓
+Sender wallet pays → sats arrive in your wallet</code></pre>
+            <p>Two components: a <strong>static file</strong> on the domain (the pointer) and a <strong>live LNURL proxy</strong> on your machine (the invoice generator). The domain owner and wallet owner can be different people.</p>
+        </section>
+
+        <!-- Wallet Comparison -->
+        <section class="tutorial-section">
+            <h2 id="wallets">Wallet Options</h2>
+            <table style="width:100%;border-collapse:collapse;margin:1em 0;">
+                <thead>
+                    <tr style="border-bottom:2px solid rgba(50,208,17,0.3);">
+                        <th style="text-align:left;padding:8px;">Wallet</th>
+                        <th style="text-align:left;padding:8px;">Self-Custody</th>
+                        <th style="text-align:left;padding:8px;">Setup</th>
+                        <th style="text-align:left;padding:8px;">Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;"><strong>Phoenixd ✅</strong></td>
+                        <td style="padding:8px;">Yes (BIP39)</td>
+                        <td style="padding:8px;">~5 min</td>
+                        <td style="padding:8px;">Agents, servers, automation</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">Alby Hub</td>
+                        <td style="padding:8px;">Yes (LDK)</td>
+                        <td style="padding:8px;">~15 min</td>
+                        <td style="padding:8px;">GUI users, Nostr/NWC</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">LND</td>
+                        <td style="padding:8px;">Yes</td>
+                        <td style="padding:8px;">Hours</td>
+                        <td style="padding:8px;">Full control, routing</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px;">LNbits</td>
+                        <td style="padding:8px;">Depends</td>
+                        <td style="padding:8px;">~20 min</td>
+                        <td style="padding:8px;">Multi-user, hackathons</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Phoenixd trade-off:</strong> ACINQ is your sole channel partner — they see payment amounts and timing. Acceptable for a spending wallet; not for serious privacy. The only mitigation is running a full LND node with multiple channel partners.</p>
+        </section>
+
+        <!-- Someone Else's Domain -->
+        <section class="tutorial-section">
+            <h2 id="someone-elses-domain">When Someone Else Owns the Domain</h2>
+            <p>You don't need to own the domain. You run the wallet and proxy on your machine; the domain owner adds one static file. That's it.</p>
+            <h3>What You Do</h3>
+            <ul>
+                <li>Install phoenixd and fund it</li>
+                <li>Run the LNURL proxy</li>
+                <li>Expose it publicly (Tailscale Funnel, etc.)</li>
+                <li>Send the domain owner your callback URL</li>
+            </ul>
+            <h3>What to Send the Domain Owner</h3>
+            <blockquote style="border-left:3px solid #32d011;padding:0.5em 1em;margin:1em 0;background:rgba(50,208,17,0.05);">
+                <p>Add one file to your website at <code>.well-known/lnurlp/yourname</code> with this content:</p>
+                <pre><code>{
+  "callback": "https://YOUR-CALLBACK-URL/lnurlp/yourname/callback",
+  "metadata": "[[\"text/identifier\",\"yourname@theirdomain.com\"],[\"text/plain\",\"Pay yourname\"]]",
+  "tag": "payRequest",
+  "minSendable": 1000,
+  "maxSendable": 100000000
+}</code></pre>
+                <p>Serve it over HTTPS as JSON. If on GitHub Pages, just commit the file.</p>
+            </blockquote>
+            <p>The domain owner does <strong>not</strong> need to run any software, receive any credentials, or have access to your wallet. They can revoke the address by deleting the file — same trust model as email routing.</p>
+        </section>
+
+        <!-- What's Inside -->
+        <section class="tutorial-section">
+            <h2 id="whats-inside">What's in the Package</h2>
+            <pre><code>lightning-address/
+├── SKILL.md                           # Core setup instructions
+├── scripts/
+│   └── lnurl-proxy.py                 # Parameterized LNURL proxy server
+└── references/
+    ├── wallet-options.md              # Full wallet comparison
+    └── exposure-methods.md            # Tailscale, Cloudflare, VPS options</code></pre>
+        </section>
+
+        <!-- Requirements -->
+        <section class="tutorial-section">
+            <h2 id="requirements">Requirements</h2>
+            <ul>
+                <li><strong>OpenClaw</strong> — any recent version</li>
+                <li><strong>Python 3</strong> — for the LNURL proxy (zero dependencies, stdlib only)</li>
+                <li><strong>Phoenixd</strong> — <a href="https://github.com/ACINQ/phoenixd/releases" style="color:#32d011;">download from GitHub</a> (or alternative wallet)</li>
+                <li><strong>Public HTTPS endpoint</strong> — Tailscale Funnel (free), Cloudflare Tunnel (free), or VPS</li>
+                <li><strong>Domain with static file hosting</strong> — GitHub Pages, Cloudflare Pages, or any web server</li>
+            </ul>
+        </section>
+
+        <!-- Freedom Tech Perspective -->
+        <section class="tutorial-section">
+            <h2 id="freedom-tech">Freedom Tech Perspective</h2>
+            <p>Lightning Addresses are the bridge between human-readable identity and self-custodial payments. The key insight: the address format looks like email, but the payment flow is peer-to-peer.</p>
+            <ul>
+                <li><strong>Self-custodial by design</strong> — your wallet, your keys. The domain only hosts a pointer.</li>
+                <li><strong>No KYC, no signup</strong> — phoenixd generates a BIP39 seed locally. No account creation anywhere.</li>
+                <li><strong>Runs locally</strong> — wallet + proxy on your machine. The only external dependency is the Lightning Network itself.</li>
+                <li><strong>Agent-native</strong> — HTTP API means your AI agent can create invoices, check balances, and manage the wallet programmatically.</li>
+                <li><strong>Composable</strong> — Lightning Address is one piece. Combine with Nostr (NIP-57 zaps), Peddler (commerce), or any LNURL-compatible service.</li>
+            </ul>
+            <p>Every Lightning Address that runs on someone's own infrastructure is one fewer person relying on custodial services. Scale that and you have a payment network that governments can't easily shut down — not because it's hidden, but because it's everywhere.</p>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <p class="footer-brand">Freedom Lab NYC</p>
+                <p class="footer-tagline">Technology for individual sovereignty</p>
+            </div>
+            <div class="footer-col">
+                <a href="/resources/">Resources</a>
+                <a href="/classes-events/">Classes & Events</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>
