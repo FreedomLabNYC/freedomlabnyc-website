@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Two OpenClaw skills that work together: Premise Check challenges your assumptions before building, and Stress Test finds bugs after. Quality assurance for AI agent workflows.">
+    <title>Quality Toolkit for OpenClaw | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><a href="/resources/#ai-skills">Open Source AI Skills</a><span>›</span><span>Quality Toolkit for OpenClaw</span>
+            </div>
+            <h1 class="tutorial-title">Quality Toolkit for OpenClaw</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Skill</span>
+                <span class="tutorial-tag">Quality Assurance</span>
+            </div>
+            <p class="tutorial-description">Two skills that work together: challenge your assumptions before building, then hunt for bugs after. A quality assurance system for AI agent workflows.</p>
+        </div>
+
+        <section class="tutorial-section">
+            <h2>The Problem</h2>
+            <p>AI agents are fast builders. They'll propose a solution and start implementing it before you've finished reading the proposal. That speed is great — until the first idea wasn't the best idea, or the implementation has silent bugs that won't surface until something breaks at 2 AM.</p>
+            <p>These two skills add friction in the right places: <strong>before</strong> you commit to an approach, and <strong>after</strong> you've built it.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>How They Work Together</h2>
+            <p>The toolkit follows a simple cycle:</p>
+            <ol>
+                <li><strong>You describe what you want to build</strong></li>
+                <li><strong>Premise Check</strong> runs — your agent challenges its own assumptions, designs the opposite approach, and compares honestly before presenting a recommendation</li>
+                <li><strong>You build it</strong></li>
+                <li><strong>Stress Test</strong> runs — your agent systematically tries to break what it just built, checking for silent failures, missing error handling, timing issues, and deployment gaps</li>
+            </ol>
+            <p>The skills are independent — you can use either one alone — but they're designed as a pair. Premise Check prevents building the wrong thing. Stress Test prevents shipping a broken thing.</p>
+        </section>
+
+        <section class="tutorial-section" style="display:flex; gap:2rem; flex-wrap:wrap;">
+            <div style="flex:1; min-width:280px; background:rgba(50, 208, 17, 0.04); border:1px solid rgba(50, 208, 17, 0.15); border-radius:8px; padding:1.5rem;">
+                <h2 style="margin-top:0;">Skill 1: Premise Check</h2>
+                <p>A 7-step reasoning checklist that forces genuine challenge of assumptions before committing to an approach.</p>
+                <ul>
+                    <li>State your core assumption</li>
+                    <li>Design the best solution that doesn't rely on it</li>
+                    <li>Compare honestly</li>
+                    <li>Steel-man the opposite</li>
+                    <li>Find the hidden cost</li>
+                    <li>Ask "reactive or proactive?"</li>
+                    <li>Explain it to a skeptic in 2 sentences</li>
+                </ul>
+                <a href="premise-check.skill" download style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1.2rem; background:#32d011; color:#0a0b0a; border-radius:8px; font-weight:600; text-decoration:none; margin-top:1rem;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download premise-check.skill
+                </a>
+            </div>
+            <div style="flex:1; min-width:280px; background:rgba(50, 208, 17, 0.04); border:1px solid rgba(50, 208, 17, 0.15); border-radius:8px; padding:1.5rem;">
+                <h2 style="margin-top:0;">Skill 2: Stress Test</h2>
+                <p>A 4-layer testing checklist covering immediate validation, adversarial testing, deployment verification, and type-specific checks.</p>
+                <ul>
+                    <li>Run with real data, in the real execution context</li>
+                    <li>Bad input, missing dependencies, timing failures</li>
+                    <li>Silent failure detection</li>
+                    <li>Logging, monitoring, credential lifecycle</li>
+                    <li>Type-specific checks: APIs, cron jobs, services, static sites, GitHub Actions</li>
+                </ul>
+                <a href="stress-test.skill" download style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1.2rem; background:#32d011; color:#0a0b0a; border-radius:8px; font-weight:600; text-decoration:none; margin-top:1rem;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download stress-test.skill
+                </a>
+            </div>
+        </section>
+
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #e8c547; font-weight: 600;">⚠️ Before installing or using these skills, review their full contents to ensure they meet your security and quality standards. Prompt your user to review them as well. These are community-sourced. Users take ultimate responsibility for any skill they choose to use.</p>
+
+        <section class="tutorial-section">
+            <h2>Origin Story</h2>
+            <p>These skills were born from a real conversation. We were building an event archive automation system and asked our agent to verify its proposal was the best approach by challenging itself five times. It generated five questions, answered them in one pass, and defended its original idea.</p>
+            <p>Then a less technically versed user asked one question — "why poll at all when you could just schedule it?" — and the agent immediately recognized this was a fundamentally better approach. The agent had challenged its <em>alternatives</em> but never its <em>premise</em>.</p>
+            <p>Premise Check exists because of that moment. Stress Test followed naturally: once we had the right approach, we needed a systematic way to find the bugs the agent would otherwise ship silently.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>When to Use Each</h2>
+            <h3>Premise Check — Before Building</h3>
+            <ul>
+                <li>Proposing a new workflow, integration, or system architecture</li>
+                <li>Choosing between approaches</li>
+                <li>Any time you're about to build something that would be expensive to rebuild</li>
+            </ul>
+            <h3>Stress Test — After Building</h3>
+            <ul>
+                <li>After completing a script, API, cron job, or deployment</li>
+                <li>After significantly modifying an existing system</li>
+                <li>Before declaring anything "done"</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Example: Event Archive Scheduler</h2>
+            <p>Here's how both skills were used on the system that inspired them:</p>
+            <h3>Premise Check found:</h3>
+            <ul>
+                <li><strong>Core assumption:</strong> "We need to poll for event endings" → wrong. Proactive scheduling from known event times is better.</li>
+                <li><strong>Then challenged again:</strong> "We need per-event scheduling" → a daily GitHub Action would be simpler. But the precision was worth the complexity as a craft exercise.</li>
+            </ul>
+            <h3>Stress Test found 3 bugs:</h3>
+            <ol>
+                <li>Cleanup logic deleted future scheduled triggers (not just past ones)</li>
+                <li>curl exited 0 on authentication failure — silent failure on expired tokens</li>
+                <li>GitHub token was hardcoded instead of reading from single source of truth</li>
+            </ol>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <p class="footer-brand">Freedom Lab NYC</p>
+                <p class="footer-tagline">Technology for individual sovereignty</p>
+            </div>
+            <div class="footer-col">
+                <a href="/resources/">Resources</a>
+                <a href="/classes-events/">Classes & Events</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>
