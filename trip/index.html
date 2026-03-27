@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post-OFF Europe — June 2026</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c0c0e;
+      --surface: #161618;
+      --border: #232326;
+      --text: #e4e4e7;
+      --text-dim: #71717a;
+      --orange: #f7931a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); }
+    #map { width: 100%; height: 100vh; }
+
+    /* Header */
+    .header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(12,12,14,0.88); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .header h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1em; font-weight: 700; letter-spacing: -0.02em;
+    }
+    .header .route { color: var(--text-dim); font-size: 0.78em; }
+    .header .route span { color: var(--orange); }
+
+    /* Tooltip overrides — Leaflet permanent tooltips as labels */
+    .event-tooltip {
+      background: rgba(12, 12, 14, 0.9) !important;
+      border: 1px solid rgba(63, 63, 70, 0.6) !important;
+      border-radius: 8px !important;
+      padding: 7px 11px !important;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.5) !important;
+      font-family: 'DM Sans', sans-serif !important;
+      color: #fff !important;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+      line-height: 1.35 !important;
+      white-space: nowrap !important;
+    }
+    .event-tooltip::before { border: none !important; display: none !important; }
+    .event-tooltip .dates { color: #f7931a; font-size: 11px; font-weight: 500; }
+    .event-tooltip .city { color: #a1a1aa; font-size: 10px; font-weight: 400; }
+
+    .airport-tooltip {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      font-family: 'Space Grotesk', sans-serif !important;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      color: #a1a1aa !important;
+      letter-spacing: 0.05em !important;
+      text-shadow: 0 0 8px rgba(0,0,0,1), 0 0 16px rgba(0,0,0,0.9) !important;
+      padding: 0 !important;
+    }
+    .airport-tooltip::before { display: none !important; }
+
+    .flight-tooltip {
+      background: rgba(22,22,24,0.95) !important;
+      border: 1px solid #3f3f46 !important;
+      border-radius: 6px !important;
+      padding: 4px 10px !important;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.6) !important;
+      font-family: 'DM Sans', sans-serif !important;
+      font-size: 11px !important;
+      font-weight: 600 !important;
+      color: #f7931a !important;
+    }
+    .flight-tooltip::before { display: none !important; }
+
+    /* Popup card */
+    .leaflet-popup-content-wrapper {
+      background: var(--surface) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5) !important;
+    }
+    .leaflet-popup-tip { background: var(--surface) !important; }
+    .leaflet-popup-content {
+      color: var(--text) !important;
+      font-family: 'DM Sans', sans-serif !important;
+      margin: 14px 16px !important;
+      min-width: 260px; line-height: 1.4;
+    }
+    .leaflet-popup-close-button { color: var(--text-dim) !important; }
+
+    .pc { font-size: 0.85em; }
+    .pc .num {
+      display: inline-flex; width: 22px; height: 22px;
+      border-radius: 50%; background: var(--orange); color: #000;
+      align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.85em;
+      margin-right: 6px; vertical-align: middle;
+    }
+    .pc h3 { display: inline; font-family: 'Space Grotesk',sans-serif; font-size: 1.05em; font-weight: 700; vertical-align: middle; }
+    .pc .meta { margin-top: 8px; color: var(--text-dim); font-size: 0.82em; }
+    .pc .meta strong { color: var(--orange); }
+    .pc .desc { margin-top: 8px; color: #a1a1aa; font-size: 0.82em; line-height: 1.5; border-top: 1px solid var(--border); padding-top: 8px; }
+    .pc .tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
+    .pc .tag { background: rgba(247,147,26,0.1); color: var(--orange); padding: 2px 7px; border-radius: 4px; font-size: 0.7em; font-weight: 500; }
+    .pc a.link { display: inline-block; margin-top: 10px; color: var(--orange); text-decoration: none; font-size: 0.82em; font-weight: 600; }
+    .pc a.link:hover { text-decoration: underline; }
+    .pc .travel { margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 0.78em; }
+
+    /* Legend */
+    .legend {
+      position: fixed; bottom: 20px; left: 20px; z-index: 1000;
+      background: rgba(22,22,24,0.92); backdrop-filter: blur(12px);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; font-size: 0.78em; max-width: 280px;
+    }
+    .legend h4 { font-family: 'Space Grotesk',sans-serif; font-size: 0.7em; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-dim); margin-bottom: 8px; }
+    .legend-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+    .legend-row:last-child { margin-bottom: 0; }
+    .legend-num {
+      width: 18px; height: 18px; border-radius: 50%; background: var(--orange); color: #000;
+      display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75em; flex-shrink: 0;
+    }
+    .legend-num.dim { background: #52525b; }
+    .legend-text { color: #a1a1aa; }
+    .legend-text strong { color: var(--text); }
+    .legend-text .d { color: var(--text-dim); font-size: 0.9em; }
+
+    .leaflet-control-zoom a { background: var(--surface) !important; color: var(--text) !important; border-color: var(--border) !important; }
+    .leaflet-control-attribution { background: rgba(12,12,14,0.7) !important; color: #3f3f46 !important; }
+    .leaflet-control-attribution a { color: #52525b !important; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Post-OFF Europe</h1>
+    <div class="route">Oslo <span>→</span> Warsaw <span>→</span> Prague · June 3–19, 2026</div>
+  </div>
+  <div id="map"></div>
+  <div class="legend">
+    <h4>Route</h4>
+    <div class="legend-row"><span class="legend-num dim">0</span><span class="legend-text"><strong>Oslo</strong> <span class="d">· OFF ends Jun 3</span></span></div>
+    <div class="legend-row"><span class="legend-num">1</span><span class="legend-text"><strong>BTC Film Fest</strong> <span class="d">· Jun 4–7</span></span></div>
+    <!-- Monero Konferenco hidden from UI -->
+
+    <div class="legend-row"><span class="legend-num">3</span><span class="legend-text"><strong>Freedom Tech Summit</strong> <span class="d">· Jun 10</span></span></div>
+    <div class="legend-row"><span class="legend-num">4</span><span class="legend-text"><strong>BTC Prague</strong> <span class="d">· Jun 11–13</span></span></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Geodesic plugin for curved flight arcs -->
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.geodesic@2.7.1/dist/leaflet.geodesic.umd.min.js"></script>
+
+  <script>
+    const map = L.map('map', { center: [54, 16], zoom: 6, zoomControl: true });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '© OSM © CARTO', subdomains: 'abcd', maxZoom: 19,
+    }).addTo(map);
+
+    // === DATA ===
+    const airports = [
+      { code: 'OSL', name: 'Oslo Gardermoen', lat: 60.1976, lng: 11.1004 },
+      { code: 'WAW', name: 'Warsaw Chopin', lat: 52.1657, lng: 20.9671 },
+      { code: 'PRG', name: 'Václav Havel', lat: 50.1008, lng: 14.2600 },
+    ];
+
+    const events = [
+      {
+        order: 0, name: 'Oslo Freedom Forum', dates: 'Jun 1–3',
+        city: 'Oslo, Norway', venue: 'Oslo City Hall',
+        lat: 59.9115, lng: 10.7338,
+        desc: 'Starting point. OFF ends June 3.',
+        tags: [], url: 'https://oslofreedomforum.com',
+        start: true, airport: 'OSL',
+      },
+      {
+        order: 1, name: 'BTC Film Fest', dates: 'Jun 4–7',
+        city: 'Warsaw', venue: 'Kinoteka, plac Defilad 1',
+        lat: 52.2317, lng: 21.0060,
+        desc: 'Bitcoin cinema, music, culture. World premieres & community screenings. 4th edition.',
+        tags: ['Bitcoin', 'Film', 'Culture'],
+        url: 'https://bitcoinfilmfest.com/bff26/',
+        travel: 'Oslo → Warsaw · ~2h flight (OSL→WAW)',
+        airport: 'WAW', tooltipDir: 'top',
+      },
+      /* Hidden from UI — kept in data for future use
+      {
+        order: 2, name: 'Monero Konferenco', dates: 'Jun 5–7',
+        city: 'Warsaw', venue: 'Kinoteka, plac Defilad 1',
+        lat: 52.2317, lng: 21.0060,
+        desc: 'Privacy tech, decentralization, financial privacy. Same venue as BTC Film Fest.',
+        tags: ['Monero', 'Privacy', 'Cypherpunk'],
+        url: 'https://www.monerokon.org/',
+        travel: 'Same building as BTC Film Fest',
+        airport: 'WAW', tooltipDir: 'right',
+      },
+      */
+      {
+        order: 3, name: 'Freedom Tech Summit', dates: 'Jun 10',
+        city: 'Prague', venue: 'Venue TBA (by Vexl Foundation)',
+        lat: 50.0880, lng: 14.4208,
+        desc: 'One-day dev conference. Bitcoin, Lightning, Cashu, Nostr, MeshCore. Formerly dev/hack/day.',
+        tags: ['Freedom Tech', 'Nostr', 'Lightning', 'Dev'],
+        url: 'https://freedomtechsummit.com/',
+        travel: 'Warsaw → Prague · ~1h flight (WAW→PRG) or ~5h train',
+        airport: 'PRG', tooltipDir: 'left',
+      },
+      {
+        order: 4, name: 'BTC Prague', dates: 'Jun 11–13',
+        city: 'Prague', venue: 'PVA EXPO, Beranových 667, Letňany',
+        lat: 50.1282, lng: 14.5144,
+        desc: "Europe's biggest Bitcoin conference. 10,000+ attendees, 250+ speakers. Plus side events all week.",
+        tags: ['Bitcoin', 'Conference', '10K+'],
+        url: 'https://btcprague.com/',
+        travel: 'Same city as Freedom Tech Summit',
+        airport: 'PRG', tooltipDir: 'right',
+      },
+    ];
+
+    // === AIRPORTS — small markers with permanent tooltips ===
+    airports.forEach(a => {
+      L.circleMarker([a.lat, a.lng], {
+        radius: 4, fillColor: '#52525b', color: '#3f3f46', weight: 1, fillOpacity: 0.8,
+      }).addTo(map)
+        .bindTooltip(`✈ ${a.code}`, {
+          permanent: true, direction: 'right', offset: [8, 0],
+          className: 'airport-tooltip',
+        });
+    });
+
+    // === FLIGHT ARCS — geodesic curved lines between airports ===
+    // Oslo → Warsaw
+    new L.Geodesic([[60.1976, 11.1004], [52.1657, 20.9671]], {
+      color: '#f7931a', weight: 1.5, opacity: 0.5, dashArray: '6, 10',
+      steps: 50,
+    }).addTo(map);
+
+    // Warsaw → Prague
+    new L.Geodesic([[52.1657, 20.9671], [50.1008, 14.2600]], {
+      color: '#f7931a', weight: 1.5, opacity: 0.5, dashArray: '6, 10',
+      steps: 50,
+    }).addTo(map);
+
+    // Short connector lines: venue ↔ airport (straight, gray)
+    function connector(from, to) {
+      L.polyline([from, to], {
+        color: '#52525b', weight: 1, opacity: 0.4, dashArray: '4, 8',
+      }).addTo(map);
+    }
+    // Oslo venue → OSL
+    connector([59.9115, 10.7338], [60.1976, 11.1004]);
+    // WAW → Warsaw venues
+    connector([52.1657, 20.9671], [52.2317, 21.0060]);
+    // PRG → Freedom Tech Summit
+    connector([50.1008, 14.2600], [50.0880, 14.4208]);
+    // PRG → BTC Prague (PVA EXPO)
+    connector([50.1008, 14.2600], [50.1282, 14.5144]);
+
+    // === FLIGHT TIME LABELS — at midpoint of each geodesic ===
+    L.marker([56.2, 15.5], { interactive: false, icon: L.divIcon({ className: '', iconSize: [0,0], html: '' }) })
+      .addTo(map)
+      .bindTooltip('✈ ~2h flight', { permanent: true, direction: 'center', className: 'flight-tooltip' });
+
+    L.marker([51.15, 17.6], { interactive: false, icon: L.divIcon({ className: '', iconSize: [0,0], html: '' }) })
+      .addTo(map)
+      .bindTooltip('✈ ~1h / 🚆 ~5h', { permanent: true, direction: 'center', className: 'flight-tooltip' });
+
+    // === EVENT MARKERS + LABELS ===
+    const sharedPins = {};
+
+    events.forEach(ev => {
+      const key = `${ev.lat},${ev.lng}`;
+      const color = ev.start ? '#52525b' : '#f7931a';
+
+      // Only one circle per location
+      if (!sharedPins[key]) {
+        sharedPins[key] = true;
+        L.circleMarker([ev.lat, ev.lng], {
+          radius: ev.start ? 6 : 9,
+          fillColor: color, color: '#0c0c0e', weight: 2, fillOpacity: 0.9,
+        }).addTo(map);
+      }
+
+      // Use Leaflet's built-in permanent tooltip for labels
+      // Direction: 'auto' tries to avoid overlap, but for co-located events we force left/right
+      const dir = ev.tooltipDir || 'top';
+      const offset = dir === 'left' ? [-14, 0] : dir === 'right' ? [14, 0] : [0, -14];
+
+      const labelHtml = `${ev.name}<br><span class="dates">${ev.dates}</span><br><span class="city">${ev.city}</span>`;
+
+      L.marker([ev.lat, ev.lng], {
+        icon: L.divIcon({ className: '', iconSize: [0,0], html: '' }),
+      }).addTo(map)
+        .bindTooltip(labelHtml, {
+          permanent: true,
+          direction: dir,
+          offset: offset,
+          className: 'event-tooltip',
+        });
+
+      // Invisible clickable area for popup
+      const tagsHtml = ev.tags.map(t => `<span class="tag">${t}</span>`).join('');
+      const travelHtml = ev.travel ? `<div class="travel">→ ${ev.travel}</div>` : '';
+
+      L.circleMarker([ev.lat, ev.lng], {
+        radius: 20, fillOpacity: 0, color: 'transparent',
+      }).addTo(map)
+        .bindPopup(`
+          <div class="pc">
+            <span class="num">${ev.order}</span>
+            <h3>${ev.name}</h3>
+            <div class="meta"><strong>${ev.dates}</strong> · ${ev.city}${ev.venue ? '<br>📍 ' + ev.venue : ''}</div>
+            <div class="desc">${ev.desc}</div>
+            ${tagsHtml ? `<div class="tags">${tagsHtml}</div>` : ''}
+            <a class="link" href="${ev.url}" target="_blank">Website →</a>
+            ${travelHtml}
+          </div>
+        `, { maxWidth: 300 });
+    });
+
+    map.fitBounds([[60.5, 9.0], [49.5, 22.5]], { padding: [60, 40] });
+  </script>
+</body>
+</html>
+
+<!--
+=== DESIGN CORRECTIONS LOG ===
+Track mistakes and fixes so the travel-plans skill improves over time.
+
+1. LABEL RECTANGLES (v1): Started with large background cards on labels. Too heavy, occluded map.
+   → Fix: Removed backgrounds, used text-shadow only.
+   → Problem: Text-shadow alone is unreadable against busy map tiles at zoom-out.
+   → Final fix: Use Leaflet's built-in permanent tooltips with custom CSS class.
+   Lesson: Don't reinvent labels with divIcons. Leaflet tooltips handle positioning, overflow, and
+   direction natively. Style them with CSS classes.
+
+2. OVERLAPPING LABELS (v1-v3): Co-located events stacked on top of each other.
+   → Fix v1: Manual iconAnchor offsets — brittle, zoom-dependent.
+   → Fix v4: Use tooltip direction: 'left'/'right' for co-located events. Leaflet handles offset math.
+   Lesson: Use tooltip direction ('left', 'right', 'top', 'auto') instead of manual pixel offsets.
+
+3. APPROXIMATE COORDINATES (v1): Used city-center lat/lng from memory.
+   → Fix: Always search for exact venue GPS from event website.
+   → PVA EXPO Prague: 50°7'41.662"N, 14°30'51.679"E (from btcprague.com)
+   Lesson: ALWAYS verify coordinates from primary source. Convert DMS to decimal.
+
+4. STRAIGHT FLIGHT LINES (v1-v3): Used L.polyline for inter-city routes — straight lines on map.
+   → Fix: Use Leaflet.Geodesic plugin for curved great-circle arcs.
+   Lesson: Flight routes should be geodesic curves, not straight polylines. Use Leaflet.Geodesic.
+
+5. CUSTOM LABEL DIVICONS (v1-v3): Built labels as L.divIcon with manual HTML + CSS.
+   → Problem: No built-in collision avoidance, manual anchor math, broke at different zoom levels.
+   → Fix: Use L.marker().bindTooltip() with permanent:true. Leaflet handles:
+     - Direction/offset
+     - Z-ordering
+     - Consistent positioning across zoom levels
+   Lesson: Use the framework's tooltip system instead of reinventing with divIcons.
+
+6. MISSING PLUGINS (v1-v3): Didn't research what Leaflet plugins exist for our exact problems.
+   → Key plugins discovered:
+     - Leaflet.Geodesic — curved flight arcs
+     - Leaflet.LayerGroup.Collision — automatic label collision hiding
+     - Leaflet.LabelTextCollision — label collision on vector layers
+     - leaflet-mapwithlabels — auto label placement (left/right/auto)
+   Lesson: ALWAYS search for existing Leaflet plugins before implementing from scratch.
+     The ecosystem is mature — most map UX problems have solutions.
+
+7. SERVER DIED: Python http.server process crashed without recovery.
+   → Fix: launchd plist (ai.openclaw.travel-map) for auto-restart.
+   → Standing rule: EVERY hosted project gets launchd immediately.
+-->
