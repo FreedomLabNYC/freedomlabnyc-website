@@ -146,10 +146,9 @@
   <div id="map"></div>
   <div class="legend">
     <h4>Route</h4>
-    <div class="legend-row"><span class="legend-num dim">0</span><span class="legend-text"><strong>Oslo</strong> <span class="d">· OFF ends Jun 3</span></span></div>
-    <div class="legend-row"><span class="legend-num">1</span><span class="legend-text"><strong>BTC Film Fest</strong> <span class="d">· Jun 4–7</span></span></div>
+    <div class="legend-row"><span class="legend-num">1</span><span class="legend-text"><strong>Oslo Freedom Forum</strong> <span class="d">· Jun 1–3</span></span></div>
+    <div class="legend-row"><span class="legend-num">2</span><span class="legend-text"><strong>BTC Film Fest</strong> <span class="d">· Jun 4–7</span></span></div>
     <!-- Monero Konferenco hidden from UI -->
-
     <div class="legend-row"><span class="legend-num">3</span><span class="legend-text"><strong>Freedom Tech Summit</strong> <span class="d">· Jun 10</span></span></div>
     <div class="legend-row"><span class="legend-num">4</span><span class="legend-text"><strong>BTC Prague</strong> <span class="d">· Jun 11–13</span></span></div>
   </div>
@@ -174,15 +173,15 @@
 
     const events = [
       {
-        order: 0, name: 'Oslo Freedom Forum', dates: 'Jun 1–3',
+        order: 1, name: 'Oslo Freedom Forum', dates: 'Jun 1–3',
         city: 'Oslo, Norway', venue: 'Oslo City Hall',
         lat: 59.9115, lng: 10.7338,
         desc: 'Starting point. OFF ends June 3.',
         tags: [], url: 'https://oslofreedomforum.com',
-        start: true, airport: 'OSL',
+        airport: 'OSL',
       },
       {
-        order: 1, name: 'BTC Film Fest', dates: 'Jun 4–7',
+        order: 2, name: 'BTC Film Fest', dates: 'Jun 4–7',
         city: 'Warsaw', venue: 'Kinoteka, plac Defilad 1',
         lat: 52.2317, lng: 21.0060,
         desc: 'Bitcoin cinema, music, culture. World premieres & community screenings. 4th edition.',
@@ -205,6 +204,7 @@
       */
       {
         order: 3, name: 'Freedom Tech Summit', dates: 'Jun 10',
+
         city: 'Prague', venue: 'Venue TBA (by Vexl Foundation)',
         lat: 50.0880, lng: 14.4208,
         desc: 'One-day dev conference. Bitcoin, Lightning, Cashu, Nostr, MeshCore. Formerly dev/hack/day.',
@@ -278,14 +278,25 @@
 
     events.forEach(ev => {
       const key = `${ev.lat},${ev.lng}`;
-      const color = ev.start ? '#52525b' : '#f7931a';
 
-      // Only one circle per location
+      // Only one numbered pin per location
       if (!sharedPins[key]) {
         sharedPins[key] = true;
-        L.circleMarker([ev.lat, ev.lng], {
-          radius: ev.start ? 6 : 9,
-          fillColor: color, color: '#0c0c0e', weight: 2, fillOpacity: 0.9,
+        // Numbered circle marker using divIcon
+        L.marker([ev.lat, ev.lng], {
+          icon: L.divIcon({
+            className: '',
+            iconSize: [24, 24],
+            iconAnchor: [12, 12],
+            html: `<div style="
+              width:24px;height:24px;border-radius:50%;
+              background:#f7931a;color:#000;
+              display:flex;align-items:center;justify-content:center;
+              font-family:'DM Sans',sans-serif;font-weight:700;font-size:12px;
+              border:2px solid #0c0c0e;
+              box-shadow:0 2px 8px rgba(0,0,0,0.5);
+            ">${ev.order}</div>`,
+          }),
         }).addTo(map);
       }
 
