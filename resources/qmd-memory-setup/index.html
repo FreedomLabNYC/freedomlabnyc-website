@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Set up QMD as a local hybrid search engine for OpenClaw agent memory. BM25 + vector + LLM re-ranking, fully self-hosted, no API keys.">
+    <title>QMD Memory Setup for OpenClaw | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>QMD Memory Setup</span>
+            </div>
+            <h1 class="tutorial-title">QMD Memory Setup for OpenClaw</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Skill</span>
+                <span class="tutorial-tag">AI Agents</span>
+                <span class="tutorial-tag">Memory</span>
+                <span class="tutorial-tag">Privacy</span>
+                <span class="tutorial-tag">OpenClaw</span>
+            </div>
+            <p class="tutorial-intro">Give your AI agent real memory recall. QMD replaces OpenClaw's default search with a local hybrid engine — BM25 keyword search, vector semantic search, and LLM re-ranking — all running on your machine with zero API keys or cloud dependencies.</p>
+        </div>
+
+        <section class="tutorial-section">
+            <h2 id="download">Download</h2>
+            <p><a href="qmd-memory-setup.skill" download style="display:inline-block;padding:12px 24px;background:#32d011;color:#000;font-weight:bold;border-radius:6px;text-decoration:none;font-size:1.1em;">⬇ Download qmd-memory-setup.skill</a></p>
+            <p>Install with OpenClaw:</p>
+            <pre><code>openclaw skill install qmd-memory-setup.skill</code></pre>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="problem">The Problem</h2>
+            <p>Your agent writes daily logs, saves preferences, and accumulates weeks of context. But ask it to recall a specific decision from three weeks ago and it either misses it or pulls up something tangentially related.</p>
+            <p>The problem isn't that the memory is gone — it's that the default search can't find it. OpenClaw's built-in SQLite search struggles when the query words don't exactly match the stored text.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="solution">What QMD Does</h2>
+            <p>QMD (by <a href="https://github.com/tobi" style="color:#32d011;">Tobi Lütke</a>) combines three search layers:</p>
+            <ul>
+                <li><strong>BM25 keyword search</strong> — fast exact matching for error messages, IDs, code symbols</li>
+                <li><strong>Vector semantic search</strong> — finds conceptually similar content even when wording differs</li>
+                <li><strong>LLM re-ranking</strong> — a small local model sorts results by actual relevance</li>
+            </ul>
+            <p>Example: your agent saved "running the gateway on the Mac Mini, port 18789." Search for "gateway server setup" — the default misses it (no "server" or "setup" in the note). QMD finds it because vector search catches the conceptual match and the reranker confirms relevance.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="setup">Quick Setup</h2>
+            <pre><code># 1. Install QMD
+npm install -g @tobilu/qmd
+
+# 2. Add to openclaw.json
+# memory.backend: "qmd"
+# memory.citations: "auto"
+
+# 3. Restart
+openclaw gateway restart</code></pre>
+            <p>Three small GGUF models (~2GB total) auto-download on first search. Everything runs locally — no API keys, no cloud.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="comparison">Backend Comparison</h2>
+            <table style="width:100%;border-collapse:collapse;margin:1em 0;">
+                <thead>
+                    <tr style="border-bottom:2px solid rgba(50,208,17,0.3);">
+                        <th style="text-align:left;padding:8px;">Feature</th>
+                        <th style="text-align:left;padding:8px;">SQLite Default</th>
+                        <th style="text-align:left;padding:8px;">QMD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">Search types</td>
+                        <td style="padding:8px;">Semantic only</td>
+                        <td style="padding:8px;"><strong>Semantic + BM25 + LLM re-ranking</strong></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">Query expansion</td>
+                        <td style="padding:8px;">No</td>
+                        <td style="padding:8px;"><strong>Yes</strong></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">API keys needed</td>
+                        <td style="padding:8px;">Optional</td>
+                        <td style="padding:8px;"><strong>None (fully local)</strong></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">Disk overhead</td>
+                        <td style="padding:8px;">~600MB</td>
+                        <td style="padding:8px;">~2GB</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px;">Speed</td>
+                        <td style="padding:8px;">Fast (~100ms)</td>
+                        <td style="padding:8px;">Moderate (~2-4s hybrid)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="whats-inside">What's in the Package</h2>
+            <pre><code>qmd-memory-setup/
+├── SKILL.md                              # Full setup guide, CLI usage, SDK, troubleshooting
+└── references/
+    └── backend-comparison.md             # Detailed comparison of all three backends</code></pre>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="requirements">Requirements</h2>
+            <ul>
+                <li><strong>OpenClaw</strong> — any recent version</li>
+                <li><strong>Node.js 22+</strong> or Bun 1.0+</li>
+                <li><strong>~2GB disk</strong> for GGUF models (auto-downloaded)</li>
+                <li><strong>macOS or Linux</strong> (Windows via WSL2)</li>
+                <li>GPU optional — auto-detects Metal (Mac), CUDA (NVIDIA), Vulkan</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="freedom-tech">Freedom Tech Perspective</h2>
+            <p>Memory recall is where AI agents become genuinely useful — an agent that forgets is just a chatbot with extra steps. QMD solves this entirely on-device: no cloud embeddings service, no vector database subscription, no API keys leaking your notes to third parties.</p>
+            <ul>
+                <li><strong>Fully local</strong> — three small GGUF models run on your machine's GPU. Your notes never leave.</li>
+                <li><strong>MIT licensed</strong> — open source, no restrictions.</li>
+                <li><strong>No accounts</strong> — install, configure, done. No signup, no telemetry.</li>
+                <li><strong>Built by Tobi Lütke</strong> — Shopify's CEO, built for his own agent workflow. Production-grade despite being a personal project.</li>
+                <li><strong>Privacy by architecture</strong> — not "we promise not to read your data," but "the data never leaves your machine in the first place."</li>
+            </ul>
+        </section>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <p class="footer-brand">Freedom Lab NYC</p>
+                <p class="footer-tagline">Technology for individual sovereignty</p>
+            </div>
+            <div class="footer-col">
+                <a href="/resources/">Resources</a>
+                <a href="/classes-events/">Classes & Events</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>
