@@ -161,9 +161,402 @@ Sender wallet pays → sats arrive in your wallet</code></pre>
             <p>The domain owner does <strong>not</strong> need to run any software, receive any credentials, or have access to your wallet. They can revoke the address by deleting the file — same trust model as email routing.</p>
         </section>
 
+        <!-- Step-by-Step: Install Phoenixd -->
+        <section class="tutorial-section">
+            <h2 id="install-phoenixd">Step 1: Install Phoenixd</h2>
+            <p>Download the latest release for your platform from <a href="https://github.com/ACINQ/phoenixd/releases" style="color:#32d011;">github.com/ACINQ/phoenixd/releases</a>.</p>
+            <pre><code># macOS arm64
+wget https://github.com/ACINQ/phoenixd/releases/download/v0.7.3/phoenixd-0.7.3-macos-arm64.zip
+unzip phoenixd-0.7.3-macos-arm64.zip
+mv phoenixd phoenix-cli ~/.local/bin/
+
+# Linux x86_64
+wget https://github.com/ACINQ/phoenixd/releases/download/v0.7.3/phoenixd-0.7.3-linux-x64.zip
+unzip phoenixd-0.7.3-linux-x64.zip
+mv phoenixd phoenix-cli ~/.local/bin/
+
+# First run — generates seed, creates config
+phoenixd
+# Type "I understand" when prompted about fee credit</code></pre>
+            <p><strong>⚠️ Critical:</strong> Back up <code>~/.phoenix/seed.dat</code> immediately. This 12-word BIP39 phrase is your only recovery path. Store it encrypted, offline, separate from the machine running phoenixd.</p>
+            <h3>Who Built Phoenixd</h3>
+            <p><strong>ACINQ</strong> — founded 2014, France. One of the three original Lightning Network implementations (alongside Lightning Labs and Blockstream). $10M funded. Their Lightning node (Eclair) has been running since 2017. Phoenix Wallet is one of the most respected self-custodial Lightning wallets on mobile. They co-authored the Lightning Protocol 1.0 specification.</p>
+        </section>
+
+        <!-- Understand the Costs -->
+        <section class="tutorial-section">
+            <h2 id="costs">Step 2: Understand the Costs</h2>
+            <p>Phoenixd uses ACINQ as a Lightning Service Provider (LSP). When you receive your first payment large enough to cover fees, ACINQ opens a channel:</p>
+            <table style="width:100%;border-collapse:collapse;margin:1em 0;">
+                <thead>
+                    <tr style="border-bottom:2px solid rgba(50,208,17,0.3);">
+                        <th style="text-align:left;padding:8px;">Setting</th>
+                        <th style="text-align:left;padding:8px;">Channel Capacity</th>
+                        <th style="text-align:left;padding:8px;">Fee (1% + mining)</th>
+                        <th style="text-align:left;padding:8px;">Approx USD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">2M sats (default)</td>
+                        <td style="padding:8px;">~$1,414</td>
+                        <td style="padding:8px;">~20,137 sats</td>
+                        <td style="padding:8px;">~$14</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">5M sats</td>
+                        <td style="padding:8px;">~$3,535</td>
+                        <td style="padding:8px;">~50,137 sats</td>
+                        <td style="padding:8px;">~$35</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px;">10M sats</td>
+                        <td style="padding:8px;">~$7,070</td>
+                        <td style="padding:8px;">~100,137 sats</td>
+                        <td style="padding:8px;">~$71</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Important details:</strong></p>
+            <ul>
+                <li>The 1% fee is on the <strong>channel capacity</strong>, not your payment amount</li>
+                <li>Payments smaller than the total fee go to <strong>fee credit</strong> (non-refundable, used toward future channel fees)</li>
+                <li>After the channel is open, incoming payments have <strong>zero additional fee</strong> until capacity is consumed</li>
+                <li>Sending fees are normal Lightning routing (1-10 sats typically)</li>
+                <li>Configure with <code>--auto-liquidity=(off|2m|5m|10m)</code> (requires restart)</li>
+            </ul>
+            <p><strong>Source:</strong> <a href="https://phoenix.acinq.co/server/auto-liquidity" style="color:#32d011;">phoenix.acinq.co/server/auto-liquidity</a></p>
+        </section>
+
+        <!-- API Reference -->
+        <section class="tutorial-section">
+            <h2 id="api">Step 3: Phoenixd API Reference</h2>
+            <p>All API calls use HTTP Basic Auth (empty username, password from <code>~/.phoenix/phoenix.conf</code>).</p>
+            <pre><code># Check balance
+curl -s http://localhost:9740/getbalance -u :$PASSWORD
+
+# Get node info
+curl -s http://localhost:9740/getinfo -u :$PASSWORD
+
+# Create invoice (receive payment)
+curl -s -X POST http://localhost:9740/createinvoice \
+  -u :$PASSWORD \
+  -d description='Coffee fund' \
+  -d amountSat=5000
+
+# Pay invoice (send payment)
+curl -s -X POST http://localhost:9740/payinvoice \
+  -u :$PASSWORD \
+  -d invoice=lnbc...
+
+# List incoming payments
+curl -s http://localhost:9740/payments/incoming -u :$PASSWORD
+
+# List outgoing payments
+curl -s http://localhost:9740/payments/outgoing -u :$PASSWORD</code></pre>
+            <p>The API is fully documented at <a href="https://phoenix.acinq.co/server/api" style="color:#32d011;">phoenix.acinq.co/server/api</a>.</p>
+        </section>
+
+        <!-- LNURL Proxy Setup -->
+        <section class="tutorial-section">
+            <h2 id="lnurl-proxy">Step 4: LNURL Proxy (Full Implementation)</h2>
+            <p>The LNURL proxy is a lightweight Python HTTP server that translates LNURL-pay callback requests into phoenixd invoice creation calls. Zero dependencies — stdlib only.</p>
+            <pre><code>#!/usr/bin/env python3
+"""LNURL-pay proxy for phoenixd. Zero dependencies."""
+import http.server, json, urllib.request, urllib.parse, base64, os
+
+PHOENIXD_URL = os.environ.get("PHOENIXD_URL", "http://localhost:9740")
+PHOENIXD_PASS = os.environ.get("PHOENIXD_PASS", "")  # limited API password
+LN_ADDRESS = os.environ.get("LN_ADDRESS", "agent@yourdomain.com")
+PORT = int(os.environ.get("PORT", "8089"))
+
+class LNURLHandler(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        path = self.path.split("?")[0]
+        params = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+
+        # Callback endpoint: wallet sends amount, we create invoice
+        if path.endswith("/callback") and "amount" in params:
+            amount_msat = int(params["amount"][0])
+            description = json.dumps([
+                ["text/identifier", LN_ADDRESS],
+                ["text/plain", f"Pay {LN_ADDRESS}"]
+            ])
+
+            # Create invoice via phoenixd
+            auth = base64.b64encode(f":{PHOENIXD_PASS}".encode()).decode()
+            data = urllib.parse.urlencode({
+                "description": description,
+                "amountSat": amount_msat // 1000
+            }).encode()
+
+            req = urllib.request.Request(
+                f"{PHOENIXD_URL}/createinvoice",
+                data=data, method="POST",
+                headers={"Authorization": f"Basic {auth}"}
+            )
+            resp = json.loads(urllib.request.urlopen(req).read())
+
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(json.dumps({
+                "pr": resp["serialized"],
+                "routes": []
+            }).encode())
+        else:
+            self.send_response(404)
+            self.end_headers()
+
+    def log_message(self, fmt, *args): pass  # silence logs
+
+if __name__ == "__main__":
+    server = http.server.HTTPServer(("0.0.0.0", PORT), LNURLHandler)
+    print(f"LNURL proxy on :{PORT} → {PHOENIXD_URL}")
+    server.serve_forever()</code></pre>
+            <p>Run it:</p>
+            <pre><code>PHOENIXD_PASS="your-limited-password" \
+LN_ADDRESS="alice@yourdomain.com" \
+python3 lnurl-proxy.py</code></pre>
+        </section>
+
+        <!-- Public Exposure Methods -->
+        <section class="tutorial-section">
+            <h2 id="exposure">Step 5: Expose Your Proxy Publicly</h2>
+            <p>Your LNURL proxy needs a public HTTPS endpoint so sender wallets can reach it. Three options:</p>
+
+            <h3>Option A: Tailscale Funnel (Recommended)</h3>
+            <p>Free, stable URL that survives reboots. No account besides Tailscale.</p>
+            <pre><code># One-time setup
+tailscale funnel --bg --set-path /ln http://127.0.0.1:8089
+
+# Verify
+tailscale serve status
+# Your URL: https://your-machine.tail12345.ts.net/ln</code></pre>
+
+            <h3>Option B: Cloudflare Tunnel</h3>
+            <p>Free tier available. Requires Cloudflare account and domain on Cloudflare DNS.</p>
+            <pre><code>cloudflared tunnel --url http://localhost:8089</code></pre>
+            <p>⚠️ Quick tunnels generate random domains that break on restart. Use named tunnels for persistence.</p>
+
+            <h3>Option C: VPS Reverse Proxy</h3>
+            <p>Run nginx/caddy on a VPS pointing to your home machine via WireGuard/Tailscale. Most control, most setup.</p>
+        </section>
+
+        <!-- DNS Configuration -->
+        <section class="tutorial-section">
+            <h2 id="dns">Step 6: DNS / Static File Configuration</h2>
+            <p>Create the well-known file on your domain. For <code>alice@example.com</code>, the file goes at:</p>
+            <pre><code>https://example.com/.well-known/lnurlp/alice</code></pre>
+            <p>Contents:</p>
+            <pre><code>{
+  "callback": "https://your-public-endpoint/lnurlp/alice/callback",
+  "metadata": "[[\"text/identifier\",\"alice@example.com\"],[\"text/plain\",\"Pay alice\"]]",
+  "tag": "payRequest",
+  "minSendable": 1000,
+  "maxSendable": 100000000
+}</code></pre>
+            <p><strong>GitHub Pages:</strong> Commit the file to your repo at <code>.well-known/lnurlp/alice</code> (no extension). Add an empty <code>.nojekyll</code> file so GitHub serves dotfiles. Ensure the response Content-Type is <code>application/json</code>.</p>
+            <p><strong>Verify:</strong></p>
+            <pre><code>curl -s https://example.com/.well-known/lnurlp/alice | python3 -m json.tool</code></pre>
+        </section>
+
+        <!-- End-to-End Testing -->
+        <section class="tutorial-section">
+            <h2 id="testing">Step 7: End-to-End Testing</h2>
+            <pre><code># 1. Verify static file resolves
+curl -s https://yourdomain.com/.well-known/lnurlp/alice
+
+# 2. Test callback directly (1000 msats = 1 sat)
+curl -s "https://your-public-endpoint/lnurlp/alice/callback?amount=1000"
+# Should return: {"pr": "lnbc...", "routes": []}
+
+# 3. Test with a real wallet
+# Open Phoenix, Muun, Breez, or any LNURL-compatible wallet
+# Enter: alice@yourdomain.com
+# Send a small amount (100 sats)
+
+# 4. Verify receipt
+curl -s http://localhost:9740/payments/incoming -u :$PASSWORD | python3 -m json.tool</code></pre>
+        </section>
+
+        <!-- Exhaustive Wallet Comparison -->
+        <section class="tutorial-section">
+            <h2 id="wallet-deep-dive">Deep Dive: All Wallet Options Compared</h2>
+            <p>We evaluated every option in real-world testing. Here's what we found from primary source docs and hands-on experience:</p>
+
+            <h3>Phoenixd (ACINQ) — Recommended for Agents</h3>
+            <ul>
+                <li><strong>Type:</strong> Self-custodial, single binary, zero config</li>
+                <li><strong>Cost to start:</strong> ~$14 one-time channel fee (1% of 2M sat channel + mining)</li>
+                <li><strong>Minimum viable payment:</strong> Need a single payment ≥ total channel fee to trigger channel creation. Smaller payments accumulate as non-refundable "fee credit"</li>
+                <li><strong>API:</strong> Simple HTTP REST (curl-friendly)</li>
+                <li><strong>Pros:</strong> Simplest self-custodial option, fully automated liquidity, battle-tested</li>
+                <li><strong>Cons:</strong> ACINQ is sole channel partner (privacy tradeoff), minimum channel 2M sats, no on-chain deposit path</li>
+                <li><strong>Gotcha:</strong> ACINQ's server can have transient "channel funding errors" (TxAbort during dual funding). We hit one that lasted ~12 hours and resolved on its own. <a href="https://github.com/ACINQ/phoenixd/issues/228" style="color:#32d011;">GitHub issue #228</a></li>
+            </ul>
+
+            <h3>Alby Hub (LDK) — Best for Humans, Decent for Agents</h3>
+            <ul>
+                <li><strong>Type:</strong> Self-custodial, web UI + HTTP API + NWC (Nostr Wallet Connect)</li>
+                <li><strong>Cost to start:</strong> Depends on LSP:
+                    <ul>
+                        <li>Megalith (Lightning): 1M sat minimum, ~$13 fee</li>
+                        <li>Megalith (on-chain): 150K sat minimum (~$106), ~$0.11 mining fee</li>
+                        <li>Olympus/Zeus (on-chain): 250K sat minimum (~$177)</li>
+                    </ul>
+                </li>
+                <li><strong>Pros:</strong> Multiple LSP choices, on-chain deposit option, nice web UI, Nostr-native</li>
+                <li><strong>Cons:</strong> Heavier than phoenixd, higher minimums for on-chain</li>
+                <li><strong>Useful as fallback</strong> when phoenixd's sole LSP has issues</li>
+            </ul>
+
+            <h3>Alby Account (Custodial) — Cheapest Quick-Start</h3>
+            <ul>
+                <li><strong>Type:</strong> Custodial (Alby holds the keys)</li>
+                <li><strong>Cost:</strong> Free. Zero minimum.</li>
+                <li><strong>Pros:</strong> Instant, no channel needed, works immediately via NWC</li>
+                <li><strong>Cons:</strong> Not self-custodial — you're trusting Alby with your funds</li>
+                <li><strong>Good for:</strong> Testing, tiny amounts, getting started before committing to self-custody</li>
+            </ul>
+
+            <h3>Zeus Wallet (Olympus LSP) — Mobile-First</h3>
+            <ul>
+                <li><strong>Type:</strong> Self-custodial, mobile app with embedded node</li>
+                <li><strong>Cost:</strong> 10,000 sat flat fee for channels up to 1M sats, 1% above</li>
+                <li><strong>Pros:</strong> 0-conf channels (instant), good mobile UX</li>
+                <li><strong>Cons:</strong> Mobile app — not designed for server/agent automation, no headless API</li>
+            </ul>
+
+            <h3>LND (Lightning Labs) — Full Sovereignty</h3>
+            <ul>
+                <li><strong>Type:</strong> Self-custodial, full routing node</li>
+                <li><strong>Cost:</strong> On-chain transaction fee to open channels (you choose partners)</li>
+                <li><strong>Pros:</strong> Maximum control, multiple channel partners (better privacy), can earn routing fees</li>
+                <li><strong>Cons:</strong> Complex setup, manual channel management, requires significant capital for useful liquidity</li>
+            </ul>
+
+            <h3>Our Decision Path (Real-World)</h3>
+            <ol>
+                <li>Started with <strong>phoenixd</strong> (simplest self-custodial) → hit ACINQ server bug</li>
+                <li>Explored <strong>Alby Hub</strong> as alternative → minimum on-chain deposits too expensive for testing ($106+)</li>
+                <li>Set up <strong>Alby Account</strong> (custodial) as cheap stopgap → worked instantly, free</li>
+                <li><strong>Phoenixd resolved</strong> after ~12 hours → now primary wallet</li>
+                <li>Alby Account remains available as custodial fallback</li>
+            </ol>
+            <p><strong>Lesson:</strong> Have a backup plan. Self-custodial Lightning depends on your LSP being operational. If your sole channel partner goes down, you need either a second node with a different LSP, or a custodial fallback for continuity.</p>
+        </section>
+
+        <!-- Security Model -->
+        <section class="tutorial-section">
+            <h2 id="security">Security Model</h2>
+            <table style="width:100%;border-collapse:collapse;margin:1em 0;">
+                <thead>
+                    <tr style="border-bottom:2px solid rgba(50,208,17,0.3);">
+                        <th style="text-align:left;padding:8px;">Component</th>
+                        <th style="text-align:left;padding:8px;">Access Level</th>
+                        <th style="text-align:left;padding:8px;">Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">Full API password</td>
+                        <td style="padding:8px;">Can send payments</td>
+                        <td style="padding:8px;">Agent uses for purchases</td>
+                    </tr>
+                    <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <td style="padding:8px;">Limited API password</td>
+                        <td style="padding:8px;">Read + create invoices only</td>
+                        <td style="padding:8px;">Dashboard, LNURL proxy</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:8px;">Seed phrase</td>
+                        <td style="padding:8px;">Full fund recovery</td>
+                        <td style="padding:8px;">Offline backup only</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><strong>Spending limits:</strong> Keep the wallet balance small ($20-100). This is a spending wallet, not savings. Fund it periodically in small amounts.</p>
+            <p><strong>Trust tradeoffs:</strong></p>
+            <ul>
+                <li>Self-custodial: you hold the keys, can force-close the channel anytime</li>
+                <li>ACINQ is the sole channel partner: they can see payment amounts/timing (privacy limitation)</li>
+                <li>For serious privacy needs, run a full LND/CLN node with multiple channel partners</li>
+                <li>The LNURL proxy uses the <strong>limited</strong> API password — it can create invoices but cannot send payments</li>
+            </ul>
+        </section>
+
+        <!-- Persistence -->
+        <section class="tutorial-section">
+            <h2 id="persistence">Persistent Services (Survive Reboots)</h2>
+            <p>Both phoenixd and the LNURL proxy must run as system services. Without this, the Lightning Address breaks on reboot.</p>
+
+            <h3>macOS (launchd)</h3>
+            <p>Create <code>~/Library/LaunchAgents/ai.openclaw.lnurl-proxy.plist</code>:</p>
+            <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;
+&lt;dict&gt;
+    &lt;key&gt;Label&lt;/key&gt;
+    &lt;string&gt;ai.openclaw.lnurl-proxy&lt;/string&gt;
+    &lt;key&gt;ProgramArguments&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;/usr/bin/python3&lt;/string&gt;
+        &lt;string&gt;/path/to/lnurl-proxy.py&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;EnvironmentVariables&lt;/key&gt;
+    &lt;dict&gt;
+        &lt;key&gt;PHOENIXD_PASS&lt;/key&gt;
+        &lt;string&gt;your-limited-password&lt;/string&gt;
+        &lt;key&gt;LN_ADDRESS&lt;/key&gt;
+        &lt;string&gt;alice@yourdomain.com&lt;/string&gt;
+    &lt;/dict&gt;
+    &lt;key&gt;RunAtLoad&lt;/key&gt;&lt;true/&gt;
+    &lt;key&gt;KeepAlive&lt;/key&gt;&lt;true/&gt;
+    &lt;key&gt;ThrottleInterval&lt;/key&gt;&lt;integer&gt;10&lt;/integer&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;</code></pre>
+            <pre><code>launchctl load ~/Library/LaunchAgents/ai.openclaw.lnurl-proxy.plist</code></pre>
+
+            <h3>Linux (systemd)</h3>
+            <p>Create <code>/etc/systemd/system/lnurl-proxy.service</code>:</p>
+            <pre><code>[Unit]
+Description=LNURL-pay proxy for phoenixd
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /path/to/lnurl-proxy.py
+Environment=PHOENIXD_PASS=your-limited-password
+Environment=LN_ADDRESS=alice@yourdomain.com
+Restart=always
+RestartSec=10
+User=your-user
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+            <pre><code>sudo systemctl enable --now lnurl-proxy</code></pre>
+            <p><strong>Key settings:</strong> <code>KeepAlive</code> / <code>Restart=always</code> ensures the proxy restarts on crash. <code>ThrottleInterval</code> / <code>RestartSec</code> prevents crash loops. Without persistence, the Lightning Address returns empty responses, causing <code>lnurlError: EOF while parsing</code> in sender wallets.</p>
+        </section>
+
+        <!-- Agent Spending Workflows -->
+        <section class="tutorial-section">
+            <h2 id="agent-workflows">Agent Spending Workflows</h2>
+            <p>Once your agent has a funded Lightning wallet, here's what it can do:</p>
+            <ul>
+                <li><strong>Bitrefill purchases:</strong> Convert Lightning to gift cards (Amazon, Visa, etc.) for any online store</li>
+                <li><strong>L402 API access:</strong> Pay-per-request APIs gated by Lightning invoices</li>
+                <li><strong>Direct Lightning payments:</strong> Pay any Lightning invoice (freelancers, services, donations)</li>
+                <li><strong>Nostr zaps (NIP-57):</strong> Tip content creators on Nostr with Lightning</li>
+                <li><strong>Peddler (Nostr commerce):</strong> Accept payments for physical or digital goods</li>
+            </ul>
+            <p><strong>Approval gates:</strong> For agent spending, always implement a human approval step before paying any invoice. Screenshot the order summary, show it to the human, wait for explicit approval. Never let an agent pay invoices autonomously without a review gate — one wrong API call can send real money.</p>
+        </section>
+
         <!-- What's Inside -->
         <section class="tutorial-section">
-            <h2 id="whats-inside">What's in the Package</h2>
+            <h2 id="whats-inside">What's in the Skill Package</h2>
             <pre><code>lightning-address/
 ├── SKILL.md                           # Core setup instructions
 ├── scripts/
@@ -182,6 +575,7 @@ Sender wallet pays → sats arrive in your wallet</code></pre>
                 <li><strong>Phoenixd</strong> — <a href="https://github.com/ACINQ/phoenixd/releases" style="color:#32d011;">download from GitHub</a> (or alternative wallet)</li>
                 <li><strong>Public HTTPS endpoint</strong> — Tailscale Funnel (free), Cloudflare Tunnel (free), or VPS</li>
                 <li><strong>Domain with static file hosting</strong> — GitHub Pages, Cloudflare Pages, or any web server</li>
+                <li><strong>~$14 in Bitcoin</strong> — for the initial channel fee (or free if using custodial Alby to start)</li>
             </ul>
         </section>
 
