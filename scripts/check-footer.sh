@@ -38,3 +38,29 @@ elif [ $ERRORS -gt 0 ]; then
 else
     echo "  ✅ All pages have footer.js"
 fi
+
+# --- OG Meta Tag Check ---
+OG_ERRORS=0
+
+while IFS= read -r file; do
+    if ! grep -q 'og:title' "$file"; then
+        echo "  ❌ Missing og:title: $file"
+        OG_ERRORS=$((OG_ERRORS + 1))
+    fi
+    if ! grep -q 'og:description' "$file"; then
+        echo "  ❌ Missing og:description: $file"
+        OG_ERRORS=$((OG_ERRORS + 1))
+    fi
+    if ! grep -q 'og:image' "$file"; then
+        echo "  ❌ Missing og:image: $file"
+        OG_ERRORS=$((OG_ERRORS + 1))
+    fi
+done < <(find . -name "index.html" -not -path "./node_modules/*")
+
+if [ $OG_ERRORS -gt 0 ]; then
+    echo ""
+    echo "$OG_ERRORS missing OG meta tag(s). Every page needs og:title, og:description, and og:image for link previews."
+    exit 1
+else
+    echo "  ✅ All pages have OG meta tags"
+fi
