@@ -1,0 +1,7 @@
+{
+  "tag": "payRequest",
+  "callback": "https://jinn-hp.taild4516d.ts.net/lnurlp/jinn/callback",
+  "metadata": "[[\"text/identifier\",\"jinn@freedomlab.nyc\"],[\"text/plain\",\"Pay Jinn\"]]",
+  "minSendable": 1000,
+  "maxSendable": 10000000000
+}
