@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Spend Bitcoin at any online store. Your AI agent handles Lightning payments, Bitrefill Visa purchases, coupon hunting, and automated checkout across 65% of e-commerce.">
+    <title>Buy With Bitcoin (Bitrefill) | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freedomlab.nyc/resources/buy-with-bitcoin/">
+    <meta property="og:title" content="Buy With Bitcoin (Bitrefill) | Freedom Lab NYC">
+    <meta property="og:description" content="Spend Bitcoin at any online store using AI agents, Lightning, and Bitrefill.">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Buy With Bitcoin (Bitrefill) | Freedom Lab NYC">
+    <meta name="twitter:description" content="Spend Bitcoin at any online store using AI agents, Lightning, and Bitrefill.">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><a href="/resources/#ai-skills">Open Source AI Skills</a><span>›</span><span>Buy With Bitcoin (Bitrefill)</span>
+            </div>
+            <h1 class="tutorial-title">Buy With Bitcoin (Bitrefill)</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Skill</span>
+                <span class="tutorial-tag">Bitcoin</span>
+                <span class="tutorial-tag">AI Agents</span>
+            </div>
+            <p class="tutorial-description">Spend Bitcoin at any online store. Your AI agent handles Lightning payments, Bitrefill Visa purchases, coupon hunting, and automated checkout — covering 65% of e-commerce.</p>
+        </div>
+
+        <a href="https://github.com/FreedomLabNYC/skills/tree/main/buy-with-bitcoin-bitrefill" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1.2rem; background:var(--bg-elevated, #191a19); border:1px solid var(--border, #292b29); border-radius:8px; color:var(--text-primary, #eff0ee); font-weight:500; text-decoration:none; font-size:0.9rem; transition:all 0.2s ease; margin-bottom:1.5rem;" onmouseover="this.style.borderColor='#32d011'" onmouseout="this.style.borderColor='var(--border, #292b29)'">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            View on GitHub
+        </a>
+
+        <section class="tutorial-section">
+            <h2>The Problem</h2>
+            <p>You have Bitcoin. You want to buy something online. The store doesn't accept Bitcoin. Now what?</p>
+            <p>This skill solves that with a pipeline: <strong>Lightning → Bitrefill Visa → automated checkout</strong>. Your AI agent handles everything — detecting the store platform, finding coupon codes, purchasing an exact-amount Visa card with Lightning, and filling out the checkout form. You just approve the total.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>How It Works</h2>
+            <p>The pipeline has four stages:</p>
+            <ol>
+                <li><strong>Detect the store platform</strong> — HTTP probes identify whether it's Shopify, Stripe, or WooCommerce (no browser needed, ~2 seconds)</li>
+                <li><strong>Find coupons + get exact total</strong> — searches 7 sources for discount codes, validates them via the Shopify Storefront API, gets the exact checkout total including shipping and tax</li>
+                <li><strong>Buy a Visa with Lightning</strong> — purchases an exact-amount prepaid Visa through Bitrefill using your Lightning wallet. No rounding up, no wasted balance.</li>
+                <li><strong>Automated checkout</strong> — fills the checkout form with your shipping info and card details using platform-specific selectors. ~15 seconds per checkout.</li>
+            </ol>
+            <p>Two mandatory approval gates: you confirm the total before the Visa purchase, and you confirm the filled checkout form before submission. The agent never spends without your sign-off.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Why This Approach</h2>
+            <h3>No buyer-side checkout API exists</h3>
+            <p>Every AI shopping agent — from sneaker bots to Browser Use to MultiOn — uses browser automation for the payment step. PCI compliance requires card details go through the merchant's payment iframe. There is no way around this.</p>
+            <h3>Hardcoded selectors beat LLM navigation</h3>
+            <p>We use platform-specific selectors (like sneaker bots) rather than LLM-driven page navigation (like Browser Use). The tradeoff: we need a module per platform. But three modules cover 65% of e-commerce, and each checkout takes ~15 seconds instead of ~120 seconds with LLM navigation. Zero AI tokens spent on the checkout itself.</p>
+            <h3>Self-custodial, no KYC</h3>
+            <p>The payment rail is fully self-custodial Lightning (we use <a href="https://phoenix.acinq.co/server" target="_blank">phoenixd</a>). Bitrefill requires no KYC. No bank account, no credit card company, no payment processor sees your identity. You hold your keys, your agent handles the rest.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Platform Coverage</h2>
+            <ul>
+                <li><strong>Shopify (~30% of e-commerce)</strong> — full support. Card iframes are fillable. Storefront API enables cart creation, discount validation, and exact pricing with zero browser interaction.</li>
+                <li><strong>Stripe Hosted Checkout (~15%)</strong> — full support. All fields are standard DOM elements, no iframes. The easiest to automate.</li>
+                <li><strong>WooCommerce + Braintree (~10%)</strong> — full support. Braintree card iframes are fillable.</li>
+                <li><strong>WooCommerce + Stripe (~10%)</strong> — partial. Stripe Elements blocks programmatic card entry. Shipping/contact fields work, but payment requires manual entry.</li>
+            </ul>
+            <p><strong>Not covered (~35%):</strong> Custom platforms, Amazon (use gift cards instead), sites with CAPTCHA, Shop Pay (requires phone + saved card).</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>The Coupon Finder</h2>
+            <p>Before every purchase, the agent searches 7 sources for discount codes:</p>
+            <ol>
+                <li><strong>Common pattern brute-force</strong> — generates ~247 codes (WELCOME10, SAVE15, FREESHIP, etc.)</li>
+                <li><strong>Store homepage</strong> — banners, popups, data attributes with promo codes</li>
+                <li><strong>Influencer/podcast codes</strong> — Google search for "[brand] podcast code" (highest value, 15-20% off)</li>
+                <li><strong>Google search</strong> — "[brand] coupon code [year]"</li>
+                <li><strong>Reddit</strong> — searches r/deals + general subreddits</li>
+                <li><strong>X/Twitter</strong> — "[brand] discount code"</li>
+                <li><strong>Coupon aggregator sites</strong> — RetailMeNot, CouponFollow, Coupons.com</li>
+            </ol>
+            <p>All found codes are validated via the Shopify Storefront API (~0.5 seconds per code). Results sorted by savings.</p>
+            <p><strong>Why this beats Honey:</strong> API validation is 10x faster than browser-based testing, zero privacy compromise (no extension sending your shopping data to PayPal), no affiliate link swapping, and more sources (brute-force + influencer + Reddit + Twitter).</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>The Payment Rail</h2>
+            <h3>Lightning → Bitrefill → Prepaid Visa → Any Store</h3>
+            <p>Bitrefill sells prepaid Visa cards for Lightning payments. The key insight: <strong>you can buy exact custom amounts</strong> ($20.00–$500.00), not just round denominations. This means zero wasted balance on single-use cards.</p>
+            <p><strong>Observed markup:</strong> ~2.4% average over face value (range 1.9–3.4%, varies with BTC/USD volatility). This is the cost of spending Bitcoin anywhere without KYC.</p>
+            <p><strong>The flow:</strong></p>
+            <ol>
+                <li>Agent gets the exact checkout total (e.g., $62.95)</li>
+                <li>You approve the amount</li>
+                <li>Agent buys a $62.95 Visa on Bitrefill, pays the Lightning invoice</li>
+                <li>You approve the Lightning payment</li>
+                <li>Agent redeems the Visa on PerfectGift.com → gets card number, CVV, expiry</li>
+                <li>Agent fills the checkout form with the card details</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Approval Gates</h2>
+            <p>The agent never spends autonomously. Two hard gates:</p>
+            <ol>
+                <li><strong>Gate 1 — Checkout total:</strong> Agent sends a screenshot of the checkout page showing item, shipping, tax, and total. You review and approve.</li>
+                <li><strong>Gate 2 — Lightning payment:</strong> Agent shows the Bitrefill order (item, total in USD and sats). You review and approve before the Lightning invoice is paid.</li>
+            </ol>
+            <p>After Gate 2, the agent completes the purchase and sends a confirmation screenshot. Every payment is logged to an append-only ledger with payment hashes, card details, and order information.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Prerequisites</h2>
+            <ul>
+                <li><strong>Python 3.8+</strong> with Playwright (<code>pip install playwright && playwright install chromium</code>)</li>
+                <li><strong>A Lightning wallet</strong> — we use <a href="https://phoenix.acinq.co/server" target="_blank">phoenixd</a> (self-custodial, single binary, HTTP API)</li>
+                <li><strong>A Bitrefill account</strong> — <a href="https://www.bitrefill.com" target="_blank">bitrefill.com</a> (no KYC required)</li>
+                <li><strong>A Chromium-based browser</strong> — Brave recommended for fingerprint randomization</li>
+                <li><strong>An AI agent</strong> — built for <a href="/resources/openclaw-setup/">OpenClaw</a> but the scripts work standalone</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>What's in the Skill</h2>
+            <ul>
+                <li><code>detect_platform.py</code> (970 lines) — platform detection, Shopify Storefront API, cart creation, discount validation</li>
+                <li><code>coupon_finder.py</code> (629 lines) — 7-source coupon discovery + API validation</li>
+                <li><code>shopify_checkout.py</code> (826 lines) — Shopify checkout (classic + new styles)</li>
+                <li><code>stripe_checkout.py</code> (511 lines) — Stripe Hosted Checkout</li>
+                <li><code>woocommerce_checkout.py</code> (542 lines) — WooCommerce (Braintree + Stripe)</li>
+                <li>Selector references for Shopify and platform coverage documentation</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Limitations</h2>
+            <ul>
+                <li><strong>Stripe Elements (embedded)</strong> — ~15-20% of stores embed Stripe on their own domain. Card fields are blocked by Stripe's security. Shipping/contact fields still work.</li>
+                <li><strong>Shop Pay</strong> — requires phone number + saved card. Impractical with single-use Visa cards.</li>
+                <li><strong>CAPTCHA</strong> — detected but not solved.</li>
+                <li><strong>Custom platforms (~35%)</strong> — not covered. Would need LLM-driven navigation or per-store modules.</li>
+                <li><strong>Prepaid Visa decline risk</strong> — some merchants flag prepaid cards. We've seen 0% decline rate across our purchases, but it's possible.</li>
+            </ul>
+        </section>
+
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: #e8c547; font-weight: 600;">⚠️ Before installing or using this skill, review its full contents — including all scripts — to ensure they meet your security and quality standards. Users take ultimate responsibility for any skill they choose to use. These are community-sourced and updated.</p>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <p class="footer-brand">Freedom Lab NYC</p>
+                <p class="footer-tagline">Technology for individual sovereignty</p>
+            </div>
+            <div class="footer-col">
+                <a href="/resources/">Resources</a>
+                <a href="/classes-events/">Classes & Events</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script src="../../js/main.js"></script>
+</body>
+</html>
