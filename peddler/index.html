@@ -605,19 +605,6 @@
     </div>
   </div>
 
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-left">
-        Peddler — powered by Nostr protocol · Built by <a href="https://freedomlab.nyc" style="color:var(--accent);text-decoration:none;">Freedom Lab NYC</a>
-      </div>
-      <div class="footer-links">
-        <a href="agents">Use Your Agent</a>
-        <a href="https://github.com/Harrison-F/peddler">GitHub</a>
-        <a href="https://freedomlab.nyc">Freedom Lab</a>
-      </div>
-    </div>
-  </footer>
-
   <!-- Product detail modal -->
   <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
     <div class="modal" id="modal-content"></div>
@@ -937,5 +924,9 @@
     // Render after a timeout even if not all EOSE received
     setTimeout(renderProducts, 8000);
   </script>
+
+    <!-- Footer (loaded from js/footer.js) -->
+    <div id="footer-placeholder"></div>
+    <script src="../js/footer.js"></script>
 </body>
 </html>
