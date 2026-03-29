@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Publish static resources and downloadable files to a GitHub Pages website the simple way. A practical skill for AI agents and humans working on static sites.">
+    <title>GitHub Pages Resource Publishing | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="GitHub Pages Resource Publishing | Freedom Lab NYC">
+    <meta property="og:description" content="Publish static pages and downloadable assets to a GitHub Pages website without inventing a framework.">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GitHub Pages Resource Publishing | Freedom Lab NYC">
+    <meta name="twitter:description" content="Publish static pages and downloadable assets to a GitHub Pages website without inventing a framework.">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><span>GitHub Pages Resource Publishing</span>
+            </div>
+            <h1 class="tutorial-title">GitHub Pages Resource Publishing</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Skill</span>
+                <span class="tutorial-tag">GitHub</span>
+                <span class="tutorial-tag">GitHub Pages</span>
+                <span class="tutorial-tag">Static Sites</span>
+                <span class="tutorial-tag">Publishing</span>
+            </div>
+            <p class="tutorial-intro">Most website publishing advice assumes a framework, build step, or CMS. This skill is for the opposite case: plain static sites where the right move is usually to match the repo's existing structure, add the page cleanly, and let GitHub Pages do the rest.</p>
+        </div>
+
+        <section class="tutorial-section">
+            <h2 id="download">Download</h2>
+            <p><a href="github-pages-resource-publishing.skill" download style="display:inline-block;padding:12px 24px;background:#32d011;color:#000;font-weight:bold;border-radius:6px;text-decoration:none;font-size:1.1em;">⬇ Download github-pages-resource-publishing.skill</a></p>
+            <p>Install with OpenClaw:</p>
+            <pre><code>openclaw skill install github-pages-resource-publishing.skill</code></pre>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="what-it-does">What it does</h2>
+            <p>This skill teaches an agent how to publish resource pages, downloadable files, and updates to a GitHub Pages site without overengineering the job.</p>
+            <ul>
+                <li>Determine how a repo actually deploys</li>
+                <li>Match the site's existing page structure</li>
+                <li>Publish downloadable assets like <code>.skill</code> files beside their landing pages</li>
+                <li>Handle public vs unlisted pages deliberately</li>
+                <li>Use real protections when content needs to be restricted</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="core-idea">Core idea</h2>
+            <p>Don't invent a framework where there isn't one. Static sites usually want boring, legible changes:</p>
+            <pre><code>resources/my-topic/
+├── index.html
+└── my-topic.skill</code></pre>
+            <p>If the repo already has a working pattern, copy the nearest good example and adapt it. That beats generic web advice almost every time.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="public-vs-private">Public vs private</h2>
+            <p>The skill draws a hard line between discoverability and protection.</p>
+            <ul>
+                <li><strong>Public page:</strong> add it to the site's resource index and sitemap</li>
+                <li><strong>Unlisted page:</strong> leave it out of public listings and add <code>noindex</code></li>
+                <li><strong>Actually protected page:</strong> encrypt it with something like StatiCrypt before publishing</li>
+            </ul>
+            <p><code>robots.txt</code>, hidden URLs, and client-side gates are not real protection. They just make discovery less convenient.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="best-for">Best for</h2>
+            <ul>
+                <li>GitHub Pages sites with plain HTML/CSS/JS</li>
+                <li>Resource libraries and tutorial hubs</li>
+                <li>Publishing AI skills, PDFs, images, and downloadable bundles</li>
+                <li>Agents that need reliable repo-specific publishing behavior</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2 id="freedom-tech">Freedom tech angle</h2>
+            <p>A simple static site is underrated. No database to harden, no opaque CMS, no plugin treadmill. When the content is just files in Git, publishing becomes legible, auditable, and easy to mirror. That's a good default for sovereign infrastructure.</p>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-col">
+                <p class="footer-brand">Freedom Lab NYC</p>
+                <p class="footer-tagline">Technology for individual sovereignty</p>
+            </div>
+            <div class="footer-col">
+                <a href="/resources/">Resources</a>
+                <a href="/classes-events/">Classes & Events</a>
+                <a href="/contact/">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script src="../../js/main.js"></script>
+    <script src="../../js/footer.js"></script>
+</body>
+</html>

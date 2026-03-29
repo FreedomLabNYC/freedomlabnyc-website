@@ -4,3 +4,4 @@ Allow: /
 Sitemap: https://freedomlab.nyc/sitemap.xml
 
 Disallow: /trip/
+Disallow: /internal/
