@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Talk to Your Node - Learn how to SSH into your Bitcoin full node and independently verify the money supply, read the mempool, estimate fees, and monitor the network.">
+    <title>Talk to Your Node: Bitcoin Verification via SSH | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Talk to Your Node: Bitcoin Verification via SSH | Freedom Lab NYC">
+    <meta property="og:description" content="Talk to Your Node - Learn how to SSH into your Bitcoin full node and independently verify the money supply, read the mempool, estimate fees, and monitor the network.">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Talk to Your Node: Bitcoin Verification via SSH | Freedom Lab NYC">
+    <meta name="twitter:description" content="Talk to Your Node - Learn how to SSH into your Bitcoin full node and independently verify the money supply, read the mempool, estimate fees, and monitor the network.">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+
+        <div class="tutorial-support-banner green">
+            <svg viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#b8e986;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#5cb025;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g opacity="0.75">
+                    <circle cx="7" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="7" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+                <circle cx="16" cy="5" r="4.5" fill="url(#greenGradient)"/>
+                <ellipse cx="16" cy="16" rx="5" ry="6" fill="url(#greenGradient)"/>
+                <g opacity="0.75">
+                    <circle cx="25" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="25" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+            </svg>
+            <p>These resources are written by Freedom Lab members. <a href="/join/">Join our Freedom Lab server</a> to be a part of the community and receive support directly.</p>
+        </div>
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>&rsaquo;</span><span>Talk to Your Node: Bitcoin Verification via SSH</span>
+            </div>
+            <h1 class="tutorial-title">Talk to Your Node: Bitcoin Verification via SSH</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Tutorial</span>
+                <span class="tutorial-tag">Bitcoin</span>
+                <span class="tutorial-tag">Self-hosting</span>
+            </div>
+            <p class="tutorial-intro"><strong>Audience:</strong> Intermediate &mdash; has a running StartOS node and basic terminal comfort</p>
+            <p><strong>Duration:</strong> 90 min</p>
+            <p><strong>Outcomes:</strong> By the end, you will:</p>
+            <ul>
+                <li>Set up SSH key-based access to a StartOS Bitcoin node</li>
+                <li>Independently verify Bitcoin's total supply using your own node</li>
+                <li>Read mempool conditions and estimate transaction fees from your own data</li>
+                <li>Understand SSH security: threat models, key protection, and agent trade-offs</li>
+                <li>Query peers, mining difficulty, and network state via bitcoin-cli</li>
+            </ul>
+        </div>
+
+        <nav class="tutorial-toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#concept-primer">Concept Primer</a></li>
+                <li><a href="#agenda">Agenda</a></li>
+                <li><a href="#prerequisites">Prerequisites</a></li>
+                <li><a href="#section-1">Section 1: Why Talk to Your Node</a></li>
+                <li><a href="#section-2">Section 2: Setup</a></li>
+                <li><a href="#section-3">Section 3: Security</a></li>
+                <li><a href="#section-4">Section 4: Your First Verification</a></li>
+                <li><a href="#section-5">Section 5: What Your Node Sees</a></li>
+                <li><a href="#appendix-a">Appendix A: Under the Hood</a></li>
+                <li><a href="#appendix-b">Appendix B: Tips &amp; Troubleshooting</a></li>
+                <li><a href="#references">Reference Links</a></li>
+            </ol>
+        </nav>
+
+        <section class="tutorial-section" id="abstract">
+            <h2>Abstract</h2>
+            <p>Your Bitcoin node validates every block and every transaction, but you have probably never asked it a direct question. This tutorial opens a secure SSH tunnel to your StartOS node and walks you through querying it: verifying the total money supply, reading the mempool, estimating fees, inspecting blocks, and monitoring the network. By the end, you will know how to get answers from your own copy of the blockchain instead of trusting a website.</p>
+            <p>The tutorial uses an AI agent (like Claude Code) as the primary interface for running commands, but every command is a standard <code>bitcoin-cli</code> call you can type yourself. Appendix A covers the full command reference so you can go direct whenever you want.</p>
+        </section>
+
+        <section class="tutorial-section" id="concept-primer">
+            <h2>Concept Primer</h2>
+
+            <h3>What is SSH?</h3>
+            <p>SSH (Secure Shell) is a way to remotely control a computer using text commands. Instead of sitting in front of your node, you type commands from your laptop and they execute on the node as if you were there. The connection is encrypted end-to-end, so nobody on your network can see what you are doing.</p>
+
+            <h3>How Key Pairs Work</h3>
+            <p>SSH uses a key pair for authentication: a <strong>private key</strong> on your laptop (like a password file) and a <strong>public key</strong> on your node (like a lock). When you connect, your computer proves it has the private key without ever sending it. The node checks this proof against the public key you registered. If they match, you are in.</p>
+            <p>This is more secure than a password:</p>
+            <ul>
+                <li>The private key never leaves your machine</li>
+                <li>There is nothing to guess or brute-force (256 bits of randomness)</li>
+                <li>Each key pair is unique to you</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="agenda">
+            <h2>Agenda</h2>
+            <ol>
+                <li><strong>Why Talk to Your Node</strong> (10 min) &mdash; motivation, what SSH is, course overview</li>
+                <li><strong>Setup</strong> (25 min) &mdash; key generation, StartOS registration, first connection, agent config</li>
+                <li><strong>Security</strong> (10 min) &mdash; threat model, key protection, checklist</li>
+                <li><strong>Your First Verification</strong> (25 min) &mdash; supply, mempool, fees, blocks, DIY command</li>
+                <li><strong>What Your Node Sees</strong> (15 min) &mdash; peers, fee dynamics, mining, bandwidth</li>
+                <li><strong>Buffer / Exploration</strong> (5 min) &mdash; try commands from Appendix A</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="prerequisites">
+            <h2>Prerequisites</h2>
+            <ul>
+                <li><strong>StartOS node</strong> &mdash; Running Bitcoin Core, fully synced</li>
+                <li><strong>Laptop or desktop</strong> &mdash; On the same local network as your node</li>
+                <li><strong>Terminal access</strong> &mdash; Terminal on Mac/Linux, PowerShell or Git Bash on Windows</li>
+                <li><strong>AI agent with terminal access</strong> &mdash; Claude Code or another assistant that can run shell commands on your behalf</li>
+            </ul>
+            <p>No programming experience required. No Linux experience required. If you can type and follow instructions, you can do this.</p>
+        </section>
+
+        <section class="tutorial-section" id="section-1">
+            <h2>Section 1: Why Talk to Your Node</h2>
+
+            <p>You bought a Bitcoin node. You plugged it in, synced the blockchain, and now it sits in your closet humming away. It is validating every transaction and every block &mdash; enforcing Bitcoin's rules without asking anyone for permission.</p>
+            <p>But right now, you are taking its word for it. You have not actually looked.</p>
+            <p>Bitcoin's entire value proposition rests on one idea: you do not have to trust anyone. Not a bank, not an exchange, not a block explorer website. You can verify everything yourself. But most node runners do not. They plug in the hardware, check the dashboard occasionally, and trust that it is working.</p>
+            <p>The blockchain data sitting on that device is the most complete, independently verified financial record in existence &mdash; and most people never look at it directly. When you check your balance on a block explorer, you are trusting that website to show you accurate data. None of that trust is necessary. Your node has the same data. It verified every byte of it.</p>
+
+            <h3>What We Are Building Toward</h3>
+            <p>Here is what it looks like when we are done. You open Claude (or any AI assistant with terminal access) and say:</p>
+            <blockquote>"Check my node's block height and tell me what's in the mempool."</blockquote>
+            <p>Claude connects to your node over SSH, runs the commands, and comes back with:</p>
+            <blockquote>"Your node is at block 940,219 &mdash; fully synced. The mempool has 45,231 unconfirmed transactions totaling 23.8 MB, with a minimum relay fee of 1 sat/vbyte. Next-block fee estimate is about 12 sats/vbyte."</blockquote>
+            <p>Or you ask:</p>
+            <blockquote>"Verify the total bitcoin supply."</blockquote>
+            <p>And a few minutes later:</p>
+            <blockquote>"Your node counted every unspent output in the blockchain. Total supply: 20,000,457.41 BTC across 164.9 million UTXOs. This matches the expected issuance schedule &mdash; no extra bitcoin have been created."</blockquote>
+
+            <div class="callout callout-note">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>A note on trust:</strong> A course about not trusting third parties asks you to trust an AI to talk to your node. Claude is a tool running on your machine, executing commands you can see and audit. It cannot move your bitcoin or change your node's configuration with the read-only commands used here. Every command Claude runs is a <code>bitcoin-cli</code> command you could type manually. Appendix A covers the full reference.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tutorial-section" id="section-2">
+            <h2>Section 2: Setup</h2>
+            <p>This section gets you from zero to connected. By the end, you will have an SSH key, your node will recognize it, and you will have typed your first command on a remote machine.</p>
+
+            <h3>Step 1: Generate an SSH Key</h3>
+            <p>Open a terminal on your computer (Terminal on Mac/Linux, PowerShell or Git Bash on Windows).</p>
+            <pre><code>ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_mynode</code></pre>
+            <ul>
+                <li><code>-t ed25519</code> &mdash; the algorithm. Ed25519 is modern, fast, and secure.</li>
+                <li><code>-f ~/.ssh/id_ed25519_mynode</code> &mdash; where to save the key. Give it a descriptive name.</li>
+            </ul>
+            <p>It will ask you to set a <strong>passphrase</strong>. Do it. This encrypts the key file so that even if someone copies it off your machine, they cannot use it without the passphrase.</p>
+            <p>This creates two files:</p>
+            <ul>
+                <li><code>~/.ssh/id_ed25519_mynode</code> &mdash; your <strong>private key</strong>. Never share this. Never move it off this machine.</li>
+                <li><code>~/.ssh/id_ed25519_mynode.pub</code> &mdash; your <strong>public key</strong>. This goes on the node. Safe to share.</li>
+            </ul>
+
+            <div class="callout callout-note">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>Windows note:</strong> <code>~</code> means <code>C:\Users\YourUsername</code>. The <code>.ssh</code> folder should already exist. If not, create it.</p>
+                </div>
+            </div>
+
+            <h3>Step 2: Add Your Public Key to StartOS</h3>
+            <p>View your public key:</p>
+            <pre><code># Mac/Linux
+cat ~/.ssh/id_ed25519_mynode.pub
+
+# Windows (PowerShell)
+type C:\Users\YourUsername\.ssh\id_ed25519_mynode.pub</code></pre>
+            <ol>
+                <li>Copy the entire output (it starts with <code>ssh-ed25519</code> and ends with your username)</li>
+                <li>Open your StartOS dashboard in a browser</li>
+                <li>Go to <strong>System &gt; SSH Keys</strong></li>
+                <li>Paste the public key and save</li>
+            </ol>
+            <p>That is it. Your node now recognizes your laptop.</p>
+
+            <h3>Step 3: Find Your Node's Address</h3>
+            <p>You need your node's IP address on your local network. Check one of these:</p>
+            <ul>
+                <li><strong>StartOS dashboard:</strong> the address bar in your browser already has it (something like <code>192.168.1.50</code>)</li>
+                <li><strong>Router admin page:</strong> look for connected devices &mdash; find the one running StartOS</li>
+                <li><strong>StartOS hostname:</strong> a <code>.local</code> hostname visible in the dashboard. This works on Mac and Linux but is unreliable on Windows.</li>
+            </ul>
+
+            <h3>Step 4: Connect</h3>
+            <pre><code>ssh -i ~/.ssh/id_ed25519_mynode start9@192.168.1.50</code></pre>
+            <p>Replace <code>192.168.1.50</code> with your node's actual IP.</p>
+            <ul>
+                <li><code>-i</code> points to your private key</li>
+                <li><code>start9</code> is the default username on StartOS</li>
+            </ul>
+            <p><strong>First connection:</strong> You will see a message asking if you trust the server's fingerprint. Type <code>yes</code>. This only happens once &mdash; SSH remembers the server after that.</p>
+            <p>If everything worked, your terminal prompt changes to something like:</p>
+            <pre><code>start9@wood-opals:~$</code></pre>
+            <p>You are on your node. Type <code>exit</code> to disconnect and return to your laptop's terminal.</p>
+
+            <h3>Step 5: Create a Shortcut</h3>
+            <p>Create or edit <code>~/.ssh/config</code> on your laptop so you never have to type the full connection string again:</p>
+            <pre><code>Host mynode
+    HostName 192.168.1.50
+    User start9
+    IdentityFile ~/.ssh/id_ed25519_mynode
+    IdentitiesOnly yes</code></pre>
+            <p>Replace the IP with your node's address. Now connecting is just:</p>
+            <pre><code>ssh mynode</code></pre>
+
+            <h3>Step 6: Set Up for Your AI Agent</h3>
+            <p>Your AI agent cannot type passphrases interactively, so you need to load your key into an SSH agent first.</p>
+
+            <p><strong>Mac/Linux:</strong></p>
+            <pre><code>ssh-add ~/.ssh/id_ed25519_mynode</code></pre>
+            <p>Enter your passphrase once. The agent holds the decrypted key in memory until you log out.</p>
+
+            <p><strong>Windows (PowerShell as Administrator):</strong></p>
+            <pre><code># Check if the agent is running
+Get-Service ssh-agent
+
+# If it says "Stopped", start it and set it to auto-start:
+Set-Service -Name ssh-agent -StartupType Automatic
+Start-Service ssh-agent
+
+# Add your key (prompts for passphrase once)
+C:\Windows\System32\OpenSSH\ssh-add.exe C:\Users\YourUsername\.ssh\id_ed25519_mynode</code></pre>
+
+            <div class="callout callout-warning">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>Git Bash users:</strong> Git Bash ships its own SSH binary that does not talk to the Windows agent. Add these aliases to your <code>~/.bashrc</code>:</p>
+                    <pre><code>export GIT_SSH="/c/Windows/System32/OpenSSH/ssh.exe"
+alias ssh='/c/Windows/System32/OpenSSH/ssh.exe'
+alias scp='/c/Windows/System32/OpenSSH/scp.exe'</code></pre>
+                    <p>Then reload: <code>source ~/.bashrc</code></p>
+                </div>
+            </div>
+
+            <p><strong>Verify your agent can connect:</strong></p>
+            <pre><code>ssh mynode "echo connected"</code></pre>
+            <p>If it prints <code>connected</code> without asking for a passphrase, your AI agent can use it too.</p>
+
+            <p><strong>When you are done for the day:</strong> Flush the keys from the agent:</p>
+            <pre><code># Mac/Linux
+ssh-add -D
+
+# Windows
+C:\Windows\System32\OpenSSH\ssh-add.exe -D</code></pre>
+        </section>
+
+        <section class="tutorial-section" id="section-3">
+            <h2>Section 3: Security</h2>
+            <p>You now have remote access to your Bitcoin node. That is a powerful thing, and it is worth understanding exactly what it means before you start using it.</p>
+
+            <h3>What You Just Opened</h3>
+            <p>SSH gives you a command-line terminal on your server. On StartOS, the SSH user (<code>start9</code>) has passwordless <code>sudo</code> &mdash; meaning there is no second gate between "logged in" and "full control." For this tutorial, we only use read-only commands. But the access itself is broader than what we use it for.</p>
+
+            <h3>Who Can Reach Your Node?</h3>
+            <table>
+                <thead>
+                    <tr><th>Setup</th><th>Risk</th><th>Who can attempt to connect</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>LAN-only (your setup)</td><td>Lower</td><td>Only devices on your home network</td></tr>
+                    <tr><td>Port 22 forwarded on router</td><td>High</td><td>Anyone on the internet</td></tr>
+                    <tr><td>SSH over Tor hidden service</td><td>Medium</td><td>Anyone who discovers the .onion address</td></tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-warning">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>Never forward port 22 on your router.</strong> Automated bots scan the entire internet for open SSH ports around the clock. If you need remote access, use a VPN or Tor &mdash; never raw SSH over the open internet.</p>
+                </div>
+            </div>
+
+            <h3>What Is at Stake</h3>
+            <p>If someone obtained your SSH key and passphrase, they could:</p>
+            <ul>
+                <li>Stop, start, or reconfigure services (Bitcoin Core, Electrs, etc.)</li>
+                <li>Read configuration files containing RPC credentials</li>
+                <li>Modify settings or install malware</li>
+                <li>Wipe the blockchain data (hundreds of gigabytes to re-download)</li>
+                <li>If a hot wallet is loaded: potentially send bitcoin</li>
+            </ul>
+            <p><strong>What they cannot do:</strong></p>
+            <ul>
+                <li><strong>Steal bitcoin from a hardware wallet</strong> connected through this node. The node validates transactions but never holds the hardware wallet's private keys.</li>
+                <li><strong>Compromise the Bitcoin network.</strong> Your node is one of tens of thousands. It has no special authority.</li>
+                <li><strong>Access funds in external wallets</strong> that connect via Electrum Server. Those wallets hold their own keys.</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>Key distinction:</strong> Your node is a verification tool, not a custody tool. If you use a hardware wallet, SSH access is a privacy and convenience concern, not a funds-at-risk concern.</p>
+                </div>
+            </div>
+
+            <h3>The SSH Agent Trade-Off</h3>
+            <p>If you loaded your key into the SSH agent (Step 6), the agent holds your decrypted key in memory. Any process running as your user can silently ask the agent to sign an authentication challenge &mdash; meaning malware or a rogue script could SSH to your server without your knowledge. The agent does not prompt you.</p>
+            <p>This is the same security model used by every developer with GitHub SSH keys. It is standard practice. But you should:</p>
+            <ul>
+                <li>Flush the agent when you are done working: <code>ssh-add -D</code></li>
+                <li>Do not leave the agent loaded while running untrusted software</li>
+                <li>Think of agent time as a session &mdash; load the key when you need it, flush it when you are done</li>
+            </ul>
+
+            <h3>Hot Wallet Check</h3>
+            <p>Check if any wallets are loaded on your node:</p>
+            <pre><code>ssh mynode "sudo podman exec bitcoind.embassy bitcoin-cli listwallets"</code></pre>
+            <p>If wallets are loaded and unencrypted, anyone with SSH access can spend from them. The standard recommendation: use a hardware wallet, and let the node handle validation only.</p>
+
+            <h3>Security Checklist</h3>
+            <p>Before moving on, confirm:</p>
+            <ul>
+                <li>You used an Ed25519 key with a strong passphrase</li>
+                <li>Your node has key-only authentication (StartOS default &mdash; no action needed)</li>
+                <li>Port 22 is NOT forwarded on your router</li>
+                <li>No hot wallets are loaded on the node (or you understand the risk)</li>
+                <li>If using the SSH agent, you know to flush it when done</li>
+                <li>You are using a hardware wallet for any real funds</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="section-4">
+            <h2>Section 4: Your First Verification</h2>
+            <p>This is the section the setup was for. You are about to independently verify facts about Bitcoin using your own node &mdash; no websites, no APIs, no trust required.</p>
+            <p>Tell your AI agent what you want to know and it will run the commands over SSH. If you want to understand what is happening under the hood, Appendix A covers every command in detail.</p>
+
+            <h3>Is Your Node Synced?</h3>
+            <p>Before verifying anything, make sure your node is caught up with the network. Ask your agent:</p>
+            <blockquote>"Check if my node is fully synced."</blockquote>
+            <p>The agent runs <code>getblockchaininfo</code> and checks that <code>blocks</code> equals <code>headers</code> (all known blocks downloaded and validated) and <code>verificationprogress</code> is at or near 1 (100% verified).</p>
+            <p>What "synced" actually means: your node downloaded every block ever produced &mdash; starting from the genesis block in January 2009 &mdash; and independently validated every transaction in every one of them. It checked every signature, verified every input was unspent, confirmed every coinbase reward was correct, and enforced every consensus rule.</p>
+
+            <h3>Verify the Money Supply</h3>
+            <p>This is the command that makes running a node worth it.</p>
+            <blockquote>"Verify the total bitcoin supply on my node."</blockquote>
+            <p>The agent runs <code>gettxoutsetinfo</code>, which scans every unspent transaction output (UTXO) in the entire blockchain. This takes several minutes &mdash; it is counting over 160 million individual outputs and summing them.</p>
+            <table>
+                <thead>
+                    <tr><th>Field</th><th>Value</th><th>Meaning</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Total supply</td><td>~20,000,457 BTC</td><td>Every bitcoin that currently exists</td></tr>
+                    <tr><td>UTXO count</td><td>~164.9 million</td><td>Individual unspent outputs</td></tr>
+                    <tr><td>Transactions</td><td>~114.4 million</td><td>Total transactions ever processed</td></tr>
+                    <tr><td>UTXO set size</td><td>~11.3 GB</td><td>How much space the state takes on disk</td></tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-tip">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>The UTXO set hash:</strong> The result includes a <code>hash_serialized_3</code> field &mdash; a cryptographic fingerprint of the entire UTXO set. If your hash matches another node's hash at the same block height, you have both independently proven you agree on the exact state of every bitcoin in existence. No coordination needed. No trust required. Just math.</p>
+                </div>
+            </div>
+
+            <h3>Check the Mempool</h3>
+            <p>The mempool is where unconfirmed transactions wait to be included in a block. Every node maintains its own mempool.</p>
+            <blockquote>"What's in my node's mempool right now?"</blockquote>
+            <table>
+                <thead>
+                    <tr><th>Field</th><th>What it tells you</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Transaction count</td><td>How many transactions are waiting for confirmation</td></tr>
+                    <tr><td>Total size</td><td>Combined size in bytes &mdash; relates to how many blocks it would take to clear</td></tr>
+                    <tr><td>Total fees</td><td>Sum of all fees waiting to be collected by miners</td></tr>
+                    <tr><td>Minimum fee</td><td>The lowest fee rate your mempool will accept (rises when the mempool is full)</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Estimate Fees</h3>
+            <blockquote>"What's the fee estimate for next-block confirmation? And for within an hour?"</blockquote>
+            <ul>
+                <li><strong>Next block (1 block):</strong> The fee rate needed to likely get into the very next block. This is the "urgent" rate.</li>
+                <li><strong>Within an hour (6 blocks):</strong> A more economical rate for transactions that can wait.</li>
+                <li><strong>Within a day (144 blocks):</strong> The cheapest rate that will still confirm eventually.</li>
+            </ul>
+            <p>The fee rate is expressed in <strong>sats/vbyte</strong> &mdash; satoshis per virtual byte of transaction data. A typical transaction is about 140 vbytes, so multiply the rate by 140 to estimate your total fee in satoshis.</p>
+
+            <h3>Inspect a Block</h3>
+            <blockquote>"Show me the latest block."</blockquote>
+            <table>
+                <thead>
+                    <tr><th>Field</th><th>What it tells you</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Height</td><td>Position in the chain (0 = genesis block)</td></tr>
+                    <tr><td>Transaction count</td><td>How many transactions the miner included</td></tr>
+                    <tr><td>Timestamp</td><td>When the miner started working on it</td></tr>
+                    <tr><td>Difficulty</td><td>Mining difficulty when this block was found</td></tr>
+                    <tr><td>Confirmations</td><td>How many blocks have been built on top of it</td></tr>
+                    <tr><td>Previous block hash</td><td>The block before this one &mdash; this is what makes it a chain</td></tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-note">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>The Genesis Block:</strong> Block 0, mined by Satoshi Nakamoto on January 3, 2009. It contains the famous coinbase message: "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks." Every block since then links back to this one through an unbroken chain of hashes. Your node verified all of them.</p>
+                </div>
+            </div>
+
+            <h3>Look Up a Transaction</h3>
+            <p>If you have a transaction ID (txid), your node can decode it:</p>
+            <blockquote>"Look up this transaction: [paste txid]"</blockquote>
+            <p>You will see the inputs (where the bitcoin came from), outputs (where it went and how much), fee (how much the sender paid the miner), and which block confirmed it.</p>
+
+            <h3>Do It Yourself</h3>
+            <p>You have been letting your agent handle the commands. Now try one yourself. Open your terminal and type this exactly:</p>
+            <pre><code>ssh mynode "sudo podman exec bitcoind.embassy bitcoin-cli getblockcount"</code></pre>
+            <p>That is it. One command. Your laptop connects to your node over SSH, reaches into the Bitcoin Core container, asks for the current block height, and prints the number.</p>
+            <p>No AI. No website. No intermediary. Your laptop asked your node a question and got a direct answer. The number you see is the block height your node has verified &mdash; every block from genesis to that number, independently validated by your hardware.</p>
+        </section>
+
+        <section class="tutorial-section" id="section-5">
+            <h2>Section 5: What Your Node Sees</h2>
+            <p>Your node is not just a database of old blocks. It is an active participant in the Bitcoin network &mdash; connected to other nodes, relaying transactions, validating new blocks as they arrive, and maintaining its own view of the network's current state.</p>
+
+            <h3>Your Peers</h3>
+            <p>Your node is connected to a handful of other nodes around the world. A healthy node typically has 8&ndash;10 outbound connections and may accept inbound connections too. The total is usually between 8 and 125.</p>
+            <blockquote>"How many peers is my node connected to? Are any on Tor?"</blockquote>
+            <p>Things to look for in peer details:</p>
+            <ul>
+                <li><strong>Tor peers:</strong> Connections over Tor show up with <code>.onion</code> addresses. StartOS routes through Tor by default.</li>
+                <li><strong>Inbound vs. outbound:</strong> Outbound peers are ones you chose. Inbound peers found you. A mix of both is healthy.</li>
+                <li><strong>Version diversity:</strong> Your peers may run different versions of Bitcoin Core. As long as they follow consensus rules, this is fine &mdash; and good for the network.</li>
+                <li><strong>Data exchanged:</strong> High byte counts mean active peers.</li>
+            </ul>
+
+            <h3>The Mempool in Motion</h3>
+            <p>Every time someone broadcasts a transaction, it ripples through the network from node to node. Your node receives it from a peer, validates it (checks that the inputs are unspent, the signatures are valid, the fee meets the minimum), and adds it to its mempool. Then it relays the transaction to its other peers.</p>
+            <p>Your mempool is <em>your node's view</em> of unconfirmed transactions. It is not identical to every other node's mempool &mdash; transactions propagate at different speeds, nodes have different minimum fee policies, and mempool size limits vary.</p>
+
+            <h3>When the Mempool Gets Full</h3>
+            <p>Your node allocates 300 MB by default for the mempool. When it fills up, the node drops the lowest-fee transactions to make room for higher-fee ones. The <code>mempoolminfee</code> field rises &mdash; your node is being selective about what it keeps.</p>
+            <blockquote>"Is the mempool full right now? What's the minimum fee to get in?"</blockquote>
+
+            <h3>Fee Dynamics</h3>
+            <p>Bitcoin Core looks at the last several hundred blocks and tracks which fee rates got confirmed in how many blocks. From this, it builds a statistical model. This is more sophisticated than most fee estimation websites, which often just look at the current mempool.</p>
+            <blockquote>"What are the fee estimates for 1 block, 6 blocks, and 144 blocks?"</blockquote>
+            <p>If the gap between next-block and next-day is large, the network is congested. If they are close together, the network is quiet and patience does not save much.</p>
+
+            <h3>Mining and Difficulty</h3>
+            <p>Mining difficulty adjusts every 2,016 blocks (roughly two weeks) to keep the average block time at 10 minutes regardless of how much computing power is on the network.</p>
+            <blockquote>"What's the current mining difficulty? When was the last adjustment?"</blockquote>
+            <p>Your node estimates the total hash rate by looking at how quickly blocks are being found relative to the difficulty target. As of early 2026, the Bitcoin network computes hundreds of exahashes per second &mdash; more computational work per second than any other system in human history.</p>
+
+            <h3>Bandwidth and Identity</h3>
+            <blockquote>"How much data has my node sent and received since it last started?"</blockquote>
+            <p>A fully synced node with default settings typically uses 50&ndash;200 GB per month. Your node also broadcasts a version string to its peers and shows which networks it is reachable over (IPv4, IPv6, Tor, I2P). StartOS nodes are typically Tor-connected, so peers see your <code>.onion</code> address, not your home IP.</p>
+        </section>
+
+        <section class="tutorial-section" id="appendix-a">
+            <h2>Appendix A: Under the Hood</h2>
+            <p>This appendix covers what your agent does behind the scenes when it queries your node. If you want to run commands manually, understand the container model, or look up a specific command, this is the reference.</p>
+
+            <h3>The Container Model</h3>
+            <p>StartOS does not run Bitcoin Core directly on the server. It runs inside a Podman container &mdash; an isolated environment that packages the software with everything it needs. Think of your server as an apartment building. Each service (Bitcoin Core, Electrum Server, Lightning) lives in its own apartment.</p>
+            <p>This means you cannot just type <code>bitcoin-cli</code> on the server. You need to reach into the container first:</p>
+            <pre><code>sudo podman exec bitcoind.embassy bitcoin-cli &lt;command&gt;</code></pre>
+            <p>To open an interactive shell inside the container:</p>
+            <pre><code>sudo podman exec -it bitcoind.embassy bash</code></pre>
+            <p>Now you can type <code>bitcoin-cli</code> commands without the <code>podman exec</code> prefix. Type <code>exit</code> to leave.</p>
+
+            <h3>Container Management</h3>
+            <table>
+                <thead>
+                    <tr><th>Command</th><th>What it does</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>sudo podman ps</code></td><td>List running containers</td></tr>
+                    <tr><td><code>sudo podman logs bitcoind.embassy --tail 50</code></td><td>Last 50 lines of Bitcoin Core logs</td></tr>
+                    <tr><td><code>sudo podman logs bitcoind.embassy --follow</code></td><td>Follow logs in real time (Ctrl+C to stop)</td></tr>
+                    <tr><td><code>sudo podman restart bitcoind.embassy</code></td><td>Restart Bitcoin Core (safe)</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Create a Shortcut</h3>
+            <p>Add an alias to your server's <code>.bashrc</code> to skip the <code>podman exec</code> prefix:</p>
+            <pre><code>ssh mynode
+echo 'alias btc="sudo podman exec bitcoind.embassy bitcoin-cli"' >> ~/.bashrc
+source ~/.bashrc</code></pre>
+            <p>Now commands are just:</p>
+            <pre><code>btc getblockcount
+btc getmempoolinfo
+btc estimatesmartfee 6</code></pre>
+
+            <h3>Command Reference</h3>
+            <p>All commands are read-only. You cannot break your node by running these.</p>
+
+            <p><strong>Blockchain:</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Command</th><th>What it returns</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>getblockchaininfo</code></td><td>Chain, height, sync status, pruning, disk size</td></tr>
+                    <tr><td><code>getblockcount</code></td><td>Current block height (just the number)</td></tr>
+                    <tr><td><code>getbestblockhash</code></td><td>Hash of the latest block</td></tr>
+                    <tr><td><code>getblock "hash"</code></td><td>Full details of a specific block</td></tr>
+                    <tr><td><code>getblockhash &lt;height&gt;</code></td><td>Block hash by height</td></tr>
+                    <tr><td><code>getdifficulty</code></td><td>Current mining difficulty</td></tr>
+                    <tr><td><code>getchaintxstats</code></td><td>Transaction rate over time</td></tr>
+                </tbody>
+            </table>
+
+            <p><strong>UTXO Set:</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Command</th><th>What it returns</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>gettxoutsetinfo</code></td><td>Total supply, UTXO count, set size (takes minutes)</td></tr>
+                    <tr><td><code>gettxout "txid" n</code></td><td>Whether a specific output is unspent</td></tr>
+                </tbody>
+            </table>
+
+            <p><strong>Mempool:</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Command</th><th>What it returns</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>getmempoolinfo</code></td><td>Size, tx count, memory usage, min fee</td></tr>
+                    <tr><td><code>getrawmempool</code></td><td>List of all unconfirmed transaction IDs</td></tr>
+                    <tr><td><code>estimatesmartfee &lt;blocks&gt;</code></td><td>Fee rate for confirmation in N blocks</td></tr>
+                </tbody>
+            </table>
+
+            <p><strong>Network:</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Command</th><th>What it returns</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>getnetworkinfo</code></td><td>Version, protocol, connections, networks</td></tr>
+                    <tr><td><code>getpeerinfo</code></td><td>Detailed info on every connected peer</td></tr>
+                    <tr><td><code>getconnectioncount</code></td><td>Number of peers (just the number)</td></tr>
+                    <tr><td><code>getnettotals</code></td><td>Total bytes sent and received</td></tr>
+                </tbody>
+            </table>
+
+            <p><strong>Mining:</strong></p>
+            <table>
+                <thead>
+                    <tr><th>Command</th><th>What it returns</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>getmininginfo</code></td><td>Difficulty, hash rate, current block</td></tr>
+                    <tr><td><code>getnetworkhashps</code></td><td>Estimated network hash rate</td></tr>
+                </tbody>
+            </table>
+
+            <h3>Reading JSON Output</h3>
+            <p>Most commands return JSON. Here is an example from <code>getblockchaininfo</code>:</p>
+            <pre><code>{
+  "chain": "main",
+  "blocks": 940219,
+  "headers": 940219,
+  "bestblockhash": "00000000000000000000ba29...",
+  "difficulty": 145042165424853.3,
+  "verificationprogress": 1,
+  "pruned": false,
+  "size_on_disk": 826789612252
+}</code></pre>
+            <p>Key things to check: <code>"chain": "main"</code> (you are on mainnet), <code>"blocks"</code> equals <code>"headers"</code> (fully synced), <code>"verificationprogress": 1</code> (100% verified), <code>"pruned": false</code> (full node).</p>
+        </section>
+
+        <section class="tutorial-section" id="appendix-b">
+            <h2>Appendix B: Tips &amp; Troubleshooting</h2>
+
+            <h3>Quick Status Check</h3>
+            <p>Three commands give you a fast snapshot:</p>
+            <pre><code>ssh mynode "sudo podman exec bitcoind.embassy bitcoin-cli getblockcount"
+ssh mynode "sudo podman exec bitcoind.embassy bitcoin-cli getconnectioncount"
+ssh mynode "sudo podman exec bitcoind.embassy bitcoin-cli getmempoolinfo"</code></pre>
+            <p>Block height, peer count, mempool size. If all three return reasonable numbers, your node is synced, connected, and healthy. Or just ask your agent: "Is my node healthy?"</p>
+
+            <h3>Common Errors</h3>
+
+            <p><strong>"Connection refused" when SSHing</strong></p>
+            <pre><code>ssh: connect to host 192.168.1.50 port 22: Connection refused</code></pre>
+            <p><strong>Cause:</strong> SSH server is not running, or the IP address is wrong.</p>
+            <p><strong>Fix:</strong> Check your node's IP address &mdash; IPs can change if you do not have a static lease on your router. Look up the current address in your router's device list or the StartOS dashboard. Confirm SSH is enabled under System &gt; SSH.</p>
+
+            <p><strong>"Permission denied (publickey)"</strong></p>
+            <pre><code>start9@192.168.1.50: Permission denied (publickey).</code></pre>
+            <p><strong>Cause:</strong> The server does not recognize your key.</p>
+            <p><strong>Fix:</strong> Confirm you added the <strong>public key</strong> (<code>.pub</code> file), not the private key, to StartOS. Check that you are pointing to the right private key with <code>-i</code>. Verify the username is <code>start9</code>. Check file permissions: <code>chmod 600 ~/.ssh/id_ed25519_mynode</code></p>
+
+            <p><strong>"Could not open a connection to your authentication agent"</strong></p>
+            <pre><code>Could not open a connection to your authentication agent.</code></pre>
+            <p><strong>Cause:</strong> <code>ssh-add</code> cannot find a running SSH agent.</p>
+            <p><strong>Fix:</strong> On Windows, use the full path: <code>C:\Windows\System32\OpenSSH\ssh-add.exe</code>. On Mac/Linux, start the agent first: <code>eval $(ssh-agent -s)</code></p>
+
+            <p><strong>"Host key verification failed"</strong></p>
+            <pre><code>WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!</code></pre>
+            <p><strong>Cause:</strong> Your node's fingerprint changed since your last connection (reinstall, hardware swap).</p>
+
+            <div class="callout callout-warning">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <div class="callout-content">
+                    <p>If you know why it changed, remove the old entry: <code>ssh-keygen -R 192.168.1.50</code>. If you do not know why, <strong>investigate before connecting</strong>. This warning protects you from man-in-the-middle attacks.</p>
+                </div>
+            </div>
+
+            <p><strong>"error: Could not connect to the server 127.0.0.1:8332"</strong></p>
+            <p><strong>Cause:</strong> Bitcoin Core is not running, or you ran <code>bitcoin-cli</code> outside the container.</p>
+            <p><strong>Fix:</strong> Make sure you are using the <code>podman exec</code> prefix. Check if the container is running: <code>sudo podman ps</code>. Check Bitcoin Core's logs: <code>sudo podman logs bitcoind.embassy --tail 20</code></p>
+
+            <p><strong>"bitcoin-cli: command not found"</strong></p>
+            <p><strong>Cause:</strong> You are on the server shell, not inside the container.</p>
+            <p><strong>Fix:</strong> Either exec into the container first (<code>sudo podman exec -it bitcoind.embassy bash</code>) or use the full <code>podman exec</code> command from the server shell.</p>
+
+            <h3>Server Maintenance</h3>
+            <pre><code># Check disk space
+ssh mynode "df -h"
+
+# Check running services
+ssh mynode "sudo podman ps"
+
+# View Bitcoin Core logs (last 20 lines)
+ssh mynode "sudo podman logs bitcoind.embassy --tail 20"
+
+# Restart Bitcoin Core (safe -- picks up where it left off)
+ssh mynode "sudo podman restart bitcoind.embassy"</code></pre>
+            <p>A full (unpruned) node uses 800+ GB and growing. If your drive fills up, Bitcoin Core will stop syncing.</p>
+
+            <h3>When to Ask for Help</h3>
+            <p>If you see errors about database corruption, unexpected shutdowns, or "block validation failed," do not try to fix these yourself. These are rare but serious.</p>
+        </section>
+
+        <section class="tutorial-section" id="references">
+            <h2>Reference Links</h2>
+            <ul>
+                <li><a href="https://community.start9.com" target="_blank">StartOS Community Support</a> &mdash; Official forums for StartOS node operators</li>
+                <li><a href="https://bitcoincore.org/en/doc/" target="_blank">Bitcoin Core Documentation</a> &mdash; Official documentation for Bitcoin Core</li>
+                <li><a href="https://bitcointalk.org" target="_blank">Bitcointalk Forums</a> &mdash; Long-running Bitcoin discussion forum</li>
+                <li><a href="https://en.bitcoin.it/wiki/Running_Bitcoin" target="_blank">Bitcoin Wiki: Running Bitcoin</a> &mdash; Community wiki on node operation</li>
+            </ul>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/resources/" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Tutorials</a>
+        </nav>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="../../js/footer.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        document.querySelectorAll('.tutorial-toc a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').slice(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    history.pushState(null, null, `#${targetId}`);
+                }
+            });
+        });
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = '<img src="" alt="">';
+        document.body.appendChild(lightbox);
+        const lightboxImg = lightbox.querySelector('img');
+        document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    </script>
+</body>
+</html>
