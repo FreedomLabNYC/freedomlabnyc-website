@@ -163,7 +163,7 @@ a:hover {
 
 /* === Page Hero Banner === */
 .page-hero {
-    background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
+    background: linear-gradient(180deg, rgba(13, 17, 23, 0.92) 0%, rgba(8, 11, 15, 0.92) 100%);
     padding: 4rem 2rem;
     text-align: center;
     border-bottom: 1px solid var(--border);
