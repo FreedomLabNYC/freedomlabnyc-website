@@ -37,6 +37,21 @@
             font: inherit;
         }
 
+        .feature-list {
+            color: #FFFFFF;
+            max-width: 560px;
+            margin: 0 auto;
+            padding-left: 1.25rem;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .feature-list li::marker {
+            color: #32D011;
+        }
+
         .waitlist-layout {
             display: block;
         }
@@ -209,7 +224,14 @@
     </section>
 
     <main class="waitlist-content">
-        <p class="page-description">We're building NYC's first and only <span class="highlight-line">freedom tech coworking and hackerspace</span>. Members will have 24/7 hour access to work remotely, take calls, have meetings, socialize, build freedom tech tools, and host + attend events together.</p>
+        <p class="page-description">We're building NYC's first and only <span class="highlight-line">freedom tech coworking and hackerspace</span>. Featuring:</p>
+        <ul class="feature-list">
+            <li>24/7 access to work remotely</li>
+            <li>Space to take calls and hold meetings</li>
+            <li>A place to socialize with other freedom tech builders</li>
+            <li>Room to build freedom tech tools</li>
+            <li>Opportunities to host and attend events together</li>
+        </ul>
 
         <div class="waitlist-layout">
             <section class="section-box" id="waitlist-form">
