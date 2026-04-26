@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Join the waitlist for Freedom Lab NYC's upcoming co-working and hackerspace for freedom tech builders in New York City.">
-    <title>Join the Waitlist | Freedom Lab NYC</title>
+    <title>Apply for Early Access | Freedom Lab NYC</title>
     <link rel="icon" href="../static/img/torch transparent icocrop2.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="preload" href="../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -24,10 +24,11 @@
         .page-description {
             color: var(--text-secondary);
             text-align: center;
-            max-width: 720px;
+            max-width: 860px;
             margin: 0 auto;
-            font-size: 1.05rem;
-            line-height: 1.65;
+            font-size: clamp(1.45rem, 3vw, 2.35rem);
+            line-height: 1.2;
+            font-weight: 700;
         }
 
         .highlight-line {
@@ -36,10 +37,7 @@
         }
 
         .waitlist-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
-            gap: 1.5rem;
-            align-items: start;
+            display: block;
         }
 
         .section-box {
@@ -49,6 +47,8 @@
             padding: 2.25rem;
             position: relative;
             overflow: hidden;
+            max-width: 560px;
+            margin: 0 auto;
         }
 
         .section-box::before {
@@ -72,31 +72,6 @@
             color: var(--text-secondary);
             margin-bottom: 1.5rem;
             line-height: 1.6;
-        }
-
-        .feature-list {
-            display: grid;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .feature-item {
-            border: 1px solid rgba(50, 208, 17, 0.18);
-            border-radius: var(--radius);
-            padding: 1rem;
-            background: rgba(50, 208, 17, 0.04);
-        }
-
-        .feature-item h3 {
-            color: var(--text-primary);
-            font-size: 1.05rem;
-            margin-bottom: 0.35rem;
-        }
-
-        .feature-item p {
-            color: var(--text-secondary);
-            line-height: 1.55;
-            margin: 0;
         }
 
         .waitlist-form {
@@ -190,7 +165,6 @@
         .animate-ready .section-box.animate-in { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 860px) {
-            .waitlist-layout { grid-template-columns: 1fr; }
             .waitlist-content { padding: 1rem; }
             .section-box { padding: 1.5rem; }
             .section-box h2 { font-size: 1.35rem; }
@@ -201,12 +175,12 @@
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://freedomlab.nyc/join/">
-    <meta property="og:title" content="Join the Waitlist | Freedom Lab NYC">
-    <meta property="og:description" content="Join the waitlist for Freedom Lab NYC's upcoming co-working and hackerspace. Get early access and discounted membership.">
+    <meta property="og:title" content="Apply for Early Access | Freedom Lab NYC">
+    <meta property="og:description" content="Apply for early access to New York City's premier co-working and freedom tech hackerspace.">
     <meta property="og:image" content="https://freedomlab.nyc/static/img/Freedom%20Lab%20NYC%20Logo%20-%20Circle.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Join the Waitlist | Freedom Lab NYC">
-    <meta name="twitter:description" content="Join the waitlist for Freedom Lab NYC's upcoming co-working and hackerspace. Get early access and discounted membership.">
+    <meta name="twitter:title" content="Apply for Early Access | Freedom Lab NYC">
+    <meta name="twitter:description" content="Apply for early access to New York City's premier co-working and freedom tech hackerspace.">
     <meta name="twitter:image" content="https://freedomlab.nyc/static/img/Freedom%20Lab%20NYC%20Logo%20-%20Circle.png">
 </head>
 <body>
@@ -230,35 +204,16 @@
     </header>
 
     <section class="page-hero">
-        <h1>Join the Waitlist</h1>
+        <h1>Apply for Early Access</h1>
     </section>
 
     <main class="waitlist-content">
-        <p class="page-description">Freedom Lab is building a New York City <span class="highlight-line">co-working / hackerspace</span> for freedom tech builders, organizers, and learners. Join the waitlist for early access and discounted membership when the physical space opens.</p>
+        <p class="page-description">New York City's premier <span class="highlight-line">co-working / freedom tech hackerspace</span>.</p>
 
         <div class="waitlist-layout">
-            <section class="section-box">
-                <h2>Become a Space Member</h2>
-                <p class="section-description">The waitlist helps us plan the right location, size, hours, and membership pricing for the community. It is not a payment commitment.</p>
-                <div class="feature-list">
-                    <div class="feature-item">
-                        <h3>Physical space</h3>
-                        <p>A dedicated NYC home base for freedom tech — a place to build, learn, collaborate, and meet other people working on Bitcoin, privacy, open-source AI, self-hosting, and related tools.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Co-working & workshops</h3>
-                        <p>Work alongside other builders and attend hands-on workshops, classes, build nights, and community sessions focused on practical freedom technology.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Early access + discounted membership</h3>
-                        <p>Waitlist members will be first to hear about opening plans, membership availability, and discounted founding-member pricing.</p>
-                    </div>
-                </div>
-            </section>
-
             <section class="section-box" id="waitlist-form">
-                <h2>Sign up</h2>
-                <p class="section-description">Tell us you're interested and what membership price range would be realistic for you.</p>
+                <h2>Join the Waitlist</h2>
+                <p class="section-description">Apply for early access and discounted membership to Freedom Lab's upcoming physical space for co-working, workshops, and hands-on freedom tech building.</p>
                 <form class="waitlist-form" id="waitlistForm">
                     <label for="name">Name <span class="required-star">*</span></label>
                     <input type="text" id="name" name="Name" required>
@@ -279,7 +234,7 @@
                         <label for="updates">I'd like to receive updates about the co-working / hackerspace, early access, and discounted membership opportunities</label>
                     </div>
 
-                    <button type="submit" class="waitlist-submit">Join the Waitlist</button>
+                    <button type="submit" class="waitlist-submit">Apply for Early Access</button>
                     <p class="waitlist-success" id="successMsg">You're on the list. We'll be in touch.</p>
                 </form>
             </section>
