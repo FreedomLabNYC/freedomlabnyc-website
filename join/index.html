@@ -103,7 +103,8 @@
             margin-bottom: -0.25rem;
         }
 
-        .waitlist-form input {
+        .waitlist-form input,
+        .waitlist-form textarea {
             padding: 0.9rem 1rem;
             background: var(--bg-input);
             border: 1px solid var(--border);
@@ -113,8 +114,17 @@
             width: 100%;
         }
 
-        .waitlist-form input::placeholder { color: var(--text-muted); }
-        .waitlist-form input:focus { outline: none; border-color: #32D011; }
+        .waitlist-form textarea {
+            min-height: 110px;
+            resize: vertical;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+
+        .waitlist-form input::placeholder,
+        .waitlist-form textarea::placeholder { color: var(--text-muted); }
+        .waitlist-form input:focus,
+        .waitlist-form textarea:focus { outline: none; border-color: #32D011; }
         .required-star { color: var(--required, #e05555); font-weight: 600; }
         .field-hint { color: var(--text-muted); font-size: 0.82rem; margin-top: -0.5rem; line-height: 1.45; }
         .field-asterisk { color: var(--text-muted); font-size: 0.75rem; font-style: italic; margin-top: -0.25rem; }
@@ -184,7 +194,7 @@
             .waitlist-content { padding: 1rem; }
             .section-box { padding: 1.5rem; }
             .section-box h2 { font-size: 1.35rem; }
-            .waitlist-form input, .waitlist-submit { min-height: 48px; font-size: 1rem; }
+            .waitlist-form input, .waitlist-form textarea, .waitlist-submit { min-height: 48px; font-size: 1rem; }
         }
     </style>
 
@@ -247,6 +257,12 @@
                         <span class="currency-symbol">$</span>
                         <input type="number" id="budget" name="Monthly Budget" min="0" step="1" required>
                     </div>
+
+                    <label for="interest">Why are you interested in membership? <span class="required-star">*</span></label>
+                    <textarea id="interest" name="Membership Interest" required></textarea>
+
+                    <label for="favorite-projects">What are your favorite freedom tech projects (that you use or develop)? <span class="required-star">*</span></label>
+                    <textarea id="favorite-projects" name="Favorite Freedom Tech Projects" required></textarea>
 
                     <div class="checkbox-wrapper">
                         <input type="checkbox" id="updates" name="Updates Opt-in" value="Yes" required checked>
@@ -319,10 +335,10 @@
                 await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
                 document.getElementById('successMsg').style.display = 'block';
                 btn.style.display = 'none';
-                form.querySelectorAll('input').forEach(i => i.disabled = true);
+                form.querySelectorAll('input, textarea').forEach(i => i.disabled = true);
             } catch (error) {
                 btn.disabled = false;
-                btn.textContent = 'Join the Waitlist';
+                btn.textContent = 'Apply for Early Access';
                 alert('Something went wrong. Please try again.');
             }
         });
