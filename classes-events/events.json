@@ -1,7 +1,17 @@
 {
-  "updated": "2026-03-25T05:12:18.568Z",
-  "count": 23,
+  "updated": "2026-04-26T07:48:55.466Z",
+  "count": 24,
   "events": [
+    {
+      "name": "OpenClaw Show and Tell Night",
+      "date": "2026-04-23T22:30:00.000Z",
+      "end": "2026-04-24T01:30:00.000Z",
+      "cover": "https://images.lumacdn.com/event-covers/81/5cd79cf7-1903-48d5-be16-8beedc11f19a.png",
+      "url": "https://lu.ma/dxkwn01h",
+      "venue": "West Village",
+      "location": "New York",
+      "price": "Free"
+    },
     {
       "name": "OpenClaw Show and Tell Night",
       "date": "2026-03-24T22:30:00.000Z",
