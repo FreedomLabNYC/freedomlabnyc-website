@@ -1171,3 +1171,19 @@ a:hover {
     filter: brightness(0) saturate(100%) invert(52%) sepia(95%) saturate(1000%) hue-rotate(85deg) brightness(95%) contrast(95%);
 }
 
+/* Decorative images inside links should behave like part of the link on touch devices.
+   Without this, mobile Chrome exposes image-specific long-press actions and shows
+   raw transparent icon assets in the context-menu preview. */
+.logo img,
+.links-logo svg,
+.tech-card img,
+.past-events-link img,
+.social-btn img,
+.footer-social-link img,
+.footer-social-link picture {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
