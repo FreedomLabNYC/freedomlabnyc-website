@@ -3,82 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Join Freedom Lab NYC as a member - support Freedom Tech education and community building in New York City. Multiple membership tiers available.">
-    <title>Join | Freedom Lab NYC</title>
+    <meta name="description" content="Join the waitlist for Freedom Lab NYC's upcoming co-working and hackerspace for freedom tech builders in New York City.">
+    <title>Join the Waitlist | Freedom Lab NYC</title>
     <link rel="icon" href="../static/img/torch transparent icocrop2.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="preload" href="../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../css/fonts.css">
-    <link rel="stylesheet" href="../css/join.css">
-    <link rel="stylesheet" href="../css/donate.css">
+    <link rel="stylesheet" href="../css/contact.css">
     <style>
-        .btcpay-form { display: inline-flex; align-items: center; justify-content: center; } .btcpay-form--inline { flex-direction: row; } .btcpay-form--block { flex-direction: column; } .btcpay-form--inline .submit { margin-left: 15px; } .btcpay-form--block select { margin-bottom: 10px; } .btcpay-form .btcpay-custom-container{ text-align: center; }.btcpay-custom { display: flex; align-items: center; justify-content: center; } .btcpay-form .plus-minus { cursor:pointer; font-size:25px; line-height: 25px; background: #DFE0E1; height: 30px; width: 45px; border:none; border-radius: 60px; margin: auto 5px; display: inline-flex; justify-content: center; } .btcpay-form select { -moz-appearance: none; -webkit-appearance: none; appearance: none; color: currentColor; background: transparent; border:1px solid transparent; display: block; padding: 1px; margin-left: auto; margin-right: auto; font-size: 11px; cursor: pointer; } .btcpay-form select:hover { border-color: #ccc; } .btcpay-form option { color: var(--text-primary); background: var(--bg-input); } .btcpay-input-price { -moz-appearance: textfield; border: none; box-shadow: none; text-align: center; font-size: 25px; margin: auto; border-radius: 5px; line-height: 35px; background: #fff; }.btcpay-input-price::-webkit-outer-spin-button, .btcpay-input-price::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        /* Styles for donation section on join page */
-        .join-content .dashed-background {
+        .waitlist-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .page-description {
+            color: var(--text-secondary);
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            line-height: 1.65;
+        }
+
+        .highlight-line {
+            color: #32D011;
+            font-weight: 700;
+        }
+
+        .waitlist-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(320px, 440px);
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .section-box {
+            background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2.25rem;
             position: relative;
             overflow: hidden;
         }
-        .join-content .dashed-background::before {
+
+        .section-box::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(90deg, #32D011 100%, #32D011 100%) 3% 45% / 35px 2px no-repeat,
-                linear-gradient(90deg, #32D011 100%, #32D011 100%) 92% 50% / 45px 2px no-repeat,
-                linear-gradient(90deg, #32D011 100%, #32D011 100%) 25% 55% / 20px 2px no-repeat,
-                linear-gradient(90deg, #32D011 100%, #32D011 100%) 70% 48% / 30px 2px no-repeat,
-                linear-gradient(90deg, #32D011 100%, #32D011 100%) 12% 85% / 35px 2px no-repeat,
-                linear-gradient(90deg, #32D011 100%, #32D011 100%) 78% 88% / 40px 2px no-repeat,
-                linear-gradient(90deg, #32D011 100%, #32D011 100%) 55% 92% / 25px 2px no-repeat,
-                linear-gradient(90deg, #32D011 100%, #32D011 100%) 62% 78% / 35px 2px no-repeat;
-            opacity: 0.35;
-            pointer-events: none;
-            z-index: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #28a00e, #32D011, #28a00e);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
         }
-        .join-content .dashed-background > * {
-            position: relative;
-            z-index: 1;
-        }
-        .join-content .donate-section .section-box h2 {
+
+        .section-box h2 {
             font-size: 1.75rem;
             font-weight: 600;
             margin-bottom: 0.75rem;
-            text-align: center;
         }
-        .join-content .donate-section .section-description {
+
+        .section-description {
             color: var(--text-secondary);
-            text-align: center;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
-        .donation-form-container select[name="currency"] option {
-            color: var(--text-primary) !important;
-            background: var(--bg-input) !important;
+
+        .feature-list {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature-item {
+            border: 1px solid rgba(50, 208, 17, 0.18);
+            border-radius: var(--radius);
+            padding: 1rem;
+            background: rgba(50, 208, 17, 0.04);
+        }
+
+        .feature-item h3 {
+            color: var(--text-primary);
+            font-size: 1.05rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .feature-item p {
+            color: var(--text-secondary);
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .waitlist-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .waitlist-form label {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: -0.25rem;
+        }
+
+        .waitlist-form input {
+            padding: 0.9rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .waitlist-form input::placeholder { color: var(--text-muted); }
+        .waitlist-form input:focus { outline: none; border-color: #32D011; }
+        .required-star { color: var(--required, #e05555); font-weight: 600; }
+        .field-hint { color: var(--text-muted); font-size: 0.82rem; margin-top: -0.5rem; line-height: 1.45; }
+        .field-asterisk { color: var(--text-muted); font-size: 0.75rem; font-style: italic; margin-top: -0.25rem; }
+
+        .price-input-wrapper { position: relative; }
+        .price-input-wrapper .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1rem;
+            pointer-events: none;
+        }
+        .price-input-wrapper input { padding-left: 1.75rem; -moz-appearance: textfield; }
+        .price-input-wrapper input::-webkit-outer-spin-button,
+        .price-input-wrapper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: #32D011;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper label {
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .waitlist-submit {
+            padding: 1rem 2.5rem;
+            background: #32D011;
+            color: var(--bg-dark);
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .waitlist-submit:hover { background: #4ae025; transform: translateY(-2px); }
+        .waitlist-success { color: #32D011; text-align: center; font-weight: 500; display: none; }
+
+        .animate-ready .section-box {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .animate-ready .section-box.animate-in { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 860px) {
+            .waitlist-layout { grid-template-columns: 1fr; }
+            .waitlist-content { padding: 1rem; }
+            .section-box { padding: 1.5rem; }
+            .section-box h2 { font-size: 1.35rem; }
+            .waitlist-form input, .waitlist-submit { min-height: 48px; font-size: 1rem; }
         }
     </style>
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://freedomlab.nyc/join/">
-    <meta property="og:title" content="Join | Freedom Lab NYC">
-    <meta property="og:description" content="Become a Freedom Lab member. Digital membership or hackerspace waitlist.">
+    <meta property="og:title" content="Join the Waitlist | Freedom Lab NYC">
+    <meta property="og:description" content="Join the waitlist for Freedom Lab NYC's upcoming co-working and hackerspace. Get early access and discounted membership.">
     <meta property="og:image" content="https://freedomlab.nyc/static/img/Freedom%20Lab%20NYC%20Logo%20-%20Circle.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Join | Freedom Lab NYC">
-    <meta name="twitter:description" content="Become a Freedom Lab member. Digital membership or hackerspace waitlist.">
+    <meta name="twitter:title" content="Join the Waitlist | Freedom Lab NYC">
+    <meta name="twitter:description" content="Join the waitlist for Freedom Lab NYC's upcoming co-working and hackerspace. Get early access and discounted membership.">
     <meta name="twitter:image" content="https://freedomlab.nyc/static/img/Freedom%20Lab%20NYC%20Logo%20-%20Circle.png">
 </head>
 <body>
-    <!-- Mobile Overlay -->
     <div class="mobile-overlay" id="mobileOverlay"></div>
-    
-    <!-- Header -->
+
     <header class="header">
         <a href="/" class="logo">
             <picture>
@@ -89,128 +222,92 @@
         <nav class="nav-menu" id="navMenu">
             <a href="/classes-events/" class="nav-link">Classes & Events</a>
             <a href="/resources/" class="nav-link">Resources</a>
-            
             <a href="/contact/" class="nav-link">Contact</a>
             <a href="/donate/" class="nav-link">Donate</a>
             <a href="/join/" class="nav-btn">Join</a>
-            
         </nav>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
     </header>
 
-    <!-- Page Hero -->
     <section class="page-hero">
-        <h1>Join</h1>
+        <h1>Join the Waitlist</h1>
     </section>
 
-    <!-- Main Content -->
-    <main class="join-content">
-        <!-- Membership Section -->
-        <section class="membership-section">
-            <div class="section-box">
-                <h2>Become a Member</h2>
-                <p class="section-description">Join our cutting edge freedom tech community where we work together to secure our freedom.</p>
-                
-                <div class="pricing-grid">
-                    <!-- Tier 1: Digital Member -->
-                    <div class="pricing-card pricing-card-green">
-                        <div class="tier-badge tier-badge-green">Digital Member</div>
-                        <div class="price">
-                            <span class="amount">$20</span>
-                            <span class="period">/month</span>
-                        </div>
-                        <ul class="features">
-                            <li><strong style="color: white;">Private Community Server</strong>: Join our end-to-end encrypted server with dedicated channels to:
-                                <ul class="sub-features">
-                                    <li>Share what you're building</li>
-                                    <li>Ask for help and receive support</li>
-                                    <li>Keep up to date with the latest Freedom Tech developments</li>
-                                </ul>
-                            </li>
-                            <li><strong style="color: white;">Early Access to Events</strong>: Be notified ahead of time on classes, workshops, and events with limited slots available.</li>
-                        </ul>
-                        <a href="/join/digital/" class="join-tier-btn join-tier-btn-green">Join</a>
-                    </div>
+    <main class="waitlist-content">
+        <p class="page-description">Freedom Lab is building a New York City <span class="highlight-line">co-working / hackerspace</span> for freedom tech builders, organizers, and learners. Join the waitlist for early access and discounted membership when the physical space opens.</p>
 
-                    <!-- Tier 2: Hackerspace Waitlist -->
-                    <div class="pricing-card pricing-card-featured">
-                        <div class="tier-badge tier-badge-gold">Hackerspace Member</div>
-                        <div class="price">
-                            <span class="amount" style="font-size: 1.8rem;">Coming to NYC</span>
-                        </div>
-                        <ul class="features">
-                            <li><strong style="color: white;">Physical Space</strong>: A dedicated freedom tech hackerspace in New York City — open 24/7 to members as a place to build, learn, and collaborate in person.</li>
-                            <li><strong style="color: white;">Co-Working & Workshops</strong>: Work alongside other freedom tech builders to workshops and hands-on classes.</li>
-                            <li><strong style="color: white;">Everything in Digital</strong>: Access to the private community server for early access to events, share progress on projects, ask for help, and discuss the latest news.</li>
-                        </ul>
-                        <p class="waitlist-note">Join the waitlist now to secure early access to discounted membership and help shape Freedom Lab's future.</p>
-                        <a href="/join-hackerspace" class="join-tier-btn join-tier-btn-featured">Join the Waitlist</a>
+        <div class="waitlist-layout">
+            <section class="section-box">
+                <h2>Become a Space Member</h2>
+                <p class="section-description">The waitlist helps us plan the right location, size, hours, and membership pricing for the community. It is not a payment commitment.</p>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>Physical space</h3>
+                        <p>A dedicated NYC home base for freedom tech — a place to build, learn, collaborate, and meet other people working on Bitcoin, privacy, open-source AI, self-hosting, and related tools.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Co-working & workshops</h3>
+                        <p>Work alongside other builders and attend hands-on workshops, classes, build nights, and community sessions focused on practical freedom technology.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Early access + discounted membership</h3>
+                        <p>Waitlist members will be first to hear about opening plans, membership availability, and discounted founding-member pricing.</p>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Donation Form Section -->
-        <section class="donate-section">
-            <div class="section-box dashed-background">
-                <h2>Support Our Mission</h2>
-                <p class="section-description">Your donation helps us continue providing Freedom Tech education, hosting community events, and building a more sovereign future together.</p>
-                
-                <div class="donation-form-container">
-                    <form method="POST" action="https://btcpay.freedomlab.nyc/api/v1/invoices" class="btcpay-form btcpay-form--block">
-                        <input type="hidden" name="storeId" value="Cfd8fkouRCqasW7CysoVR31Lf9Xbb8zJVYJsbRHGbpwv" />
-                        <input type="hidden" name="orderId" value="website_donation" />
-                        <input type="hidden" name="checkoutDesc" value="Thank you for supporting us!" />
-                        <input type="hidden" name="browserRedirect" value="https://freedomlab.nyc/thankyou/" />
-                        <div class="btcpay-custom-container">
-                            <div class="btcpay-custom">
-                                <input class="btcpay-input-price" type="number" name="price" min="1" max="1000000" step="1" value="10" data-price="10" />
-                            </div>
-                            <select name="currency">
-                                <option value="USD" selected>USD</option>
-                                <option value="GBP">GBP</option>
-                                <option value="EUR">EUR</option>
-                                <option value="BTC">BTC</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="submit" name="submit" title="Pay with BTCPay Server, a Self-Hosted Bitcoin Payment Processor">
-                            <span>Donate with</span>
-                            <img src="https://btcpay.freedomlab.nyc/img/paybutton/logo.svg" alt="BTCPay">
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
+            <section class="section-box" id="waitlist-form">
+                <h2>Sign up</h2>
+                <p class="section-description">Tell us you're interested and what membership price range would be realistic for you.</p>
+                <form class="waitlist-form" id="waitlistForm">
+                    <label for="name">Name <span class="required-star">*</span></label>
+                    <input type="text" id="name" name="Name" required>
+
+                    <label for="email">Email <span class="required-star">*</span></label>
+                    <input type="email" id="email" name="Email" required>
+
+                    <label for="budget">Monthly Membership Amount <span class="required-star">*</span></label>
+                    <p class="field-hint">What monthly membership amount would you consider for access to a co-working / hackerspace?</p>
+                    <div class="price-input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="budget" name="Monthly Budget" min="0" step="1" required>
+                    </div>
+                    <p class="field-asterisk">*For planning only — not a commitment to pay.</p>
+
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="updates" name="Updates Opt-in" value="Yes" required checked>
+                        <label for="updates">I'd like to receive updates about the co-working / hackerspace, early access, and discounted membership opportunities</label>
+                    </div>
+
+                    <button type="submit" class="waitlist-submit">Join the Waitlist</button>
+                    <p class="waitlist-success" id="successMsg">You're on the list. We'll be in touch.</p>
+                </form>
+            </section>
+        </div>
     </main>
 
-    <!-- Footer (loaded from js/footer.js) -->
     <div id="footer-placeholder"></div>
     <script src="../js/footer.js"></script>
 
     <script>
-        // Mobile Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
         const mobileOverlay = document.getElementById('mobileOverlay');
-        
+
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             mobileOverlay.classList.toggle('active');
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
         });
-        
+
         mobileOverlay.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
             mobileOverlay.classList.remove('active');
             document.body.style.overflow = '';
         });
-        
+
         document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
@@ -219,52 +316,43 @@
                 document.body.style.overflow = '';
             });
         });
-        
-        // Enable animations
+
         document.body.classList.add('animate-ready');
-        
-        // Entrance animations for pricing cards (staggered)
-        const pricingObserver = new IntersectionObserver((entries) => {
+        const sectionObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const cards = entry.target.querySelectorAll('.pricing-card');
-                    cards.forEach((card, i) => {
-                        setTimeout(() => {
-                            card.classList.add('animate-in');
-                        }, i * 150);
-                    });
-                    pricingObserver.unobserve(entry.target);
-                }
+                if (entry.isIntersecting) entry.target.classList.add('animate-in');
             });
         }, { threshold: 0.2 });
-        
-        document.querySelectorAll('.pricing-grid').forEach(grid => {
-            pricingObserver.observe(grid);
+        document.querySelectorAll('.section-box').forEach((el, i) => {
+            setTimeout(() => sectionObserver.observe(el), i * 100);
         });
-    </script>
-    <script>
-        // BTCPay price input handler
-        function handlePriceInput(event) {
-            event.preventDefault();
-            const root = event.target.closest('.btcpay-form');
-            const price = parseInt(event.target.dataset.price);
-            if (isNaN(event.target.value)) root.querySelector('.btcpay-input-price').value = price;
-            const min = parseInt(event.target.getAttribute('min')) || 1;
-            const max = parseInt(event.target.getAttribute('max'));
-            if (event.target.value < min) {
-                event.target.value = min;
-            } else if (event.target.value > max) {
-                event.target.value = max;
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyDDn0cRv9xF6JV_dfeer0B81Uq_q_vkRtuoZ8iQct5aH1_icPEfD66Im5X6Fk444eHKQ/exec';
+        const form = document.getElementById('waitlistForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+
+            const formData = new FormData(form);
+            formData.append('formType', 'Hackerspace Waitlist');
+            if (!form.querySelector('#updates').checked) {
+                formData.set('Updates Opt-in', 'No');
             }
-        }
-        document.querySelectorAll(".btcpay-form .btcpay-input-price").forEach(function(el) {
-            if (!el.dataset.initialized) {
-                el.addEventListener('input', handlePriceInput);
-                el.dataset.initialized = true;
+
+            try {
+                await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
+                document.getElementById('successMsg').style.display = 'block';
+                btn.style.display = 'none';
+                form.querySelectorAll('input').forEach(i => i.disabled = true);
+            } catch (error) {
+                btn.disabled = false;
+                btn.textContent = 'Join the Waitlist';
+                alert('Something went wrong. Please try again.');
             }
         });
     </script>
     <script src="../js/social-config.js"></script>
 </body>
 </html>
-
