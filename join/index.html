@@ -12,10 +12,16 @@
     <link rel="stylesheet" href="../css/fonts.css">
     <link rel="stylesheet" href="../css/contact.css">
     <style>
-        .page-hero {
+        body.join-page {
+            min-height: 100vh;
             background:
-                radial-gradient(circle at top, rgba(50, 208, 17, 0.15), transparent 38%),
-                linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
+                radial-gradient(circle at 50% 7rem, rgba(50, 208, 17, 0.16), transparent 24rem),
+                radial-gradient(circle at 50% 26rem, rgba(50, 208, 17, 0.09), transparent 30rem),
+                linear-gradient(180deg, #0a0b0a 0%, #0d110d 100%);
+        }
+
+        .page-hero {
+            background: transparent;
         }
 
         .page-hero h1 {
@@ -222,7 +228,7 @@
     <meta name="twitter:description" content="Apply for early access to New York City's premier co-working and freedom tech hacker space to receive discounted membership when we launch.">
     <meta name="twitter:image" content="https://freedomlab.nyc/static/img/Freedom%20Lab%20NYC%20Logo%20-%20Circle.png">
 </head>
-<body>
+<body class="join-page">
     <div class="mobile-overlay" id="mobileOverlay"></div>
 
     <header class="header">
