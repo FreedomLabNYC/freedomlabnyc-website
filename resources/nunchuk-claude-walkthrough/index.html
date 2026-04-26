@@ -119,7 +119,7 @@
             <p>BIP39 defines the 12- or 24-word mnemonic seed phrase. BIP32 defines how a single seed derives an unlimited tree of key pairs — your root key, your wallet xpub, and the individual signing keys all come from the same seed. When the CLI generates a software key, it creates a BIP39 mnemonic and derives keys from it using BIP32. Write the mnemonic down if this is a real wallet.</p>
 
             <h3>Agent skills</h3>
-            <p>Agent skills are markdown files that tell Claude Code how to use a specific tool. Installing <code>nunchuk-io/agent-skills</code> drops six skill files into Claude's skill directory. Claude reads them and learns the exact commands, flags, and error patterns for each Nunchuk operation — so natural language like "create a 2-of-3 wallet" maps directly to the right CLI invocations.</p>
+            <p>Agent skills are markdown files that tell Claude Code how to use a specific tool. Installing <code>nunchuk-io/agent-skills</code> drops seven skill files into Claude's skill directory. Claude reads them and learns the exact commands, flags, and error patterns for each Nunchuk operation — so natural language like "create a 2-of-3 wallet" maps directly to the right CLI invocations.</p>
 
             <h3>Bounded authority</h3>
             <p>The core design principle: the AI doesn't have the wallet. It has a key in a multisig with a cap. If Claude goes rogue — hallucination, prompt injection, a malicious skill — it cannot authorize a spend above the daily limit without your cosignature. The cryptographic policy is the fence, and neither you nor the AI can remove it unilaterally.</p>
@@ -201,16 +201,16 @@ nunchuk --help</code></pre>
             <p><strong>What to tell Claude:</strong> <em>"Log into Nunchuk with this API key: &lt;key&gt;."</em></p>
 
             <h3>1.4 Install Agent Skills</h3>
-            <p>Agent skills are markdown-based plugins that tell Claude <em>when</em> to use a capability and <em>how</em> to invoke it. Installing <code>nunchuk-io/agent-skills</code> drops six skill files into Claude's skill directory, teaching it the exact commands and error patterns for each Nunchuk operation.</p>
+            <p>Agent skills are markdown-based plugins that tell Claude <em>when</em> to use a capability and <em>how</em> to invoke it. Installing <code>nunchuk-io/agent-skills</code> drops seven skill files into Claude's skill directory, teaching it the exact commands and error patterns for each Nunchuk operation.</p>
             <pre><code>npx skills add nunchuk-io/agent-skills --all --global</code></pre>
             <p><strong>What to tell Claude:</strong> <em>"Install all Nunchuk agent skills globally."</em></p>
-            <p>After installation, six skills become available: <code>nunchuk-setup</code>, <code>nunchuk-wallet-creation</code>, <code>nunchuk-invitations</code>, <code>nunchuk-platform-key</code>, <code>nunchuk-wallet-management</code>, and <code>nunchuk-wallet-transactions</code>. Restart your Claude Code session so they load.</p>
+            <p>After installation, seven skills become available: <code>nunchuk-setup</code>, <code>nunchuk-wallet-creation</code>, <code>nunchuk-invitations</code>, <code>nunchuk-platform-key</code>, <code>nunchuk-wallet-management</code>, <code>nunchuk-wallet-transactions</code>, and <code>nunchuk-coldcard-hsm</code>. Restart your Claude Code session so they load.</p>
             <div class="callout callout-tip">
                 <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
                 </svg>
                 <div class="callout-content">
-                    <p>After restarting Claude Code, try asking: "What Nunchuk skills do you have?" Claude should list all six skills and their descriptions, confirming the install worked.</p>
+                    <p>After restarting Claude Code, try asking: "What Nunchuk skills do you have?" Claude should list all seven skills and their descriptions, confirming the install worked.</p>
                 </div>
             </div>
 
@@ -280,7 +280,7 @@ nunchuk --help</code></pre>
   --auto-broadcast \
   --limit-amount 100 --limit-currency USD --limit-interval DAILY</code></pre>
             <p><strong>What to tell Claude:</strong> <em>"Set a $100/day spending limit on the Platform key with auto-broadcast."</em></p>
-            <p>Run <code>nunchuk sandbox platform-key get-policy &lt;id&gt;</code> to confirm the policy is attached before moving on.</p>
+            <p>Run <code>nunchuk sandbox platform-key get &lt;id&gt;</code> to confirm the policy is attached before moving on.</p>
 
             <h3>3.5 Add your key and the agent's key</h3>
             <p>Fill the remaining 2 slots. One is your human key (from a hardware wallet, Nunchuk mobile, or another software key); the other is the agent key you generated in 3.1. Exporting your hardware wallet xpub requires using your device's export function — the exact steps depend on your hardware wallet model.</p>
@@ -314,7 +314,7 @@ nunchuk wallet export &lt;wallet-id&gt; &gt; agent-wallet-backup.txt</code></pre
             <h3>3.7 Policy updates require cosigning</h3>
             <p>To prove the agent cannot raise its own spending limit: Nunchuk constructs a dummy PSBT — a non-broadcastable transaction that encodes the policy change. The wallet's M signers must sign it for the change to take effect. This is the same cryptographic rail that guards real spends, repurposed for governance.</p>
             <pre><code># Attempt to raise the limit
-nunchuk sandbox platform-key set-policy &lt;wallet-id&gt; \
+nunchuk wallet platform-key update &lt;wallet-id&gt; \
   --limit-amount 1000 --limit-currency USD --limit-interval DAILY
 
 # Nunchuk returns a dummy transaction ID requiring signatures
@@ -339,7 +339,7 @@ nunchuk tx broadcast --wallet &lt;wallet-id&gt; --tx-id &lt;tx-id&gt;</code></pr
             <h3>4.2 Agent tries to exceed the cap</h3>
             <p>Now test the fence. Ask Claude to send more than the daily limit. The transaction creation and the agent's signing step will both succeed — but the Platform key will refuse its cosignature. The transaction stays <code>PENDING_SIGNATURE</code> until a human cosigns from their hardware wallet.</p>
             <p><strong>What to tell Claude:</strong> <em>"Send $500 from the agent wallet."</em></p>
-            <p>Observe that <code>tx create</code> and the agent's <code>tx sign</code> both succeed, but the broadcast never happens. Run <code>nunchuk tx list &lt;wallet-id&gt;</code> to see the transaction stuck at <code>PENDING_SIGNATURE</code>. This is bounded authority working as designed.</p>
+            <p>Observe that <code>tx create</code> and the agent's <code>tx sign</code> both succeed, but the broadcast never happens. Run <code>nunchuk tx list --wallet &lt;wallet-id&gt;</code> to see the transaction stuck at <code>PENDING_SIGNATURE</code>. This is bounded authority working as designed.</p>
             <div class="callout callout-tip">
                 <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
@@ -355,7 +355,7 @@ nunchuk tx broadcast --wallet &lt;wallet-id&gt; --tx-id &lt;tx-id&gt;</code></pr
             <ul>
                 <li><a href="https://developer.nunchuk.io/" target="_blank" rel="noopener">Nunchuk Developer Portal</a> — API key registration and documentation</li>
                 <li><a href="https://agentskills.io/" target="_blank" rel="noopener">Agent Skills</a> — the markdown-based plugin system for Claude Code</li>
-                <li><a href="https://github.com/nunchuk-io/agent-skills" target="_blank" rel="noopener">nunchuk-io/agent-skills on GitHub</a> — source for the six Nunchuk skills</li>
+                <li><a href="https://github.com/nunchuk-io/agent-skills" target="_blank" rel="noopener">nunchuk-io/agent-skills on GitHub</a> — source for the seven Nunchuk skills</li>
                 <li><a href="https://learnmeabitcoin.com/technical/keys/hd-wallets/extended-keys/" target="_blank" rel="noopener">HD Wallets and Extended Keys</a> — BIP32 key derivation explained clearly</li>
                 <li><a href="https://river.com/learn/what-is-a-partially-signed-bitcoin-transaction-psbt/" target="_blank" rel="noopener">What is a PSBT?</a> — the Partially Signed Bitcoin Transaction standard explained</li>
             </ul>
