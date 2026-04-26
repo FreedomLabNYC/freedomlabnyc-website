@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Give Claude bounded signing authority on a 2-of-3 Bitcoin multisig wallet. Set daily spending limits enforced by Nunchuk's Platform key — the AI pays invoices, you stay in control.">
+    <title>Nunchuk + Claude: AI Bitcoin Agent with Spending Limits | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Nunchuk + Claude: AI Bitcoin Agent with Spending Limits | Freedom Lab NYC">
+    <meta property="og:description" content="Give Claude bounded signing authority on a 2-of-3 Bitcoin multisig wallet. Set daily spending limits enforced by Nunchuk's Platform key — the AI pays invoices, you stay in control.">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Nunchuk + Claude: AI Bitcoin Agent with Spending Limits | Freedom Lab NYC">
+    <meta name="twitter:description" content="Give Claude bounded signing authority on a 2-of-3 Bitcoin multisig wallet. Set daily spending limits enforced by Nunchuk's Platform key — the AI pays invoices, you stay in control.">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes &amp; Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+
+        <div class="tutorial-support-banner green">
+            <svg viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#b8e986;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#5cb025;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <g opacity="0.75">
+                    <circle cx="7" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="7" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+                <circle cx="16" cy="5" r="4.5" fill="url(#greenGradient)"/>
+                <ellipse cx="16" cy="16" rx="5" ry="6" fill="url(#greenGradient)"/>
+                <g opacity="0.75">
+                    <circle cx="25" cy="6" r="3.5" fill="url(#greenGradient)"/>
+                    <ellipse cx="25" cy="15" rx="4" ry="5" fill="url(#greenGradient)"/>
+                </g>
+            </svg>
+            <p>These resources are written by Freedom Lab members. <a href="/join/">Join our Freedom Lab server</a> to be a part of the community and receive support directly.</p>
+        </div>
+
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>&rsaquo;</span><span>Nunchuk + Claude: AI Bitcoin Agent with Spending Limits</span>
+            </div>
+            <h1 class="tutorial-title">Nunchuk + Claude: AI Bitcoin Agent with Spending Limits</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Tutorial</span>
+                <span class="tutorial-tag">Bitcoin</span>
+                <span class="tutorial-tag">Open-source AI</span>
+            </div>
+            <p class="tutorial-intro"><strong>Audience:</strong> Intermediate — basic Bitcoin knowledge and command-line comfort required</p>
+            <p><strong>Duration:</strong> 60–90 min</p>
+            <p><strong>Outcomes:</strong> By the end, students will:</p>
+            <ul>
+                <li>Install Nunchuk CLI and connect Claude Code to it via agent skills</li>
+                <li>Understand why bounded signing authority is safer than giving an AI full wallet access</li>
+                <li>Build a 2-of-3 multisig wallet with a Nunchuk Platform key</li>
+                <li>Set a daily spending limit enforced at the cryptographic level</li>
+                <li>Send a transaction under the cap and demonstrate that exceeding it requires human cosigning</li>
+            </ul>
+        </div>
+
+        <nav class="tutorial-toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#concept-primer">Concept Primer</a></li>
+                <li><a href="#agenda">Agenda</a></li>
+                <li><a href="#prerequisites">Prerequisites</a></li>
+                <li><a href="#section-1">Part 1: Connecting Claude to Nunchuk</a></li>
+                <li><a href="#section-2">Part 2: Use Cases for AI Treasury Agents</a></li>
+                <li><a href="#section-3">Part 3: Building the Wallet</a></li>
+                <li><a href="#section-4">Part 4: Putting It to Work</a></li>
+                <li><a href="#references">Reference Links</a></li>
+            </ol>
+        </nav>
+
+        <section class="tutorial-section" id="abstract">
+            <h2>Abstract</h2>
+            <p>Most AI agent setups give Claude access to a hot wallet or an API with full spending power. That's convenient but brittle — a misbehaving prompt, a confused agent, or a supply chain compromise and your funds are gone. There's a better design: give the AI bounded signing authority on one key in a multisig, and let cryptographic policy enforce the ceiling.</p>
+            <p>This walkthrough shows you how to build exactly that using the Nunchuk CLI and Claude Code. You'll create a 2-of-3 multisig wallet where Nunchuk's Platform key enforces a daily spending limit. Claude holds one key, you hold another, and Nunchuk's HSM holds the third. Any two signers can authorize a transaction — but the Platform key will only co-sign if the spend is within the policy limit. Above the cap, you have to cosign manually. The AI can pay invoices and rebalance within its budget. It cannot go rogue.</p>
+        </section>
+
+        <section class="tutorial-section" id="concept-primer">
+            <h2>Concept Primer</h2>
+            <p>Before getting into commands, here's the vocabulary you need:</p>
+
+            <h3>Multisig wallets</h3>
+            <p>A multisig (multi-signature) wallet requires M of N keys to authorize a transaction. A 2-of-3 means any 2 of the 3 key holders can sign — no single person can move funds unilaterally. This is the basis of both collaborative custody and AI-bounded authority: the AI is one keyholder, not all of them.</p>
+
+            <h3>Platform key</h3>
+            <p>Nunchuk's Platform key is an HSM-backed key held by Nunchuk's servers. Unlike a human cosigner, the Platform key applies programmable policies before signing. You set a daily spending limit in USD — the Platform key auto-signs anything under the limit and refuses everything over it. Changing the policy requires a signed dummy PSBT from the wallet's other signers, so the AI cannot raise its own limit.</p>
+
+            <h3>PSBTs</h3>
+            <p>A Partially Signed Bitcoin Transaction (PSBT) is the standard format for passing a transaction between multiple signers. Each signer adds their signature and passes it along. Nunchuk uses this same rail for policy changes — a dummy PSBT encodes a governance action (like a policy update) rather than a real spend, but it still requires the same M-of-N signatures to execute.</p>
+
+            <h3>BIP32 and BIP39</h3>
+            <p>BIP39 defines the 12- or 24-word mnemonic seed phrase. BIP32 defines how a single seed derives an unlimited tree of key pairs — your root key, your wallet xpub, and the individual signing keys all come from the same seed. When the CLI generates a software key, it creates a BIP39 mnemonic and derives keys from it using BIP32. Write the mnemonic down if this is a real wallet.</p>
+
+            <h3>Agent skills</h3>
+            <p>Agent skills are markdown files that tell Claude Code how to use a specific tool. Installing <code>nunchuk-io/agent-skills</code> drops six skill files into Claude's skill directory. Claude reads them and learns the exact commands, flags, and error patterns for each Nunchuk operation — so natural language like "create a 2-of-3 wallet" maps directly to the right CLI invocations.</p>
+
+            <h3>Bounded authority</h3>
+            <p>The core design principle: the AI doesn't have the wallet. It has a key in a multisig with a cap. If Claude goes rogue — hallucination, prompt injection, a malicious skill — it cannot authorize a spend above the daily limit without your cosignature. The cryptographic policy is the fence, and neither you nor the AI can remove it unilaterally.</p>
+        </section>
+
+        <section class="tutorial-section" id="agenda">
+            <h2>Agenda</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Part</th>
+                        <th>Topic</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Connecting Claude to Nunchuk — install CLI, authenticate, install skills</td>
+                        <td>15 min</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Use cases for AI treasury agents — the why before the how</td>
+                        <td>10 min</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Building the wallet — generate key, sandbox, Platform key, policy, finalize</td>
+                        <td>25 min</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Putting it to work — send under cap, hit the fence, policy enforcement demo</td>
+                        <td>15 min</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="tutorial-section" id="prerequisites">
+            <h2>Prerequisites</h2>
+            <ul>
+                <li><strong>Node.js and npm</strong> — required to install the Nunchuk CLI. Run <code>node --version</code> and <code>npm --version</code> to verify they're installed.</li>
+                <li><strong>Claude Code</strong> — the CLI-based AI agent. You need an active session running during the walkthrough.</li>
+                <li><strong>Nunchuk API key</strong> — get one at <a href="https://developer.nunchuk.io/" target="_blank" rel="noopener">developer.nunchuk.io</a> before starting. The free tier is sufficient for testnet use.</li>
+                <li><strong>Testnet BTC</strong> — you'll need a small amount of testnet coins to fund a transaction. A quick web search for "bitcoin testnet faucet" will find a free source.</li>
+                <li><strong>Hardware wallet (optional)</strong> — for the human key in the 2-of-3. You can also use a second software key. The walkthrough notes where this choice matters.</li>
+            </ul>
+            <div class="callout callout-note">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <div class="callout-content">
+                    <p>Do this walkthrough on testnet first. Testnet coins have no monetary value — mistakes cost nothing. Switch to mainnet only after you've run the full flow at least once and understand what each step does.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tutorial-section" id="section-1">
+            <h2>Part 1: Connecting Claude to Nunchuk</h2>
+
+            <h3>1.1 Install the CLI</h3>
+            <p>The Nunchuk CLI is a Node package that bundles the crypto, the Electrum client, and the Nunchuk API wrapper into a single binary. Install it globally so Claude can call it as a shell tool from any directory.</p>
+            <pre><code>npm install -g nunchuk-cli
+nunchuk --help</code></pre>
+            <p>A successful install prints the command tree: <code>auth</code>, <code>sandbox</code>, <code>wallet</code>, <code>tx</code>, <code>key</code>, <code>network</code>, <code>config</code>. If the binary isn't found after install, check that your npm global bin directory is on your PATH.</p>
+            <p><strong>What to tell Claude:</strong> <em>"Install the Nunchuk CLI globally and confirm it's working."</em></p>
+
+            <h3>1.2 Get an API key</h3>
+            <p>Nunchuk's server brokers multisig coordination — sandbox invites, encrypted PSBT relay, and Platform key signing. You need an API key to identify yourself to it. This is not a custodial account: the server never sees your private keys, only encrypted blobs.</p>
+            <p>Go to <a href="https://developer.nunchuk.io/" target="_blank" rel="noopener">developer.nunchuk.io</a>, sign in, create an API key, and copy it to your clipboard. This is a manual browser step — paste the key into your terminal when prompted in the next step.</p>
+
+            <h3>1.3 Authenticate</h3>
+            <p>This writes your API key into <code>~/.nunchuk-cli/config.json</code> and creates an AES-256-GCM encrypted SQLite database at <code>~/.nunchuk-cli/data/&lt;emailHash&gt;/&lt;network&gt;/storage.sqlite</code>. Every key, sandbox, and wallet state lives here, encrypted row-by-row with a master key at <code>~/.nunchuk-cli/master.key</code>.</p>
+            <pre><code>nunchuk auth login --api-key &lt;your-key&gt;</code></pre>
+            <p>Verify with <code>nunchuk auth status</code> — it should report that you're logged in and your local vault is initialized.</p>
+            <p><strong>What to tell Claude:</strong> <em>"Log into Nunchuk with this API key: &lt;key&gt;."</em></p>
+
+            <h3>1.4 Install Agent Skills</h3>
+            <p>Agent skills are markdown-based plugins that tell Claude <em>when</em> to use a capability and <em>how</em> to invoke it. Installing <code>nunchuk-io/agent-skills</code> drops six skill files into Claude's skill directory, teaching it the exact commands and error patterns for each Nunchuk operation.</p>
+            <pre><code>npx skills add nunchuk-io/agent-skills --all --global</code></pre>
+            <p><strong>What to tell Claude:</strong> <em>"Install all Nunchuk agent skills globally."</em></p>
+            <p>After installation, six skills become available: <code>nunchuk-setup</code>, <code>nunchuk-wallet-creation</code>, <code>nunchuk-invitations</code>, <code>nunchuk-platform-key</code>, <code>nunchuk-wallet-management</code>, and <code>nunchuk-wallet-transactions</code>. Restart your Claude Code session so they load.</p>
+            <div class="callout callout-tip">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                </svg>
+                <div class="callout-content">
+                    <p>After restarting Claude Code, try asking: "What Nunchuk skills do you have?" Claude should list all six skills and their descriptions, confirming the install worked.</p>
+                </div>
+            </div>
+
+            <h3>1.5 Pick a network</h3>
+            <p>Nunchuk supports mainnet (real BTC), testnet (free test coins), and signet. For this walkthrough, use testnet — mistakes cost nothing. Network state is stored in config and applies to all subsequent commands.</p>
+            <pre><code>nunchuk network set testnet</code></pre>
+            <p>All subsequent commands will talk to testnet endpoints and use testnet BIP32 derivation paths (<code>m/48h/1h/...</code> instead of <code>m/48h/0h/...</code>).</p>
+            <p><strong>What to tell Claude:</strong> <em>"Switch Nunchuk to testnet."</em></p>
+        </section>
+
+        <section class="tutorial-section" id="section-2">
+            <h2>Part 2: Use Cases for AI Treasury Agents</h2>
+            <p>Before building the wallet, it helps to anchor the <em>why</em>. The combination of CLI + agent skills + Platform key policies unlocks use cases that custodial apps can't touch and that hot wallets can't do safely:</p>
+            <ul>
+                <li><strong>AI treasury agent</strong> — give Claude a key in a 2-of-3 with a $500/day cap. It pays invoices, rebalances between cold storage, files receipts. If it goes rogue, the limit holds.</li>
+                <li><strong>Automated payroll in BTC</strong> — a monthly disbursement run by an agent with a spending cap equal to payroll plus 10%. Humans cosign only if the agent tries to exceed the cap.</li>
+                <li><strong>Agent-to-agent micropayments</strong> — one AI buys data or compute from another, each bounded by policy so neither can drain the wallet.</li>
+                <li><strong>Bill-pay with a signing delay</strong> — a 24-hour delay on all spends gives you a cancellation window if something looks wrong before broadcast.</li>
+                <li><strong>Self-custody with a human safety net</strong> — you hold 1 key, Nunchuk Platform holds 1, Claude holds 1. Any 2 sign. You can recover from losing any single factor.</li>
+                <li><strong>Auditable agent actions</strong> — every agent spend is a real Bitcoin transaction. No opaque "the AI did something" — it's on-chain and visible in your wallet history forever.</li>
+            </ul>
+            <div class="callout callout-note">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <div class="callout-content">
+                    <p>The key distinction: <strong>the AI doesn't have the wallet. It has bounded signing authority on one key in a multisig.</strong> This is a fundamentally different security model than giving an agent a hot wallet or API key with full spending power.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tutorial-section" id="section-3">
+            <h2>Part 3: Building the Wallet</h2>
+
+            <h3>3.1 Generate the agent's key</h3>
+            <p>This creates a BIP39 24-word mnemonic, derives a BIP32 root, and extracts the xpub at the multisig derivation path <code>m/48h/1h/0h/2h</code> (testnet, native segwit). The key lives encrypted in SQLite on this machine — Claude can use it to sign, but the mnemonic never leaves the device.</p>
+            <pre><code>nunchuk key generate --name "Agent"</code></pre>
+            <p><strong>What to tell Claude:</strong> <em>"Generate a new software key named Agent."</em></p>
+            <p>A fingerprint (8 hex characters) prints to confirm success. Run <code>nunchuk key list</code> to verify it's stored. If this is a real mainnet wallet, write the mnemonic down — losing the device without a backup means losing the key permanently.</p>
+            <div class="callout callout-warning">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <div class="callout-content">
+                    <p>On testnet, losing the key just means losing test coins. On mainnet, it means losing real funds. Back up the mnemonic before loading any mainnet value into the wallet.</p>
+                </div>
+            </div>
+
+            <h3>3.2 Create the sandbox</h3>
+            <p>A sandbox is the pre-finalization state of a multisig wallet. It holds the wallet structure (M-of-N, address type, name) while participants add their keys. Once all N slots are filled, you finalize it into a real wallet.</p>
+            <pre><code>nunchuk sandbox create --name "Agent Wallet" --m 2 --n 3 --address-type NATIVE_SEGWIT</code></pre>
+            <p><strong>What to tell Claude:</strong> <em>"Create a 2-of-3 native segwit sandbox called Agent Wallet."</em></p>
+            <p>A sandbox ID prints. Run <code>nunchuk sandbox get &lt;id&gt;</code> to confirm 3 empty slots with status <code>PENDING</code>.</p>
+
+            <h3>3.3 Enable the Platform key</h3>
+            <p>This tells the sandbox that one of the 3 keys will be Nunchuk's HSM-backed Platform key. You don't supply an xpub — the server contributes its own xpub to the descriptor. This is the key that spending policies will apply to.</p>
+            <pre><code>nunchuk sandbox platform-key enable &lt;sandbox-id&gt;</code></pre>
+            <p><strong>What to tell Claude:</strong> <em>"Enable the Platform key on sandbox &lt;id&gt;."</em></p>
+            <p>After this command, one slot shows as filled by Nunchuk. Two slots remain for you and the agent.</p>
+
+            <h3>3.4 Set the policy</h3>
+            <p>This defines the bounded authority. The <code>--auto-broadcast</code> flag means the Platform key will co-sign <em>and push to the network</em> any transaction under the daily limit without asking. Above the limit, it refuses — and there's no way for the agent to override this without your cosigning a dummy PSBT.</p>
+            <pre><code>nunchuk sandbox platform-key set-policy &lt;sandbox-id&gt; \
+  --auto-broadcast \
+  --limit-amount 100 --limit-currency USD --limit-interval DAILY</code></pre>
+            <p><strong>What to tell Claude:</strong> <em>"Set a $100/day spending limit on the Platform key with auto-broadcast."</em></p>
+            <p>Run <code>nunchuk sandbox platform-key get-policy &lt;id&gt;</code> to confirm the policy is attached before moving on.</p>
+
+            <h3>3.5 Add your key and the agent's key</h3>
+            <p>Fill the remaining 2 slots. One is your human key (from a hardware wallet, Nunchuk mobile, or another software key); the other is the agent key you generated in 3.1. Exporting your hardware wallet xpub requires using your device's export function — the exact steps depend on your hardware wallet model.</p>
+            <pre><code># Agent's software key — already on this device
+nunchuk sandbox add-key &lt;sandbox-id&gt; --slot 1 --fingerprint &lt;agent-xfp&gt;
+
+# Your key — paste the descriptor exported from your hardware wallet or Nunchuk mobile
+nunchuk sandbox add-key &lt;sandbox-id&gt; --slot 2 \
+  --descriptor "[abcd1234/48h/1h/0h/2h]xpub..."</code></pre>
+            <p><strong>What to tell Claude:</strong> <em>"Add the agent's key to slot 1. I'll paste my hardware wallet descriptor for slot 2."</em></p>
+            <p>Run <code>nunchuk sandbox get &lt;id&gt;</code> to confirm all 3 slots are filled before finalizing.</p>
+
+            <h3>3.6 Finalize</h3>
+            <p>Finalizing turns the sandbox into a real wallet. The CLI assembles the multisig descriptor, computes a wallet ID (a hash of the descriptor), and stores the finalized wallet locally and server-side. After this step, the wallet can receive funds.</p>
+            <pre><code>nunchuk sandbox finalize &lt;sandbox-id&gt;
+nunchuk wallet address get &lt;wallet-id&gt;
+nunchuk wallet export &lt;wallet-id&gt; &gt; agent-wallet-backup.txt</code></pre>
+            <p><strong>What to tell Claude:</strong> <em>"Finalize the sandbox, give me a receive address, and export a backup."</em></p>
+            <p>You'll get a wallet ID, a testnet bech32 address starting with <code>tb1q...</code>, and a descriptor backup file. Send testnet coins to the address from a faucet to fund it for the next steps.</p>
+            <div class="callout callout-warning">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <div class="callout-content">
+                    <p>Keep <code>agent-wallet-backup.txt</code> safe. It contains the full multisig descriptor. If you ever need to recover the wallet in a different app, you'll need this file plus the individual seed phrases for each key.</p>
+                </div>
+            </div>
+
+            <h3>3.7 Policy updates require cosigning</h3>
+            <p>To prove the agent cannot raise its own spending limit: Nunchuk constructs a dummy PSBT — a non-broadcastable transaction that encodes the policy change. The wallet's M signers must sign it for the change to take effect. This is the same cryptographic rail that guards real spends, repurposed for governance.</p>
+            <pre><code># Attempt to raise the limit
+nunchuk sandbox platform-key set-policy &lt;wallet-id&gt; \
+  --limit-amount 1000 --limit-currency USD --limit-interval DAILY
+
+# Nunchuk returns a dummy transaction ID requiring signatures
+nunchuk wallet dummy-tx list &lt;wallet-id&gt;
+nunchuk wallet dummy-tx sign &lt;wallet-id&gt; --dummy-tx-id &lt;id&gt;
+# The agent's signature alone is not enough — you must cosign from your hardware wallet</code></pre>
+            <p><strong>What to tell Claude:</strong> <em>"Try to raise the limit to $1,000/day. Show me the dummy transaction it generates."</em></p>
+            <p>Claude's signature alone is insufficient. You must cosign from your hardware wallet for the policy change to execute. This is the enforcement demo: the fence holds even against the agent's own requests.</p>
+        </section>
+
+        <section class="tutorial-section" id="section-4">
+            <h2>Part 4: Putting It to Work</h2>
+
+            <h3>4.1 Agent sends under the cap</h3>
+            <p>With the wallet funded and policy set, instruct Claude to send a transaction end-to-end — construct, sign with the agent key, and broadcast — all from a single natural-language prompt.</p>
+            <pre><code>nunchuk tx create --wallet &lt;wallet-id&gt; --to &lt;address&gt; --amount 50 --currency USD
+nunchuk tx sign --wallet &lt;wallet-id&gt; --tx-id &lt;tx-id&gt;
+nunchuk tx broadcast --wallet &lt;wallet-id&gt; --tx-id &lt;tx-id&gt;</code></pre>
+            <p><strong>What to tell Claude:</strong> <em>"Send $50 from the agent wallet to tb1q..."</em></p>
+            <p>Claude runs all three commands. The Platform key auto-cosigns (the amount is under the $100 daily cap) and the transaction is broadcast. Verify in a testnet block explorer that it went through.</p>
+
+            <h3>4.2 Agent tries to exceed the cap</h3>
+            <p>Now test the fence. Ask Claude to send more than the daily limit. The transaction creation and the agent's signing step will both succeed — but the Platform key will refuse its cosignature. The transaction stays <code>PENDING_SIGNATURE</code> until a human cosigns from their hardware wallet.</p>
+            <p><strong>What to tell Claude:</strong> <em>"Send $500 from the agent wallet."</em></p>
+            <p>Observe that <code>tx create</code> and the agent's <code>tx sign</code> both succeed, but the broadcast never happens. Run <code>nunchuk tx list &lt;wallet-id&gt;</code> to see the transaction stuck at <code>PENDING_SIGNATURE</code>. This is bounded authority working as designed.</p>
+            <div class="callout callout-tip">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                </svg>
+                <div class="callout-content">
+                    <p><code>PENDING_SIGNATURE</code> is not an error — it's the system working. The transaction will complete as soon as the required cosignature is added. You can reject it entirely by double-spending the input from your hardware wallet if needed.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tutorial-section" id="references">
+            <h2>Reference Links</h2>
+            <ul>
+                <li><a href="https://developer.nunchuk.io/" target="_blank" rel="noopener">Nunchuk Developer Portal</a> — API key registration and documentation</li>
+                <li><a href="https://agentskills.io/" target="_blank" rel="noopener">Agent Skills</a> — the markdown-based plugin system for Claude Code</li>
+                <li><a href="https://github.com/nunchuk-io/agent-skills" target="_blank" rel="noopener">nunchuk-io/agent-skills on GitHub</a> — source for the six Nunchuk skills</li>
+                <li><a href="https://learnmeabitcoin.com/technical/keys/hd-wallets/extended-keys/" target="_blank" rel="noopener">HD Wallets and Extended Keys</a> — BIP32 key derivation explained clearly</li>
+                <li><a href="https://river.com/learn/what-is-a-partially-signed-bitcoin-transaction-psbt/" target="_blank" rel="noopener">What is a PSBT?</a> — the Partially Signed Bitcoin Transaction standard explained</li>
+            </ul>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/resources/" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Resources</a>
+        </nav>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="../../js/footer.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        document.querySelectorAll('.tutorial-toc a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').slice(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    history.pushState(null, null, `#${targetId}`);
+                }
+            });
+        });
+        const lightbox = document.createElement('div');
+        lightbox.className = 'lightbox-overlay';
+        lightbox.innerHTML = '<img src="" alt="">';
+        document.body.appendChild(lightbox);
+        const lightboxImg = lightbox.querySelector('img');
+        document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        lightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    </script>
+</body>
+</html>
