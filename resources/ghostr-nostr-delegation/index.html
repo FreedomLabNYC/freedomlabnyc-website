@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Set up Ghostr so an AI agent can draft Nostr posts without holding your main publishing key. Secure delegate workflow with NIP-07, NIP-46, NIP-44, and Blossom media guidance.">
+    <title>Ghostr Nostr Delegation for AI Agents | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freedomlab.nyc/resources/ghostr-nostr-delegation/">
+    <meta property="og:title" content="Ghostr Nostr Delegation for AI Agents | Freedom Lab NYC">
+    <meta property="og:description" content="A practical skill for letting AI agents draft Nostr posts through Ghostr without exposing your publishing key.">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ghostr Nostr Delegation for AI Agents | Freedom Lab NYC">
+    <meta name="twitter:description" content="A practical skill for letting AI agents draft Nostr posts through Ghostr without exposing your publishing key.">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture><source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp"><img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide"></picture></a>
+        <nav class="nav-menu" id="navMenu"><a href="/classes-events/" class="nav-link">Classes & Events</a><a href="/resources/" class="nav-link active">Resources</a><a href="/contact/" class="nav-link">Contact</a><a href="/donate/" class="nav-link">Donate</a><a href="/join/" class="nav-btn">Join</a></nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb"><a href="/resources/">Resources</a><span>›</span><a href="/resources/#ai-skills">Open Source AI Skills</a><span>›</span><span>Ghostr Nostr Delegation</span></div>
+            <h1 class="tutorial-title">Ghostr Nostr Delegation for AI Agents</h1>
+            <div class="tutorial-meta"><span class="tutorial-type-tag tutorial">Skill</span><span class="tutorial-tag">Nostr</span><span class="tutorial-tag">AI Agents</span><span class="tutorial-tag">Security</span></div>
+            <p class="tutorial-description">Let an AI agent draft Nostr posts through Ghostr while the human publisher keeps control of the real signing key.</p>
+        </div>
+        <a href="ghostr-nostr-delegation.skill" download style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1.2rem; background:#32d011; color:#0a0b0a; border-radius:8px; font-weight:600; text-decoration:none; margin-bottom:1rem;">Download ghostr-nostr-delegation.skill</a>
+        <p style="margin-top:0; margin-bottom:1.5rem; font-size:0.9rem; color:#e8c547; font-weight:600;">⚠️ Review the full skill before installing or using it. It is designed to reduce key exposure, not eliminate your responsibility for final publishing decisions.</p>
+
+        <section class="tutorial-section"><h2>Brief overview</h2><p>Ghostr separates writing from publishing. A delegate identity drafts and submits privately; the publisher identity reviews and signs. This means an AI agent can help with social publishing without holding the account that actually speaks for you or your organization.</p></section>
+        <section class="tutorial-section"><h2>Step 1 — Confirm the publishing model</h2><ol><li>Choose the publisher account and record only its public <code>npub</code>.</li><li>Create or choose a separate low-risk delegate identity for the agent.</li><li>Decide whether the agent may upload media, and whether the publisher should re-host it before approval.</li></ol></section>
+        <section class="tutorial-section"><h2>Step 2 — Store secrets in the right place</h2><p>The exact password manager or secret store depends on your device. On macOS, Keychain works well and can be scripted. On Linux, consider <code>pass</code>, Secret Service/GNOME Keyring, KDE Wallet, Bitwarden CLI, or 1Password CLI. On Windows, use Windows Credential Manager, Bitwarden CLI, 1Password CLI, or a signer extension in a dedicated browser profile. On Android, Amber can act as a NIP-46 remote signer.</p><p>The rule is portable: public <code>npub</code> values can be copied around; private <code>nsec</code> values should never appear in chat, logs, screenshots, repos, or agent memory.</p></section>
+        <section class="tutorial-section"><h2>Step 3 — Pick a signer</h2><ul><li><strong>NIP-07 browser extension:</strong> good for browser workflows; verify NIP-44 support for Ghostr encryption.</li><li><strong>NIP-46 remote signer:</strong> good when you want keys to stay on a phone or separate signer.</li><li><strong>Direct private-key entry:</strong> acceptable only for disposable delegate keys, not brand or main publisher accounts.</li></ul><p>If you manage multiple Nostr identities, use a reliable multi-account signer or separate browser profiles. Ambiguous signer state is how people post from the wrong account.</p></section>
+        <section class="tutorial-section"><h2>Step 4 — Have the agent submit drafts</h2><ol><li>The agent logs in as the delegate/writer.</li><li>The publisher logs in with the real signer.</li><li>The agent drafts a short note or long-form post.</li><li>The agent submits the draft privately to the publisher <code>npub</code>.</li><li>The publisher reviews, edits, optionally re-hosts media, and signs.</li></ol></section>
+        <section class="tutorial-section"><h2>Step 5 — Re-host media for Nostr</h2><p>When adapting posts from X, LinkedIn, or another platform, avoid leaving platform CDN image URLs in the Nostr draft. Download the images, upload them to a Nostr-friendly media host such as Blossom, and include those URLs in the draft. The publisher can re-host under the publisher identity before final posting if needed.</p></section>
+        <section class="tutorial-section"><h2>What your agent should report back</h2><ul><li>Which publisher <code>npub</code> was targeted.</li><li>Whether a draft was submitted or only prepared locally.</li><li>The submission ID and event ID, if submitted.</li><li>The final draft text and media URLs.</li><li>Any manual approval step still required.</li></ul></section>
+        <section class="tutorial-section"><h2>Security rules</h2><ul><li>Never expose valuable publisher <code>nsec</code> keys to an AI agent.</li><li>Use delegate keys with limited blast radius.</li><li>Prefer NIP-07 or NIP-46 signers for publisher accounts.</li><li>Require explicit human approval before publishing externally.</li></ul></section>
+    </main>
+    <script src="../../js/main.js"></script>
+    <div id="footer-placeholder"></div><script src="../../js/footer.js"></script>
+</body>
+</html>

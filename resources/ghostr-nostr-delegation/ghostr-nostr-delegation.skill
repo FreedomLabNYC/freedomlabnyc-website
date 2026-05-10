@@ -1,0 +1,111 @@
+---
+name: ghostr-nostr-delegation
+description: Set up secure Nostr posting workflows with Ghostr using writer/publisher delegation so an AI agent or assistant can draft without holding the publisher private key.
+version: 1.1.0
+author: Freedom Lab NYC / Wren
+license: MIT
+---
+
+# Ghostr Nostr Delegation
+
+Use this when you want an AI agent, assistant, collaborator, or automation to draft Nostr posts through Ghostr without giving it the main account's private key.
+
+## Brief overview
+
+Ghostr separates the person or agent that writes a draft from the account that publishes it:
+
+- **Delegate / writer**: drafts posts, attaches media, and submits privately.
+- **Publisher / admin**: reviews, edits, approves, and signs with the real publishing key.
+
+The safe default is: create a low-risk delegate identity for the agent, keep the main publishing key with the human/operator, and have the agent submit encrypted drafts for approval.
+
+## Step 1 — Choose the accounts
+
+Ask the user/operator to confirm:
+
+1. Which Nostr account should publish the final posts? Record only its public `npub`.
+2. Who or what will draft? Usually a separate delegate identity for the AI agent.
+3. Whether media uploads are allowed, and who should own/re-host media.
+
+Never ask the user to paste a valuable `nsec` into chat, logs, a repo, or an agent memory file.
+
+## Step 2 — Set up secure key storage
+
+Use the best secret store available on the operator's device. The examples below are recommendations, not requirements.
+
+- **macOS**: Keychain via the `security` CLI, 1Password CLI, or a NIP-07 browser signer in a dedicated browser profile.
+- **Linux**: `pass`, GNOME Keyring/Secret Service, KDE Wallet, Bitwarden CLI, 1Password CLI, or an encrypted file unlocked only at runtime.
+- **Windows**: Windows Credential Manager, 1Password CLI, Bitwarden CLI, or a signer extension in a dedicated browser profile.
+- **Android**: Amber as a NIP-46 remote signer is a strong option.
+- **iOS**: use a reputable Nostr signer/app if available; otherwise keep approval/publishing manual.
+
+For high-value publisher keys, prefer a signer extension or NIP-46 remote signer over raw private-key entry.
+
+## Step 3 — Pick the login method
+
+Ghostr supports several login paths:
+
+1. **Extension / NIP-07 signer**: good for browser workflows. NIP-44 support is required for encrypted Ghostr features.
+2. **Bunker / NIP-46 remote signer**: good for keeping keys on a phone or external signer.
+3. **Private key entry**: least preferred. Only consider this for a disposable delegate key, not a brand/main publisher key.
+
+If you need multiple Nostr accounts, use either a reliable multi-account signer or separate browser profiles, one identity per profile. Ambiguous signer state is a common cause of accidental posting from the wrong account.
+
+## Step 4 — Create or load a delegate identity
+
+Create a separate Nostr identity for the AI agent/delegate. This key can submit drafts and upload media, but should not be the final brand/publisher key.
+
+Recommended agent behavior:
+
+- Store the delegate secret only in the local secret manager.
+- Store public `npub` values freely; they are not secrets.
+- Redact private keys from terminal output and logs.
+- Avoid direct public posting unless the user explicitly approves it.
+
+## Step 5 — Submit drafts through Ghostr
+
+UI workflow:
+
+1. Agent logs into Ghostr as the delegate/writer.
+2. Human/operator logs into Ghostr as publisher/admin using the real publisher signer.
+3. Agent drafts a short note or long-form article.
+4. Agent submits the draft privately to the publisher `npub`.
+5. Publisher reviews, edits, re-hosts media if desired, approves, and signs.
+
+CLI-compatible workflow for advanced setups:
+
+- Ghostr submissions are encrypted gift-wrapped Nostr events.
+- The draft payload is a JSON object with `protocol: "ghostr_v1"`, `type: "submission"`, `kind`, `content`, tags, optional note, and timestamp.
+- Tools such as `nak` can create kind `14` encrypted content and wrap it as kind `1059` for the publisher.
+
+Do not print expanded commands containing private keys. Use wrapper scripts that read secrets from the OS secret manager and redact outputs.
+
+## Step 6 — Handle media safely
+
+If adapting posts from X, LinkedIn, or another platform, do not leave platform CDN image URLs in the final Nostr draft. Download and re-host images to Blossom or another Nostr-friendly media host so clients render them natively and the draft is not dependent on another platform's CDN.
+
+Default media policy:
+
+1. Download source images locally.
+2. Upload with the delegate key to a Blossom server.
+3. Append Blossom URLs to the draft body.
+4. Publisher may re-host under the publisher identity before final approval.
+
+## Step 7 — Agent checklist before reporting done
+
+The agent should report:
+
+- Publisher `npub` targeted.
+- Whether the draft was submitted or only prepared locally.
+- Draft/submission ID and gift-wrap event ID if submitted.
+- Final draft text.
+- Media URLs, if any.
+- Any manual approval step still required.
+
+## Security rules
+
+- Never store raw `nsec` values in memory, chat, screenshots, public repos, or skill files.
+- Main/brand account keys stay with the publisher, ideally in NIP-07/NIP-46 signing infrastructure.
+- Delegate keys should be low-risk and revocable.
+- NIP-44 support matters; older signers may fail encrypted Ghostr flows.
+- Posting is public. Agents should draft and submit for review, not publish directly, unless explicitly told to publish.
