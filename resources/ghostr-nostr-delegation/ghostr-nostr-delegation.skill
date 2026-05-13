@@ -88,15 +88,31 @@ When adapting posts from X, LinkedIn, Mastodon, websites, or other sources:
 4. Append the Blossom HTTPS URLs to the draft so Nostr clients render native images.
 5. If brand ownership matters, have the publisher re-host media under the publisher identity before final approval.
 
-## Step 7 — Draft threads safely
+## Step 7 — Post threads with the Freedom Lab Ghostr Fork
 
-If using a Ghostr fork or client that supports thread drafts:
+Freedom Lab's Ghostr Fork is published at `https://freedomlab.nyc/ghostr/`. It extends the normal Ghostr review flow so a delegate can submit a multi-post thread draft and the publisher can sign it as linked Nostr events.
 
-1. Keep the same delegation model: the agent drafts, the publisher signs.
-2. Store each thread post as a separate draft item or as text blocks separated by a line containing `---`.
-3. When publishing, create sequential Nostr `kind 1` events.
-4. Add NIP-10 root/reply `e` tags so clients can render the thread correctly.
-5. Verify the published events from relay data before assuming every client will render them identically.
+Use this workflow when the user specifically wants a real Nostr thread, not one long note:
+
+1. Keep the same delegation model: the agent prepares the thread draft; the publisher reviews and signs.
+2. Draft each thread post as a separate card in the Ghostr Fork UI, or represent the thread in plain text with separator lines containing only `---`.
+3. Keep each post concise; the fork surfaces per-post character counts and over-280 warnings, but the publisher should still review readability and client rendering.
+4. Submit the thread for review. The submission should include all durable thread signals the fork understands:
+   - a normal Ghostr `submission` payload for backward compatibility,
+   - `kind: 1`,
+   - tag `['ghostr-thread', 'true']`,
+   - `threadPosts: string[]` containing the ordered posts,
+   - legacy `content` joined with `\n---\n` for display/backward compatibility.
+5. In the publisher review screen, edit the per-post cards rather than collapsing the thread into one textarea.
+6. Publish from the `Publish Thread` dialog. The fork should publish the first post as the root `kind 1` event, then publish later posts sequentially with NIP-10-style tags:
+   ```ts
+   ['e', rootId, '', 'root']
+   ['e', previousPostId, '', 'reply']
+   ```
+7. Treat the root event ID as the main shareable thread URL, but capture every event ID if the tool exposes them. Some rough Ghostr forks still have single-root-shaped receipts/history.
+8. Verify from relay data before assuming client rendering is correct. At minimum confirm that multiple `kind 1` events exist, later posts include root/reply `e` tags, and the public content is split into separate posts rather than published as one giant note.
+
+If a submitted thread publishes as a single post, inspect the encrypted submission or local draft before changing code. Common causes are missing `threadPosts`, a missing `ghostr-thread` marker, or publisher code that detects only one of the durable thread signals. Prefer `threadPosts` as the source of truth when present; use `---`-split content only as fallback.
 
 ## CLI-oriented submission notes
 
