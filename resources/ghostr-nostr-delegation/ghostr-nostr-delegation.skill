@@ -94,7 +94,7 @@ Freedom Lab's Ghostr Fork is published at `https://freedomlab.nyc/ghostr/`. It e
 
 Use this workflow when the user specifically wants a real Nostr thread, not one long note:
 
-1. Keep the same delegation model: the agent prepares the thread draft; the publisher reviews and signs.
+1. Open `https://freedomlab.nyc/ghostr/` and keep the same delegation model: the agent prepares the thread draft; the publisher reviews and signs.
 2. Draft each thread post as a separate card in the Ghostr Fork UI, or represent the thread in plain text with separator lines containing only `---`.
 3. Keep each post concise; the fork surfaces per-post character counts and over-280 warnings, but the publisher should still review readability and client rendering.
 4. Submit the thread for review. The submission should include all durable thread signals the fork understands:
