@@ -1,0 +1,1 @@
+import{decodePaymentRequest as n}from"./cashu-ts.es-BYdLH67O.js";import"./index-D8BJQyJB.js";function u(t,s=!1){const e=t.get("X-Cashu");if(!e){if(s)return;throw new Error("Missing cashu header")}const r=n(e);return r.transport=[],r}export{u as getPaymentRequestFromHeaders};
