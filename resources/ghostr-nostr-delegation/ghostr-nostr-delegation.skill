@@ -1,281 +1,134 @@
 ---
 name: ghostr-nostr-delegation
-description: Set up secure Nostr posting workflows with Ghostr using writer/publisher delegation so Wren can draft without holding the publisher private key.
+description: Set up secure Nostr posting workflows with Ghostr so an AI agent can draft posts without holding the publisher's private key.
 version: 1.0.0
-author: Wren
 license: MIT
 ---
 
 # Ghostr Nostr delegation
 
-Use this when Harrison wants Wren to draft or prepare Nostr posts using Ghostr (`https://ghostr.org/`) or a similar Nostr delegation workflow.
+Use this skill when someone wants an AI agent or assistant to prepare Nostr posts through Ghostr (`https://ghostr.org/`) while keeping the real publishing key under human control.
 
-## Core security model
+## Brief overview
 
-Do **not** ask Harrison to give Wren the Freedom Lab or personal Nostr `nsec`.
+Ghostr separates two roles:
 
-When converting this workflow into a public FreedomLab.NYC skill/resource, generalize beyond Harrison's exact setup: keep macOS Keychain as a validated example, but also recommend equivalents for Linux (`pass`, Secret Service/GNOME Keyring, KDE Wallet, Bitwarden CLI, 1Password CLI), Windows (Credential Manager, Bitwarden CLI, 1Password CLI), and mobile/NIP-46 signers such as Amber. Structure public skill pages as a brief overview followed by numbered steps an agent can follow with minimal user intervention.
+- **Delegate / writer**: drafts content, attaches media, and submits private drafts.
+- **Publisher / admin**: reviews, edits, approves, and signs with the real Nostr publishing key.
 
-Ghostr is designed for:
-- **Delegate / writer**: drafts content, uploads media, submits privately.
-- **Publisher / admin**: reviews, edits, approves, and signs with the real publishing key.
+The safe default is simple: the agent may hold or use a low-risk delegate identity, but it should never receive the `nsec` for a personal, organizational, brand, or other high-value publisher account.
 
-Best default for Freedom Lab:
-1. Create/use a separate low-risk Wren delegate Nostr identity.
-2. Keep the Freedom Lab publisher key with Harrison/Freedom Lab only.
-3. Have the publisher key live in a signer extension or remote signer, not pasted into chat or memory.
-4. Wren submits drafts to the Freedom Lab publisher `npub`; Harrison approves/signs.
+## Step 1 — Confirm the publishing model
 
-## Ghostr login options observed
+Ask the user for only the information needed to configure delegation:
 
-Ghostr login modal supports:
-- **Extension**: NIP-07 browser extension such as Alby or nos2x. Ghostr says NIP-44 support is required for encrypted features.
-- **Bunker**: NIP-46 remote signer URI (`bunker://...`), e.g. Amber on Android. Also needs NIP-44.
-- **Private Key**: direct `nsec`/hex entry; Ghostr says it is stored only in memory and cleared on logout, but this is still the least preferred route for valuable publisher keys.
+1. Which public Nostr account should publish? Record the publisher `npub`, not the `nsec`.
+2. Is the publisher key already available through a signer such as a NIP-07 browser extension or a NIP-46 remote signer?
+3. Should the agent create or use a separate low-risk delegate identity?
+4. May the agent download and re-host media, or should the publisher handle media manually?
 
-Recommended:
-- Wren delegate: can use a dedicated low-risk key, ideally via extension/remote signer if feasible.
-- Freedom Lab publisher: use NIP-07 extension or NIP-46 remote signer. Avoid direct private-key paste.
+Do not ask the user to paste a valuable private key into chat, logs, files, or agent memory.
 
-## Browser signer extension notes
+## Step 2 — Choose a secret-storage method
 
-For Harrison's three-account browser-login use case, prefer a signer/account-manager extension over a wallet-first extension:
-- **AKA Profiles**: good first fallback when multi-account Nostr signing is needed. It is explicitly oriented around multiple public/private key pairs and references `nip44.encrypt()` / `nip44.decrypt()` support, which should satisfy Ghostr's NIP-44 requirement.
-- **Nostrame**: conceptually the right model (Nostr signer + multi-account manager), but in-browser testing showed it may hang at “Loading…” immediately after install. Do not sink much time into it if the popup fails to load.
-- **Alby**: useful for Lightning + basic Nostr but confusing for multiple Nostr identities because its UI is wallet/account-centric and can create ambiguous duplicate wallet entries.
-- **nos2x**: old reliable/simple NIP-07 signer, but less ideal for three accounts; if used, prefer one browser profile per identity.
+Use the host platform's secret store or a dedicated password manager. Portable options:
 
-If all multi-account signers are janky, the safe pragmatic setup is separate Chrome/Brave profiles per Nostr account, each with exactly one signer key, so the active identity is unambiguous.
+- **macOS**: Keychain, 1Password CLI, Bitwarden CLI.
+- **Linux**: `pass`, Secret Service/GNOME Keyring, KDE Wallet, 1Password CLI, Bitwarden CLI.
+- **Windows**: Windows Credential Manager, 1Password CLI, Bitwarden CLI.
+- **Android / mobile signing**: NIP-46 remote signers such as Amber.
+- **Browser workflows**: NIP-07 signer extensions in a dedicated browser profile.
 
-## What to ask Harrison for
+Public `npub` values are safe to share. Private `nsec` values are not.
 
-Ask only for:
-1. Which account should publish: Freedom Lab NYC `npub` or Harrison’s personal `npub`.
-2. Whether that publisher key is already available in Alby/nos2x/Amber/NIP-46.
-3. Permission to create/use a separate Wren delegate Nostr key.
-4. Desired media/upload policy if images are involved, since Ghostr supports Blossom media upload and publisher-side re-hosting.
+## Step 3 — Pick a signer for each role
 
-## Draft workflow
+Recommended setup:
 
-1. Wren logs into Ghostr as delegate/writer.
-2. Harrison/Freedom Lab logs into Ghostr as publisher/admin using the real publisher signer.
-3. Wren drafts a Kind 1 short note or Kind 30023 long-form article.
-4. Wren uploads or attaches media if needed.
-5. Wren submits draft privately to the publisher `npub`.
-6. Harrison reviews in Ghostr, optionally re-hosts images to publisher Blossom account, edits/approves/rejects.
-7. Final post is signed by the publisher key, not Wren’s key.
+1. **Delegate key**: a separate, low-risk identity for the agent. A direct private-key login may be acceptable only if the key is disposable and clearly not the publisher identity.
+2. **Publisher key**: a NIP-07 extension, NIP-46 remote signer, hardware-backed signing flow, or trusted password-manager-backed signer controlled by the human publisher.
+3. **Multiple accounts**: use either a reliable multi-account signer or one browser profile per identity. Ambiguous signer state can cause posting from the wrong account.
 
-## CLI submission workflow learned
+Ghostr encrypted workflows require modern Nostr encryption support, especially NIP-44. If a signer only supports older NIP-04 flows, Ghostr draft submission may fail.
 
-When Ghostr's UI has no manual “add delegate” screen, the practical flow is reversed: publish an encrypted delegate submission to the publisher, then it appears in the publisher's Inbox.
+## Step 4 — Configure Ghostr
 
-Validated tooling on Harrison's Mac:
-- `nak` is installed at `/opt/homebrew/bin/nak`.
-- Store Wren/delegate secret keys in macOS Keychain, not memory/files:
-  - service: `hermes-nostr`
-  - account for Wren delegate hex key: `wren-delegate-hex`
-  - account for Freedom Lab publisher npub: `freedom-lab-publisher-npub`
-- Retrieve without printing secrets:
-  ```bash
-  security find-generic-password -a wren-delegate-hex -s hermes-nostr -w
-  security find-generic-password -a freedom-lab-publisher-npub -s hermes-nostr -w
-  ```
+1. Open Ghostr.
+2. Log in as the delegate/writer in one browser profile or session.
+3. Log in as the publisher/admin in a separate trusted browser profile or signer-controlled session.
+4. Confirm the publisher `npub` the agent should target.
+5. Submit a harmless test draft first, such as `Delegation test — please reject after confirming receipt.`
+6. Confirm the draft appears in the publisher inbox before using the workflow for real posts.
 
-Ghostr bundled JS (`https://ghostr.org/assets/...js`) revealed its submission format:
-- Protocol: `ghostr_v1`
-- Outer event: NIP-59 gift wrap, kind `1059`, tagged `['p', <publisher pubkey hex>]`
-- Inner seal: kind `13`
-- Rumor / inner DM: kind `14`, content JSON:
-  ```json
-  {
-    "protocol": "ghostr_v1",
-    "type": "submission",
-    "id": "<uuid>",
-    "content": "<draft text>",
-    "kind": 1,
-    "tags": [],
-    "note": "<optional note to publisher>",
-    "submittedAt": 1770000000
-  }
-  ```
-- For long-form articles use `kind: 30023` and include relevant tags such as `title`, `summary`, and `image` if needed.
+## Step 5 — Draft and submit content
 
-Minimal CLI flow:
-```bash
-WREN_SEC=$(security find-generic-password -a wren-delegate-hex -s hermes-nostr -w)
-PUBLISHER_NPUB=$(security find-generic-password -a freedom-lab-publisher-npub -s hermes-nostr -w)
-PUBLISHER_HEX=$(nak decode "$PUBLISHER_NPUB")
-PAYLOAD='{"protocol":"ghostr_v1","type":"submission","id":"<uuid>","content":"Hello world — Ghostr delegation test draft from Wren.","kind":1,"tags":[],"note":"Test submission from Wren delegate to Freedom Lab NYC publisher.","submittedAt":<unix>}'
+For each post:
 
-nak event --sec "$WREN_SEC" --kind 14 --content "$PAYLOAD" -p "$PUBLISHER_HEX" \
-  | nak gift wrap --sec "$WREN_SEC" -p "$PUBLISHER_HEX" --use-our-identity-key --use-their-identity-key \
-  | nak event wss://relay.damus.io wss://nos.lol wss://relay.primal.net wss://nostr.mom wss://relay.nos.social
+1. Prepare the final draft text locally.
+2. If adapting content from another platform, remove platform-specific handles unless they are replaced with confirmed Nostr identities.
+3. Include useful source links directly when appropriate; Nostr does not penalize outbound links the way some algorithmic feeds do.
+4. Submit the draft privately to the publisher `npub`.
+5. Report back with:
+   - target publisher `npub`,
+   - whether the draft was submitted or only prepared,
+   - submission ID and event ID if available,
+   - final draft text,
+   - any media URLs,
+   - the remaining human approval step.
+
+Do not publish externally unless the user explicitly approves the final post and the workflow is designed for direct publishing.
+
+## Step 6 — Handle media safely
+
+When adapting posts from X, LinkedIn, Mastodon, websites, or other sources:
+
+1. Do not paste temporary platform CDN image URLs into the final Nostr draft.
+2. Download media locally.
+3. Upload media to a Nostr-friendly host such as Blossom.
+4. Append the Blossom HTTPS URLs to the draft so Nostr clients render native images.
+5. If brand ownership matters, have the publisher re-host media under the publisher identity before final approval.
+
+## Step 7 — Draft threads safely
+
+If using a Ghostr fork or client that supports thread drafts:
+
+1. Keep the same delegation model: the agent drafts, the publisher signs.
+2. Store each thread post as a separate draft item or as text blocks separated by a line containing `---`.
+3. When publishing, create sequential Nostr `kind 1` events.
+4. Add NIP-10 root/reply `e` tags so clients can render the thread correctly.
+5. Verify the published events from relay data before assuming every client will render them identically.
+
+## CLI-oriented submission notes
+
+Some Ghostr setups accept encrypted delegate submissions as NIP-59 gift-wrapped events. A typical payload is a kind `14` private message containing JSON like:
+
+```json
+{
+  "protocol": "ghostr_v1",
+  "type": "submission",
+  "id": "<uuid>",
+  "content": "<draft text>",
+  "kind": 1,
+  "tags": [],
+  "note": "Optional note to publisher",
+  "submittedAt": 1770000000
+}
 ```
 
-Do not paste the expanded secret-bearing command into chat/logs. Prefer a short Python wrapper that redacts `WREN_SEC` in outputs.
+Then wrap it to the publisher pubkey as kind `1059` using tooling such as `nak` or a Nostr SDK.
 
-Relays observed for Ghostr defaults: `wss://relay.damus.io`, `wss://nos.lol`, `wss://relay.primal.net`, `wss://relay.snort.social`, `wss://nostr.mom`, `wss://purplepag.es`, `wss://nostr.wine`, `wss://relay.nos.social`. `nostr.wine` may reject writes without signup; `purplepag.es` may reject kind 1059.
+Operational safeguards for CLI workflows:
 
-## Replicating Freedom Lab social posts into Nostr drafts
+- Retrieve private delegate keys from the secret store without printing them.
+- Redact secrets from command output and logs.
+- Keep publisher private keys outside the agent runtime.
+- Treat relay write failures as partial delivery; report which relays accepted the event if tooling exposes that detail.
 
-Use this when Harrison asks to “replicate the LinkedIn/X post for Nostr.” Treat it as creating a Ghostr draft for review, not directly posting as Freedom Lab.
+## Security rules
 
-Discovery workflow:
-1. Clarify only if the source is genuinely ambiguous. If Harrison corrects “LinkedIn” to “latest X post,” switch sources immediately and submit a corrected draft.
-2. For X/Freedom Lab, official API credentials may be unavailable. Load the `xitter` skill if using X, but fall back to public extraction if setup is missing.
-3. Public X profile pages may misleadingly say `@FreedomLabNYC hasn’t posted` when logged out. Direct status URLs still render. Use search to find the latest status if needed:
-   ```bash
-   python3 - <<'PY'
-   from ddgs import DDGS
-   with DDGS(verify=False) as ddgs:
-       for r in ddgs.text('site:x.com/FreedomLabNYC Freedom Lab NYC latest', max_results=8):
-           print(r.get('title'), r.get('href'), r.get('body','')[:300])
-   PY
-   ```
-4. Open the candidate status with Browser Harness and extract `document.body.innerText`; the page `<title>` also often contains the full post text:
-   ```bash
-   cd ~/Hermes/browser-harness && browser-harness <<'PY'
-   new_tab('https://x.com/FreedomLabNYC/status/<id>')
-   wait_for_load()
-   print(page_info())
-   print(js('document.body.innerText.slice(0,5000)'))
-   PY
-   ```
-5. Adapt for Nostr rather than copying mechanically:
-   - Search for Nostr handles/npubs for any people, sponsors, projects, or orgs mentioned in the source post before defaulting to plain text. Search web/Primal/nostr.band/NIP-05 where practical, then use `nostr:npub...` mentions for confirmed identities.
-   - Replace X `@handles` with confirmed Nostr mentions when available; otherwise use readable names. Known sponsor Nostr identities:
-     - Cake Wallet: `nostr:npub1j9qyxka5lck4tw50v7qfrs6gdwczz5ydt7ugqy6nhuva9p6dpy5q8rs2yg` / NIP-05 `cakewallet@cakewallet.com` (Primal profile found via `nprofile1qqsfzszrtw60ut24h28k0qy3cdyxhvpp2zx4lwyqzdfm7xwjsaxsj2q44xssz`).
-   - Include the quoted-post context if the latest X post is a quote tweet, since Nostr will not automatically preserve X quote-card context.
-   - **Add the relevant Luma/event link in the best natural place for Nostr**, even if the X post omitted it to avoid X algorithmic link penalties. Nostr does not punish outbound links the same way, and the event link materially improves context/conversion. Prefer placing it after the event/date call-to-action and before sponsor thanks or hashtags.
-   - If the Luma URL is not visible in the X body, recover it from local event data, the Freedom Lab Luma calendar, the image/card context, or dashboard event records before submitting.
-   - Add Nostr-style hashtags as `tags` in the Ghostr payload as well as in visible text when useful.
-6. Submit via the CLI submission workflow above. Report `submission_id`, `gift_event_id`, and final draft text.
-
-Example adapted draft from a Freedom Lab X quote-post:
-```text
-Now free to attend thanks to Kilo Code's generous sponsorship of the tickets!
-
-We'll also be trying out a "skill sharing" session: not just demonstrating how we use agents, but turning those workflows into skills for each other to try live.
-
-Our next OpenClaw show and tell is Thursday the 23rd. We're expanding the discussion to all AI agents, open source preferred.
-
-Big thank you to Cake Wallet for sponsoring food and beverages.
-
-🦞🗽
-
-https://luma.com/dxkwn01h
-
-#OpenClaw #AIAgents #OpenSource #FreedomTech #NYC
-```
-
-## Native image workflow for X/LinkedIn → Nostr drafts
-
-When replicating social posts with images, do **not** paste `pbs.twimg.com`, LinkedIn CDN, or other platform CDN image URLs into the final draft body. Rehost images to Blossom first so Nostr clients render them like normal native image posts.
-
-Preferred workflow:
-1. Extract the source post text and image URLs.
-2. Download each image locally.
-3. Upload each image to Blossom using Wren's delegate key from macOS Keychain.
-4. Remove raw source-platform CDN URLs from the draft.
-5. Append the resulting Blossom URLs as plain HTTPS image URLs, one per line, after the post text.
-6. Submit the Ghostr draft to the Freedom Lab publisher via the CLI submission workflow.
-7. Report the `submission_id`, `gift_event_id`, and final draft text including Blossom URLs.
-
-Validated uploader on Harrison's Mac:
-- `nak blossom` works with `https://blossom.nostr.build`.
-- With Wren delegate key, uploads return URLs under a Blossom host such as `*.blossom.band/...jpg`.
-- This is preferable to X/LinkedIn CDN links for visual rendering and durability.
-
-Reusable script installed:
-```bash
-~/.hermes/scripts/ghostr_submit.py
-```
-
-The script supports multiple publisher targets:
-- Default: reads `freedom-lab-publisher-npub` from macOS Keychain.
-- One-off target: pass `--publisher-npub <npub>`.
-- Stored alternate target: pass `--publisher-account <keychain-account>` where the account stores a public npub under service `hermes-nostr`.
-
-Known publisher targets:
-- **Freedom Lab NYC**: default Keychain account `freedom-lab-publisher-npub` -> `npub1xyu3s3zt3v44l3rj5gn90xk33n387sgtjepcvxnqvd5rt58fpzzsx0055n`
-- **Harrison personal**: Keychain account `ghostr-publisher-npub1dlkff` -> `npub1dlkff8vcdwcty9hs3emc43yks8y7pr0tnn7jewvt63ph077sw48s4cc4qc`
-
-When Harrison says to draft for “Freedom Lab” or “Freedom Lab NYC,” target `freedom-lab-publisher-npub` unless he says otherwise. When he says to draft for “Harrison,” “me,” or “my personal Nostr,” target `ghostr-publisher-npub1dlkff`.
-
-Usage examples:
-```bash
-# Submit a thread draft to a disposable/test publisher; split posts on lines containing ---
-~/.hermes/scripts/ghostr_submit.py \
-  --content /tmp/thread.txt \
-  --thread \
-  --publisher-npub npub1... \
-  --note 'Thread draft submitted for Ghostr fork testing.'
-
-# Content from stdin, rehost X images to Blossom, submit Ghostr draft to default Freedom Lab publisher
-cat /tmp/post.txt | ~/.hermes/scripts/ghostr_submit.py \
-  --image-url 'https://pbs.twimg.com/media/EXAMPLE?format=jpg&name=large' \
-  --tag OpenClaw --tag AIAgents --tag FreedomTech --tag NYC \
-  --note 'Replicated from Freedom Lab X post; images rehosted to Blossom.'
-
-# Submit to alternate stored publisher target
-cat /tmp/post.txt | ~/.hermes/scripts/ghostr_submit.py \
-  --publisher-account ghostr-publisher-npub1dlkff \
-  --tag FreedomTech
-
-# Submit to one-off npub target
-cat /tmp/post.txt | ~/.hermes/scripts/ghostr_submit.py \
-  --publisher-npub npub1dlkff8vcdwcty9hs3emc43yks8y7pr0tnn7jewvt63ph077sw48s4cc4qc
-
-# Local images already downloaded
-~/.hermes/scripts/ghostr_submit.py --content /tmp/post.txt --image-file /tmp/image1.jpg --image-file /tmp/image2.jpg --tag OpenClaw
-```
-
-Script behavior:
-- Reads Wren delegate key from Keychain account `wren-delegate-hex`.
-- Reads Freedom Lab publisher npub from Keychain account `freedom-lab-publisher-npub` unless `--publisher-account` or `--publisher-npub` is passed.
-- With `--thread`, splits content on separator lines containing `---`, adds `['ghostr-thread', 'true']`, and includes `threadPosts` so the Freedom Lab Ghostr fork renders/publishes a native sequential thread.
-- Downloads `--image-url` images.
-- Uploads images via:
-  ```bash
-  nak blossom --server https://blossom.nostr.build upload <file> --sec <wren-secret>
-  ```
-- Removes raw `https://pbs.twimg.com/...` URLs from content.
-- Appends Blossom URLs to the final draft body.
-- Creates the Ghostr `ghostr_v1` NIP-59/NIP-44 encrypted submission.
-
-Important: this uses Wren's delegate identity for Blossom upload ownership, not Freedom Lab's publisher key. If Harrison wants images owned by Freedom Lab's Nostr identity, he should use Ghostr's publisher-side re-hosting before final publish or provide a dedicated Freedom Lab media-upload signer/Blossom workflow. For now, Wren-owned Blossom URLs are the best seamless automated path without exposing the Freedom Lab publisher key.
-
-## Thread support / fork assessment
-
-When Harrison asks whether Ghostr can draft or publish whole threads, see `references/thread-support-assessment.md`.
-
-When Harrison asks to continue, deploy, or productionize the Freedom Lab Ghostr thread fork, see `references/freedomlab-ghostr-thread-fork.md`.
-
-When Harrison asks to draft a Nostr thread from X-style source material, reconcile X handles to Nostr identities, or create a disposable Ghostr test publisher account, see `references/thread-draft-nostr-handle-reconciliation.md`.
-
-Key takeaways:
-- Upstream Ghostr is single-post-shaped (`kind: 1 | 30023`, one `content`, one `publishedEventId`).
-- It can carry a whole thread as one review draft today, but upstream does not publish native linked Nostr threads.
-- A true polished thread-publishing fork is a small-to-medium feature build: multi-post editor/review UI, sequential publishing with root/reply `e` tags, and multi-event receipts/history.
-- A rough operational MVP can be made faster by preserving the existing `submission` payload, storing thread posts as `---`-separated kind-1 content, adding a `['ghostr-thread', 'true']` tag, and teaching publisher publish logic to split/publish sequential events. See `references/thread-support-assessment.md` for details and caveats.
-- For Nostr-adapted announcement threads, do not keep X `@handles` by default. Replace with confirmed `nostr:npub...` mentions only after validating source materials / NIP-05 / public profiles, and convert unconfirmed tags back to readable plain names. See `references/thread-draft-nostr-handle-reconciliation.md`.
-
-## Research notes
-
-Ghostr README states:
-- “Writers draft, publishers sign — no scary key sharing required.”
-- Communications between delegates and publishers use encrypted gift-wrapped messages (NIP-59).
-- Uses NIP-07, NIP-23, NIP-37, NIP-44, NIP-59, NIP-65, NIP-78.
-- Supports image upload to Blossom and publisher re-hosting.
-- Supports direct posting by publisher, but Wren should avoid direct posting unless explicitly asked.
-
-## Pitfalls
-
-- Brand or main account keys are high-value; do not store raw `nsec` in memory, logs, screenshots, Telegram, skills, or repo files.
-- For Wren/delegate Nostr secrets on Harrison's Mac, prefer macOS Keychain or a browser/remote signer; store only harmless lookup labels in Hermes memory/config.
-- Freedom Lab publisher key should stay only with Harrison/Freedom Lab in a browser signer or remote signer; Wren should not store it.
-- `npub` values are safe to share in chat; `nsec` values are not.
-- NIP-44 support matters. Older extensions with only NIP-04 may fail encrypted Ghostr workflows.
-- A direct private-key login may be acceptable for a disposable Wren delegate key, but not for the Freedom Lab publisher key.
-- `Extension context invalidated` from nos2x/Ghostr is usually a browser extension reload/context problem, not proof of missing NIP-44 support; refresh the site or restart the browser before diagnosing capabilities.
-- Posting is externally visible. Wren should draft/submit, not publish, unless Harrison explicitly approves the final post.
+- Never expose valuable publisher `nsec` keys to an AI agent.
+- Use delegate keys with limited blast radius.
+- Prefer signer-based publishing for main accounts.
+- Keep private keys out of chat, screenshots, git repos, terminal transcripts, and long-term memory.
+- Require explicit human approval before external publishing.
+- When in doubt, prepare a draft and stop before signing.
