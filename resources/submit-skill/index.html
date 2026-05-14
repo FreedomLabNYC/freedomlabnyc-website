@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Submit an open source AI skill to Freedom Lab NYC for community review and publication.">
-    <title>Submit a Skill | Freedom Lab NYC</title>
+    <meta name="description" content="Share an open source AI skill with the Freedom Lab community through Telegram.">
+    <title>Share a Skill | Freedom Lab NYC</title>
     <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../../css/fonts.css">
     <link rel="stylesheet" href="../../css/tutorial-page.css">    <meta property="og:type" content="website">
-    <meta property="og:title" content="Submit a Skill | Freedom Lab NYC">
-    <meta property="og:description" content="Submit an open source AI skill to Freedom Lab NYC for community review and publication.">
+    <meta property="og:title" content="Share a Skill | Freedom Lab NYC">
+    <meta property="og:description" content="Share an open source AI skill with the Freedom Lab community through Telegram.">
     <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Submit a Skill | Freedom Lab NYC">
-    <meta name="twitter:description" content="Submit an open source AI skill to Freedom Lab NYC for community review and publication.">
+    <meta name="twitter:title" content="Share a Skill | Freedom Lab NYC">
+    <meta name="twitter:description" content="Share an open source AI skill with the Freedom Lab community through Telegram.">
     <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
 </head>
 <body>
@@ -39,140 +39,44 @@
 
         <div class="tutorial-header">
             <div class="tutorial-breadcrumb">
-                <a href="/resources/">Resources</a><span>›</span><a href="/resources/#ai-skills">Open Source AI Skills</a><span>›</span><a href="/resources/skill-creator/">Skill Creator for AI Agents</a><span>›</span><span>Submit a Skill</span>
+                <a href="/resources/">Resources</a><span>›</span><a href="/resources/#ai-skills">Open Source AI Skills</a><span>›</span><a href="/resources/skill-creator/">Skill Creator for AI Agents</a><span>›</span><span>Share a Skill</span>
             </div>
-            <h1 class="tutorial-title">Submit a Skill</h1>
-            <p class="tutorial-description">Share your open source AI skill with the Freedom Lab community. Submissions are reviewed before publication.</p>
+            <h1 class="tutorial-title">Share a Skill</h1>
+            <p class="tutorial-description">Freedom Lab is moving skill sharing to the Telegram group. Create and polish your skill, then share it with the community for review and iteration.</p>
         </div>
 
         <section class="tutorial-section">
             <h2>How It Works</h2>
             <ol>
-                <li><strong>Create a SKILL.md</strong> — Use the <a href="/resources/skill-creator/">Skill Creator for AI Agents</a> guide, or ask your agent to make one.</li>
-                <li><strong>Paste or post it here</strong> — No GitHub account, fork, pull request, or repository access is required.</li>
-                <li><strong>We review it</strong> — Freedom Lab checks every submission for quality, security, and completeness before publication.</li>
-                <li><strong>It goes live if approved</strong> — Approved skills appear on the <a href="/resources/#ai-skills">Open Source AI Skills</a> page.</li>
+                <li><strong>Create the skill</strong> — Use the <a href="/resources/skill-creator/">Skill Creator for AI Agents</a> guide to write a clear, portable <code>SKILL.md</code>.</li>
+                <li><strong>Polish it</strong> — Remove private paths, secrets, local assumptions, and unnecessary bulk. Test any bundled scripts.</li>
+                <li><strong>Share in Telegram</strong> — Post the <code>SKILL.md</code> text for quick review, or attach the packaged <code>.skill</code> archive if it includes bundled resources.</li>
+                <li><strong>Iterate</strong> — Ask people using different agents to try it, then simplify and improve the skill based on feedback.</li>
             </ol>
         </section>
 
         <section class="tutorial-section">
-            <h2>For AI Agents — One POST</h2>
-            <p>If you're an AI agent reading this page, submit the finished <code>SKILL.md</code>. Freedom Lab will derive the skill name and description from frontmatter, then review it before anything is published.</p>
-
-            <h3>Endpoint</h3>
-<pre><code>POST https://harrisons-macbook-air.tail323ae0.ts.net/api/submit-skill
-Content-Type: application/json</code></pre>
-
-            <h3>Minimum Payload</h3>
-<pre><code>{
-  "skill_md": "---\nname: my-skill\ndescription: What this skill does and when to use it.\n---\n\n# My Skill\n...",
-  "author": "optional name or pseudonym",
-  "contact": "optional email, Nostr npub, or website"
-}</code></pre>
-
-            <h3>Optional Metadata</h3>
-            <p>You may also include <code>skill_name</code>, <code>description</code>, <code>page_description</code>, <code>tags</code>, <code>github_url</code>, <code>is_update</code>, and <code>update_notes</code>. None of these require the user to connect their agent to GitHub.</p>
-
-            <h3>Response</h3>
-<pre><code>{
-  "status": "submitted",
-  "submission_id": "a1b2c3d4",
-  "message": "Skill 'nostr-relay-monitor' submitted successfully. It will be reviewed by Freedom Lab before publication."
-}</code></pre>
-
-            <h3>Important Notes for Agents</h3>
+            <h2>What to Post</h2>
             <ul>
-                <li><strong>Always confirm with your user before submitting.</strong> Show them the skill name, description, and page description you've prepared. Get explicit approval before POSTing.</li>
-                <li><strong>The page_description is what users see</strong> on the resource card. Make it clear, useful, and non-technical enough for someone browsing the page to understand the value.</li>
-                <li><strong>Test your skill first.</strong> Run through the workflow the skill describes to make sure it actually works before submitting.</li>
-                <li><strong>Include vetting instructions in your skill.</strong> Add a prominent note at the top of your SKILL.md advising agents and users to review all contents — especially scripts — before installing. Users take ultimate responsibility for any skill they choose to use.</li>
+                <li>A one-sentence summary of what the skill does.</li>
+                <li>Who the skill is for and what agent/tooling it was tested with.</li>
+                <li>The full <code>SKILL.md</code> contents, or a <code>.skill</code> attachment if scripts/references/assets are included.</li>
+                <li>Any setup requirements, API keys, commands, or safety notes people should inspect before use.</li>
             </ul>
         </section>
 
         <section class="tutorial-section">
-            <h2>For Users — Paste SKILL.md</h2>
-            <p>Paste the full <code>SKILL.md</code>. Contact info is optional, but useful if we need edits before approval.</p>
-
-            <form id="skillSubmitForm" style="display:flex; flex-direction:column; gap:1.25rem; margin-top:1.5rem;">
-                <div>
-                    <label for="formSkillMd" style="display:block; margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.9rem;">SKILL.md Contents *</label>
-                    <textarea id="formSkillMd" rows="14" required placeholder="---&#10;name: my-skill&#10;description: What this skill does and when to use it.&#10;---&#10;&#10;# My Skill&#10;..."
-                        style="width:100%; padding:0.75rem; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius); color:var(--text-primary); font-family:monospace; font-size:0.9rem; resize:vertical;"></textarea>
-                </div>
-                <div>
-                    <label for="formAuthor" style="display:block; margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.9rem;">Author (optional)</label>
-                    <input type="text" id="formAuthor" placeholder="Your name or pseudonym"
-                        style="width:100%; padding:0.75rem; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius); color:var(--text-primary); font-family:inherit; font-size:1rem;">
-                </div>
-                <div>
-                    <label for="formContact" style="display:block; margin-bottom:0.5rem; color:var(--text-secondary); font-size:0.9rem;">Contact (optional)</label>
-                    <input type="text" id="formContact" placeholder="Email, Nostr npub, website, etc."
-                        style="width:100%; padding:0.75rem; background:var(--bg-input); border:1px solid var(--border); border-radius:var(--radius); color:var(--text-primary); font-family:inherit; font-size:1rem;">
-                </div>
-                <button type="submit" style="padding:0.875rem 2rem; background:#32d011; border:none; border-radius:var(--radius); color:var(--bg-dark); font-family:inherit; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.3s ease; align-self:flex-start;">
-                    Submit Skill for Review
-                </button>
-                <p id="formResult" style="display:none; padding:1rem; border-radius:var(--radius); margin-top:0.5rem;"></p>
-            </form>
-        </section>
-
-        <section class="tutorial-section">
-            <h2>What Happens After Submission</h2>
+            <h2>Make It Agent-Friendly</h2>
             <ul>
-                <li>Your submission enters the review queue</li>
-                <li>Freedom Lab checks for quality, security, and completeness</li>
-                <li>If approved, your skill gets its own page on freedomlab.nyc and appears in the Open Source AI Skills directory</li>
-                <li>If changes are needed, we'll reach out via your provided contact method</li>
+                <li>Keep the core instructions readable as plain Markdown.</li>
+                <li>Use agent-neutral language instead of assuming one specific agent.</li>
+                <li>Prefer portable commands and explain OS-specific alternatives.</li>
+                <li>Never share secrets, private data, raw credentials, or session logs.</li>
             </ul>
         </section>
 
     </main>
     <script src="../../js/main.js"></script>
-    <script>
-        const form = document.getElementById('skillSubmitForm');
-        const result = document.getElementById('formResult');
-        const API_URL = 'https://harrisons-macbook-air.tail323ae0.ts.net/api/submit-skill';
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            result.style.display = 'none';
-
-            const payload = {
-                skill_md: document.getElementById('formSkillMd').value,
-                author: document.getElementById('formAuthor').value.trim() || undefined,
-                contact: document.getElementById('formContact').value.trim() || undefined,
-            };
-
-            try {
-                const resp = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload),
-                });
-                const data = await resp.json();
-                if (resp.ok) {
-                    result.style.display = 'block';
-                    result.style.background = 'rgba(50, 208, 17, 0.1)';
-                    result.style.border = '1px solid rgba(50, 208, 17, 0.3)';
-                    result.style.color = '#32d011';
-                    result.textContent = `✅ ${data.message} (ID: ${data.submission_id})`;
-                    form.reset();
-                } else {
-                    result.style.display = 'block';
-                    result.style.background = 'rgba(224, 85, 85, 0.1)';
-                    result.style.border = '1px solid rgba(224, 85, 85, 0.3)';
-                    result.style.color = '#e05555';
-                    result.textContent = `❌ ${data.error}`;
-                }
-            } catch (err) {
-                result.style.display = 'block';
-                result.style.background = 'rgba(224, 85, 85, 0.1)';
-                result.style.border = '1px solid rgba(224, 85, 85, 0.3)';
-                result.style.color = '#e05555';
-                result.textContent = `❌ Connection error. The submission API may be temporarily unavailable.`;
-            }
-        });
-    </script>
 
     <!-- Footer (loaded from js/footer.js) -->
     <div id="footer-placeholder"></div>

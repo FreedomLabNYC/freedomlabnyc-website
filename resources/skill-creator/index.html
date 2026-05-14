@@ -51,20 +51,12 @@
 
         <div class="tutorial-support-banner green" style="border-color: rgba(50, 208, 17, 0.3); margin-bottom: 2rem;">
             <svg viewBox="0 0 24 24" fill="none" stroke="#32d011" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;flex-shrink:0;">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="12" y1="18" x2="12" y2="12"/>
-                <polyline points="9 15 12 12 15 15"/>
+                <path d="M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
             </svg>
-            <p>Have a skill to share? <a href="/resources/submit-skill/">Submit your skill to freedomlab.nyc</a></p>
+            <p>Sharing a skill? Post the finished <code>SKILL.md</code> or <code>.skill</code> file in the Freedom Lab Telegram group so other people can inspect, adapt, and try it with their own agents.</p>
         </div>
 
-
-        <a href="https://github.com/FreedomLabNYC/skills/tree/main/skill-creator" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:0.5rem; padding:0.6rem 1.2rem; background:var(--bg-elevated, #191a19); border:1px solid var(--border, #292b29); border-radius:8px; color:var(--text-primary, #eff0ee); font-weight:500; text-decoration:none; font-size:0.9rem; transition:all 0.2s ease; margin-bottom:1.5rem;" onmouseover="this.style.borderColor='#32d011'" onmouseout="this.style.borderColor='var(--border, #292b29)'">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-            View on GitHub
-        </a>
-        <p style="margin-top: 0.75rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: #e8c547; font-weight: 600;">⚠️ Before installing or using this skill, review its full contents — including all scripts — to ensure they meet your security and quality standards. Users take ultimate responsibility for any skill they choose to use. These are community-sourced and updated.</p>
+        <p style="margin-top: 0.75rem; margin-bottom: 1.5rem; font-size: 0.9rem; color: #e8c547; font-weight: 600;">⚠️ Before installing or using any community skill, review its full contents — including scripts — to ensure it meets your security and quality standards. Users take responsibility for skills they choose to use.</p>
 
         <section class="tutorial-section" style="background: rgba(50, 208, 17, 0.04); border: 1px solid rgba(50, 208, 17, 0.15); border-radius: 8px; padding: 1.5rem; margin-bottom: 2rem;">
             <h2 style="margin-top: 0;">Install This Skill</h2>
@@ -81,8 +73,8 @@ hermes skills install FreedomLabNYC/skills/skill-creator --yes</code></pre>
 
         <section class="tutorial-section">
             <h2>What This Skill Does</h2>
-            <p>This is a skill that teaches your AI agent how to create other skills. Point your agent at this page and it will learn the full skill creation workflow — from understanding requirements to packaging a distributable <code>.skill</code> file.</p>
-            <p>Think of it as the "teach a man to fish" skill. Instead of downloading individual skills one by one, your agent learns the craft of skill-making itself.</p>
+            <p>This is a skill that teaches your AI agent how to create other skills: understand the workflow, write a clean <code>SKILL.md</code>, add only useful resources, polish the result, and package it so different agents can inspect and reuse it.</p>
+            <p>Think of it as the "teach a man to fish" skill. The goal is not publishing to a central website; the goal is helping people share useful, portable skills with each other — especially in the Freedom Lab Telegram group.</p>
         </section>
 
         <section class="tutorial-section">
@@ -92,6 +84,8 @@ hermes skills install FreedomLabNYC/skills/skill-creator --yes</code></pre>
                 <li>Improving, reviewing, or auditing an existing skill</li>
                 <li>Restructuring a skill directory</li>
                 <li>Validating a skill against the AgentSkills spec</li>
+                <li>Preparing a skill to share in Telegram or another community channel</li>
+                <li>Making a skill readable by Hermes, Codex-style agents, Claude-style agents, and other tool-using agents</li>
             </ul>
         </section>
 
@@ -176,8 +170,23 @@ hermes skills install FreedomLabNYC/skills/skill-creator --yes</code></pre>
 <pre><code>scripts/package_skill.py &lt;path/to/skill-folder&gt;</code></pre>
             <p>The script validates the skill (frontmatter, naming, structure, description quality) and creates a distributable <code>.skill</code> file. Fix any validation errors and re-run if needed.</p>
 
-            <h3>Step 6: Iterate</h3>
-            <p>Use the skill on real tasks, notice struggles or inefficiencies, update SKILL.md or resources, and test again.</p>
+            <h3>Step 6: Polish for Sharing</h3>
+            <p>Before sharing, make the skill easy for another person and another agent to trust: remove private paths or secrets, replace local assumptions with portable alternatives, keep setup steps explicit, and include a short note explaining what was tested.</p>
+
+            <h3>Step 7: Share and Iterate</h3>
+            <p>Share either the <code>SKILL.md</code> text or the packaged <code>.skill</code> file in the Freedom Lab Telegram group. Ask people to inspect it before use, try it with their own agent, and report what was confusing. Use that feedback to simplify the skill and test again.</p>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>Make It Accessible to Different Agents</h2>
+            <ul>
+                <li><strong>Plain Markdown first:</strong> make <code>SKILL.md</code> useful even if the receiving agent cannot install <code>.skill</code> packages.</li>
+                <li><strong>Portable paths:</strong> avoid hardcoded local paths, private usernames, and machine-specific assumptions. Give OS-neutral alternatives when possible.</li>
+                <li><strong>Minimal dependencies:</strong> list required commands or API keys clearly, and include graceful fallbacks where possible.</li>
+                <li><strong>Agent-neutral language:</strong> write for “the agent,” not only Codex, Claude, Hermes, or one user’s setup.</li>
+                <li><strong>Safe sharing:</strong> never include secrets, private data, raw credentials, session logs, or unpublished internal details.</li>
+                <li><strong>Two share formats:</strong> post the <code>SKILL.md</code> for quick review, and attach the <code>.skill</code> archive when bundled scripts/references/assets matter.</li>
+            </ul>
         </section>
 
         <section class="tutorial-section">
@@ -192,20 +201,14 @@ hermes skills install FreedomLabNYC/skills/skill-creator --yes</code></pre>
         </section>
 
         <section class="tutorial-section">
-            <h2>Submit Your Skill</h2>
-            <p>Once your agent has created a skill, it can submit it directly to Freedom Lab for community review and publication. No GitHub account, fork, pull request, or repo access is required.</p>
-            <h3>API Endpoint</h3>
-            <p>Your agent only needs to POST the finished <code>SKILL.md</code>:</p>
-<pre><code>POST https://harrisons-macbook-air.tail323ae0.ts.net/api/submit-skill
-
-Content-Type: application/json
-
-{
-  "skill_md": "---\nname: my-skill\ndescription: What this skill does and when to use it.\n---\n\n# My Skill\n...",
-  "author": "Your Name (optional)",
-  "contact": "email, Nostr npub, or website (optional)"
-}</code></pre>
-            <p>Freedom Lab derives the skill name and description from frontmatter, reviews the submission, and publishes approved skills to the site.</p>
+            <h2>Share in the Freedom Lab Telegram Group</h2>
+            <p>We are not using this workflow to publish skills directly to the website. Instead, create and polish the skill, then share it in Telegram for community review.</p>
+            <ol>
+                <li>Post a short summary: what the skill does, who it is for, and what you tested.</li>
+                <li>Paste the <code>SKILL.md</code> contents, or attach the packaged <code>.skill</code> file if it has bundled resources.</li>
+                <li>Tell people what to inspect before using it, especially scripts and setup steps.</li>
+                <li>Invite feedback from people using different agents, then update the skill so it becomes more portable.</li>
+            </ol>
         </section>
 
     </main>
