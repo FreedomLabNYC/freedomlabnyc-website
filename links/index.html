@@ -158,6 +158,57 @@
             font-size: 0.95rem;
         }
 
+        .sponsors-section {
+            margin-top: 1.75rem;
+            text-align: center;
+        }
+
+        .sponsors-title {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            margin-bottom: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .sponsor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .sponsor-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 88px;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+        }
+
+        .sponsor-card:hover,
+        .sponsor-card:focus-visible {
+            transform: translateY(-1px);
+            background: rgba(50, 208, 17, 0.08);
+            border-color: rgba(50, 208, 17, 0.35);
+        }
+
+        .sponsor-card img {
+            display: block;
+            max-width: 100%;
+            max-height: 46px;
+            object-fit: contain;
+        }
+
+        .sponsor-card--light img {
+            background: #fff;
+            border-radius: 10px;
+            padding: 0.35rem 0.5rem;
+        }
+
         @media (max-width: 640px) {
             .links-shell {
                 padding: 1.25rem 1rem 3rem;
@@ -175,6 +226,10 @@
             .module-btn-secondary,
             .module-chip {
                 width: 100%;
+            }
+
+            .sponsor-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -218,6 +273,21 @@
                         <a class="module-btn" href="https://luma.com/freedomlab" target="_blank" rel="noopener">Open classes & events</a>
                     </div>
                 </article>
+            </section>
+
+            <section class="sponsors-section" aria-labelledby="sponsors-title">
+                <h2 id="sponsors-title" class="sponsors-title">Sponsors</h2>
+                <div class="sponsor-grid">
+                    <a class="sponsor-card sponsor-card--light" href="https://www.vellum.ai/" target="_blank" rel="noopener" aria-label="Visit Vellum AI">
+                        <img src="../static/img/sponsors/vellum-logo.svg" alt="Vellum AI logo">
+                    </a>
+                    <a class="sponsor-card" href="https://kilo.ai/" target="_blank" rel="noopener" aria-label="Visit Kilo Code">
+                        <img src="../static/img/sponsors/kilo-code-logo.svg" alt="Kilo Code logo">
+                    </a>
+                    <a class="sponsor-card sponsor-card--light" href="https://cakewallet.com/" target="_blank" rel="noopener" aria-label="Visit Cake Wallet">
+                        <img src="../static/img/sponsors/cake-wallet-logo.png" alt="Cake Wallet logo">
+                    </a>
+                </div>
             </section>
         </div>
     </main>

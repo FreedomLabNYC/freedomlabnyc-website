@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" role="img" aria-labelledby="title">
+  <title id="title">Kilo Code</title>
+  <rect width="320" height="100" fill="none"/>
+  <g fill="#F5F85A">
+    <rect x="8" y="16" width="68" height="68" rx="4"/>
+  </g>
+  <path fill="#111111" d="M8,16v68h68V16H8ZM70.96,78.96H13.04V21.04h57.92v57.92ZM49.56,64.89h6.3v5.04h-7.92l-3.42-3.42v-7.92h5.04v6.3ZM39.48,58.59h-5.04V33.37h5.04v8.82h5.04v-8.82h5.04v20.18h-5.04v-6.3h-5.04v11.34ZM29.41,41.44h-5.04v-5.67h5.04v5.67Z"/>
+  <text x="94" y="61" fill="#F5F85A" font-family="Space Grotesk, Arial, sans-serif" font-size="42" font-weight="700" letter-spacing="0.02em">Kilo Code</text>
+</svg>
