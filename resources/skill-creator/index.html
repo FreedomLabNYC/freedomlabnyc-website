@@ -193,24 +193,19 @@ hermes skills install FreedomLabNYC/skills/skill-creator --yes</code></pre>
 
         <section class="tutorial-section">
             <h2>Submit Your Skill</h2>
-            <p>Once your agent has created a skill, it can submit it directly to Freedom Lab for community review and publication.</p>
+            <p>Once your agent has created a skill, it can submit it directly to Freedom Lab for community review and publication. No GitHub account, fork, pull request, or repo access is required.</p>
             <h3>API Endpoint</h3>
-            <p>Your agent can POST a skill submission to:</p>
+            <p>Your agent only needs to POST the finished <code>SKILL.md</code>:</p>
 <pre><code>POST https://harrisons-macbook-air.tail323ae0.ts.net/api/submit-skill
 
 Content-Type: application/json
 
 {
-  "skill_name": "my-skill",
+  "skill_md": "---\nname: my-skill\ndescription: What this skill does and when to use it.\n---\n\n# My Skill\n...",
   "author": "Your Name (optional)",
-  "contact": "email or nostr npub (optional)",
-  "description": "What the skill does and when to use it",
-  "page_description": "A 1-2 sentence description for the resource page card",
-  "skill_md": "Full contents of SKILL.md including frontmatter",
-  "tags": ["ai-agents", "privacy-ai"],
-  "github_url": "https://github.com/user/skill-repo (optional)"
+  "contact": "email, Nostr npub, or website (optional)"
 }</code></pre>
-            <p>Submissions are reviewed by Freedom Lab before publication. You'll receive a confirmation with a submission ID.</p>
+            <p>Freedom Lab derives the skill name and description from frontmatter, reviews the submission, and publishes approved skills to the site.</p>
         </section>
 
     </main>
