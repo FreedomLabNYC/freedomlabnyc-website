@@ -17,8 +17,14 @@
     <meta name="twitter:title" content="Onion Site | Freedom Lab NYC">
     <meta name="twitter:description" content="Access Freedom Lab NYC via the Tor network for enhanced privacy.">
     <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
-    <script>window.FL_GA_MEASUREMENT_ID = 'G-5L8YH7QGBD';</script>
-    <script src="/js/analytics.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L8YH7QGBD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5L8YH7QGBD', { anonymize_ip: true });
+    </script>
 </head>
 <body>
     <!-- Navigation (loaded from js/nav.js) -->
