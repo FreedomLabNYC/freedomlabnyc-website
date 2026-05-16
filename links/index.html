@@ -67,6 +67,14 @@
         }
 
         .link-module {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            grid-template-areas:
+                "kicker action"
+                "title action"
+                "copy action";
+            align-items: center;
+            column-gap: 1.25rem;
             padding: 1.35rem;
             position: relative;
             overflow: hidden;
@@ -82,6 +90,7 @@
         }
 
         .module-kicker {
+            grid-area: kicker;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -93,17 +102,20 @@
         }
 
         .link-module h2 {
+            grid-area: title;
             font-size: clamp(1.35rem, 4vw, 1.9rem);
             margin-bottom: 0.65rem;
         }
 
         .link-module p {
+            grid-area: copy;
             color: var(--text-secondary);
             line-height: 1.6;
-            margin-bottom: 1rem;
+            margin-bottom: 0;
         }
 
         .module-actions {
+            grid-area: action;
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
@@ -116,7 +128,7 @@
             align-items: center;
             justify-content: center;
             min-height: 3rem;
-            padding: 0.85rem 1.05rem;
+            padding: 0.85rem 1.25rem;
             border-radius: 999px;
             text-decoration: none;
             font-weight: 700;
@@ -215,11 +227,18 @@
             }
 
             .link-module {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "kicker"
+                    "title"
+                    "copy"
+                    "action";
                 border-radius: 20px;
             }
 
             .module-actions {
                 flex-direction: column;
+                margin-top: 1rem;
             }
 
             .module-btn,
@@ -249,10 +268,10 @@
             <section class="module-stack" aria-label="Freedom Lab quick links">
                 <article class="link-module">
                     <div class="module-kicker">💬 Community</div>
-                    <h2>Telegram Group</h2>
+                    <h2>Join the Telegram</h2>
                     <p>Join our exclusive Telegram group, made available only to those who attend our in-person events.</p>
                     <div class="module-actions">
-                        <a class="module-btn" href="https://t.me/+OAf7Uz8oxttmNTAx" target="_blank" rel="noopener">Join the Telegram</a>
+                        <a class="module-btn" href="https://t.me/+OAf7Uz8oxttmNTAx" target="_blank" rel="noopener">Join</a>
                     </div>
                 </article>
 
@@ -261,7 +280,7 @@
                     <h2>Apply for early coworking access</h2>
                     <p>Apply for early access to Freedom Lab’s NYC coworking and hackerspace, with 24/7 access, remote work space, social areas, and freedom tech events.</p>
                     <div class="module-actions">
-                        <a class="module-btn" href="/join/">Apply for Early Access</a>
+                        <a class="module-btn" href="/join/">Apply</a>
                     </div>
                 </article>
 
@@ -270,13 +289,13 @@
                     <h2>Classes & Events</h2>
                     <p>See upcoming workshops, meetups, and classes. This is the best place to find what’s happening soon.</p>
                     <div class="module-actions">
-                        <a class="module-btn" href="https://luma.com/freedomlab" target="_blank" rel="noopener">Open classes & events</a>
+                        <a class="module-btn" href="https://luma.com/freedomlab" target="_blank" rel="noopener">Open</a>
                     </div>
                 </article>
             </section>
 
             <section class="sponsors-section" aria-labelledby="sponsors-title">
-                <h2 id="sponsors-title" class="sponsors-title">Thank You to Our Sponsors</h2>
+                <h2 id="sponsors-title" class="sponsors-title">Thank You to Our Sponsor</h2>
                 <div class="sponsor-grid">
                     <a class="sponsor-card" href="https://cakewallet.com/" target="_blank" rel="noopener" aria-label="Visit Cake Wallet">
                         <img src="../static/img/sponsors/cake-wallet-wordmark.png" alt="Cake Wallet logo">
