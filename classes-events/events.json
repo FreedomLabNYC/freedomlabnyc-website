@@ -1,7 +1,17 @@
 {
-  "updated": "2026-04-26T07:48:55.466Z",
-  "count": 24,
+  "updated": "2026-05-17T21:18:46.242Z",
+  "count": 25,
   "events": [
+    {
+      "name": "Open-Source AI Agent Skill Sharing Night",
+      "date": "2026-05-14T22:30:00.000Z",
+      "end": "2026-05-15T00:30:00.000Z",
+      "cover": "https://images.lumacdn.com/uploads/go/e899df75-f7fa-4e23-990e-684d665651ef.png",
+      "url": "https://lu.ma/taidx51a",
+      "venue": "Flatiron District",
+      "location": "New York",
+      "price": "Free"
+    },
     {
       "name": "OpenClaw Show and Tell Night",
       "date": "2026-04-23T22:30:00.000Z",
