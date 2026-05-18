@@ -92,11 +92,26 @@
         .module-label {
             grid-column: 2;
             justify-self: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
             text-align: center;
             font-family: var(--font-body);
+            line-height: 1.2;
+        }
+
+        .module-title {
             font-size: clamp(1rem, 3vw, 1.15rem);
             font-weight: 700;
-            line-height: 1.2;
+        }
+
+        .module-subtitle {
+            max-width: 21rem;
+            color: var(--text-muted);
+            font-size: clamp(0.78rem, 2.4vw, 0.88rem);
+            font-weight: 400;
+            line-height: 1.3;
         }
 
         .module-icon {
@@ -185,8 +200,12 @@
                 border-radius: 10px;
             }
 
-            .module-label {
+            .module-title {
                 font-size: 1rem;
+            }
+
+            .module-subtitle {
+                font-size: 0.76rem;
             }
 
             .module-icon {
@@ -214,21 +233,29 @@
 
             <section class="module-stack" aria-label="Freedom Lab quick links">
                 <a class="link-module" href="https://t.me/+OAf7Uz8oxttmNTAx" target="_blank" rel="noopener">
-                    <span class="module-label">Join the Telegram</span>
+                    <span class="module-label">
+                        <span class="module-title">Join the Telegram</span>
+                        <span class="module-subtitle">Only available to in person attendees</span>
+                    </span>
                     <span class="module-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24"><path d="M21 4.5 3 11.7l6.9 2.2M21 4.5l-4.8 15-6.3-5.6M21 4.5 9.9 13.9m0 0-.2 5 2.9-3.1"/></svg>
                     </span>
                 </a>
 
                 <a class="link-module" href="/join/">
-                    <span class="module-label">Apply for Early Access</span>
+                    <span class="module-label">
+                        <span class="module-title">Apply for Early Access</span>
+                        <span class="module-subtitle">To become a member of our freedom tech coworking and hacker space</span>
+                    </span>
                     <span class="module-icon" aria-hidden="true">
                         <img src="../static/img/early-access-icon-white.png" alt="">
                     </span>
                 </a>
 
                 <a class="link-module" href="https://luma.com/freedomlab" target="_blank" rel="noopener">
-                    <span class="module-label">View Events</span>
+                    <span class="module-label">
+                        <span class="module-title">View Upcoming Events</span>
+                    </span>
                     <span class="module-icon" aria-hidden="true">
                         <svg viewBox="0 0 24 24"><path d="M7 3v3M17 3v3M4.5 8.5h15M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/><path d="M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01"/></svg>
                     </span>
