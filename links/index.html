@@ -54,120 +54,58 @@
             height: auto;
         }
 
-        .link-module {
-            background: linear-gradient(180deg, rgba(19,20,19,0.96) 0%, rgba(10,11,10,0.98) 100%);
-            border: 1px solid rgba(50, 208, 17, 0.22);
-            border-radius: 24px;
-            box-shadow: 0 24px 50px rgba(0,0,0,0.35);
-        }
-
         .module-stack {
             display: grid;
-            gap: 1rem;
+            gap: 0.9rem;
         }
 
         .link-module {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) auto;
-            grid-template-areas:
-                "kicker action"
-                "title action"
-                "copy action";
+            grid-template-columns: 1fr auto;
             align-items: center;
-            column-gap: 1.25rem;
-            padding: 1.35rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .link-module::before {
-            content: "";
-            position: absolute;
-            inset: 0 auto auto 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #1f8d10, #32D011, #89ff63);
-        }
-
-        .module-kicker {
-            grid-area: kicker;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #89ff63;
-            font-size: 0.85rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            margin-bottom: 0.85rem;
-        }
-
-        .link-module h2 {
-            grid-area: title;
-            font-size: clamp(1.35rem, 4vw, 1.9rem);
-            margin-bottom: 0.65rem;
-        }
-
-        .link-module p {
-            grid-area: copy;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 0;
-        }
-
-        .module-actions {
-            grid-area: action;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .module-btn,
-        .module-btn-secondary,
-        .module-chip {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 3rem;
-            padding: 0.85rem 1.25rem;
-            border-radius: 999px;
+            min-height: 4.4rem;
+            padding: 1.05rem 1.35rem;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1.5px solid rgba(50, 208, 17, 0.7);
+            border-radius: 10px;
+            color: var(--text-primary);
             text-decoration: none;
-            font-weight: 700;
             transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
         }
 
-        .module-btn {
-            background: #32D011;
-            color: #081006;
-        }
-
-        .module-btn:hover,
-        .module-btn:focus-visible {
+        .link-module:hover,
+        .link-module:focus-visible {
             transform: translateY(-1px);
-            background: #52e532;
-        }
-
-        .module-btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border-light);
-        }
-
-        .module-btn-secondary:hover,
-        .module-btn-secondary:focus-visible {
-            transform: translateY(-1px);
+            background: rgba(50, 208, 17, 0.09);
             border-color: #32D011;
+            outline: none;
         }
 
-        .module-chip {
-            background: rgba(50, 208, 17, 0.08);
-            color: #9ef87d;
-            border: 1px dashed rgba(50, 208, 17, 0.35);
+        .module-label {
+            justify-self: center;
+            text-align: center;
+            font-family: var(--font-body);
+            font-size: clamp(1rem, 3vw, 1.15rem);
+            font-weight: 700;
+            line-height: 1.2;
         }
 
-        .module-note {
-            margin-top: 1rem;
-            color: var(--text-muted);
-            font-size: 0.95rem;
+        .module-icon {
+            width: 1.65rem;
+            height: 1.65rem;
+            color: #fff;
+            margin-left: 1rem;
+        }
+
+        .module-icon svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         .sponsors-section {
@@ -227,24 +165,18 @@
             }
 
             .link-module {
-                grid-template-columns: 1fr;
-                grid-template-areas:
-                    "kicker"
-                    "title"
-                    "copy"
-                    "action";
-                border-radius: 20px;
+                min-height: 4rem;
+                padding: 1rem;
+                border-radius: 10px;
             }
 
-            .module-actions {
-                flex-direction: column;
-                margin-top: 1rem;
+            .module-label {
+                font-size: 1rem;
             }
 
-            .module-btn,
-            .module-btn-secondary,
-            .module-chip {
-                width: 100%;
+            .module-icon {
+                width: 1.45rem;
+                height: 1.45rem;
             }
 
             .sponsor-grid {
@@ -266,32 +198,26 @@
             </div>
 
             <section class="module-stack" aria-label="Freedom Lab quick links">
-                <article class="link-module">
-                    <div class="module-kicker">💬 Community</div>
-                    <h2>Join the Telegram</h2>
-                    <p>Join our exclusive Telegram group, made available only to those who attend our in-person events.</p>
-                    <div class="module-actions">
-                        <a class="module-btn" href="https://t.me/+OAf7Uz8oxttmNTAx" target="_blank" rel="noopener">Join</a>
-                    </div>
-                </article>
+                <a class="link-module" href="https://t.me/+OAf7Uz8oxttmNTAx" target="_blank" rel="noopener">
+                    <span class="module-label">Join the Telegram</span>
+                    <span class="module-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M21 4.5 3 11.7l6.9 2.2M21 4.5l-4.8 15-6.3-5.6M21 4.5 9.9 13.9m0 0-.2 5 2.9-3.1"/></svg>
+                    </span>
+                </a>
 
-                <article class="link-module">
-                    <div class="module-kicker">🛠️ Join in</div>
-                    <h2>Apply for early coworking access</h2>
-                    <p>Apply for early access to Freedom Lab’s NYC coworking and hackerspace, with 24/7 access, remote work space, social areas, and freedom tech events.</p>
-                    <div class="module-actions">
-                        <a class="module-btn" href="/join/">Apply</a>
-                    </div>
-                </article>
+                <a class="link-module" href="/join/">
+                    <span class="module-label">Apply for Coworking</span>
+                    <span class="module-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/><path d="M7 7h10v10H7z"/></svg>
+                    </span>
+                </a>
 
-                <article class="link-module">
-                    <div class="module-kicker">⚡ Live now</div>
-                    <h2>Classes & Events</h2>
-                    <p>See upcoming workshops, meetups, and classes. This is the best place to find what’s happening soon.</p>
-                    <div class="module-actions">
-                        <a class="module-btn" href="https://luma.com/freedomlab" target="_blank" rel="noopener">Open</a>
-                    </div>
-                </article>
+                <a class="link-module" href="https://luma.com/freedomlab" target="_blank" rel="noopener">
+                    <span class="module-label">View Events</span>
+                    <span class="module-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M7 3v3M17 3v3M4.5 8.5h15M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/><path d="M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01"/></svg>
+                    </span>
+                </a>
             </section>
 
             <section class="sponsors-section" aria-labelledby="sponsors-title">
