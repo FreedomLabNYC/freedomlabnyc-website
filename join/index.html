@@ -36,15 +36,26 @@
             flex-direction: column;
             gap: 2rem;
             padding: 2rem;
-            max-width: 980px;
+            max-width: 1180px;
             margin: 0 auto;
+        }
+
+        .join-intro-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 560px) minmax(320px, 1fr);
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .join-copy {
+            max-width: 560px;
         }
 
         .page-description {
             color: #FFFFFF;
             text-align: left;
             max-width: 560px;
-            margin: 0 auto;
+            margin: 0;
             font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-size: 16px;
             line-height: 1.6;
@@ -59,12 +70,34 @@
         .feature-list {
             color: #FFFFFF;
             max-width: 560px;
-            margin: 0 auto;
+            margin: 0.75rem 0 0;
             padding-left: 1.25rem;
             font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-size: 16px;
             line-height: 1.6;
             font-weight: 400;
+        }
+
+        .concept-render-card {
+            margin: 0;
+        }
+
+        .concept-render-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(50, 208, 17, 0.24);
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.36);
+        }
+
+        .concept-render-caption {
+            margin-top: 0.45rem;
+            color: var(--text-muted);
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            text-align: right;
         }
 
         .feature-list li::marker {
@@ -211,6 +244,8 @@
 
         @media (max-width: 860px) {
             .waitlist-content { padding: 1rem; }
+            .join-intro-layout { grid-template-columns: 1fr; gap: 1.25rem; }
+            .concept-render-caption { text-align: left; }
             .section-box { padding: 1.5rem; }
             .section-box h2 { font-size: 1.35rem; }
             .waitlist-form input, .waitlist-form textarea, .waitlist-submit { min-height: 48px; font-size: 1rem; }
@@ -276,13 +311,21 @@
     </section>
 
     <main class="waitlist-content">
-        <p class="page-description">We're building NYC's first <span class="highlight-line">freedom tech coworking and hackerspace</span>. Featuring:</p>
-        <ul class="feature-list">
-            <li>24/7 hour access</li>
-            <li>Space to work remotely and take calls</li>
-            <li>Social areas to hang out, collaborate, and build together</li>
-            <li>Opportunities to host and attend freedom tech events</li>
-        </ul>
+        <div class="join-intro-layout">
+            <div class="join-copy">
+                <p class="page-description">We're building NYC's first <span class="highlight-line">freedom tech coworking and hackerspace</span>. Featuring:</p>
+                <ul class="feature-list">
+                    <li>24/7 hour access</li>
+                    <li>Space to work remotely and take calls</li>
+                    <li>Social areas to hang out, collaborate, and build together</li>
+                    <li>Opportunities to host and attend freedom tech events</li>
+                </ul>
+            </div>
+            <figure class="concept-render-card">
+                <img src="../static/img/freedom-lab-concept-render.jpg" alt="Conceptual rendering of the future Freedom Lab NYC physical space" loading="lazy">
+                <figcaption class="concept-render-caption">Conceptual rendering</figcaption>
+            </figure>
+        </div>
 
         <div class="waitlist-layout">
             <section class="section-box" id="waitlist-form">
