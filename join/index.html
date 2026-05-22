@@ -34,11 +34,11 @@
         .waitlist-content {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-            padding: 2.5rem;
-            max-width: 1220px;
-            margin: 2rem auto 2.5rem;
-            border: 1px solid rgba(239, 240, 238, 0.42);
+            gap: 1.35rem;
+            padding: 1.5rem;
+            max-width: min(1560px, calc(100vw - 32px));
+            margin: 1.5rem auto 2rem;
+            border: 1px solid rgba(239, 240, 238, 0.36);
             border-radius: 28px;
             background: rgba(8, 11, 15, 0.62);
             box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
@@ -46,8 +46,8 @@
 
         .join-intro-layout {
             display: grid;
-            grid-template-columns: minmax(300px, 0.82fr) minmax(460px, 1.18fr);
-            gap: 2rem;
+            grid-template-columns: minmax(210px, 0.62fr) minmax(410px, 0.9fr) minmax(560px, 1.45fr);
+            gap: 1.25rem;
             align-items: stretch;
         }
 
@@ -58,15 +58,14 @@
         }
 
         .join-copy {
-            max-width: 960px;
-            margin: 0 auto;
+            max-width: 980px;
             width: 100%;
         }
 
         .page-description {
             color: #FFFFFF;
             text-align: left;
-            max-width: 960px;
+            max-width: 980px;
             margin: 0;
             font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             font-size: 16px;
@@ -79,20 +78,51 @@
             font: inherit;
         }
 
-        .feature-list {
+        .feature-modules {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
+            align-content: start;
+        }
+
+        .feature-module {
+            min-height: 142px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            border: 1px solid rgba(239, 240, 238, 0.36);
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(13, 17, 23, 0.82) 0%, rgba(8, 11, 15, 0.82) 100%);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+            text-align: center;
+        }
+
+        .feature-module-icon {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(50, 208, 17, 0.42);
+            border-radius: 14px;
+            color: #32D011;
+            font-size: 1.3rem;
+            background: rgba(50, 208, 17, 0.08);
+        }
+
+        .feature-module-title {
             color: #FFFFFF;
-            max-width: 960px;
-            margin: 0.75rem 0 0;
-            padding-left: 1.25rem;
             font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 16px;
-            line-height: 1.6;
-            font-weight: 400;
+            font-size: 0.95rem;
+            line-height: 1.3;
+            font-weight: 600;
         }
 
         .concept-render-card {
             margin: 0;
-            min-height: 640px;
+            min-height: 410px;
             height: 100%;
         }
 
@@ -100,7 +130,7 @@
             display: block;
             width: 100%;
             height: 100%;
-            min-height: 640px;
+            min-height: 410px;
             object-fit: cover;
             border-radius: 22px;
             border: 1px solid rgba(239, 240, 238, 0.42);
@@ -116,10 +146,6 @@
             text-align: right;
         }
 
-        .feature-list li::marker {
-            color: #32D011;
-        }
-
         .waitlist-layout {
             display: block;
             margin-top: 0;
@@ -129,7 +155,7 @@
             background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
             border: 1px solid rgba(239, 240, 238, 0.42);
             border-radius: 22px;
-            padding: 2.25rem;
+            padding: 1.5rem;
             position: relative;
             overflow: hidden;
             max-width: none;
@@ -260,15 +286,26 @@
         }
         .animate-ready .section-box.animate-in { opacity: 1; transform: none; }
 
+        @media (max-width: 1180px) {
+            .join-intro-layout { grid-template-columns: minmax(220px, 0.75fr) minmax(390px, 1fr); }
+            .concept-render-card { grid-column: 1 / -1; min-height: auto; }
+            .concept-render-card img { aspect-ratio: 16 / 7; height: auto; min-height: 0; }
+        }
+
         @media (max-width: 860px) {
             .waitlist-content { padding: 1rem; margin: 1rem; border-radius: 20px; }
             .join-intro-layout { grid-template-columns: 1fr; gap: 1.25rem; }
+            .feature-modules { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .concept-render-card { min-height: auto; }
             .concept-render-card img { height: auto; min-height: 0; object-fit: cover; }
             .concept-render-caption { text-align: left; }
             .section-box { padding: 1.5rem; height: auto; }
             .section-box h2 { font-size: 1.35rem; }
             .waitlist-form input, .waitlist-form textarea, .waitlist-submit { min-height: 48px; font-size: 1rem; }
+        }
+
+        @media (max-width: 520px) {
+            .feature-modules { grid-template-columns: 1fr; }
         }
     </style>
 
@@ -332,20 +369,28 @@
 
     <main class="waitlist-content">
         <div class="join-copy">
-            <p class="page-description">We're a community hosted at various venues that's building towards becoming NYC's first <span class="highlight-line">freedom tech coworking and hackerspace</span>. Featuring:</p>
-            <ul class="feature-list">
-                <li>24/7 hour access</li>
-                <li>Space to work remotely and take calls</li>
-                <li>Social areas to hang out, collaborate, and build together</li>
-                <li>Opportunities to host and attend freedom tech events</li>
-            </ul>
+            <p class="page-description">We're a community hosted at various venues that's building towards becoming NYC's first <span class="highlight-line">freedom tech coworking and hackerspace</span>.</p>
         </div>
 
         <div class="join-intro-layout">
-            <figure class="concept-render-card">
-                <img src="../static/img/freedom-lab-concept-render.jpg" alt="Conceptual rendering of the future Freedom Lab NYC physical space" loading="lazy">
-                <figcaption class="concept-render-caption">Conceptual rendering</figcaption>
-            </figure>
+            <div class="feature-modules" aria-label="Freedom Lab space features">
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">24</div>
+                    <div class="feature-module-title">24/7 hour access</div>
+                </article>
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">⌘</div>
+                    <div class="feature-module-title">Space to work remotely and take calls</div>
+                </article>
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">✦</div>
+                    <div class="feature-module-title">Social areas to hang out, collaborate, and build together</div>
+                </article>
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">◎</div>
+                    <div class="feature-module-title">Opportunities to host and attend freedom tech events</div>
+                </article>
+            </div>
             <div class="join-left-column">
                 <div class="waitlist-layout">
                     <section class="section-box" id="waitlist-form">
@@ -378,6 +423,10 @@
                     </section>
                 </div>
             </div>
+            <figure class="concept-render-card">
+                <img src="../static/img/freedom-lab-concept-render.jpg" alt="Conceptual rendering of the future Freedom Lab NYC physical space" loading="lazy">
+                <figcaption class="concept-render-caption">Conceptual rendering</figcaption>
+            </figure>
         </div>
     </main>
 
