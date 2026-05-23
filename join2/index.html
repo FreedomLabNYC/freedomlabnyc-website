@@ -130,6 +130,14 @@
             background: rgba(50, 208, 17, 0.08);
         }
 
+        .feature-module-icon svg {
+            width: 24px;
+            height: 24px;
+            display: block;
+            stroke: currentColor;
+            fill: none;
+        }
+
         .feature-module-title {
             color: #FFFFFF;
             font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -318,7 +326,7 @@
             margin-top: 0.15rem;
         }
 
-        .waitlist-submit:hover { background: #4ae025; transform: translateY(-2px); }
+        .waitlist-submit:hover { background: #32D011; transform: translateY(-2px); }
         .waitlist-success { color: #32D011; text-align: center; font-weight: 500; display: none; }
 
         .animate-ready .section-box {
@@ -437,22 +445,30 @@
 
             <div class="feature-modules" aria-label="Freedom Lab space features">
                 <article class="feature-module">
-                    <div class="feature-module-icon" aria-hidden="true">24</div>
-                    <div class="feature-module-title">24/7 access</div>
+                    <div class="feature-module-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="img"><circle cx="12" cy="12" r="8.5" stroke-width="2"></circle><path d="M12 7v5l3.5 2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </div>
+                    <div class="feature-module-title">24-7 Hour Access</div>
                     <div class="feature-module-text">24/7 hour access</div>
                 </article>
                 <article class="feature-module">
-                    <div class="feature-module-icon" aria-hidden="true">⌘</div>
-                    <div class="feature-module-title">Work + calls</div>
+                    <div class="feature-module-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="img"><path d="M4 9h6v4H4zM14 9h6v4h-6zM7 13v5M17 13v5M5 18h4M15 18h4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                    </div>
+                    <div class="feature-module-title">Co-Working.com</div>
                     <div class="feature-module-text">Space to work remotely and take calls</div>
                 </article>
                 <article class="feature-module">
-                    <div class="feature-module-icon" aria-hidden="true">✦</div>
+                    <div class="feature-module-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="img"><path d="M7 7h4M7 17h4M13 6l4 6-4 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="6" cy="12" r="1.4" fill="currentColor" stroke="none"></circle><circle cx="11" cy="12" r="1.4" fill="currentColor" stroke="none"></circle></svg>
+                    </div>
                     <div class="feature-module-title">Build together</div>
                     <div class="feature-module-text">Social areas to hang out, collaborate, and build together</div>
                 </article>
                 <article class="feature-module">
-                    <div class="feature-module-icon" aria-hidden="true">◎</div>
+                    <div class="feature-module-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="img"><path d="M12 3v7M8.5 7.5 12 3l3.5 4.5M9 21h6M10 18h4M10.5 10h3l1 8h-5z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 10c-1.6-1.4-2.2-3-1.5-4.8C12.4 6 13.6 7.3 12 10Z" fill="currentColor" stroke="none"></path></svg>
+                    </div>
                     <div class="feature-module-title">Events</div>
                     <div class="feature-module-text">Opportunities to host and attend freedom tech events</div>
                 </article>
