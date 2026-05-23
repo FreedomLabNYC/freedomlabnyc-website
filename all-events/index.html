@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="description" content="Unlisted Freedom Lab NYC all-events social screenshot page.">
+    <title>All Events | Freedom Lab NYC</title>
+    <link rel="canonical" href="https://freedomlab.nyc/all-events/">
+    <link rel="icon" href="../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preload" href="../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../css/fonts.css">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freedomlab.nyc/all-events/">
+    <meta property="og:title" content="All Events | Freedom Lab NYC">
+    <meta property="og:description" content="A social screenshot view of Freedom Lab NYC past events.">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="All Events | Freedom Lab NYC">
+    <meta name="twitter:description" content="A social screenshot view of Freedom Lab NYC past events.">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+
+    <style>
+        :root {
+            --all-events-cols: 6;
+            --all-events-gap: 14px;
+        }
+
+        body.all-events-page {
+            background:
+                radial-gradient(circle at 20% 0%, rgba(50, 208, 17, 0.14) 0, rgba(50, 208, 17, 0) 32rem),
+                radial-gradient(circle at 85% 12%, rgba(20, 106, 235, 0.16) 0, rgba(20, 106, 235, 0) 30rem),
+                linear-gradient(180deg, #070a08 0%, #0d1117 52%, #080b0a 100%);
+            min-height: 100vh;
+        }
+
+        .screenshot-shell {
+            width: min(1600px, calc(100vw - 48px));
+            margin: 0 auto;
+            padding: 34px 0 42px;
+        }
+
+        .all-events-hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: end;
+            gap: 2rem;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(50, 208, 17, 0.22);
+        }
+
+        .all-events-eyebrow {
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(0.62rem, 0.8vw, 0.86rem);
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #32D011;
+            margin: 0 0 12px;
+        }
+
+        .all-events-title {
+            font-family: 'Press Start 2P', monospace;
+            font-weight: 400;
+            font-size: clamp(1.4rem, 3vw, 3.25rem);
+            line-height: 1.16;
+            color: var(--text-primary);
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .all-events-subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-secondary);
+            font-size: clamp(0.98rem, 1.25vw, 1.32rem);
+            line-height: 1.35;
+            max-width: 680px;
+            margin: 14px 0 0;
+        }
+
+        .all-events-mark {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-secondary);
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .all-events-mark img {
+            width: clamp(76px, 7vw, 118px);
+            height: auto;
+            filter: drop-shadow(0 0 18px rgba(50, 208, 17, 0.22));
+        }
+
+        .all-events-count {
+            border: 1px solid rgba(50, 208, 17, 0.32);
+            border-radius: 999px;
+            padding: 8px 14px;
+            background: rgba(13, 17, 23, 0.74);
+            color: #32D011;
+            font-size: clamp(0.84rem, 1vw, 1.05rem);
+        }
+
+        .all-events-grid {
+            display: grid;
+            grid-template-columns: repeat(var(--all-events-cols), minmax(0, 1fr));
+            gap: var(--all-events-gap);
+            align-items: stretch;
+        }
+
+        .all-event-card {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            overflow: hidden;
+            text-decoration: none;
+            color: inherit;
+            background: rgba(13, 17, 23, 0.92);
+            border: 1px solid rgba(139, 148, 158, 0.28);
+            border-radius: 14px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+        }
+
+        .all-event-cover {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: #151b25;
+        }
+
+        .all-event-cover img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .all-event-cover::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0) 58%, rgba(0,0,0,0.36) 100%);
+            pointer-events: none;
+        }
+
+        .all-event-body {
+            min-height: 86px;
+            padding: 11px 12px 13px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .all-event-date {
+            font-family: 'Space Grotesk', sans-serif;
+            color: #32D011;
+            font-size: clamp(0.68rem, 0.78vw, 0.82rem);
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .all-event-title {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-primary);
+            font-size: clamp(0.78rem, 0.88vw, 0.98rem);
+            line-height: 1.2;
+            font-weight: 650;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .all-event-card.no-cover .all-event-cover {
+            display: grid;
+            place-items: center;
+            background:
+                linear-gradient(135deg, rgba(50, 208, 17, 0.18), rgba(20, 106, 235, 0.12)),
+                #111721;
+        }
+
+        .all-event-card.no-cover .all-event-cover::before {
+            content: 'FL';
+            font-family: 'Press Start 2P', monospace;
+            color: rgba(50, 208, 17, 0.82);
+            font-size: clamp(1rem, 1.8vw, 2rem);
+            letter-spacing: 0.08em;
+        }
+
+        .all-events-loading,
+        .all-events-error {
+            grid-column: 1 / -1;
+            color: var(--text-secondary);
+            font-family: 'Space Grotesk', sans-serif;
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .site-footer {
+            margin-top: 0;
+        }
+
+        @media (max-width: 1100px) {
+            :root { --all-events-cols: 4; }
+            .all-events-hero { grid-template-columns: 1fr; }
+            .all-events-mark { align-items: flex-start; text-align: left; }
+        }
+
+        @media (max-width: 720px) {
+            :root {
+                --all-events-cols: 2;
+                --all-events-gap: 10px;
+            }
+            .screenshot-shell {
+                width: min(100% - 24px, 640px);
+                padding-top: 24px;
+            }
+            .all-events-body { min-height: 76px; }
+        }
+    </style>
+</head>
+<body class="all-events-page">
+    <header>
+        <nav class="navbar">
+            <a href="../" class="logo">
+                <picture>
+                    <source srcset="../static/img/FL-bw-light.webp" type="image/webp">
+                    <img src="../static/img/FL-bw-light.png" alt="Freedom Lab NYC" width="240" height="44">
+                </picture>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../classes-events/" class="nav-link">Classes & Events</a></li>
+                <li><a href="../resources/" class="nav-link">Resources</a></li>
+                <li><a href="../contact/" class="nav-link">Contact</a></li>
+                <li><a href="https://geyser.fund/project/freedomlab" target="_blank" rel="noopener" class="nav-link">Donate</a></li>
+                <li><a href="../join/" class="nav-btn">Join</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+        <div class="mobile-overlay" id="mobileOverlay"></div>
+    </header>
+
+    <main class="screenshot-shell" aria-labelledby="allEventsTitle">
+        <section class="all-events-hero">
+            <div>
+                <p class="all-events-eyebrow">Freedom Lab NYC</p>
+                <h1 class="all-events-title" id="allEventsTitle">All Events</h1>
+                <p class="all-events-subtitle">Workshops, meetups, game nights, office hours, and community experiments for NYC freedom tech.</p>
+            </div>
+            <div class="all-events-mark" aria-label="Freedom Lab event count">
+                <img src="../static/img/torch transparent icocrop2.png" alt="" aria-hidden="true">
+                <span class="all-events-count" id="eventCount">Loading events…</span>
+            </div>
+        </section>
+
+        <section class="all-events-grid" id="allEventsGrid" aria-label="All archived Freedom Lab events">
+            <p class="all-events-loading">Loading events…</p>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="../js/footer.js"></script>
+    <script src="../js/social-config.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+    <script>
+        (async function loadAllEvents() {
+            const grid = document.getElementById('allEventsGrid');
+            const count = document.getElementById('eventCount');
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            function escapeHtml(value) {
+                return String(value ?? '').replace(/[&<>'"]/g, ch => ({
+                    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+                }[ch]));
+            }
+
+            try {
+                const res = await fetch('../classes-events/events.json');
+                if (!res.ok) throw new Error('Failed to load events');
+                const data = await res.json();
+                const events = Array.isArray(data.events) ? data.events : [];
+                const viewportColumns = window.innerWidth <= 720
+                    ? 2
+                    : window.innerWidth <= 1100
+                        ? 4
+                        : Math.max(2, Math.ceil(Math.sqrt(events.length || 1)));
+                grid.style.setProperty('--all-events-cols', viewportColumns);
+                count.textContent = `${events.length} archived events`;
+
+                if (!events.length) {
+                    grid.innerHTML = '<p class="all-events-error">No archived events yet.</p>';
+                    return;
+                }
+
+                grid.innerHTML = events.map(ev => {
+                    const d = new Date(ev.date);
+                    const dateStr = Number.isNaN(d.getTime()) ? '' : `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+                    const cover = ev.cover ? `<img src="${escapeHtml(ev.cover)}" alt="${escapeHtml(ev.name)}" loading="eager">` : '';
+                    const cardClass = ev.cover ? 'all-event-card' : 'all-event-card no-cover';
+                    const inner = `
+                        <div class="all-event-cover">${cover}</div>
+                        <div class="all-event-body">
+                            <span class="all-event-date">${escapeHtml(dateStr)}</span>
+                            <h2 class="all-event-title">${escapeHtml(ev.name)}</h2>
+                        </div>
+                    `;
+                    return ev.url
+                        ? `<a class="${cardClass}" href="${escapeHtml(ev.url)}" target="_blank" rel="noopener">${inner}</a>`
+                        : `<article class="${cardClass}">${inner}</article>`;
+                }).join('');
+            } catch (err) {
+                console.error('All events load failed:', err);
+                count.textContent = 'Events unavailable';
+                grid.innerHTML = '<p class="all-events-error">Could not load events.</p>';
+            }
+        })();
+    </script>
+</body>
+</html>
