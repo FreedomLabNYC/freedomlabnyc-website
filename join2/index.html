@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join the waitlist for Freedom Lab NYC's upcoming co-working and hackerspace for freedom tech builders in New York City.">
+    <title>Apply for Early Access | Freedom Lab NYC</title>
+    <!-- Canonical / SEO -->
+    <link rel="canonical" href="https://freedomlab.nyc/join2/">
+
+<link rel="icon" href="../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="preload" href="../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="../css/contact.css">
+    <style>
+        body.join-page {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #0a0b0a 0%, #0d110d 100%);
+        }
+
+        .page-hero {
+            background: linear-gradient(180deg, rgba(13, 17, 23, 0.92) 0%, rgba(8, 11, 15, 0.92) 100%);
+        }
+
+        .page-hero h1 {
+            text-shadow:
+                0 0 12px rgba(50, 208, 17, 0.45),
+                0 0 32px rgba(50, 208, 17, 0.28),
+                0 0 56px rgba(50, 208, 17, 0.16);
+        }
+
+        .waitlist-content {
+            position: relative;
+            min-height: 820px;
+            padding: 0;
+            max-width: min(1500px, calc(100vw - 40px));
+            margin: 1.5rem auto 2rem;
+            overflow: visible;
+        }
+
+        .join-intro-layout {
+            position: relative;
+            min-height: 760px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(239, 240, 238, 0.22);
+            background: #080b0f;
+        }
+
+        .join-left-column {
+            position: absolute;
+            right: clamp(1rem, 3vw, 2rem);
+            bottom: clamp(1rem, 3vw, 2rem);
+            width: min(430px, calc(100% - 2rem));
+            z-index: 3;
+        }
+
+        .join-copy {
+            position: absolute;
+            top: clamp(1rem, 2.5vw, 2rem);
+            left: clamp(1rem, 2.5vw, 2rem);
+            z-index: 3;
+            width: min(560px, calc(100% - 2rem));
+            padding: clamp(1.25rem, 2.5vw, 1.75rem);
+            border: 1px solid rgba(239, 240, 238, 0.28);
+            border-radius: 22px;
+            background: rgba(8, 11, 15, 0.78);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+        }
+
+        .page-description {
+            color: #FFFFFF;
+            text-align: left;
+            max-width: none;
+            margin: 0;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: clamp(16px, 1.35vw, 20px);
+            line-height: 1.55;
+            font-weight: 600;
+        }
+
+        .highlight-line {
+            color: #32D011;
+            font: inherit;
+        }
+
+        .feature-modules {
+            position: absolute;
+            left: clamp(1.5rem, 4vw, 3rem);
+            bottom: clamp(1.5rem, 4vw, 3rem);
+            z-index: 3;
+            width: min(560px, calc(100% - 3rem));
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(1.15rem, 2vw, 1.55rem);
+        }
+
+        .feature-module {
+            min-height: 118px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 1rem;
+            border: 1px solid rgba(239, 240, 238, 0.18);
+            border-radius: 18px;
+            background: rgba(8, 11, 15, 0.46);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
+            text-align: center;
+        }
+
+        .feature-module-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(50, 208, 17, 0.5);
+            border-radius: 14px;
+            color: #32D011;
+            font-size: 1.18rem;
+            background: rgba(50, 208, 17, 0.08);
+        }
+
+        .feature-module-title {
+            color: #FFFFFF;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 1rem;
+            line-height: 1.25;
+            font-weight: 700;
+        }
+
+        .concept-render-card {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            margin: 0;
+        }
+
+        .concept-render-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background:
+                linear-gradient(90deg, rgba(8, 11, 15, 0.42) 0%, rgba(8, 11, 15, 0.12) 46%, rgba(8, 11, 15, 0.34) 100%),
+                linear-gradient(180deg, rgba(8, 11, 15, 0.08) 0%, rgba(8, 11, 15, 0.32) 100%);
+            pointer-events: none;
+        }
+
+        .concept-render-card img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 760px;
+            object-fit: cover;
+            border-radius: 0;
+            border: 0;
+            box-shadow: none;
+        }
+
+        .concept-render-caption {
+            position: absolute;
+            right: 1rem;
+            bottom: 0.75rem;
+            z-index: 4;
+            margin: 0;
+            color: rgba(239, 240, 238, 0.62);
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.72rem;
+            line-height: 1.4;
+            text-align: right;
+        }
+
+        .waitlist-layout {
+            display: block;
+            margin-top: 0;
+        }
+
+        .section-box {
+            background: #0d1117;
+            border: 1px solid rgba(239, 240, 238, 0.36);
+            border-radius: 22px;
+            padding: 1.4rem;
+            position: relative;
+            overflow: hidden;
+            max-width: none;
+            height: auto;
+            margin: 0;
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42);
+        }
+
+        .section-box::before { display: none; }
+
+        .section-box h2 {
+            color: #FFFFFF;
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .waitlist-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .waitlist-form label {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin-bottom: -0.25rem;
+        }
+
+        .waitlist-form input,
+        .waitlist-form textarea {
+            padding: 0.9rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-size: 1rem;
+            width: 100%;
+        }
+
+        .waitlist-form textarea {
+            min-height: 110px;
+            resize: vertical;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+
+        .waitlist-form input::placeholder,
+        .waitlist-form textarea::placeholder { color: var(--text-muted); }
+        .waitlist-form input:focus,
+        .waitlist-form textarea:focus { outline: none; border-color: #32D011; }
+        .required-star { color: var(--required, #e05555); font-weight: 600; }
+        .field-hint { color: var(--text-muted); font-size: 0.82rem; margin-top: -0.5rem; line-height: 1.45; }
+        .field-asterisk { color: var(--text-muted); font-size: 0.75rem; font-style: italic; margin-top: -0.25rem; }
+
+        .price-input-wrapper { position: relative; }
+        .price-input-wrapper .currency-symbol {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1rem;
+            pointer-events: none;
+        }
+        .price-input-wrapper input { padding-left: 1.75rem; -moz-appearance: textfield; }
+        .price-input-wrapper input::-webkit-outer-spin-button,
+        .price-input-wrapper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            accent-color: #32D011;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper label {
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .waitlist-submit {
+            padding: 1rem 2.5rem;
+            background: #32D011;
+            color: var(--bg-dark);
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .waitlist-submit:hover { background: #4ae025; transform: translateY(-2px); }
+        .waitlist-success { color: #32D011; text-align: center; font-weight: 500; display: none; }
+
+        .animate-ready .section-box {
+            opacity: 1;
+            transform: none;
+        }
+        .animate-ready .section-box.animate-in { opacity: 1; transform: none; }
+
+        @media (max-width: 1180px) {
+            .join-intro-layout {
+                min-height: auto;
+                display: grid;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .concept-render-card,
+            .join-copy,
+            .feature-modules,
+            .join-left-column {
+                position: relative;
+                inset: auto;
+                width: auto;
+            }
+            .concept-render-card { order: 1; min-height: auto; }
+            .join-copy { order: 2; }
+            .feature-modules { order: 3; }
+            .join-left-column { order: 4; }
+            .concept-render-card::after { display: none; }
+            .concept-render-card img { aspect-ratio: 16 / 8; height: auto; min-height: 0; border-radius: 20px; }
+            .concept-render-caption { position: static; margin-top: 0.45rem; }
+        }
+
+        @media (max-width: 860px) {
+            .waitlist-content { min-height: 0; margin: 1rem; }
+            .feature-modules { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .concept-render-caption { text-align: left; }
+            .section-box { padding: 1.5rem; height: auto; }
+            .section-box h2 { font-size: 1.35rem; }
+            .waitlist-form input, .waitlist-form textarea, .waitlist-submit { min-height: 48px; font-size: 1rem; }
+        }
+
+        @media (max-width: 520px) {
+            .feature-modules { grid-template-columns: 1fr; }
+            .page-description { font-size: 16px; font-weight: 500; }
+        }
+    </style>
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freedomlab.nyc/join2/">
+    <meta property="og:title" content="Apply for Early Access | Freedom Lab NYC">
+    <meta property="og:description" content="Apply for early access to New York City's premier co-working and freedom tech hacker space to receive discounted membership when we launch.">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Apply for Early Access | Freedom Lab NYC">
+    <meta name="twitter:description" content="Apply for early access to New York City's premier co-working and freedom tech hacker space to receive discounted membership when we launch.">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+
+    <!-- Freedom Lab structured data (generated by scripts/apply-seo.py) -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://freedomlab.nyc/join2/#webpage",
+  "name": "Apply for Early Access | Freedom Lab NYC",
+  "description": "Join the waitlist for Freedom Lab NYC",
+  "url": "https://freedomlab.nyc/join2/",
+  "publisher": {
+    "@id": "https://freedomlab.nyc/#organization"
+  }
+}
+</script>
+<!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L8YH7QGBD"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5L8YH7QGBD', { anonymize_ip: true });
+    </script>
+</head>
+<body class="join-page join2-page">
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <header class="header">
+        <a href="/" class="logo">
+            <picture>
+                <source srcset="../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture>
+        </a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources/" class="nav-link">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+
+    <section class="page-hero">
+        <h1>Apply for Early Access</h1>
+    </section>
+
+    <main class="waitlist-content">
+        <div class="join-intro-layout">
+            <figure class="concept-render-card">
+                <img src="../static/img/freedom-lab-concept-render.jpg" alt="Conceptual rendering of the future Freedom Lab NYC physical space" loading="lazy">
+                <figcaption class="concept-render-caption">Conceptual rendering</figcaption>
+            </figure>
+
+            <div class="join-copy">
+                <p class="page-description">We're a community hosted at various venues that's building towards becoming NYC's first <span class="highlight-line">freedom tech coworking and hackerspace</span>.</p>
+            </div>
+
+            <div class="feature-modules" aria-label="Freedom Lab space features">
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">24</div>
+                    <div class="feature-module-title">24/7 access</div>
+                </article>
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">⌘</div>
+                    <div class="feature-module-title">Work + calls</div>
+                </article>
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">✦</div>
+                    <div class="feature-module-title">Build together</div>
+                </article>
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">◎</div>
+                    <div class="feature-module-title">Events</div>
+                </article>
+            </div>
+
+            <div class="join-left-column">
+                <div class="waitlist-layout">
+                    <section class="section-box" id="waitlist-form">
+                        <h2>Apply</h2>
+                        <form class="waitlist-form" id="waitlistForm">
+                            <label for="name">Name <span class="required-star">*</span></label>
+                            <input type="text" id="name" name="Name" required>
+
+                            <label for="email">Email <span class="required-star">*</span></label>
+                            <input type="email" id="email" name="Email" required>
+
+
+                            <label for="budget">Membership dues <span class="required-star">*</span></label>
+                            <div class="price-input-wrapper">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="budget" name="Monthly Budget" min="0" step="1" required>
+                            </div>
+
+                            <label for="favorite-projects">Tools <span class="required-star">*</span></label>
+                            <textarea id="favorite-projects" name="Freedom Tech Tools" required></textarea>
+
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="updates" name="Updates Opt-in" value="Yes" required checked>
+                                <label for="updates">I'd like to receive updates about the co-working / hackerspace, early access, and discounted membership opportunities <span class="required-star">*</span></label>
+                            </div>
+
+                            <button type="submit" class="waitlist-submit">Apply for Early Access</button>
+                            <p class="waitlist-success" id="successMsg">You're on the list. We'll be in touch.</p>
+                        </form>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="../js/footer.js"></script>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        document.body.classList.add('animate-ready');
+        const sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('animate-in');
+            });
+        }, { threshold: 0.2 });
+        document.querySelectorAll('.section-box').forEach((el, i) => {
+            setTimeout(() => sectionObserver.observe(el), i * 100);
+        });
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyDDn0cRv9xF6JV_dfeer0B81Uq_q_vkRtuoZ8iQct5aH1_icPEfD66Im5X6Fk444eHKQ/exec';
+        const form = document.getElementById('waitlistForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+
+            const formData = new FormData(form);
+            formData.append('formType', 'Hackerspace Waitlist');
+            if (!form.querySelector('#updates').checked) {
+                formData.set('Updates Opt-in', 'No');
+            }
+
+            try {
+                await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
+                document.getElementById('successMsg').style.display = 'block';
+                btn.style.display = 'none';
+                form.querySelectorAll('input, textarea').forEach(i => i.disabled = true);
+            } catch (error) {
+                btn.disabled = false;
+                btn.textContent = 'Apply for Early Access';
+                alert('Something went wrong. Please try again.');
+            }
+        });
+    </script>
+    <script src="../js/social-config.js"></script>
+</body>
+</html>
