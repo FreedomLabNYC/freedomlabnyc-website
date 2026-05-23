@@ -51,24 +51,25 @@
 
         .join-left-column {
             position: absolute;
-            right: clamp(1rem, 3vw, 2rem);
-            bottom: clamp(1rem, 3vw, 2rem);
+            right: max(3rem, calc(50% - 550px));
+            top: 50%;
+            transform: translateY(-50%);
             width: min(430px, calc(100% - 2rem));
             z-index: 3;
         }
 
         .join-copy {
             position: absolute;
-            top: clamp(1rem, 2.5vw, 2rem);
-            left: clamp(1rem, 2.5vw, 2rem);
+            top: clamp(2.25rem, 5vw, 4rem);
+            left: max(3rem, calc(50% - 550px));
             z-index: 3;
             width: min(560px, calc(100% - 2rem));
             padding: clamp(1.25rem, 2.5vw, 1.75rem);
-            border: 1px solid rgba(239, 240, 238, 0.28);
+            border: 1px solid rgba(239, 240, 238, 0.18);
             border-radius: 22px;
-            background: rgba(8, 11, 15, 0.78);
-            backdrop-filter: blur(14px);
-            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.34);
+            background: rgba(8, 11, 15, 0.20);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
         }
 
         .page-description {
@@ -89,8 +90,8 @@
 
         .feature-modules {
             position: absolute;
-            left: clamp(1.5rem, 4vw, 3rem);
-            bottom: clamp(1.5rem, 4vw, 3rem);
+            left: max(3rem, calc(50% - 550px));
+            bottom: clamp(2.25rem, 5vw, 4rem);
             z-index: 3;
             width: min(560px, calc(100% - 3rem));
             display: grid;
@@ -191,8 +192,8 @@
         }
 
         .section-box {
-            background: #0d1117;
-            border: 1px solid rgba(239, 240, 238, 0.36);
+            background: rgba(13, 17, 23, 0.20);
+            border: 1px solid rgba(239, 240, 238, 0.18);
             border-radius: 22px;
             padding: 1.4rem;
             position: relative;
@@ -200,7 +201,8 @@
             max-width: none;
             height: auto;
             margin: 0;
-            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42);
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
+            backdrop-filter: blur(8px);
         }
 
         .section-box::before { display: none; }
@@ -267,7 +269,16 @@
             font-size: 1rem;
             pointer-events: none;
         }
-        .price-input-wrapper input { padding-left: 1.75rem; -moz-appearance: textfield; }
+        .price-input-wrapper .period-suffix {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            pointer-events: none;
+        }
+        .price-input-wrapper input { padding-left: 1.75rem; padding-right: 3.25rem; -moz-appearance: textfield; }
         .price-input-wrapper input::-webkit-outer-spin-button,
         .price-input-wrapper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
@@ -464,6 +475,7 @@
                             <div class="price-input-wrapper">
                                 <span class="currency-symbol">$</span>
                                 <input type="number" id="budget" name="Monthly Budget" min="0" step="1" required>
+                                <span class="period-suffix">/mo</span>
                             </div>
 
                             <label for="favorite-projects">Tools <span class="required-star">*</span></label>
