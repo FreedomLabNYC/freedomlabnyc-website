@@ -200,7 +200,33 @@ a:hover {
     font-size: 1.1rem;
     color: var(--text-secondary);
     max-width: 600px;
+    margin: 1.25rem auto 0;
+}
+
+/* === Standard Page Primitives === */
+.standard-page {
+    min-height: calc(100vh - 150px);
+}
+
+.standard-content-section {
+    padding: 3rem 2rem;
+}
+
+.standard-content-card {
+    max-width: 960px;
     margin: 0 auto;
+    padding: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+}
+
+.standard-content-card > *:first-child {
+    margin-top: 0;
+}
+
+.standard-content-card > *:last-child {
+    margin-bottom: 0;
 }
 
 .coming-soon {

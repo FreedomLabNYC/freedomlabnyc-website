@@ -19,7 +19,8 @@ DEFAULT_IMAGE = f"{SITE}/static/img/FL%20Signature%20Rectangular2.png"
 GA_SNIPPET_MARKER = "googletagmanager.com/gtag/js?id=G-5L8YH7QGBD"
 
 EXCLUDE_PARTS = {
-    ".git", ".hermes", "internal", "ghostr", "dashboard", "peddler", "poll", "links"
+    ".git", ".hermes", "internal", "ghostr", "dashboard", "peddler", "poll", "links",
+    "sketches", "templates",
 }
 EXCLUDE_FILES = {"google962eebcd38de853f.html"}
 NO_SITEMAP_PATHS = {
