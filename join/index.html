@@ -24,6 +24,7 @@
             background: linear-gradient(180deg, rgba(13, 17, 23, 0.92) 0%, rgba(8, 11, 15, 0.92) 100%);
         }
 
+        /* Locked to the strongest historical join title glow (commit d812869). */
         .page-hero h1 {
             text-shadow:
                 0 0 12px rgba(50, 208, 17, 0.45),
@@ -32,23 +33,58 @@
         }
 
         .waitlist-content {
+            position: relative;
+            min-height: 820px;
+            padding: 0;
+            max-width: min(1500px, calc(100vw - 40px));
+            margin: 1.5rem auto 2rem;
+            overflow: visible;
+        }
+
+        .join-intro-layout {
+            position: relative;
+            min-height: 760px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(239, 240, 238, 0.22);
+            background: #080b0f;
+            --overlay-top: clamp(2.75rem, 5vw, 4.25rem);
+            --overlay-bottom: clamp(7rem, 11vw, 10rem);
+        }
+
+        .join-left-column {
+            position: absolute;
+            right: max(3rem, calc(50% - 550px));
+            top: var(--overlay-top);
+            bottom: var(--overlay-bottom);
+            width: min(430px, calc(100% - 2rem));
+            z-index: 3;
             display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 980px;
-            margin: 0 auto;
+        }
+
+        .join-copy {
+            position: absolute;
+            top: var(--overlay-top);
+            left: max(3rem, calc(50% - 550px));
+            z-index: 3;
+            width: min(560px, calc(100% - 2rem));
+            padding: clamp(1.25rem, 2.5vw, 1.75rem);
+            border: 1px solid rgba(239, 240, 238, 0.18);
+            border-radius: 22px;
+            background: rgba(8, 11, 15, 0.20);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
         }
 
         .page-description {
             color: #FFFFFF;
             text-align: left;
-            max-width: 560px;
-            margin: 0 auto;
+            max-width: none;
+            margin: 0;
             font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 16px;
-            line-height: 1.6;
-            font-weight: 400;
+            font-size: clamp(16px, 1.35vw, 20px);
+            line-height: 1.55;
+            font-weight: 600;
         }
 
         .highlight-line {
@@ -56,52 +92,141 @@
             font: inherit;
         }
 
-        .feature-list {
-            color: #FFFFFF;
-            max-width: 560px;
-            margin: 0 auto;
-            padding-left: 1.25rem;
-            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            font-size: 16px;
-            line-height: 1.6;
-            font-weight: 400;
+        .feature-modules {
+            position: absolute;
+            left: max(3rem, calc(50% - 550px));
+            bottom: var(--overlay-bottom);
+            z-index: 3;
+            width: min(560px, calc(100% - 3rem));
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: clamp(1.35rem, 2.3vw, 1.85rem);
         }
 
-        .feature-list li::marker {
+        .feature-module {
+            min-height: 158px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 1.1rem;
+            border: 1px solid rgba(239, 240, 238, 0.16);
+            border-radius: 18px;
+            background: rgba(8, 11, 15, 0.20);
+            backdrop-filter: blur(7px);
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
+            text-align: center;
+        }
+
+        .feature-module-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(50, 208, 17, 0.5);
+            border-radius: 14px;
             color: #32D011;
+            font-size: 1.18rem;
+            background: rgba(50, 208, 17, 0.08);
+        }
+
+        .feature-module-icon svg {
+            width: 24px;
+            height: 24px;
+            display: block;
+            stroke: currentColor;
+            fill: none;
+        }
+
+        .feature-module-icon img {
+            width: 32px;
+            height: 32px;
+            display: block;
+            object-fit: contain;
+        }
+
+        .feature-module-title {
+            color: #FFFFFF;
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 1.08rem;
+            line-height: 1.25;
+            font-weight: 700;
+        }
+
+        .feature-module-text {
+            color: rgba(255, 255, 255, 0.88);
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.82rem;
+            line-height: 1.35;
+            font-weight: 500;
+            max-width: 14rem;
+        }
+
+        .concept-render-card {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            margin: 0;
+        }
+
+        .concept-render-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background:
+                linear-gradient(90deg, rgba(8, 11, 15, 0.42) 0%, rgba(8, 11, 15, 0.12) 46%, rgba(8, 11, 15, 0.34) 100%),
+                linear-gradient(180deg, rgba(8, 11, 15, 0.08) 0%, rgba(8, 11, 15, 0.32) 100%);
+            pointer-events: none;
+        }
+
+        .concept-render-card img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 760px;
+            object-fit: cover;
+            border-radius: 0;
+            border: 0;
+            box-shadow: none;
+        }
+
+        .concept-render-caption {
+            position: absolute;
+            right: 1rem;
+            bottom: 0.75rem;
+            z-index: 4;
+            margin: 0;
+            color: rgba(239, 240, 238, 0.62);
+            font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.72rem;
+            line-height: 1.4;
+            text-align: right;
         }
 
         .waitlist-layout {
             display: block;
+            margin-top: 0;
+            width: 100%;
         }
 
         .section-box {
-            background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 2.25rem;
+            background: rgba(13, 17, 23, 0.20);
+            border: 1px solid rgba(239, 240, 238, 0.18);
+            border-radius: 22px;
+            padding: 1.05rem;
             position: relative;
             overflow: hidden;
-            max-width: 560px;
-            margin: 0 auto;
+            max-width: none;
+            min-height: 0;
+            height: 100%;
+            margin: 0;
+            box-shadow: 0 18px 48px rgba(0, 0, 0, 0.16);
+            backdrop-filter: blur(8px);
         }
 
-        .section-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #28a00e, #32D011, #28a00e);
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        }
-
-        .section-box h2 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
+        .section-box::before { display: none; }
 
         .section-description {
             color: var(--text-secondary);
@@ -112,19 +237,19 @@
         .waitlist-form {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.55rem;
         }
 
         .waitlist-form label {
             color: var(--text-primary);
-            font-weight: 500;
-            font-size: 0.95rem;
-            margin-bottom: -0.25rem;
+            font-weight: 600;
+            font-size: 0.92rem;
+            margin-bottom: -0.15rem;
         }
 
         .waitlist-form input,
         .waitlist-form textarea {
-            padding: 0.9rem 1rem;
+            padding: 0.72rem 0.9rem;
             background: var(--bg-input);
             border: 1px solid var(--border);
             border-radius: var(--radius);
@@ -134,7 +259,7 @@
         }
 
         .waitlist-form textarea {
-            min-height: 110px;
+            min-height: 54px;
             resize: vertical;
             font-family: inherit;
             line-height: 1.5;
@@ -145,7 +270,7 @@
         .waitlist-form input:focus,
         .waitlist-form textarea:focus { outline: none; border-color: #32D011; }
         .required-star { color: var(--required, #e05555); font-weight: 600; }
-        .field-hint { color: var(--text-muted); font-size: 0.82rem; margin-top: -0.5rem; line-height: 1.45; }
+        .field-hint { color: rgba(239, 240, 238, 0.82); font-size: 0.76rem; margin-top: -0.35rem; line-height: 1.45; }
         .field-asterisk { color: var(--text-muted); font-size: 0.75rem; font-style: italic; margin-top: -0.25rem; }
 
         .price-input-wrapper { position: relative; }
@@ -154,19 +279,28 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
+            color: rgba(239, 240, 238, 0.78);
+            font-size: 1.05rem;
+            pointer-events: none;
+        }
+        .price-input-wrapper .period-suffix {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(239, 240, 238, 0.78);
             font-size: 1rem;
             pointer-events: none;
         }
-        .price-input-wrapper input { padding-left: 1.75rem; -moz-appearance: textfield; }
+        .price-input-wrapper input { padding-left: 1.75rem; padding-right: 3.25rem; -moz-appearance: textfield; }
         .price-input-wrapper input::-webkit-outer-spin-button,
         .price-input-wrapper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 
         .checkbox-wrapper {
             display: flex;
             align-items: flex-start;
-            gap: 0.6rem;
-            margin-top: 0.5rem;
+            gap: 0.5rem;
+            margin-top: 0.15rem;
         }
 
         .checkbox-wrapper input[type="checkbox"] {
@@ -179,41 +313,72 @@
         }
 
         .checkbox-wrapper label {
-            color: var(--text-secondary);
-            font-size: 0.78rem;
+            color: rgba(239, 240, 238, 0.82);
+            font-size: 0.76rem;
+            line-height: 1.28;
             cursor: pointer;
             font-weight: 400;
         }
 
         .waitlist-submit {
-            padding: 1rem 2.5rem;
+            padding: 0.86rem 2rem;
             background: #32D011;
             color: var(--bg-dark);
             border: none;
             border-radius: var(--radius);
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 1rem;
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
-            margin-top: 0.5rem;
+            margin-top: 0.15rem;
         }
 
-        .waitlist-submit:hover { background: #4ae025; transform: translateY(-2px); }
+        .waitlist-submit:hover { background: #32D011; transform: translateY(-2px); }
         .waitlist-success { color: #32D011; text-align: center; font-weight: 500; display: none; }
 
         .animate-ready .section-box {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            opacity: 1;
+            transform: none;
         }
-        .animate-ready .section-box.animate-in { opacity: 1; transform: translateY(0); }
+        .animate-ready .section-box.animate-in { opacity: 1; transform: none; }
+
+        @media (max-width: 1180px) {
+            .join-intro-layout {
+                min-height: auto;
+                display: grid;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            .concept-render-card,
+            .join-copy,
+            .feature-modules,
+            .join-left-column {
+                position: relative;
+                inset: auto;
+                width: auto;
+            }
+            .join-copy { order: 1; }
+            .join-left-column { order: 2; transform: none; }
+            .feature-modules { order: 3; }
+            .concept-render-card { order: 4; min-height: auto; }
+            .concept-render-card::after { display: none; }
+            .concept-render-card img { aspect-ratio: 16 / 8; height: auto; min-height: 0; border-radius: 20px; }
+            .concept-render-caption { position: static; margin-top: 0.45rem; }
+        }
 
         @media (max-width: 860px) {
-            .waitlist-content { padding: 1rem; }
-            .section-box { padding: 1.5rem; }
+            .waitlist-content { min-height: 0; margin: 1rem; }
+            .feature-modules { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .concept-render-caption { text-align: left; }
+            .section-box { padding: 1.5rem; min-height: 0; height: auto; }
             .section-box h2 { font-size: 1.35rem; }
             .waitlist-form input, .waitlist-form textarea, .waitlist-submit { min-height: 48px; font-size: 1rem; }
+        }
+
+        @media (max-width: 520px) {
+            .feature-modules { grid-template-columns: 1fr; }
+            .page-description { font-size: 16px; font-weight: 500; }
         }
     </style>
 
@@ -251,7 +416,7 @@
       gtag('config', 'G-5L8YH7QGBD', { anonymize_ip: true });
     </script>
 </head>
-<body class="join-page">
+<body class="join-page join2-page">
     <div class="mobile-overlay" id="mobileOverlay"></div>
 
     <header class="header">
@@ -276,43 +441,80 @@
     </section>
 
     <main class="waitlist-content">
-        <p class="page-description">We're building NYC's first <span class="highlight-line">freedom tech coworking and hackerspace</span>. Featuring:</p>
-        <ul class="feature-list">
-            <li>24/7 hour access</li>
-            <li>Space to work remotely and take calls</li>
-            <li>Social areas to hang out, collaborate, and build together</li>
-            <li>Opportunities to host and attend freedom tech events</li>
-        </ul>
+        <div class="join-intro-layout">
+            <figure class="concept-render-card">
+                <img src="../static/img/freedom-lab-concept-render.jpg" alt="Conceptual rendering of the future Freedom Lab NYC physical space" loading="lazy">
+                <figcaption class="concept-render-caption">Conceptual rendering</figcaption>
+            </figure>
 
-        <div class="waitlist-layout">
-            <section class="section-box" id="waitlist-form">
-                <form class="waitlist-form" id="waitlistForm">
-                    <label for="name">Name <span class="required-star">*</span></label>
-                    <input type="text" id="name" name="Name" required>
+            <div class="join-copy">
+                <p class="page-description">We're a community hosted at various venues that's building towards becoming NYC's first <span class="highlight-line">freedom tech coworking and hackerspace</span>.</p>
+            </div>
 
-                    <label for="email">Email <span class="required-star">*</span></label>
-                    <input type="email" id="email" name="Email" required>
-
-
-                    <label for="budget">Poll: Membership dues <span class="required-star">*</span></label>
-                    <p class="field-hint">Co-working dues typically range between $200 to $650. Higher dues = nicer space.</p>
-                    <div class="price-input-wrapper">
-                        <span class="currency-symbol">$</span>
-                        <input type="number" id="budget" name="Monthly Budget" min="0" step="1" required>
+            <div class="feature-modules" aria-label="Freedom Lab space features">
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" role="img"><circle cx="12" cy="12" r="8.5" stroke-width="2"></circle><path d="M12 7v5l3.5 2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     </div>
-
-                    <label for="favorite-projects">What freedom tech tools are you interested in? <span class="required-star">*</span></label>
-                    <textarea id="favorite-projects" name="Freedom Tech Tools" required></textarea>
-
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="updates" name="Updates Opt-in" value="Yes" required checked>
-                        <label for="updates">I'd like to receive updates about the co-working / hackerspace, early access, and discounted membership opportunities <span class="required-star">*</span></label>
+                    <div class="feature-module-title">24/7 Hour Access</div>
+                    <div class="feature-module-text">Come and go on your own schedule.</div>
+                </article>
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">
+                        <img src="../static/img/coworking-option-a-green.png" alt="" loading="lazy">
                     </div>
+                    <div class="feature-module-title">Co-working</div>
+                    <div class="feature-module-text">Space to work on projects and join meetings.</div>
+                </article>
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">
+                        <img src="../static/img/build-together-option-b-green.png" alt="" loading="lazy">
+                    </div>
+                    <div class="feature-module-title">Build together</div>
+                    <div class="feature-module-text">Social areas to hang out, collaborate, and build together.</div>
+                </article>
+                <article class="feature-module">
+                    <div class="feature-module-icon" aria-hidden="true">
+                        <img src="../static/img/liberty-torch-green-black-inverted.svg" alt="" loading="lazy">
+                    </div>
+                    <div class="feature-module-title">Events</div>
+                    <div class="feature-module-text">Opportunities to host and attend freedom tech events.</div>
+                </article>
+            </div>
 
-                    <button type="submit" class="waitlist-submit">Apply for Early Access</button>
-                    <p class="waitlist-success" id="successMsg">You're on the list. We'll be in touch.</p>
-                </form>
-            </section>
+            <div class="join-left-column">
+                <div class="waitlist-layout">
+                    <section class="section-box" id="waitlist-form">
+                        <form class="waitlist-form" id="waitlistForm">
+                            <label for="name">Name <span class="required-star">*</span></label>
+                            <input type="text" id="name" name="Name" required>
+
+                            <label for="email">Email <span class="required-star">*</span></label>
+                            <input type="email" id="email" name="Email" required>
+
+
+                            <label for="budget">Poll: Membership dues <span class="required-star">*</span></label>
+                            <div class="field-hint">Co-working dues typically range between $200 to $650/mo. Higher dues = nicer space.</div>
+                            <div class="price-input-wrapper">
+                                <span class="currency-symbol">$</span>
+                                <input type="number" id="budget" name="Monthly Budget" min="0" step="1" required>
+                                <span class="period-suffix">/mo</span>
+                            </div>
+
+                            <label for="favorite-projects">Tools <span class="required-star">*</span></label>
+                            <textarea id="favorite-projects" name="Freedom Tech Tools" required></textarea>
+
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="updates" name="Updates Opt-in" value="Yes" required checked>
+                                <label for="updates">I'd like to receive updates about the co-working / hackerspace, early access, and discounted membership opportunities. <span class="required-star">*</span></label>
+                            </div>
+
+                            <button type="submit" class="waitlist-submit">Apply for Early Access</button>
+                            <p class="waitlist-success" id="successMsg">You're on the list. We'll be in touch.</p>
+                        </form>
+                    </section>
+                </div>
+            </div>
         </div>
     </main>
 
