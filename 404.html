@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Page not found - Freedom Lab NYC">
+    <link rel="canonical" href="https://freedomlab.nyc/404.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freedomlab.nyc/404.html">
     <meta property="og:title" content="404 - Page Not Found | Freedom Lab NYC">
     <meta property="og:description" content="Page not found - Freedom Lab NYC">
     <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
@@ -12,126 +15,142 @@
     <meta name="twitter:description" content="Page not found - Freedom Lab NYC">
     <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
     <title>404 - Page Not Found | Freedom Lab NYC</title>
-    <link rel="icon" href="static/img/torch transparent icocrop2.png" type="image/png">
-    <link rel="stylesheet" href="css/styles.css?v=banner-proportions">
-    <link rel="preload" href="static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="icon" href="/static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="/css/styles.css?v=banner-proportions">
+    <link rel="preload" href="/static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/fonts.css">
     <style>
-        /* Force dark mode */
-        html, body {
-            background-color: #0a0a0a !important;
-            color: #ffffff !important;
+        body.error-page {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at 50% 38%, rgba(50, 208, 17, 0.12), transparent 28rem),
+                linear-gradient(180deg, #0a0b0a 0%, #0d110d 100%);
+            color: var(--text-primary, #eff0ee);
+            font-family: 'Space Grotesk', system-ui, sans-serif;
             overflow-x: hidden;
         }
-        
+
         .error-content {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: calc(100vh - 200px);
+            min-height: calc(100vh - 168px);
+            padding: clamp(3rem, 9vw, 7rem) 1.25rem clamp(4rem, 8vw, 6rem);
             text-align: center;
-            padding: 2rem;
-            background-color: #0a0a0a;
         }
-        
+
+        .error-panel {
+            width: min(100%, 720px);
+            padding: clamp(2rem, 5vw, 3.5rem);
+            border: 1px solid rgba(50, 208, 17, 0.24);
+            border-radius: 28px;
+            background: linear-gradient(180deg, rgba(19, 20, 19, 0.86), rgba(10, 11, 10, 0.72));
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(14px);
+        }
+
+        .error-kicker {
+            margin: 0 0 1rem;
+            color: var(--secondary, #32D011);
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
         .error-code {
+            margin: 0;
+            color: var(--secondary, #32D011);
             font-family: 'Press Start 2P', monospace;
-            font-size: 6rem;
-            color: #32D011;
-            text-shadow: 0 0 30px rgba(50, 208, 17, 0.5);
-            margin-bottom: 1rem;
+            font-size: clamp(4.5rem, 16vw, 8rem);
+            line-height: 1;
+            text-shadow: 0 0 18px rgba(50, 208, 17, 0.46), 0 0 56px rgba(50, 208, 17, 0.20);
         }
-        
+
         .error-title {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 1.5rem;
-            color: #ffffff;
-            margin-bottom: 1rem;
+            margin: 1.35rem 0 0;
+            color: var(--text-primary, #eff0ee);
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+            font-size: clamp(1.75rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
         }
-        
+
         .error-message {
-            color: #a0a0a0;
-            font-size: 1.1rem;
-            max-width: 500px;
-            margin-bottom: 2rem;
-            line-height: 1.6;
+            max-width: 560px;
+            margin: 1rem auto 0;
+            color: var(--text-secondary, #9da89a);
+            font-size: clamp(1rem, 1.5vw, 1.14rem);
+            line-height: 1.7;
         }
-        
+
         .error-links {
             display: flex;
-            gap: 1rem;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
+            gap: 0.85rem;
             justify-content: center;
+            margin-top: 2rem;
         }
-        
+
         .error-link {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            min-height: 48px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0.85rem 1.35rem;
+            border: 1px solid rgba(50, 208, 17, 0.82);
+            border-radius: 999px;
+            background: rgba(50, 208, 17, 0.08);
+            color: var(--secondary, #32D011);
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
             text-decoration: none;
-            transition: all 0.3s ease;
-            background: transparent;
-            color: #32D011;
-            border: 2px solid #32D011;
+            transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
         }
-        
-        .error-link:hover {
-            background: #32D011;
-            color: #0a0a0a;
+
+        .error-link:hover,
+        .error-link:focus-visible {
+            transform: translateY(-1px);
+            background: var(--secondary, #32D011);
+            color: #050805;
+            border-color: var(--secondary, #32D011);
+            box-shadow: 0 0 24px rgba(50, 208, 17, 0.22);
+            outline: none;
         }
-        
+
         .error-link-primary {
-            background: rgba(128, 128, 128, 0.3);
-            border: 2px solid #ffffff;
-            color: #ffffff;
+            background: var(--secondary, #32D011);
+            color: #050805;
+            border-color: var(--secondary, #32D011);
+            box-shadow: 0 0 28px rgba(50, 208, 17, 0.18);
         }
-        
-        .error-link-primary:hover {
-            background: #32D011;
-            border-color: #32D011;
-            color: #0a0a0a;
+
+        .error-link-primary:hover,
+        .error-link-primary:focus-visible {
+            background: #42f01c;
+            border-color: #42f01c;
         }
-        
-        .terminal-cursor {
-            display: inline-block;
-            width: 10px;
-            height: 1.2em;
-            background: #32D011;
-            margin-left: 5px;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
-        @media (max-width: 768px) {
-            .error-code {
-                font-size: 4rem;
+
+        @media (max-width: 640px) {
+            .error-content {
+                min-height: calc(100vh - 132px);
+                padding-top: 2.25rem;
             }
-            
-            .error-title {
-                font-size: 1rem;
+
+            .error-panel {
+                border-radius: 22px;
             }
-            
+
+            .error-links {
+                flex-direction: column;
+            }
+
             .error-link {
-                padding: 0.75rem 1rem;
-                font-size: 0.85rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .error-link {
-                padding: 0.6rem 0.75rem;
-                font-size: 0.75rem;
+                width: 100%;
             }
         }
     </style>
@@ -144,28 +163,24 @@
       gtag('config', 'G-5L8YH7QGBD', { anonymize_ip: true });
     </script>
 </head>
-<body>
-    <!-- Mobile Overlay -->
+<body class="error-page">
     <div class="mobile-overlay" id="mobileOverlay"></div>
-    
-    <!-- Header -->
+
     <header class="header">
         <a href="/" class="logo">
             <picture>
-                <source srcset="static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
-                <img src="static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+                <source srcset="/static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="/static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
             </picture>
         </a>
         <nav class="nav-menu" id="navMenu">
             <a href="/classes-events/" class="nav-link">Classes & Events</a>
             <a href="/resources/" class="nav-link">Resources</a>
-            
             <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
             <a href="/join/" class="nav-btn">Join</a>
-            
-            
         </nav>
-        <div class="hamburger" id="hamburger">
+        <div class="hamburger" id="hamburger" aria-label="Open navigation" role="button" tabindex="0">
             <span></span>
             <span></span>
             <span></span>
@@ -173,52 +188,52 @@
     </header>
 
     <main class="error-content">
-        <div class="error-code">404</div>
-        <h1 class="error-title">Page Not Found<span class="terminal-cursor"></span></h1>
-        <p class="error-message">
-            The page you're looking for doesn't exist or has been moved. 
-            Escape the tyranny of this undelivered page.
-        </p>
-        <div class="error-links">
-            <a href="/" class="error-link error-link-primary">Back to Home</a>
-            <a href="/classes-events/" class="error-link">Explore Classes & Events</a>
-        </div>
+        <section class="error-panel" aria-labelledby="error-title">
+            <p class="error-kicker">Page not found</p>
+            <p class="error-code" aria-hidden="true">404</p>
+            <h1 class="error-title" id="error-title">This page escaped the lab.</h1>
+            <p class="error-message">
+                The page you’re looking for doesn’t exist or has moved. Try the homepage, or jump back into upcoming classes and events.
+            </p>
+            <div class="error-links" aria-label="404 navigation options">
+                <a href="/" class="error-link error-link-primary">Back to Home</a>
+                <a href="/classes-events/" class="error-link">Explore Classes & Events</a>
+            </div>
+        </section>
     </main>
 
-    <!-- Footer (loaded from js/footer.js) -->
     <div id="footer-placeholder"></div>
-    <script src="js/footer.js"></script>
+    <script src="/js/footer.js"></script>
 
     <script>
-        // Mobile Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
         const mobileOverlay = document.getElementById('mobileOverlay');
-        
+
+        function closeMenu() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             mobileOverlay.classList.toggle('active');
             document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
         });
-        
-        mobileOverlay.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+
+        hamburger.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                hamburger.click();
+            }
         });
-        
-        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-                mobileOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
+
+        mobileOverlay.addEventListener('click', closeMenu);
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => link.addEventListener('click', closeMenu));
     </script>
-    <script src="js/social-config.js"></script>
+    <script src="/js/social-config.js"></script>
 </body>
 </html>
-
