@@ -7,35 +7,6 @@
     padding-bottom: 3rem;
 }
 
-/* === Hero Section === */
-.classes-hero {
-    background: linear-gradient(180deg, #0d1117 0%, #080b0f 100%);
-    padding: 4rem 2rem;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-}
-
-.classes-hero h1 {
-    font-family: 'Press Start 2P', monospace;
-    font-size: 2.16rem;
-    font-weight: 400;
-    color: var(--text-primary);
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
-}
-
-.classes-hero p {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
 /* === Embed Section === */
 .embed-section {
     padding: 0 2rem;

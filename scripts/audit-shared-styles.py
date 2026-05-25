@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 """Audit Freedom Lab static pages for shared-style drift.
 
-Flags public HTML pages that redefine shared title/banner styling inline.
+Flags public HTML pages that redefine shared title/banner styling inline,
+miss the shared footer, or drift away from the default rectangular preview image.
 This is intentionally lightweight: it does not require a build step.
 """
 from __future__ import annotations
 
-import sys
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_PREVIEW = 'https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png'
 SKIP_DIRS = {
     '.git', '.hermes', 'node_modules', 'ghostr', 'internal', 'sketches',
 }
@@ -32,7 +34,12 @@ REQUIRED_PUBLIC_SNIPPETS = [
 FORBIDDEN_INLINE = [
     '.page-hero {',
     '.page-hero h1 {',
+    '.classes-hero {',
+    '.classes-hero h1 {',
+    '.tutorials-hero {',
+    '.tutorials-hero h1 {',
 ]
+PREVIEW_PROPS = ['og:image', 'twitter:image']
 
 
 def is_public_html(path: Path) -> bool:
@@ -45,6 +52,15 @@ def is_public_html(path: Path) -> bool:
     if any(part in SKIP_DIRS for part in rel.parts):
         return False
     return path.suffix == '.html'
+
+
+def meta_content(text: str, prop: str) -> str | None:
+    match = re.search(
+        rf'<meta\s+(?:property|name)=["\']{re.escape(prop)}["\']\s+content=["\']([^"\']+)["\']',
+        text,
+        re.IGNORECASE,
+    )
+    return match.group(1) if match else None
 
 
 def main() -> int:
@@ -63,6 +79,10 @@ def main() -> int:
         for forbidden in FORBIDDEN_INLINE:
             if forbidden in text:
                 errors.append(f'{rel}: inline shared title-banner CSS ({forbidden})')
+        for prop in PREVIEW_PROPS:
+            value = meta_content(text, prop)
+            if value != DEFAULT_PREVIEW:
+                errors.append(f'{rel}: {prop} should be {DEFAULT_PREVIEW}, got {value or "missing"}')
     if errors:
         print('Shared style audit failed:')
         for error in errors:

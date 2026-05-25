@@ -167,7 +167,9 @@ a:hover {
     --page-hero-title-glow: 0 0 12px rgba(50, 208, 17, 0.45), 0 0 32px rgba(50, 208, 17, 0.28), 0 0 56px rgba(50, 208, 17, 0.16);
 }
 
-.page-hero {
+.page-hero,
+.classes-hero,
+.tutorials-hero {
     width: 100%;
     background: var(--page-hero-bg);
     padding: 4rem 2rem;
@@ -180,7 +182,9 @@ a:hover {
     min-height: 200px;
 }
 
-.page-hero h1 {
+.page-hero h1,
+.classes-hero h1,
+.tutorials-hero h1 {
     font-family: 'Press Start 2P', monospace;
     font-size: 2.16rem;
     font-weight: 400;
@@ -190,7 +194,9 @@ a:hover {
     text-shadow: var(--page-hero-title-glow);
 }
 
-.page-hero p {
+.page-hero p,
+.classes-hero p,
+.tutorials-hero p {
     font-size: 1.1rem;
     color: var(--text-secondary);
     max-width: 600px;
