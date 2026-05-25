@@ -132,17 +132,20 @@
     background: var(--secondary) !important;
     color: var(--bg-dark) !important;
     border: none !important;
-    padding: 1rem 2rem !important;
-    border-radius: var(--radius) !important;
+    padding: 0.95rem 1.35rem !important;
+    border-radius: 999px !important;
     font-weight: 700 !important;
-    font-size: 1.1rem !important;
+    font-size: 1rem !important;
+    font-family: 'Space Grotesk', system-ui, sans-serif !important;
+    line-height: 1 !important;
     cursor: pointer !important;
     transition: all 0.3s ease !important;
-    display: flex !important;
+    display: inline-flex !important;
     align-items: center !important;
-    gap: 0.5rem !important;
-    min-width: 200px !important;
+    gap: 0.45rem !important;
+    min-width: 0 !important;
     justify-content: center !important;
+    white-space: nowrap !important;
 }
 
 .donation-form-container button.submit:hover {
@@ -153,11 +156,30 @@
 .donation-form-container button.submit span {
     color: var(--bg-dark) !important;
     font-weight: 700 !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+.donation-form-container button.submit .btcpay-button-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 .donation-form-container button.submit img {
-    height: 28px !important;
-    filter: brightness(0);
+    display: block !important;
+    width: 112px !important;
+    height: auto !important;
+    max-height: 24px !important;
+    filter: none !important;
+    flex: 0 0 auto !important;
 }
 
 /* === Why Donate Section === */

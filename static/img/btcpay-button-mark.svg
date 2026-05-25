@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 168 36" role="img" aria-labelledby="title">
+  <title id="title">BTCPay</title>
+  <g fill="none" fill-rule="evenodd">
+    <circle cx="18" cy="18" r="16" fill="#050805"/>
+    <path fill="#32D011" d="M18 7.5c5.8 0 10.5 4.7 10.5 10.5S23.8 28.5 18 28.5 7.5 23.8 7.5 18 12.2 7.5 18 7.5Zm-2.7 4.2v2.1h-2v2h1.4v8.4h-1.4v2h2v2.1h2.1v-2.1h1.7v2.1h2.1v-2.2c2.3-.35 3.8-1.65 3.8-3.65 0-1.55-.86-2.6-2.33-3.07 1.08-.5 1.72-1.43 1.72-2.72 0-1.8-1.26-2.92-3.17-3.25v-1.72h-2.1v1.65h-1.7v-1.65h-2.1Zm2.1 8.45h2.86c1.18 0 1.83.5 1.83 1.43s-.65 1.44-1.83 1.44H17.4v-2.87Zm0-3.92h2.35c1.04 0 1.62.44 1.62 1.25 0 .82-.58 1.27-1.62 1.27H17.4v-2.52Z"/>
+    <text x="42" y="24.5" fill="#050805" font-family="Space Grotesk, Arial, sans-serif" font-size="22" font-weight="800" letter-spacing="-.5">BTCPay</text>
+  </g>
+</svg>
