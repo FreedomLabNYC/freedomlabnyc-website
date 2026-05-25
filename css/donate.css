@@ -132,7 +132,7 @@
     background: var(--secondary) !important;
     color: var(--bg-dark) !important;
     border: none !important;
-    padding: 0.95rem 1.35rem !important;
+    padding: 0.95rem 1.45rem !important;
     border-radius: 999px !important;
     font-weight: 700 !important;
     font-size: 1rem !important;
@@ -142,7 +142,7 @@
     transition: all 0.3s ease !important;
     display: inline-flex !important;
     align-items: center !important;
-    gap: 0.45rem !important;
+    gap: 0.85rem !important;
     min-width: 0 !important;
     justify-content: center !important;
     white-space: nowrap !important;
