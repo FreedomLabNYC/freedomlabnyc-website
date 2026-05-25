@@ -162,8 +162,14 @@ a:hover {
 }
 
 /* === Page Hero Banner === */
+:root {
+    --page-hero-bg: linear-gradient(180deg, rgba(13, 17, 23, 0.92) 0%, rgba(8, 11, 15, 0.92) 100%);
+    --page-hero-title-glow: 0 0 12px rgba(50, 208, 17, 0.45), 0 0 32px rgba(50, 208, 17, 0.28), 0 0 56px rgba(50, 208, 17, 0.16);
+}
+
 .page-hero {
-    background: linear-gradient(180deg, rgba(13, 17, 23, 0.92) 0%, rgba(8, 11, 15, 0.92) 100%);
+    width: 100%;
+    background: var(--page-hero-bg);
     padding: 4rem 2rem;
     text-align: center;
     border-bottom: 1px solid var(--border);
@@ -181,6 +187,7 @@ a:hover {
     color: var(--text-primary);
     margin: 0;
     line-height: 1.6;
+    text-shadow: var(--page-hero-title-glow);
 }
 
 .page-hero p {
