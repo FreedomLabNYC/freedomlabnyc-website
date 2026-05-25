@@ -475,19 +475,6 @@
 
 /* === Responsive === */
 @media (max-width: 768px) {
-    .tutorials-hero {
-        padding: 2.5rem 1.5rem;
-    }
-    
-    .tutorials-hero h1 {
-        font-size: 1.44rem;
-        line-height: 1.4;
-    }
-    
-    .tutorials-hero p {
-        font-size: 1rem;
-    }
-    
     .tutorials-filters-section,
     .tutorials-grid-section {
         padding: 0 1rem;
@@ -531,10 +518,6 @@
 }
 
 @media (max-width: 480px) {
-    .tutorials-hero h1 {
-        font-size: 1.2rem;
-    }
-    
     .tags-list {
         gap: 0.4rem;
     }

@@ -357,15 +357,6 @@
    Responsive
    ============================================ */
 @media (max-width: 768px) {
-    .classes-hero {
-        padding: 2.5rem 1.5rem;
-    }
-    
-    .classes-hero h1 {
-        font-size: 1.44rem;
-        line-height: 1.4;
-    }
-    
     .embed-section,
     .past-events-section {
         padding: 0 1rem;

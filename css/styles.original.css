@@ -165,42 +165,55 @@ a:hover {
 :root {
     --page-hero-bg: linear-gradient(180deg, rgba(13, 17, 23, 0.92) 0%, rgba(8, 11, 15, 0.92) 100%);
     --page-hero-title-glow: 0 0 12px rgba(50, 208, 17, 0.45), 0 0 32px rgba(50, 208, 17, 0.28), 0 0 56px rgba(50, 208, 17, 0.16);
+    --page-hero-title-size: clamp(1.35rem, 1rem + 2.2vw, 2.16rem);
+    --page-hero-min-height: clamp(156px, 18vw, 220px);
+    --page-hero-padding-block: clamp(2.5rem, 6vw, 4.25rem);
+    --page-hero-padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+    --page-hero-title-measure: 18ch;
+    --page-hero-helper-measure: 66ch;
 }
 
 .page-hero,
 .classes-hero,
 .tutorials-hero {
     width: 100%;
+    box-sizing: border-box;
     background: var(--page-hero-bg);
-    padding: 4rem 2rem;
+    padding: var(--page-hero-padding-block) var(--page-hero-padding-inline);
     text-align: center;
     border-bottom: 1px solid var(--border);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 200px;
+    min-height: var(--page-hero-min-height);
 }
 
 .page-hero h1,
 .classes-hero h1,
 .tutorials-hero h1 {
     font-family: 'Press Start 2P', monospace;
-    font-size: 2.16rem;
+    font-size: var(--page-hero-title-size);
     font-weight: 400;
     color: var(--text-primary);
-    margin: 0;
-    line-height: 1.6;
+    max-width: min(100%, var(--page-hero-title-measure));
+    margin: 0 auto;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+    text-align: center;
+    text-wrap: balance;
     text-shadow: var(--page-hero-title-glow);
 }
 
 .page-hero p,
 .classes-hero p,
 .tutorials-hero p {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 0.94rem + 0.25vw, 1.12rem);
+    line-height: 1.55;
     color: var(--text-secondary);
-    max-width: 600px;
-    margin: 1.25rem auto 0;
+    max-width: min(100%, var(--page-hero-helper-measure));
+    margin: clamp(0.875rem, 1.6vw, 1.25rem) auto 0;
+    text-wrap: pretty;
 }
 
 /* === Standard Page Primitives === */
@@ -1000,14 +1013,6 @@ a:hover {
     .main-layout {
         grid-template-columns: 180px 1fr 200px;
     }
-    
-    .page-hero {
-        padding: 3rem 1.5rem;
-    }
-    
-    .page-hero h1 {
-        font-size: 2.52rem;
-    }
 }
 
 @media (max-width: 768px) {
@@ -1082,15 +1087,7 @@ a:hover {
         height: 35px;
     }
     
-    /* Page Hero mobile */
-    .page-hero {
-        padding: 2.5rem 1.5rem;
-    }
-    
-    .page-hero h1 {
-        font-size: 1.8rem;
-        line-height: 1.4;
-    }
+    /* Shared page hero spacing and type are defined in the universal banner system. */
     
     .coming-soon {
         display: block;
