@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://freedomlab.nyc/</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
@@ -62,12 +62,12 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/bitcoin-node-ssh/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/bitcoin-node-startos/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -77,7 +77,7 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/buy-with-bitcoin/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -97,7 +97,7 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/ghostr-nostr-delegation/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -152,12 +152,12 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/openclaw-setup/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/programmatic-video/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -167,7 +167,7 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/quality-toolkit/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -222,7 +222,7 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/x-research/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>

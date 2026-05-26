@@ -14,3 +14,8 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Updated metadata only for `/contact/`: title/meta/social descriptions target visit/contact/collaborate/NYC freedom tech space intent.
 - Updated metadata only for `/resources/`: title/meta/social descriptions target Bitcoin, privacy, self-hosting guides.
 - No visible page body copy or design changed in this metadata pass.
+
+## 2026-05-25 — Technical SEO cleanup
+- Shortened overlong meta descriptions on homepage and resource pages so snippets are less likely to truncate.
+- Added missing canonical tags to `/onion/`, `/thankyou/`, and `/poll/`.
+- Re-ran generated SEO metadata/sitemap after fixes.
