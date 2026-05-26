@@ -1,6 +1,15 @@
 // Universal Footer Component
 // Update this file to change the footer across all pages
 
+function loadAnalyticsEvents() {
+    if (document.querySelector('script[data-fl-analytics-events]')) return;
+    const script = document.createElement('script');
+    script.src = `${getBasePath()}js/analytics-events.js?v=join-conversion-events`;
+    script.defer = true;
+    script.dataset.flAnalyticsEvents = 'true';
+    document.head.appendChild(script);
+}
+
 function renderFooter() {
     const footerHTML = `
     <footer class="site-footer">
@@ -40,6 +49,7 @@ function renderFooter() {
     if (placeholder) {
         placeholder.outerHTML = footerHTML;
     }
+    loadAnalyticsEvents();
 }
 
 // Calculate the base path for assets based on page depth
