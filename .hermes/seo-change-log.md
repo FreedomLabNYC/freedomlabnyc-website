@@ -19,3 +19,9 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Shortened overlong meta descriptions on homepage and resource pages so snippets are less likely to truncate.
 - Added missing canonical tags to `/onion/`, `/thankyou/`, and `/poll/`.
 - Re-ran generated SEO metadata/sitemap after fixes.
+
+## 2026-05-26 — Event pages, resource schema, media accessibility protocol
+- Added durable /events/<date-title>/ pages generated from Luma events JSON; Luma remains RSVP/ticketing CTA/source of truth.
+- Added media accessibility audit for alt text, lazy loading, and video labels/captions.
+- Extended SEO generator to enrich resource TechArticle schema with audience/time/prerequisites/outcomes when present.
+- Generated 26 event pages and updated sitemap to include 72 URLs.

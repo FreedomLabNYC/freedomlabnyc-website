@@ -41,7 +41,12 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/google-drive-scoped-access/",
-  "keywords": "Open-source AI, Privacy, Security"
+  "keywords": "Open-source AI, Privacy, Security",
+  "about": [
+    "Open-source AI",
+    "Privacy",
+    "Security"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -410,7 +415,7 @@ docs.documents().batchUpdate(
         });
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

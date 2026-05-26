@@ -41,7 +41,14 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/simplex-smp/",
-  "keywords": "Self-hosting, Privacy, Encryption, Tor"
+  "keywords": "Self-hosting, Privacy, Encryption, Tor",
+  "about": [
+    "Self-hosting",
+    "Privacy",
+    "Encryption",
+    "Tor"
+  ],
+  "prerequisites": "sudo apt install -y apt-transport-https gnupg wget Add the Tor Project repository. Create /etc/apt/sources.list.d/tor.sources : CODENAME=\"$(lsb_release -c | awk '{print $2}')\" sudo"
 }
 </script>
     <script type="application/ld+json">
@@ -384,7 +391,7 @@ echo "Tor: ${smp%@*}@${tor}"</code></pre>
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

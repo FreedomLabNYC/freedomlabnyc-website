@@ -41,7 +41,23 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/diy-hardware-wallet/",
-  "keywords": "Bitcoin, Hardware Wallet, Open-source hardware"
+  "keywords": "Bitcoin, Hardware Wallet, Open-source hardware",
+  "about": [
+    "Bitcoin",
+    "Hardware Wallet",
+    "Open-source hardware"
+  ],
+  "audience": "Curious builders with little-to-no embedded experience",
+  "timeRequired": "2 hours (flexible) Outcomes: By the end, students will: Recognize the security m",
+  "learningResourceType": "hands-on tutorial",
+  "teaches": [
+    "Recognize the security model of DIY hardware wallets versus commercial devices.",
+    "Assemble a microcontroller-based signing device.",
+    "Flash open-source firmware and verify the build checksum.",
+    "Sign and broadcast a mainnet transaction using their new device.",
+    "Abstract",
+    "Concept Primer"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -545,7 +561,7 @@
         });
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

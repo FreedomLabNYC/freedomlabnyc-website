@@ -41,7 +41,22 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/bitcoin-node-startos/",
-  "keywords": "Bitcoin, Self-hosting"
+  "keywords": "Bitcoin, Self-hosting",
+  "about": [
+    "Bitcoin",
+    "Self-hosting"
+  ],
+  "audience": "Beginner–intermediate Duration: 90–121 min (see timing in Agenda) Outcomes: By the end, students will: Understand what a",
+  "timeRequired": "90–121 min (see timing in Agenda) Outcomes: By the end, students will: Understan",
+  "learningResourceType": "hands-on tutorial",
+  "teaches": [
+    "Understand what a Bitcoin node is and why to run one (sovereignty, privacy, security).",
+    "Boot a node with StartOS, complete initial setup, and understand CA trust.",
+    "Install Bitcoin Core or Bitcoin Knots and understand their relationship.",
+    "Connect electrs and Sparrow Wallet to their own node.",
+    "Send/receive a small on-chain transaction and inspect it.",
+    "Abstract"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -421,7 +436,7 @@
         });
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

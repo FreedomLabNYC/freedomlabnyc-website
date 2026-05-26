@@ -41,7 +41,12 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/bitaxe-miners/",
-  "keywords": "Bitcoin, Mining, Open-source hardware"
+  "keywords": "Bitcoin, Mining, Open-source hardware",
+  "about": [
+    "Bitcoin",
+    "Mining",
+    "Open-source hardware"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -345,7 +350,7 @@ overheat_mode,data,u16,0</code></pre>
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

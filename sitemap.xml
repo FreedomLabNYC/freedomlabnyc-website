@@ -31,13 +31,143 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://freedomlab.nyc/events/2024-10-27-empire-state-of-bitcoin-launch-event/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2024-11-24-workshop-how-to-run-a-bitcoin-lightning-node-for-beginners/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-02-06-beginner-s-workshop-how-to-run-a-bitcoin-node/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-02-25-how-to-get-involved-in-the-bitcoin-space/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-03-13-beginner-s-workshop-how-to-set-up-a-bitcoin-hardware-wallet/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-04-15-beginner-s-workshop-secure-your-bitcoin-wallet/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-04-29-beginner-s-workshop-how-bitcoin-works-as-a-decentralized-ledger/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-05-11-grassroots-aid-for-myanmar-burma/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-05-13-bitcoin-trivia-night/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-06-24-beginner-s-workshop-how-to-mine-bitcoin/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-07-29-beginner-s-workshop-how-to-run-a-bitcoin-node/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-08-26-beginner-s-workshop-how-to-buy-bitcoin-p2p-peer-to-peer/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-09-30-hands-on-class-how-to-run-a-bitcoin-node-for-beginners/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-10-14-office-hours-how-to-run-a-bitcoin-node/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-10-28-beginner-s-class-how-to-build-a-bitcoin-hardware-wallet/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-11-11-office-hours-bitcoin-hardware-support/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-12-09-workshop-intro-to-bitcoin-and-mining/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-12-18-workshop-how-to-vibe-code-with-open-source-tools/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2025-12-20-freedom-lab-nyc-holiday-launch-party/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2026-01-07-bitcoin-video-and-board-game-night/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2026-01-27-freedom-lab-new-year-s-brainstorming/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2026-03-03-openclaw-show-and-tell-night/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2026-03-24-openclaw-show-and-tell-night/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2026-04-23-openclaw-show-and-tell-night/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2026-05-14-open-source-ai-agent-skill-sharing-night/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://freedomlab.nyc/events/2026-05-19-bitcoin-video-and-board-game-night/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://freedomlab.nyc/join/</loc>
     <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/join2/</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
@@ -47,17 +177,17 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/anonymous-vibecoding/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/bitaxe-miners/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/bitcoin-node-from-source/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -72,7 +202,7 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/bitcoin-node-umbrel/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -82,17 +212,17 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/change-luks-password/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/diy-hardware-wallet/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/encrypt-drive/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -102,52 +232,52 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/github-pages-resource-publishing/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/google-drive-scoped-access/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/jade-wallet/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/lightning-address/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/lightning-node-umbrel/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/linux-2fa/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/mailcow/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/matrix-synapse/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/nunchuk-claude-walkthrough/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/obsidian-git-sync/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -162,7 +292,7 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/qmd-memory-setup/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -172,22 +302,22 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/remote-mining/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/self-host-ai/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/simplex-smp/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/skill-creator/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -197,27 +327,27 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/tor-relay/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/tor-vs-vpn/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/usbguard/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/vibe-coding-101/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/vpn-over-tor/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
@@ -227,7 +357,7 @@
   </url>
   <url>
     <loc>https://freedomlab.nyc/resources/xmpp-server/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
   </url>
 </urlset>

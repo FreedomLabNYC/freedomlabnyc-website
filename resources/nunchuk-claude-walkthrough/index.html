@@ -42,7 +42,22 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/nunchuk-claude-walkthrough/",
-  "keywords": "Bitcoin, Open-source AI"
+  "keywords": "Bitcoin, Open-source AI",
+  "about": [
+    "Bitcoin",
+    "Open-source AI"
+  ],
+  "audience": "Intermediate — basic Bitcoin knowledge and command-line comfort required Duration: 60–90 min Outcomes: By the end, stude",
+  "timeRequired": "60–90 min Outcomes: By the end, students will: Install Nunchuk CLI and connect C",
+  "learningResourceType": "hands-on tutorial",
+  "teaches": [
+    "Install Nunchuk CLI and connect Claude Code to it via agent skills",
+    "Understand why bounded signing authority is safer than giving an AI full wallet access",
+    "Build a 2-of-3 multisig wallet with a Nunchuk Platform key",
+    "Set a daily spending limit enforced at the cryptographic level",
+    "Send a transaction under the cap and demonstrate that exceeding it requires human cosigning",
+    "Abstract"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -456,7 +471,7 @@ nunchuk tx broadcast --wallet &lt;wallet-id&gt; --tx-id &lt;tx-id&gt;</code></pr
         });
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

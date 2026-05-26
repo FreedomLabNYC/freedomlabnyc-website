@@ -41,7 +41,12 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/self-host-ai/",
-  "keywords": "Self-hosting, Privacy, Open-source AI"
+  "keywords": "Self-hosting, Privacy, Open-source AI",
+  "about": [
+    "Self-hosting",
+    "Privacy",
+    "Open-source AI"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -356,7 +361,7 @@ CLOUDFLARE_API_TOKEN="YOUR_API_TOKEN" caddy run --config /etc/caddy/Caddyfile</c
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

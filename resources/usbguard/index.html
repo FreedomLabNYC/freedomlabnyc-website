@@ -41,7 +41,11 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/usbguard/",
-  "keywords": "Linux, Security"
+  "keywords": "Linux, Security",
+  "about": [
+    "Linux",
+    "Security"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -257,7 +261,7 @@ sudo systemctl restart usbguard</code></pre>
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

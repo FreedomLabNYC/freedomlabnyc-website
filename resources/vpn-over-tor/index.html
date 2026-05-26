@@ -41,7 +41,13 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/vpn-over-tor/",
-  "keywords": "Privacy, Networking, Self-hosting, Tor"
+  "keywords": "Privacy, Networking, Self-hosting, Tor",
+  "about": [
+    "Privacy",
+    "Networking",
+    "Self-hosting",
+    "Tor"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -306,7 +312,7 @@ route 10.8.0.1 255.255.255.255</code></pre>
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

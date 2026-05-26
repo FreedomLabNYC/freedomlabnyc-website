@@ -95,6 +95,31 @@ def resource_tags(html: str) -> list[str]:
     return [unescape(x.strip()) for x in re.findall(r'<span class="tutorial-tag">(.*?)</span>', html, re.I | re.S)]
 
 
+def plain_text(html_fragment: str) -> str:
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html_fragment)).strip()
+
+
+def resource_metadata(html: str) -> dict[str, str]:
+    data = {}
+    text = plain_text(html)
+    patterns = {
+        "audience": r"Audience:\s*([^\n\.]{3,120})",
+        "timeRequired": r"(?:Duration|Time required):\s*([^\n\.]{2,80})",
+        "prerequisites": r"Prerequisites?:\s*([^\n]{3,180})",
+    }
+    for key, pat in patterns.items():
+        m = re.search(pat, text, re.I)
+        if m:
+            data[key] = m.group(1).strip(" .")
+    outcomes = re.search(r"Outcomes?:\s*(.*?)(?:Agenda|Steps|Materials|Prerequisites|</section>|$)", html, re.I | re.S)
+    if outcomes:
+        items = [plain_text(x) for x in re.findall(r"<li[^>]*>(.*?)</li>", outcomes.group(1), re.I | re.S)[:6]]
+        if items:
+            data["learningResourceType"] = "hands-on tutorial"
+            data["teaches"] = items
+    return data
+
+
 def json_script(schema: object) -> str:
     return '<script type="application/ld+json">\n' + json.dumps(schema, ensure_ascii=False, indent=2) + '\n</script>'
 
@@ -139,6 +164,18 @@ def schemas_for(path: Path, html: str, canonical: str) -> list[object]:
             "publisher": {"@id": f"{SITE}/#organization"},
             "description": desc,
         })
+    elif url_path.startswith("/events/"):
+        h1 = get_tag(html, r"<h1[^>]*>(.*?)</h1>")
+        clean_h1 = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", h1)).strip() or title.replace(" | Freedom Lab NYC", "")
+        schemas.append({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Home", "item": f"{SITE}/"},
+                {"@type": "ListItem", "position": 2, "name": "Classes & Events", "item": f"{SITE}/classes-events/"},
+                {"@type": "ListItem", "position": 3, "name": clean_h1, "item": canonical},
+            ],
+        })
     elif url_path.startswith("/resources/") and url_path != "/resources/":
         h1 = get_tag(html, r"<h1[^>]*>(.*?)</h1>")
         clean_h1 = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", h1)).strip() or title.replace(" | Freedom Lab NYC", "")
@@ -158,6 +195,8 @@ def schemas_for(path: Path, html: str, canonical: str) -> list[object]:
         tags = resource_tags(html)
         if tags:
             schema["keywords"] = ", ".join(tags)
+            schema["about"] = tags
+        schema.update(resource_metadata(html))
         schemas.append(schema)
         schemas.append({
             "@context": "https://schema.org",

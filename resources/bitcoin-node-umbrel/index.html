@@ -41,7 +41,11 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/bitcoin-node-umbrel/",
-  "keywords": "Bitcoin, Self-hosting"
+  "keywords": "Bitcoin, Self-hosting",
+  "about": [
+    "Bitcoin",
+    "Self-hosting"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -437,7 +441,7 @@ sudo umount /dev/sda</code></pre>
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

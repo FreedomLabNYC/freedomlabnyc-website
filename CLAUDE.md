@@ -51,5 +51,9 @@ Auto-deploys to GitHub Pages on push to `main` via `.github/workflows/pages.yml`
 
 - Semantic HTML5 elements
 - Maintain accessibility (alt text, ARIA labels)
+- Media protocol: every public image needs specific, human-useful `alt`; decorative images use `alt=""` only when truly decorative; non-logo images use `loading="lazy"`; videos need captions/transcript fallback plus `aria-label`/`title`.
+- Run `python3 scripts/audit-media-accessibility.py` and `python3 scripts/apply-seo.py` after creating or editing public content.
+- Event UX protocol: Freedom Lab owns durable `/events/<date-title>/` pages for search/archive context; Luma remains the live RSVP/ticketing source of truth via primary CTA.
+- Resource protocol: include audience/prerequisites/duration/outcomes or equivalent practical metadata so pages are useful to people and machine-readable systems.
 - Test responsive design on mobile and desktop
 - Test in Chrome, Firefox, and Safari before PRs

@@ -41,7 +41,11 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/encrypt-drive/",
-  "keywords": "Encryption, Security"
+  "keywords": "Encryption, Security",
+  "about": [
+    "Encryption",
+    "Security"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -202,7 +206,7 @@ sudo cryptsetup luksClose MY_PRECIOUS_USB</code></pre>
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

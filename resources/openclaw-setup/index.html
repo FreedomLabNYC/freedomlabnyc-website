@@ -41,7 +41,13 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/openclaw-setup/",
-  "keywords": "AI, Privacy, Open-source, Self-hosting"
+  "keywords": "AI, Privacy, Open-source, Self-hosting",
+  "about": [
+    "AI",
+    "Privacy",
+    "Open-source",
+    "Self-hosting"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -477,7 +483,7 @@ to fill out SOUL.md and USER.md."</code></pre>
         });
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

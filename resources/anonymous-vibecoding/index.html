@@ -41,7 +41,11 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/anonymous-vibecoding/",
-  "keywords": "Privacy, Open-source AI"
+  "keywords": "Privacy, Open-source AI",
+  "about": [
+    "Privacy",
+    "Open-source AI"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -305,7 +309,7 @@
         // Image lightbox
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img loading="lazy" src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {

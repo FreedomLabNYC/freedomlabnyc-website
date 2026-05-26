@@ -42,7 +42,22 @@
     "@id": "https://freedomlab.nyc/#organization"
   },
   "mainEntityOfPage": "https://freedomlab.nyc/resources/bitcoin-node-ssh/",
-  "keywords": "Bitcoin, Self-hosting"
+  "keywords": "Bitcoin, Self-hosting",
+  "about": [
+    "Bitcoin",
+    "Self-hosting"
+  ],
+  "audience": "Intermediate &mdash; has a running StartOS node and basic terminal comfort Duration: 90 min Outcomes: By the end, you wi",
+  "timeRequired": "90 min Outcomes: By the end, you will: Set up SSH key-based access to a StartOS",
+  "learningResourceType": "hands-on tutorial",
+  "teaches": [
+    "Set up SSH key-based access to a StartOS Bitcoin node",
+    "Independently verify Bitcoin's total supply using your own node",
+    "Read mempool conditions and estimate transaction fees from your own data",
+    "Understand SSH security: threat models, key protection, and agent trade-offs",
+    "Query peers, mining difficulty, and network state via bitcoin-cli",
+    "Abstract"
+  ]
 }
 </script>
     <script type="application/ld+json">
@@ -797,7 +812,7 @@ ssh mynode "sudo podman restart bitcoind.embassy"</code></pre>
         });
         const lightbox = document.createElement('div');
         lightbox.className = 'lightbox-overlay';
-        lightbox.innerHTML = '<img src="" alt="">';
+        lightbox.innerHTML = '';
         document.body.appendChild(lightbox);
         const lightboxImg = lightbox.querySelector('img');
         document.querySelectorAll('.tutorial-section img, .tutorial-header img, .callout-content img').forEach(img => {
