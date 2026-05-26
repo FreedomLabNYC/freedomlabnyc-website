@@ -563,6 +563,14 @@
 
             try {
                 await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
+                if (typeof gtag === 'function') {
+                    gtag('event', 'join_waitlist_submit', {
+                        event_category: 'conversion',
+                        event_label: 'Hackerspace Waitlist',
+                        form_type: 'Hackerspace Waitlist',
+                        page_path: '/join/'
+                    });
+                }
                 document.getElementById('successMsg').style.display = 'block';
                 btn.style.display = 'none';
                 form.querySelectorAll('input, textarea').forEach(i => i.disabled = true);
