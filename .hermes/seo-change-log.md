@@ -25,3 +25,11 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Added media accessibility audit for alt text, lazy loading, and video labels/captions.
 - Extended SEO generator to enrich resource TechArticle schema with audience/time/prerequisites/outcomes when present.
 - Generated 26 event pages and updated sitemap to include 72 URLs.
+## 2026-05-29 — SEO stewardship pilot baseline
+
+- Ran initial autonomy-gradient SEO/website-health baseline for Freedom Lab.
+- GSC monitor: 72 sitemap URLs inspected from cached/current Search Console data; sitemap submitted, not pending, last downloaded 2026-05-28; no actionable canonical/robots/duplicate/blocking errors found. Most unindexed URLs are waiting on Google (Discovered/Unknown/Crawled currently not indexed).
+- Technical audits: `scripts/audit-media-accessibility.py` passed; JSON-LD parse check passed across HTML pages.
+- Green fix: aligned generated event-page OG/Twitter preview images with the site-wide rectangular Freedom Lab signature preview required by `scripts/audit-shared-styles.py`, while preserving per-event cover images in visible page content and Event JSON-LD.
+- Verification: patched 26 event pages narrowly for preview metadata; `python3 scripts/audit-shared-styles.py` passed; `python3 scripts/audit-media-accessibility.py` passed; JSON-LD parse failures: 0.
+- Note: `python3 scripts/apply-seo.py` currently mutates some resource JSON-LD incorrectly; reverted those generated changes and left script repair as a follow-up before using it in automated stewardship.

@@ -39,6 +39,7 @@ def page(ev: dict) -> tuple[str, str]:
     title=f"{ev.get('name','Freedom Lab event')} | Freedom Lab NYC"
     desc=f"Freedom Lab NYC event: {ev.get('name','hands-on freedom tech gathering')} at {ev.get('venue') or 'a New York City venue'}. RSVP and tickets remain on Luma."
     cover=ev.get('cover') or DEFAULT_IMAGE
+    preview=DEFAULT_IMAGE
     tags=topic_tags(ev.get('name',''))
     schema={
       "@context":"https://schema.org","@type":"Event","@id":url+"#event","name":ev.get('name'),
@@ -48,6 +49,13 @@ def page(ev: dict) -> tuple[str, str]:
       "location":{"@type":"Place","name":ev.get('venue') or "Freedom Lab NYC event venue","address":ev.get('location') or "New York, NY"},
       "offers":{"@type":"Offer","url":ev.get('url'),"price":ev.get('price') or "0","availability":"https://schema.org/InStock"}
     }
+    breadcrumb={
+      "@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+        {"@type":"ListItem","position":1,"name":"Home","item":SITE+"/"},
+        {"@type":"ListItem","position":2,"name":"Classes & Events","item":SITE+"/classes-events/"},
+        {"@type":"ListItem","position":3,"name":ev.get('name','Freedom Lab event'),"item":url},
+      ]
+    }
     tag_html=''.join(f'<span class="tutorial-tag">{escape(t)}</span>' for t in tags)
     html=f'''<!DOCTYPE html>
 <html lang="en">
@@ -56,19 +64,22 @@ def page(ev: dict) -> tuple[str, str]:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{escape(desc)}">
   <title>{escape(title)}</title>
+  <link rel="canonical" href="{escape(url)}">
   <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/fonts.css">
   <link rel="stylesheet" href="../../css/tutorial-page.css">
   <meta property="og:type" content="event">
+  <meta property="og:url" content="{escape(url)}">
   <meta property="og:title" content="{escape(title)}">
   <meta property="og:description" content="{escape(desc)}">
-  <meta property="og:image" content="{escape(cover)}">
+  <meta property="og:image" content="{escape(preview)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{escape(title)}">
   <meta name="twitter:description" content="{escape(desc)}">
-  <meta name="twitter:image" content="{escape(cover)}">
+  <meta name="twitter:image" content="{escape(preview)}">
   <script type="application/ld+json">{json.dumps(schema, ensure_ascii=False, indent=2)}</script>
+  <script type="application/ld+json">{json.dumps(breadcrumb, ensure_ascii=False, indent=2)}</script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-5L8YH7QGBD"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-5L8YH7QGBD',{{anonymize_ip:true}});</script>
