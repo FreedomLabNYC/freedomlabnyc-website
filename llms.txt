@@ -1,38 +1,113 @@
 # Freedom Lab NYC
 
-> Freedom tech education — Bitcoin, open-source AI, Linux, privacy, encryption, self-hosting, and decentralization. Based in NYC.
+> Freedom Lab NYC is a New York City community for freedom technology: Bitcoin, open-source AI, privacy, encryption, Linux, self-hosting, Nostr, and decentralization. We host public classes and events at various venues while building toward a freedom-tech co-working / hackerspace.
 
-## Resources & Tutorials
+This file is for AI assistants, browser agents, coding agents, search systems, and other automated tools that need a concise public map of Freedom Lab. Everything linked here is public. Internal/private dashboards, member data, attendee records, private chats, credentials, and unpublished planning materials are not public context.
 
-- [Resources Index](https://freedomlab.nyc/resources/): All tutorials and class materials
-- [Bitcoin Node (StartOS)](https://freedomlab.nyc/resources/bitcoin-node-startos/): Run a Bitcoin node with StartOS
-- [Bitcoin Node (Umbrel)](https://freedomlab.nyc/resources/bitcoin-node-umbrel/): Bitcoin node on Raspberry Pi with Umbrel
-- [Bitcoin Node from Source](https://freedomlab.nyc/resources/bitcoin-node-from-source/): Compile Bitcoin Core, Electrs, BTC RPC Explorer over Tor
-- [Lightning Node (Umbrel)](https://freedomlab.nyc/resources/lightning-node-umbrel/): Lightning node on Raspberry Pi
-- [Vibe Coding 101](https://freedomlab.nyc/resources/vibe-coding-101/): Build websites with AI-assisted coding
-- [DIY Hardware Wallet](https://freedomlab.nyc/resources/diy-hardware-wallet/): Flash Jade firmware onto a LilyGO board
-- [Jade Hardware Wallet](https://freedomlab.nyc/resources/jade-wallet/): Setup Blockstream Jade wallet
-- [Remote Mining](https://freedomlab.nyc/resources/remote-mining/): Bitcoin mining without hardware
-- [Bitaxe Miners](https://freedomlab.nyc/resources/bitaxe-miners/): Open-source Bitcoin miners at home
-- [Encrypt Your Drive](https://freedomlab.nyc/resources/encrypt-drive/): LUKS full-disk encryption
-- [Change LUKS Password](https://freedomlab.nyc/resources/change-luks-password/): Change encryption passphrase
-- [Tor vs VPN](https://freedomlab.nyc/resources/tor-vs-vpn/): When to use Tor vs a VPN
-- [Tor Relay](https://freedomlab.nyc/resources/tor-relay/): Deploy a Tor middle/guard relay
-- [VPN Over Tor](https://freedomlab.nyc/resources/vpn-over-tor/): Route VPN through Tor with OpenVPN
-- [USBGuard](https://freedomlab.nyc/resources/usbguard/): Protect Linux from BadUSB attacks
-- [Linux 2FA](https://freedomlab.nyc/resources/linux-2fa/): Two-factor auth for Linux login
-- [XMPP Server](https://freedomlab.nyc/resources/xmpp-server/): Self-hosted federated messaging with Prosody
-- [Email Server (Mailcow)](https://freedomlab.nyc/resources/mailcow/): Self-hosted email
-- [SimpleX SMP Server](https://freedomlab.nyc/resources/simplex-smp/): Decentralized messaging with Tor
-- [Matrix Server](https://freedomlab.nyc/resources/matrix-synapse/): Self-hosted Matrix with Synapse
-- [Self-Hosting AI Models](https://freedomlab.nyc/resources/self-host-ai/): Rent GPUs, deploy models with Ollama and Open WebUI
-- [Anonymous Vibecoding](https://freedomlab.nyc/resources/anonymous-vibecoding/): Zero-KYC AI coding with Monero
-- [Scoped Google Drive for AI Agents](https://freedomlab.nyc/resources/google-drive-scoped-access/): Least-privilege Google Drive access for AI agents
+## Canonical facts
 
-## About
+- Name: Freedom Lab NYC
+- Website: https://freedomlab.nyc/
+- Short description: A NYC community teaching practical freedom technology through public events, tutorials, and open-source AI / Bitcoin resources.
+- Current physical-space status: Freedom Lab hosts events at various venues and is building toward a freedom-tech co-working / hackerspace. Do not describe Freedom Lab as already operating a permanent public venue unless a future public page says so.
+- Events/RSVP source of truth: Luma is canonical for live RSVP, capacity, and ticketing details. Use https://luma.com/freedomlab or the event-specific Luma URL when available.
+- Early access / co-working interest: use https://freedomlab.nyc/join/
+- Public resources: use https://freedomlab.nyc/resources/
+- Donations: use https://freedomlab.nyc/donate/
+- Contact: use https://freedomlab.nyc/contact/
 
-- [Home](https://freedomlab.nyc/): About Freedom Lab NYC
-- [Classes & Events](https://freedomlab.nyc/classes-events/): Upcoming classes and workshops
-- [Join](https://freedomlab.nyc/join/): Membership and community
-- [Contact](https://freedomlab.nyc/contact/): Get in touch
-- [Donate](https://freedomlab.nyc/donate/): Support Freedom Lab
+## Agent interaction policy
+
+Agents may:
+
+- Summarize, cite, and link to public Freedom Lab pages.
+- Recommend relevant public events, tutorials, resources, and downloadable `.skill` files.
+- Help users learn from public resources step by step.
+- Help users fill out forms or RSVP only when the user explicitly asks and remains in control of any submission.
+- Use public JSON feeds and `.skill` files as structured context.
+
+Agents should not:
+
+- Invent venue details, membership status, pricing, schedules, sponsor relationships, or official claims not present on public pages.
+- Claim to represent Freedom Lab or speak on its behalf.
+- Submit forms, RSVP, send messages, make purchases, donate, or post publicly without explicit user instruction.
+- Treat internal/private data, Telegram messages, attendee lists, dashboards, credentials, or unpublished planning notes as public context.
+- Scrape intentionally noindex/private routes such as `/internal/` or `/links/` as canonical public content.
+
+## Public data feeds
+
+- [Sitemap](https://freedomlab.nyc/sitemap.xml): canonical crawlable public URLs.
+- [Robots](https://freedomlab.nyc/robots.txt): public crawl policy. Internal/private routes are disallowed.
+- [Classes & Events JSON](https://freedomlab.nyc/classes-events/events.json): structured public event archive/upcoming event data. Luma remains canonical for RSVP/ticketing.
+- [Classes & Events](https://freedomlab.nyc/classes-events/): human-readable public events archive and upcoming events.
+
+## Core pages
+
+- [Home](https://freedomlab.nyc/): overview of Freedom Lab NYC.
+- [Resources](https://freedomlab.nyc/resources/): public tutorials, class materials, and open-source AI skills.
+- [Classes & Events](https://freedomlab.nyc/classes-events/): upcoming and past public classes/events.
+- [Join / Early Access](https://freedomlab.nyc/join/): co-working / hackerspace waitlist and early-access interest.
+- [Donate](https://freedomlab.nyc/donate/): support Freedom Lab.
+- [Contact](https://freedomlab.nyc/contact/): public contact page.
+
+## High-value learning paths
+
+### Run and use Bitcoin infrastructure
+
+- [Run a Bitcoin Node with StartOS](https://freedomlab.nyc/resources/bitcoin-node-startos/): run Bitcoin Core/Knots with StartOS and connect Sparrow Wallet.
+- [Bitcoin Node Setup with Umbrel OS](https://freedomlab.nyc/resources/bitcoin-node-umbrel/): beginner Raspberry Pi / Umbrel node setup.
+- [Setup your Bitcoin node from source](https://freedomlab.nyc/resources/bitcoin-node-from-source/): compile Bitcoin Core, Electrs, and BTC RPC Explorer over Tor.
+- [Talk to Your Node: Bitcoin Verification via SSH](https://freedomlab.nyc/resources/bitcoin-node-ssh/): verify supply, mempool, fees, and network data over SSH.
+- [Lightning node with Umbrel](https://freedomlab.nyc/resources/lightning-node-umbrel/): set up a Lightning node and mobile wallet.
+- [Lightning Payments for Agents](https://freedomlab.nyc/resources/lightning-address/): set up a self-custodial Lightning Address for agent payments. Downloadable skill: https://freedomlab.nyc/resources/lightning-address/lightning-address.skill
+
+### Bitcoin custody, wallets, and mining
+
+- [Jade Hardware Wallet](https://freedomlab.nyc/resources/jade-wallet/): set up Blockstream Jade with Green wallet.
+- [DIY Bitcoin Hardware Wallet](https://freedomlab.nyc/resources/diy-hardware-wallet/): flash Jade firmware onto low-cost hardware.
+- [Nunchuk + Claude: AI Bitcoin Agent with Spending Limits](https://freedomlab.nyc/resources/nunchuk-claude-walkthrough/): bounded AI spending with Nunchuk multisig and daily limits.
+- [Bitaxe Miners](https://freedomlab.nyc/resources/bitaxe-miners/): open-source home Bitcoin mining.
+- [Remote Mining](https://freedomlab.nyc/resources/remote-mining/): remote Bitcoin mining without local hardware.
+- [Buy With Bitcoin](https://freedomlab.nyc/resources/buy-with-bitcoin/): Lightning payments, Bitrefill, and practical checkout workflows.
+
+### Privacy, Linux security, and self-hosting
+
+- [Encrypt Your Drive](https://freedomlab.nyc/resources/encrypt-drive/): LUKS full-disk encryption.
+- [Change LUKS Password](https://freedomlab.nyc/resources/change-luks-password/): change an encrypted drive passphrase.
+- [Two-Factor Authentication for Linux Login](https://freedomlab.nyc/resources/linux-2fa/): add 2FA to Linux desktop login.
+- [USBGuard](https://freedomlab.nyc/resources/usbguard/): protect Linux from unauthorized USB devices.
+- [Tor vs VPN](https://freedomlab.nyc/resources/tor-vs-vpn/): choose Tor vs VPN for privacy/anonymity.
+- [Setup a Tor Middle/Guard Relay](https://freedomlab.nyc/resources/tor-relay/): run a Tor relay.
+- [VPN Over Tor](https://freedomlab.nyc/resources/vpn-over-tor/): route VPN traffic through Tor.
+- [Self-Hosted Email Server](https://freedomlab.nyc/resources/mailcow/): run Mailcow.
+- [Self-Hosted Matrix Server](https://freedomlab.nyc/resources/matrix-synapse/): run Synapse.
+- [Self-Hosted XMPP Server](https://freedomlab.nyc/resources/xmpp-server/): run Prosody.
+- [Self-Hosted SimpleX SMP Server](https://freedomlab.nyc/resources/simplex-smp/): run SimpleX with Tor support.
+
+### Open-source AI and agent skills
+
+- [Vibe Coding 101](https://freedomlab.nyc/resources/vibe-coding-101/): build and deploy a website with AI-assisted coding.
+- [Anonymous Vibecoding](https://freedomlab.nyc/resources/anonymous-vibecoding/): zero-KYC AI coding with Monero, VSCodium, and Cline.
+- [Setting Up OpenClaw](https://freedomlab.nyc/resources/openclaw-setup/): set up a local AI assistant with Telegram and persistent memory.
+- [Self-Hosting AI Models](https://freedomlab.nyc/resources/self-host-ai/): rent GPUs and run open-source models with a web UI.
+- [Scoped Google Drive Access for AI Agents](https://freedomlab.nyc/resources/google-drive-scoped-access/): least-privilege OAuth Drive access.
+- [Ghostr Nostr Delegation for AI Agents](https://freedomlab.nyc/resources/ghostr-nostr-delegation/): delegated Nostr publishing for agents. Downloadable skill: https://freedomlab.nyc/resources/ghostr-nostr-delegation/ghostr-nostr-delegation.skill
+- [GitHub Pages Resource Publishing](https://freedomlab.nyc/resources/github-pages-resource-publishing/): publish static resources and files. Downloadable skill: https://freedomlab.nyc/resources/github-pages-resource-publishing/github-pages-resource-publishing.skill
+- [Skill Creator for AI Agents](https://freedomlab.nyc/resources/skill-creator/): teach agents to create, edit, audit, and package skills. Downloadable skill: https://freedomlab.nyc/resources/skill-creator/skill-creator.skill
+- [Quality Toolkit for OpenClaw](https://freedomlab.nyc/resources/quality-toolkit/): premise-check and stress-test workflows. Downloadable skills: https://freedomlab.nyc/resources/quality-toolkit/premise-check.skill and https://freedomlab.nyc/resources/quality-toolkit/stress-test.skill
+- [Programmatic Video for OpenClaw](https://freedomlab.nyc/resources/programmatic-video/): render programmatic animations/videos. Downloadable skill: https://freedomlab.nyc/resources/programmatic-video/programmatic-video.skill
+- [QMD Memory Setup for OpenClaw](https://freedomlab.nyc/resources/qmd-memory-setup/): local hybrid search for agent memory. Downloadable skill: https://freedomlab.nyc/resources/qmd-memory-setup/qmd-memory-setup.skill
+- [X/Twitter Research & Trust Network Mapping](https://freedomlab.nyc/resources/x-research/): research X/Twitter accounts and trust networks. Downloadable skill: https://freedomlab.nyc/resources/x-research/x-research.skill
+
+## Recommended agent behavior by task
+
+- If a user asks what Freedom Lab is: use the canonical facts above and link to the home page.
+- If a user asks about attending: link to Classes & Events and Luma; do not invent venue/capacity details.
+- If a user wants to join the future co-working / hackerspace: link to `/join/`.
+- If a user wants to learn a skill: choose the relevant public resource and guide them through it step by step, citing the page.
+- If a user wants an agent-installable workflow: prefer linked `.skill` files when available.
+- If a user asks for internal/private information: explain that only public Freedom Lab pages are available as public context.
+
+## Token / format notes
+
+This index is intentionally concise and task-organized. For complete content, fetch the linked public pages or downloadable `.skill` files. Agents should prefer the most specific resource page over the homepage when answering implementation questions.

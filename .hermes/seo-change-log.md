@@ -33,3 +33,9 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Green fix: aligned generated event-page OG/Twitter preview images with the site-wide rectangular Freedom Lab signature preview required by `scripts/audit-shared-styles.py`, while preserving per-event cover images in visible page content and Event JSON-LD.
 - Verification: patched 26 event pages narrowly for preview metadata; `python3 scripts/audit-shared-styles.py` passed; `python3 scripts/audit-media-accessibility.py` passed; JSON-LD parse failures: 0.
 - Note: `python3 scripts/apply-seo.py` currently mutates some resource JSON-LD incorrectly; reverted those generated changes and left script repair as a follow-up before using it in automated stewardship.
+## 2026-05-29 — Agent-readable public index
+
+- Expanded root `llms.txt` from a simple resource list into a public agent-readable index for Freedom Lab.
+- Added canonical facts, public/private boundary notes, agent interaction policy, public data feeds, task-organized learning paths, and downloadable `.skill` links where available.
+- Purpose: help AI assistants route users to accurate public Freedom Lab events/resources without inventing venue, membership, RSVP, or internal details.
+- Verification: root `llms.txt` fetchable locally; publish/live verification recorded with the related commit.
