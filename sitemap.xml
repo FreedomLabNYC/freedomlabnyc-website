@@ -6,6 +6,11 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://freedomlab.nyc/agent-guide/</loc>
+    <lastmod>2026-05-29</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://freedomlab.nyc/book-space/</loc>
     <lastmod>2026-05-16</lastmod>
     <priority>0.7</priority>

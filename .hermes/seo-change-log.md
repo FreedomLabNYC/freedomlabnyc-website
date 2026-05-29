@@ -39,3 +39,9 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Added canonical facts, public/private boundary notes, agent interaction policy, public data feeds, task-organized learning paths, and downloadable `.skill` links where available.
 - Purpose: help AI assistants route users to accurate public Freedom Lab events/resources without inventing venue, membership, RSVP, or internal details.
 - Verification: root `llms.txt` fetchable locally; publish/live verification recorded with the related commit.
+## 2026-05-29 — Public agent response guide
+
+- Added `/agent-guide/` as a public canonical response/routing guide for AI assistants.
+- Linked it from `llms.txt` and added it to `sitemap.xml`.
+- The guide defines one-sentence/one-paragraph descriptions, routing for common user intents, claims agents should not make, citation preferences, and machine-readable public links.
+- Verification: shared style/media audits, JSON-LD parse check, deploy, and live no-cache fetch.

@@ -40,6 +40,7 @@ Agents should not:
 - [Robots](https://freedomlab.nyc/robots.txt): public crawl policy. Internal/private routes are disallowed.
 - [Classes & Events JSON](https://freedomlab.nyc/classes-events/events.json): structured public event archive/upcoming event data. Luma remains canonical for RSVP/ticketing.
 - [Classes & Events](https://freedomlab.nyc/classes-events/): human-readable public events archive and upcoming events.
+- [Agent Response Guide](https://freedomlab.nyc/agent-guide/): canonical guidance for assistants that summarize, cite, or route users to Freedom Lab resources.
 
 ## Core pages
 
