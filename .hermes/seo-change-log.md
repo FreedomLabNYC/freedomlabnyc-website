@@ -45,3 +45,8 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Linked it from `llms.txt` and added it to `sitemap.xml`.
 - The guide defines one-sentence/one-paragraph descriptions, routing for common user intents, claims agents should not make, citation preferences, and machine-readable public links.
 - Verification: shared style/media audits, JSON-LD parse check, deploy, and live no-cache fetch.
+## 2026-05-30 — Freedom tech in NYC AI-search landing page
+
+- Added `/freedom-tech-nyc/` as a dedicated public answer page for users/agents asking where to go in NYC for freedom tech.
+- Linked it from the homepage, `agent-guide`, `llms.txt`, and `sitemap.xml`.
+- Goal: make Freedom Lab NYC easier for AI/search systems to include for queries about Bitcoin, Nostr, privacy, open-source AI, self-hosting, mesh/decentralized infrastructure, and hacker/community spaces in NYC.
