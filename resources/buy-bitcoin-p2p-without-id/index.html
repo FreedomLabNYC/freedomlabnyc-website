@@ -188,12 +188,24 @@
             <ul>
                 <li><strong>Hodl Hodl:</strong> email + 2FA account flow; sellers may need to accept a contract before the payment window. Verify currency and payment method with the seller before relying on it.</li>
                 <li><strong>RoboSats:</strong> Tor-first, no personal info, Lightning-only. Save the robot token carefully. Coordinator trust matters because coordinators mediate disputes and provide infrastructure.</li>
+                <li><strong>Mostro:</strong> Nostr + Lightning P2P exchange infrastructure. It can support local markets when someone runs or joins a node with local liquidity, but do not assume a currency is usable just because the protocol is flexible. Check the visible orderbook and node settings first.</li>
                 <li><strong>Bisq / Bisq 2:</strong> stronger decentralization and Tor integration. Bisq 1 requires deposits and desktop uptime; Bisq Easy reduces friction for small buys but uses reputation rather than the same escrow model.</li>
                 <li><strong>Vexl:</strong> social-graph/web-of-trust liquidity. It can be powerful if your network has offers, but many users may initially see zero available offers.</li>
                 <li><strong>Peach:</strong> escrow-based mobile P2P with regional availability limits, reputation gating, and address-signing requirements under Swiss rules.</li>
                 <li><strong>LocalCoinSwap:</strong> account-based marketplace with many payment methods. Some traders or situations may require KYC, screenshots, or other identity/payment proof.</li>
                 <li><strong>lnp2pBot:</strong> open-source Telegram + Lightning escrow. Liquidity depends heavily on local communities and channels.</li>
                 <li><strong>ATMs / Unbank-style options:</strong> may be convenient for small amounts, but privacy depends on local limits, cameras, phone/email requirements, and operator policy.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section">
+            <h2>HRF and freedom-tech apps to investigate</h2>
+            <p>Some of the most relevant options are not generic global exchanges. They are freedom-tech projects or local-market tools that may need a community, operator, or liquidity maker before they work in a specific country. Treat this list as a starting map, then verify local currency support before teaching or relying on it.</p>
+            <ul>
+                <li><strong>Mostro:</strong> HRF-aligned Nostr + Lightning P2P exchange infrastructure. Use the <a href="https://github.com/MostroP2P/mobile/releases" target="_blank" rel="noopener">Mostro Android releases</a> to test the app, check <a href="https://mostro.community" target="_blank" rel="noopener">mostro.community</a> for public nodes, and use the <a href="https://github.com/MostroP2P/mostro" target="_blank" rel="noopener">Mostro server repo</a> if you need to bootstrap a local node. Evidence standard: a visible local-currency orderbook beats “the protocol can support it.”</li>
+                <li><strong>SudaBit / Sudan Hodl:</strong> Sudan-specific HRF Bitcoin Development Fund lead for private, self-custodial Bitcoin access from local currency. Current public links: <a href="https://me4doc.wixsite.com/sudabit" target="_blank" rel="noopener">SudaBit site</a> and <a href="https://x.com/SudanHODL" target="_blank" rel="noopener">Sudan Hodl on X</a>. Verify whether SDG liquidity is live before presenting it as operational.</li>
+                <li><strong>Banxaas:</strong> HRF-covered West Africa Lightning/mobile-money bridge. Public code is at <a href="https://github.com/banxaas/banxaas" target="_blank" rel="noopener">github.com/banxaas/banxaas</a>. Do not assume Sierra Leone support from “West Africa”: verify the exact country, mobile-money rail, and currency. Prior checks pointed to CFA/XOF-region relevance rather than SLE/SLL.</li>
+                <li><strong>Vexl and lnp2pBot:</strong> not guaranteed by geography, but useful where local trusted networks or Telegram communities already exist. They are best treated as community-liquidity tools, not universal orderbooks.</li>
             </ul>
         </section>
 
