@@ -251,6 +251,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://freedomlab.nyc/resources/hermes-desktop-dashboard/</loc>
+    <lastmod>2026-06-05</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://freedomlab.nyc/resources/jade-wallet/</loc>
     <lastmod>2026-05-26</lastmod>
     <priority>0.8</priority>
