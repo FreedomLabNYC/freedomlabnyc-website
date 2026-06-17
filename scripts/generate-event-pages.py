@@ -65,7 +65,7 @@ def page(ev: dict) -> tuple[str, str]:
   <meta name="description" content="{escape(desc)}">
   <title>{escape(title)}</title>
   <link rel="canonical" href="{escape(url)}">
-  <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+  <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="stylesheet" href="../../css/styles.css">
   <link rel="stylesheet" href="../../css/fonts.css">
   <link rel="stylesheet" href="../../css/tutorial-page.css">
