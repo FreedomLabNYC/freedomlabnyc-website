@@ -180,57 +180,6 @@
             stroke-linejoin: round;
         }
 
-        .sponsors-section {
-            margin-top: 3rem;
-            padding-top: 0.75rem;
-            text-align: center;
-        }
-
-        .sponsors-title {
-            color: var(--text-muted);
-            font-size: 0.78rem;
-            letter-spacing: 0.18em;
-            margin-bottom: 0.9rem;
-            text-transform: uppercase;
-        }
-
-        .sponsor-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr);
-            gap: 0.75rem;
-        }
-
-        .sponsor-card {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.25rem 0;
-            background: transparent;
-            border: 0;
-            border-radius: 0;
-            transition: transform 0.18s ease, opacity 0.18s ease;
-        }
-
-        .sponsor-card:hover,
-        .sponsor-card:focus-visible {
-            transform: translateY(-1px);
-            opacity: 0.9;
-            outline: none;
-        }
-
-        .sponsor-card img {
-            display: block;
-            width: min(210px, 58vw);
-            max-height: 48px;
-            object-fit: contain;
-        }
-
-        .sponsor-card--light img {
-            background: #fff;
-            border-radius: 10px;
-            padding: 0.35rem 0.5rem;
-        }
-
         @media (max-width: 860px) {
             .links-shell {
                 width: min(100%, 760px);
@@ -268,10 +217,6 @@
             .module-icon {
                 width: 1.45rem;
                 height: 1.45rem;
-            }
-
-            .sponsor-grid {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -327,15 +272,6 @@
                     <p class="links-qr-label">Scan to open freedomlab.nyc/links</p>
                 </aside>
             </div>
-
-            <section class="sponsors-section" aria-labelledby="sponsors-title">
-                <h2 id="sponsors-title" class="sponsors-title">Thank You to Our Sponsor</h2>
-                <div class="sponsor-grid">
-                    <a class="sponsor-card" href="https://cakewallet.com/" target="_blank" rel="noopener" aria-label="Visit Cake Wallet">
-                        <img src="../static/img/sponsors/cake-wallet-wordmark.png" alt="Cake Wallet logo">
-                    </a>
-                </div>
-            </section>
         </div>
     </main>
 
