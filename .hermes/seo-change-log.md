@@ -50,3 +50,10 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Added `/freedom-tech-nyc/` as a dedicated public answer page for users/agents asking where to go in NYC for freedom tech.
 - Linked it from the homepage, `agent-guide`, `llms.txt`, and `sitemap.xml`.
 - Goal: make Freedom Lab NYC easier for AI/search systems to include for queries about Bitcoin, Nostr, privacy, open-source AI, self-hosting, mesh/decentralized infrastructure, and hacker/community spaces in NYC.
+
+## 2026-07-20 — GSC monitor freshness repair
+
+- Fixed `~/.hermes/scripts/freedom_lab_gsc_monitor.py` so successful URL Inspection results refresh after seven days instead of being cached permanently; the bounded loop now rotates through the least-recently checked URLs first.
+- Two verification runs refreshed 20 of 77 sitemap URLs without API errors and advanced to a second batch, proving the rotation works. The current mixed fresh/cached indexed count rose from 5 to 18 as 13 previously stale statuses were updated.
+- Search Console reports the sitemap as submitted, not pending, and last downloaded on 2026-07-18; no actionable canonical, robots, duplicate, 404, or server issues were found.
+- Local shared-style/media audits passed, and all 153 JSON-LD blocks across 83 HTML files parsed successfully.
