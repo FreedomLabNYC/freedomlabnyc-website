@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A field-tested, agent-readable guide to Google Workspace integration using gws, Google APIs, rclone, Gmail events, and safe verification loops.">
+    <title>Google Workspace Integration for AI Agents | Freedom Lab NYC</title>
+    <link rel="canonical" href="https://freedomlab.nyc/resources/google-workspace-agent-integration/">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freedomlab.nyc/resources/google-workspace-agent-integration/">
+    <meta property="og:title" content="Google Workspace Integration for AI Agents | Freedom Lab NYC">
+    <meta property="og:description" content="Choose the right Google Workspace tool, automate safely, and verify real outcomes.">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Google Workspace Integration for AI Agents | Freedom Lab NYC">
+    <meta name="twitter:description" content="Choose the right Google Workspace tool, automate safely, and verify real outcomes.">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "@id": "https://freedomlab.nyc/resources/google-workspace-agent-integration/#article",
+      "headline": "Google Workspace Integration for AI Agents",
+      "name": "Google Workspace Integration for AI Agents",
+      "description": "A field-tested, agent-readable guide to Google Workspace integration using gws, Google APIs, rclone, Gmail events, and safe verification loops.",
+      "url": "https://freedomlab.nyc/resources/google-workspace-agent-integration/",
+      "image": "https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png",
+      "publisher": {"@id": "https://freedomlab.nyc/#organization"},
+      "author": {"@id": "https://freedomlab.nyc/#organization"},
+      "mainEntityOfPage": "https://freedomlab.nyc/resources/google-workspace-agent-integration/",
+      "keywords": "Google Workspace, AI agents, gws, Gmail, Drive, Docs, Sheets, Calendar",
+      "about": ["Google Workspace", "AI agents", "Automation", "Open-source AI"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://freedomlab.nyc/"},
+        {"@type": "ListItem", "position": 2, "name": "Resources", "item": "https://freedomlab.nyc/resources/"},
+        {"@type": "ListItem", "position": 3, "name": "Google Workspace Integration for AI Agents", "item": "https://freedomlab.nyc/resources/google-workspace-agent-integration/"}
+      ]
+    }
+    </script>
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+            <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+            <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+        </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes &amp; Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+
+    <main class="tutorial-content">
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>›</span><a href="/resources/#ai-skills">Open Source AI Skills</a><span>›</span><span>Google Workspace Integration</span>
+            </div>
+            <h1 class="tutorial-title">Google Workspace Integration for AI Agents</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag tutorial">Skill</span>
+                <span class="tutorial-tag">AI Agents</span>
+                <span class="tutorial-tag">Google Workspace</span>
+                <span class="tutorial-tag">Automation</span>
+            </div>
+            <p class="tutorial-intro">A portable playbook for Gmail, Drive, Docs, Sheets, Calendar, Meet, and Workspace administration—built from workflows we have used in practice, with account-specific data removed.</p>
+        </div>
+
+        <section class="tutorial-section" id="download">
+            <h2>Use the skill</h2>
+            <p><a href="google-workspace-agent-integration.skill" download style="display:inline-block;padding:12px 24px;background:#32d011;color:#000;font-weight:bold;border-radius:6px;text-decoration:none;font-size:1.05em;">Download .skill</a></p>
+            <p><a href="SKILL.md">Read SKILL.md</a> · <a href="https://github.com/FreedomLabNYC/freedomlabnyc-website/tree/main/resources/google-workspace-agent-integration" target="_blank" rel="noopener">View on GitHub</a></p>
+        </section>
+
+        <nav class="tutorial-toc">
+            <h3>Contents</h3>
+            <ol>
+                <li><a href="#tool-router">Tool router</a></li>
+                <li><a href="#gws">Primary tool: gws</a></li>
+                <li><a href="#operating-loop">Agent operating loop</a></li>
+                <li><a href="#service-playbooks">Service playbooks</a></li>
+                <li><a href="#security">Security and privacy</a></li>
+                <li><a href="#references">Official references</a></li>
+            </ol>
+        </nav>
+
+        <section class="tutorial-section" id="tool-router">
+            <h2>Tool router</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>Need</th><th>Default</th><th>Escalate when…</th></tr></thead>
+                    <tbody>
+                        <tr><td>General Workspace API work</td><td><code>gws</code></td><td>Precise API-specific logic is required.</td></tr>
+                        <tr><td>Docs / Sheets formatting</td><td>Official Google API client</td><td>Use range-level and batch requests.</td></tr>
+                        <tr><td>Large Drive folder trees</td><td><code>rclone</code></td><td>Use <code>gws</code> for metadata and small uploads.</td></tr>
+                        <tr><td>New-mail triggers</td><td>Gmail watch + history</td><td>Use bounded polling only when latency is unimportant.</td></tr>
+                        <tr><td>Meet attendance</td><td>Dedicated browser identity</td><td>APIs manage spaces and artifacts, not attendance.</td></tr>
+                        <tr><td>Organization settings</td><td>Admin console / Admin SDK</td><td>Verify privileges and the real affected surface.</td></tr>
+                        <tr><td>Enable APIs</td><td><code>gcloud services enable</code></td><td>Use Cloud Console when CLI permissions are unavailable.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="tutorial-section" id="gws">
+            <h2>Primary tool: <code>gws</code></h2>
+            <p><a href="https://github.com/googleworkspace/cli" target="_blank" rel="noopener"><code>googleworkspace/cli</code></a> is the cleanest general command surface we have used. It builds commands from Google's Discovery Service, returns structured JSON, supports schema inspection and dry runs, and ships agent skills.</p>
+            <div class="callout"><div class="callout-content"><p><strong>Important:</strong> the project says it is not an officially supported Google product and remains pre-1.0. Pin a tested version for production automation.</p></div></div>
+            <pre><code># Install
+brew install googleworkspace-cli
+# or: npm install -g @googleworkspace/cli
+
+# Authenticate
+gws auth setup
+gws auth login -s drive,gmail,sheets,docs,calendar
+gws auth status
+
+# Discover before guessing
+gws drive --help
+gws schema drive.files.list
+
+# Read a Sheet range
+gws sheets spreadsheets values get \
+  --params '{"spreadsheetId":"SPREADSHEET_ID","range":"Sheet1!A1:D10"}'</code></pre>
+            <p>Do not print unmasked exported credentials in an agent-visible terminal, log, document, screenshot, or chat.</p>
+        </section>
+
+        <section class="tutorial-section" id="operating-loop">
+            <h2>Agent operating loop</h2>
+            <ol>
+                <li><strong>Confirm identity and scope.</strong> OAuth consent and Cloud API enablement are separate gates.</li>
+                <li><strong>Resolve the exact target.</strong> Use stable IDs, not names or titles alone.</li>
+                <li><strong>Fetch current state.</strong> Avoid stale copies.</li>
+                <li><strong>Prepare the smallest mutation.</strong> Preserve user-managed content and formatting.</li>
+                <li><strong>Dry-run or render a diff.</strong> Show target, changed fields, and dedupe key.</li>
+                <li><strong>Apply once.</strong> Make retries idempotent.</li>
+                <li><strong>Read back.</strong> Verify Google's stored object, not only the success response.</li>
+                <li><strong>Check the human surface.</strong> Required for formatting, drafts, calendars, and Admin settings.</li>
+                <li><strong>Return stable proof.</strong> IDs and URLs, never credentials.</li>
+            </ol>
+        </section>
+
+        <section class="tutorial-section" id="service-playbooks">
+            <h2>Service playbooks</h2>
+
+            <h3>Gmail</h3>
+            <p>Search narrowly, fetch full bodies only for relevant message IDs, and persist message/thread IDs for deduplication. Draft by default. Before sending, verify the recipient, subject, body, attachments, and target thread.</p>
+            <pre><code>users.watch → Pub/Sub historyId → users.history.list
+→ changed message IDs only → idempotent processor</code></pre>
+            <p>Renew the watch before it expires. Pub/Sub is a wake-up signal, not the email body.</p>
+
+            <h3>Sheets</h3>
+            <p>Inspect headers, section boundaries, formulas, validation, and duplicate identities first. Use bounded value updates for cells and <code>batchUpdate</code> for row insertion, formatting, rich links, checkboxes, or validation. Read back the exact rows.</p>
+
+            <h3>Docs</h3>
+            <p>Edit the existing working Doc. Fetch its current structure, make targeted <code>batchUpdate</code> requests, apply multiple replacements bottom-to-top, and account for UTF-16 indices. Re-fetch to verify text, links, and styles.</p>
+
+            <h3>Drive</h3>
+            <p>Use <code>gws</code> for search, metadata, permissions, native file creation, and small uploads. Use <code>rclone</code> for large trees:</p>
+            <pre><code>rclone copy ./archive gdrive:Agent-Archive \
+  --transfers 4 --checkers 8</code></pre>
+            <p>For archives, <code>copy</code> is safer than <code>sync</code> because local deletion does not remove remote files. Verify destination counts and representative sizes or hashes.</p>
+
+            <h3>Calendar</h3>
+            <p>Use bounded windows and explicit ISO 8601 timezones. Dedupe with a source URL plus provider event/occurrence ID. Re-fetch before RSVP or update, mutate only owned fields, then read back the stored event.</p>
+
+            <h3>Meet</h3>
+            <p>Keep Calendar/API authorization separate from the browser attendee identity. Use a dedicated account/profile, transparent bot name, organizer rules, bounded join windows, and visible transcription notice. Transcript delivery is complete only after the destination document is created and read back.</p>
+
+            <h3>Workspace administration</h3>
+            <p>Distinguish organization settings from user preferences. Use the exact Admin console deep link and official help page, identify the required privilege, confirm risky identity/routing/security changes, and verify the affected Workspace surface after any propagation delay.</p>
+        </section>
+
+        <section class="tutorial-section" id="security">
+            <h2>Security and privacy</h2>
+            <ul>
+                <li>Request only the services and scopes the workflow needs.</li>
+                <li>Use <code>drive.file</code> when an app should access only files it creates or the user explicitly opens/shares with that app.</li>
+                <li>Keep OAuth secrets, refresh tokens, service-account keys, and exported credentials outside Git.</li>
+                <li>Prefer an OS keyring or secret manager. If a credential file is unavoidable, use owner-only permissions.</li>
+                <li>Never publish authorization codes, cookies, signed callback URLs, real account IDs, object IDs, or production payloads.</li>
+                <li>Scan both source files and the final packaged archive before release.</li>
+            </ul>
+            <div class="table-wrapper">
+                <table>
+                    <thead><tr><th>Failure</th><th>Check first</th></tr></thead>
+                    <tbody>
+                        <tr><td>Login / consent fails</td><td>OAuth client, test user, redirect, scopes, account.</td></tr>
+                        <tr><td>Service disabled</td><td>API enablement in the Cloud project.</td></tr>
+                        <tr><td>Insufficient permission</td><td>OAuth scope or user/admin privilege.</td></tr>
+                        <tr><td>Object returns 404</td><td>Identity, share, object ID, deletion state.</td></tr>
+                        <tr><td>Browser works; API fails</td><td>Browser and API may use different accounts.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>Analytics, Search Console, Site Verification, and Cloud administration use separate APIs, roles, and scopes. A working Gmail/Drive token does not imply access to them.</p>
+        </section>
+
+        <section class="tutorial-section" id="references">
+            <h2>Official references</h2>
+            <ul>
+                <li><a href="https://github.com/googleworkspace/cli" target="_blank" rel="noopener"><code>gws</code> repository</a></li>
+                <li><a href="https://developers.google.com/workspace/guides/auth-overview" target="_blank" rel="noopener">Google Workspace authentication</a></li>
+                <li><a href="https://developers.google.com/workspace/gmail/api/guides/push" target="_blank" rel="noopener">Gmail push notifications</a></li>
+                <li><a href="https://developers.google.com/workspace/drive/api/guides/about-sdk" target="_blank" rel="noopener">Drive API</a></li>
+                <li><a href="https://developers.google.com/workspace/docs/api/how-tos/overview" target="_blank" rel="noopener">Docs API</a></li>
+                <li><a href="https://developers.google.com/workspace/sheets/api/guides/concepts" target="_blank" rel="noopener">Sheets API</a></li>
+                <li><a href="https://developers.google.com/workspace/calendar/api/guides/overview" target="_blank" rel="noopener">Calendar API</a></li>
+                <li><a href="https://rclone.org/drive/" target="_blank" rel="noopener">rclone Drive backend</a></li>
+            </ul>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/resources/#ai-skills" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Open Source AI Skills</a>
+        </nav>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="../../js/footer.js"></script>
+</body>
+</html>

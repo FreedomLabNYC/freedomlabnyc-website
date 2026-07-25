@@ -94,6 +94,7 @@ Agents should not:
 - [Setting Up OpenClaw](https://freedomlab.nyc/resources/openclaw-setup/): set up a local AI assistant with Telegram and persistent memory.
 - [Self-Hosting AI Models](https://freedomlab.nyc/resources/self-host-ai/): rent GPUs and run open-source models with a web UI.
 - [Scoped Google Drive Access for AI Agents](https://freedomlab.nyc/resources/google-drive-scoped-access/): least-privilege OAuth Drive access.
+- [Google Workspace Integration for AI Agents](https://freedomlab.nyc/resources/google-workspace-agent-integration/): tool selection and verified workflows for gws, Gmail, Drive, Docs, Sheets, Calendar, Meet, and Admin. Downloadable skill: https://freedomlab.nyc/resources/google-workspace-agent-integration/google-workspace-agent-integration.skill
 - [Ghostr Nostr Delegation for AI Agents](https://freedomlab.nyc/resources/ghostr-nostr-delegation/): delegated Nostr publishing for agents. Downloadable skill: https://freedomlab.nyc/resources/ghostr-nostr-delegation/ghostr-nostr-delegation.skill
 - [GitHub Pages Resource Publishing](https://freedomlab.nyc/resources/github-pages-resource-publishing/): publish static resources and files. Downloadable skill: https://freedomlab.nyc/resources/github-pages-resource-publishing/github-pages-resource-publishing.skill
 - [Skill Creator for AI Agents](https://freedomlab.nyc/resources/skill-creator/): teach agents to create, edit, audit, and package skills. Downloadable skill: https://freedomlab.nyc/resources/skill-creator/skill-creator.skill
