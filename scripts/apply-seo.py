@@ -25,7 +25,7 @@ EXCLUDE_PARTS = {
 EXCLUDE_FILES = {"google962eebcd38de853f.html"}
 NO_SITEMAP_PATHS = {
     "/404.html", "/print-page.html", "/print-page/", "/tag-tree-options.html", "/skill/",
-    "/join/digital/", "/join/waitlist/", "/join-hackerspace/", "/thankyou/", "/onion/"
+    "/join/digital/", "/join/waitlist/", "/join-hackerspace/", "/join2/", "/thankyou/", "/onion/"
 }
 HIGH_PRIORITY = {"/": "1.0", "/classes-events/": "0.9", "/resources/": "0.9", "/join/": "0.8"}
 

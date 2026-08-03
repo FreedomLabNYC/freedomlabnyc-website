@@ -57,3 +57,9 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Two verification runs refreshed 20 of 77 sitemap URLs without API errors and advanced to a second batch, proving the rotation works. The current mixed fresh/cached indexed count rose from 5 to 18 as 13 previously stale statuses were updated.
 - Search Console reports the sitemap as submitted, not pending, and last downloaded on 2026-07-18; no actionable canonical, robots, duplicate, 404, or server issues were found.
 - Local shared-style/media audits passed, and all 153 JSON-LD blocks across 83 HTML files parsed successfully.
+
+## 2026-08-03 — Join experiment duplicate-canonical cleanup
+
+- Search Console identified `/join2/` as a duplicate of the indexed primary `/join/` page and selected `/join/` as Google's canonical.
+- Aligned `/join2/` canonical, Open Graph URL, and WebPage JSON-LD with `/join/`; marked the experimental route `noindex, follow`; removed it from the sitemap; and excluded it from future generated sitemaps.
+- No visible page copy or design changed.
