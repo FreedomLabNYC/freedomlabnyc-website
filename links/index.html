@@ -180,6 +180,58 @@
             stroke-linejoin: round;
         }
 
+        .sponsors-section {
+            margin-top: 3rem;
+            padding-top: 0.75rem;
+            text-align: center;
+        }
+
+        .sponsors-title {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            letter-spacing: 0.18em;
+            margin-bottom: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .sponsor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .sponsor-card {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 56px;
+            padding: 0.25rem 0;
+            background: transparent;
+            border: 0;
+            border-radius: 8px;
+            transition: transform 0.18s ease, opacity 0.18s ease;
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-1px);
+            opacity: 0.9;
+        }
+
+        .sponsor-card:focus-visible {
+            transform: translateY(-1px);
+            opacity: 0.9;
+            outline: 2px solid #32D011;
+            outline-offset: 4px;
+        }
+
+        .sponsor-card img {
+            display: block;
+            width: min(240px, 100%);
+            max-height: 52px;
+            object-fit: contain;
+        }
+
         @media (max-width: 860px) {
             .links-shell {
                 width: min(100%, 760px);
@@ -217,6 +269,11 @@
             .module-icon {
                 width: 1.45rem;
                 height: 1.45rem;
+            }
+
+            .sponsor-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
         }
     </style>
@@ -272,6 +329,18 @@
                     <p class="links-qr-label">Scan to open freedomlab.nyc/links</p>
                 </aside>
             </div>
+
+            <section class="sponsors-section" aria-labelledby="sponsors-title">
+                <h2 id="sponsors-title" class="sponsors-title">Thank You to Our Sponsors</h2>
+                <div class="sponsor-grid">
+                    <a class="sponsor-card" href="https://kilo.ai/" target="_blank" rel="noopener noreferrer" aria-label="Visit Kilo Code">
+                        <img src="../static/img/sponsors/kilo-code-logo.svg" alt="Kilo Code logo">
+                    </a>
+                    <a class="sponsor-card" href="https://cakewallet.com/" target="_blank" rel="noopener noreferrer" aria-label="Visit Cake Wallet">
+                        <img src="../static/img/sponsors/cake-wallet-wordmark.png" alt="Cake Wallet logo">
+                    </a>
+                </div>
+            </section>
         </div>
     </main>
 
