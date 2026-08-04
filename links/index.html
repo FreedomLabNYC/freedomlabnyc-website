@@ -180,6 +180,122 @@
             stroke-linejoin: round;
         }
 
+        .sovereign-resources {
+            margin-top: 3.5rem;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.44);
+            border: 1px solid rgba(244, 210, 31, 0.24);
+            border-radius: 18px;
+        }
+
+        .resources-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.6rem;
+        }
+
+        .resources-title {
+            margin: 0;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: clamp(1.15rem, 3vw, 1.5rem);
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .resources-slides-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0.65rem 1.1rem;
+            background: rgba(244, 210, 31, 0.06);
+            border: 1.5px solid #f4d21f;
+            border-radius: 9px;
+            color: #f4d21f;
+            font: 700 0.9rem/1 var(--font-body);
+        }
+
+        .resources-slides-button:disabled {
+            cursor: not-allowed;
+            opacity: 0.55;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 2rem 3rem;
+        }
+
+        .resources-column {
+            display: grid;
+            align-content: start;
+            gap: 1.5rem;
+        }
+
+        .resource-group-title {
+            margin: 0 0 0.65rem;
+            color: #f4d21f;
+            font-family: var(--font-body);
+            font-size: 0.86rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .resource-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.55rem;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            padding: 0.68rem 0.9rem;
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(244, 210, 31, 0.52);
+            border-radius: 9px;
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 0.88rem;
+            font-weight: 600;
+            line-height: 1.1;
+            text-align: center;
+            text-decoration: none;
+            transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+        }
+
+        .resource-link:visited {
+            color: #fff;
+        }
+
+        .resource-link:hover,
+        .resource-link:focus-visible {
+            transform: translateY(-1px);
+            background: rgba(244, 210, 31, 0.1);
+            border-color: #f4d21f;
+            color: #fff;
+            outline: none;
+        }
+
+        .resource-link:focus-visible {
+            box-shadow: 0 0 0 2px #0a0b0a, 0 0 0 4px #f4d21f;
+        }
+
+        .resource-group--feature {
+            box-sizing: border-box;
+            justify-self: start;
+            width: min(260px, 100%);
+            padding: 1rem;
+            border: 1.5px solid #f4d21f;
+            border-radius: 14px;
+        }
+
         .sponsors-section {
             margin-top: 3rem;
             padding-top: 0.75rem;
@@ -271,6 +387,28 @@
                 height: 1.45rem;
             }
 
+            .sovereign-resources {
+                padding: 1.2rem;
+            }
+
+            .resources-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .resources-column {
+                gap: 1.25rem;
+            }
+
+            .resource-link {
+                flex: 1 1 auto;
+            }
+
             .sponsor-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
@@ -329,6 +467,91 @@
                     <p class="links-qr-label">Scan to open freedomlab.nyc/links</p>
                 </aside>
             </div>
+
+            <section class="sovereign-resources" aria-labelledby="resources-title">
+                <header class="resources-header">
+                    <h2 id="resources-title" class="resources-title">Sovereign AI Resources</h2>
+                    <button class="resources-slides-button" type="button" disabled title="Slides link coming soon">Slides</button>
+                </header>
+
+                <div class="resources-grid">
+                    <div class="resources-column">
+                        <section class="resource-group" aria-labelledby="models-title">
+                            <h3 id="models-title" class="resource-group-title">Where Models Come From</h3>
+                            <div class="resource-links">
+                                <a class="resource-link" href="https://huggingface.co/models" target="_blank" rel="noopener noreferrer">Hugging Face</a>
+                                <a class="resource-link" href="https://ollama.com/library" target="_blank" rel="noopener noreferrer">Ollama Library</a>
+                            </div>
+                        </section>
+
+                        <section class="resource-group" aria-labelledby="chat-title">
+                            <h3 id="chat-title" class="resource-group-title">Run and Chat</h3>
+                            <div class="resource-links">
+                                <a class="resource-link" href="https://ollama.com/" target="_blank" rel="noopener noreferrer">Ollama</a>
+                                <a class="resource-link" href="https://www.jan.ai/" target="_blank" rel="noopener noreferrer">Jan</a>
+                                <a class="resource-link" href="https://lmstudio.ai/" target="_blank" rel="noopener noreferrer">LM Studio</a>
+                                <a class="resource-link" href="https://atomic.chat/" target="_blank" rel="noopener noreferrer">Atomic Chat</a>
+                            </div>
+                        </section>
+
+                        <section class="resource-group" aria-labelledby="phone-title">
+                            <h3 id="phone-title" class="resource-group-title">Phone</h3>
+                            <div class="resource-links">
+                                <a class="resource-link" href="https://pocketpal.dev/" target="_blank" rel="noopener noreferrer">Pocket Pal</a>
+                                <a class="resource-link" href="https://locallyai.app/" target="_blank" rel="noopener noreferrer">Locally AI</a>
+                                <a class="resource-link" href="https://github.com/google-ai-edge/gallery" target="_blank" rel="noopener noreferrer">Edge Gallery</a>
+                            </div>
+                        </section>
+
+                        <section class="resource-group" aria-labelledby="documents-title">
+                            <h3 id="documents-title" class="resource-group-title">Your Own Documents</h3>
+                            <div class="resource-links">
+                                <a class="resource-link" href="https://openwebui.com/" target="_blank" rel="noopener noreferrer">Open WebUI</a>
+                                <a class="resource-link" href="https://www.anythingllm.co/" target="_blank" rel="noopener noreferrer">AnythingLLM</a>
+                            </div>
+                        </section>
+
+                        <section class="resource-group" aria-labelledby="coding-title">
+                            <h3 id="coding-title" class="resource-group-title">Coding Harness</h3>
+                            <div class="resource-links">
+                                <a class="resource-link" href="https://opencode.ai/" target="_blank" rel="noopener noreferrer">OpenCode</a>
+                                <a class="resource-link" href="https://goose-docs.ai/" target="_blank" rel="noopener noreferrer">Goose</a>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="resources-column">
+                        <section class="resource-group" aria-labelledby="agent-title">
+                            <h3 id="agent-title" class="resource-group-title">Personal Agent</h3>
+                            <div class="resource-links">
+                                <a class="resource-link" href="https://openclaw.ai/" target="_blank" rel="noopener noreferrer">OpenClaw</a>
+                                <a class="resource-link" href="https://hermes-agent.nousresearch.com/" target="_blank" rel="noopener noreferrer">Hermes Agent</a>
+                            </div>
+                        </section>
+
+                        <section class="resource-group" aria-labelledby="workspace-title">
+                            <h3 id="workspace-title" class="resource-group-title">Agent Workspace</h3>
+                            <div class="resource-links">
+                                <a class="resource-link" href="https://buzz.xyz/" target="_blank" rel="noopener noreferrer">Buzz</a>
+                            </div>
+                        </section>
+
+                        <section class="resource-group resource-group--feature" aria-labelledby="transcription-title">
+                            <h3 id="transcription-title" class="resource-group-title">Transcription</h3>
+                            <div class="resource-links">
+                                <a class="resource-link" href="https://openwhispr.com/" target="_blank" rel="noopener noreferrer">OpenWhispr</a>
+                            </div>
+                        </section>
+
+                        <section class="resource-group" aria-labelledby="visual-title">
+                            <h3 id="visual-title" class="resource-group-title">Image and Video</h3>
+                            <div class="resource-links">
+                                <a class="resource-link" href="https://github.com/Comfy-Org/ComfyUI" target="_blank" rel="noopener noreferrer">Comfy UI</a>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </section>
 
             <section class="sponsors-section" aria-labelledby="sponsors-title">
                 <h2 id="sponsors-title" class="sponsors-title">Thank You to Our Sponsors</h2>
