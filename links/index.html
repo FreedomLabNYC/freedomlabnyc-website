@@ -216,11 +216,24 @@
             border-radius: 9px;
             color: #f4d21f;
             font: 700 0.9rem/1 var(--font-body);
+            text-decoration: none;
+            transition: transform 0.18s ease, background 0.18s ease;
         }
 
-        .resources-slides-button:disabled {
-            cursor: not-allowed;
-            opacity: 0.55;
+        .resources-slides-button:visited {
+            color: #f4d21f;
+        }
+
+        .resources-slides-button:hover {
+            background: rgba(244, 210, 31, 0.14);
+            transform: translateY(-1px);
+        }
+
+        .resources-slides-button:focus-visible {
+            background: rgba(244, 210, 31, 0.14);
+            outline: 2px solid #f4d21f;
+            outline-offset: 3px;
+            transform: translateY(-1px);
         }
 
         .resources-grid {
@@ -471,7 +484,7 @@
             <section class="sovereign-resources" aria-labelledby="resources-title">
                 <header class="resources-header">
                     <h2 id="resources-title" class="resources-title">Sovereign AI Resources</h2>
-                    <button class="resources-slides-button" type="button" disabled title="Slides link coming soon">Slides</button>
+                    <a class="resources-slides-button" href="https://docs.google.com/presentation/d/1_rP2ldfbqWincm2IPyUGlDVIUi6urijzd_uZGAsHWfA/edit?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Open the Sovereign AI slides in a new tab">Slides</a>
                 </header>
 
                 <div class="resources-grid">
