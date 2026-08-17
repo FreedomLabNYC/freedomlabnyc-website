@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Freedom Lab NYC meetup companions: slide decks, referenced links, practical guides, and community projects.">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Resource Lab Preview | Freedom Lab NYC</title>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="preload" href="../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/slides/slide-02.webp" as="image" type="image/webp">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/fonts.css">
+    <link rel="stylesheet" href="styles.css">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freedomlab.nyc/resources2/">
+    <meta property="og:title" content="Resource Lab Preview | Freedom Lab NYC">
+    <meta property="og:description" content="Meetup slides, referenced links, practical guides, and community projects in one place.">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Resource Lab Preview | Freedom Lab NYC">
+    <meta name="twitter:description" content="Meetup slides, referenced links, practical guides, and community projects in one place.">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo" aria-label="Freedom Lab NYC home">
+            <picture>
+                <source srcset="../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide" width="869" height="494">
+            </picture>
+        </a>
+        <nav class="nav-menu" id="navMenu" aria-label="Main navigation">
+            <a href="/classes-events/" class="nav-link">Classes & Events</a>
+            <a href="/resources2/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+    </header>
+
+    <main>
+        <section class="lab-hero section-shell" aria-labelledby="page-title">
+            <div class="hero-grid" aria-hidden="true"></div>
+            <div class="hero-copy">
+                <p class="eyebrow">Resource Lab · Preview</p>
+                <h1 id="page-title">Meetups that keep teaching.</h1>
+                <p class="hero-lede">Slides, every referenced link, practical guides, and community projects—organized around the meetup where they started.</p>
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#featured-event">Explore the event companion</a>
+                    <a class="button button-quiet" href="#library">Browse the library</a>
+                </div>
+            </div>
+            <div class="hero-proof" aria-label="Prototype contents">
+                <div><strong>45</strong><span>sanitized slides</span></div>
+                <div><strong>8</strong><span>deck references</span></div>
+                <div><strong>9</strong><span>connected guides</span></div>
+            </div>
+        </section>
+
+        <nav class="page-nav" aria-label="Resource Lab sections">
+            <div class="section-shell page-nav-inner">
+                <a href="#featured-event">Featured event</a>
+                <a href="#library">Library</a>
+                <a href="#projects">Projects</a>
+                <a href="#contribute">Contribute</a>
+            </div>
+        </nav>
+
+        <section class="event-section section-shell" id="featured-event" aria-labelledby="event-title">
+            <header class="section-heading event-heading">
+                <div>
+                    <p class="eyebrow">Past meetup · May 14, 2026</p>
+                    <h2 id="event-title">Open-Source AI Agent Skill Sharing</h2>
+                    <p>A deck-first companion for revisiting the talk, opening every named resource, and continuing with hands-on Freedom Lab guides.</p>
+                </div>
+                <a class="button button-quiet button-small" href="https://lu.ma/taidx51a" target="_blank" rel="noopener">Original event ↗</a>
+            </header>
+
+            <div class="event-meta" aria-label="Event details">
+                <span>Flatiron District</span><span>Open-source AI</span><span>45-slide public deck</span><span>Beginner friendly</span>
+            </div>
+
+            <div class="deck-layout">
+                <article class="deck-card" aria-label="Slide deck viewer">
+                    <div class="deck-toolbar">
+                        <div class="deck-label"><span class="status-dot"></span> Public deck</div>
+                        <div class="deck-tools">
+                            <button type="button" id="shareSlide" class="icon-button text-button" aria-label="Copy a link to this slide">Share slide</button>
+                            <button type="button" id="fullScreen" class="icon-button text-button" aria-label="View slide full screen">Full screen</button>
+                            <span class="slide-count"><strong id="currentSlide">2</strong> / 45</span>
+                        </div>
+                    </div>
+                    <div class="slide-stage" id="slideStage">
+                        <button type="button" class="slide-arrow slide-arrow-prev" id="previousSlide" aria-label="Previous slide">←</button>
+                        <figure>
+                            <img id="deckSlide" src="assets/slides/slide-02.webp" alt="Slide 2: Open Source AI Agent Skill Sharing" width="1600" height="900">
+                            <figcaption><span id="slideTitle">Open Source AI Agent Skill Sharing</span><span class="keyboard-hint">Use ← → keys</span></figcaption>
+                        </figure>
+                        <button type="button" class="slide-arrow slide-arrow-next" id="nextSlide" aria-label="Next slide">→</button>
+                    </div>
+                    <div class="deck-progress" aria-hidden="true"><span id="deckProgress"></span></div>
+                    <div class="thumbnail-strip" id="thumbnailStrip" aria-label="Choose a slide"></div>
+                </article>
+
+                <aside class="deck-links" aria-labelledby="deck-links-title">
+                    <div class="aside-heading">
+                        <p class="eyebrow">Pulled from the slides</p>
+                        <h3 id="deck-links-title">Links from the deck</h3>
+                        <p>Open the resources without hunting through screenshots or speaker notes.</p>
+                    </div>
+                    <div class="deck-link-list">
+                        <a class="deck-link" data-slides="42" href="https://github.com/openclaw/openclaw" target="_blank" rel="noopener"><span class="link-slide">Slide 42</span><strong>OpenClaw on GitHub</strong><small>Source code and documentation</small></a>
+                        <a class="deck-link" data-slides="38" href="https://github.com/hesamsheikh/awesome-openclaw-usecases" target="_blank" rel="noopener"><span class="link-slide">Slide 38</span><strong>Awesome OpenClaw Use Cases</strong><small>Community examples referenced directly</small></a>
+                        <a class="deck-link" data-slides="24" href="https://github.com/vellum-ai/vellum-assistant" target="_blank" rel="noopener"><span class="link-slide">Slide 24</span><strong>Vellum Assistant</strong><small>Open-source assistant project</small></a>
+                        <a class="deck-link" data-slides="21,40,45" href="https://ollama.com/" target="_blank" rel="noopener"><span class="link-slide">Slides 21, 40, 45</span><strong>Ollama</strong><small>Run models locally</small></a>
+                        <a class="deck-link" data-slides="22,32,43" href="https://docs.openclaw.ai/clawhub" target="_blank" rel="noopener"><span class="link-slide">Slides 22, 32, 43</span><strong>ClawHub</strong><small>Skills registry and safety context</small></a>
+                        <a class="deck-link" data-slides="42" href="https://www.anthropic.com/learn" target="_blank" rel="noopener"><span class="link-slide">Slide 42</span><strong>Anthropic Academy</strong><small>AI fluency courses</small></a>
+                        <a class="deck-link" data-slides="42" href="https://www.skills.google/" target="_blank" rel="noopener"><span class="link-slide">Slide 42</span><strong>Google Skills</strong><small>Technical courses and labs</small></a>
+                        <a class="deck-link" data-slides="5,26" href="/resources/?tag=open-source-ai"><span class="link-slide">Slides 5, 26</span><strong>Freedom Lab AI guides</strong><small>Continue on our site</small></a>
+                    </div>
+                    <div class="privacy-note"><strong>Public copy</strong><span>Slide 16 was replaced because the original contained private meeting and network access details.</span></div>
+                </aside>
+            </div>
+
+            <div class="takeaway-grid" aria-label="Event takeaways">
+                <article><span>01</span><h3>Understand agents</h3><p>How models, tools, memory, and always-on gateways work together.</p></article>
+                <article><span>02</span><h3>Own the stack</h3><p>Why local-first, open-source infrastructure matters for autonomy.</p></article>
+                <article><span>03</span><h3>Start safely</h3><p>Dedicated hardware, narrow permissions, private defaults, and incident planning.</p></article>
+                <article><span>04</span><h3>Build with skills</h3><p>Turn repeatable workflows into capabilities the agent can reuse.</p></article>
+            </div>
+        </section>
+
+        <section class="learning-paths section-shell" aria-labelledby="paths-title">
+            <header class="section-heading compact-heading"><div><p class="eyebrow">Continue from the meetup</p><h2 id="paths-title">Three practical paths</h2></div></header>
+            <div class="path-grid">
+                <article class="path-card"><div class="path-number">01</div><div><h3>Start an agent</h3><p>Set up a personal assistant and understand the moving parts.</p><a href="/resources/openclaw-setup/">OpenClaw setup guide →</a></div></article>
+                <article class="path-card"><div class="path-number">02</div><div><h3>Make it yours</h3><p>Add durable memory and scoped access without opening everything.</p><a href="/resources/qmd-memory-setup/">Build better memory →</a></div></article>
+                <article class="path-card"><div class="path-number">03</div><div><h3>Harden the workflow</h3><p>Challenge assumptions before building and stress-test the result.</p><a href="/resources/quality-toolkit/">Use the quality toolkit →</a></div></article>
+            </div>
+        </section>
+
+        <section class="library-section section-shell" id="library" aria-labelledby="library-title">
+            <header class="section-heading library-heading">
+                <div><p class="eyebrow">Reusable knowledge</p><h2 id="library-title">Guides connected to real work</h2><p>Resources stay durable; event companions show why and when they matter.</p></div>
+                <label class="search-box" for="resourceSearch"><span class="sr-only">Search guides</span><input id="resourceSearch" type="search" placeholder="Search guides" autocomplete="off"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg></label>
+            </header>
+            <div class="filter-row" id="resourceFilters" aria-label="Filter guides">
+                <button type="button" class="filter-chip active" data-filter="all">All</button>
+                <button type="button" class="filter-chip" data-filter="agents">Agents</button>
+                <button type="button" class="filter-chip" data-filter="privacy">Privacy</button>
+                <button type="button" class="filter-chip" data-filter="bitcoin">Bitcoin</button>
+                <button type="button" class="filter-chip" data-filter="self-hosting">Self-hosting</button>
+            </div>
+            <div class="resource-grid" id="resourceGrid" aria-live="polite"></div>
+            <p class="empty-state" id="resourceEmpty" hidden>No guides match that search.</p>
+            <div class="section-footer"><a class="button button-quiet" href="/resources/">View the current full library →</a></div>
+        </section>
+
+        <section class="projects-section section-shell" id="projects" aria-labelledby="projects-title">
+            <header class="section-heading"><div><p class="eyebrow">Shared at the meetup</p><h2 id="projects-title">Projects become part of the record</h2><p>Demos should not disappear when the room empties. Each one gets a durable link and a path for collaboration.</p></div></header>
+            <div class="project-grid">
+                <a class="project-card project-featured" href="https://github.com/vellum-ai/vellum-assistant" target="_blank" rel="noopener"><div class="project-meta"><span>Open source</span><span>Agent</span></div><h3>Vellum Assistant</h3><p>An assistant designed to run continuously, learn preferences, and improve over time.</p><span class="project-link">View project ↗</span></a>
+                <a class="project-card" href="https://github.com/hesamsheikh/awesome-openclaw-usecases" target="_blank" rel="noopener"><div class="project-meta"><span>Community list</span></div><h3>OpenClaw use cases</h3><p>A living index of workflows other operators are building.</p><span class="project-link">Explore examples ↗</span></a>
+                <a class="project-card project-invite" href="mailto:info@freedomlab.nyc?subject=Freedom%20Lab%20demo%20proposal"><div class="project-meta"><span>Your project</span></div><h3>Share what you built</h3><p>Propose a five-minute demo for a future Freedom Lab meetup.</p><span class="project-link">Propose a demo →</span></a>
+            </div>
+        </section>
+
+        <section class="knowledge-loop section-shell" aria-labelledby="loop-title">
+            <header class="section-heading compact-heading"><div><p class="eyebrow">One publishing loop</p><h2 id="loop-title">A meetup becomes reusable knowledge</h2></div></header>
+            <ol class="loop-list">
+                <li><span>01</span><strong>Meetup</strong><small>People learn together</small></li>
+                <li><span>02</span><strong>Deck</strong><small>The shared narrative</small></li>
+                <li><span>03</span><strong>Links</strong><small>Sources pulled out</small></li>
+                <li><span>04</span><strong>Guides</strong><small>Skills made repeatable</small></li>
+                <li><span>05</span><strong>Projects</strong><small>Work continues</small></li>
+            </ol>
+        </section>
+
+        <section class="contribute-section section-shell" id="contribute" aria-labelledby="contribute-title">
+            <div class="contribute-panel">
+                <div><p class="eyebrow">Help improve the record</p><h2 id="contribute-title">What did we miss?</h2><p>Send a missing link, correct a slide reference, or propose a demo for the next meetup.</p></div>
+                <div class="contribute-actions">
+                    <a class="button button-primary" href="mailto:info@freedomlab.nyc?subject=Resource%20Lab%20link%20or%20correction">Send a link or correction</a>
+                    <a class="button button-quiet" href="mailto:info@freedomlab.nyc?subject=Freedom%20Lab%20demo%20proposal">Propose a demo</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <div id="footer-placeholder"></div>
+    <script src="../js/footer.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
