@@ -64,7 +64,8 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Aligned `/join2/` canonical, Open Graph URL, and WebPage JSON-LD with `/join/`; marked the experimental route `noindex, follow`; removed it from the sitemap; and excluded it from future generated sitemaps.
 - No visible page copy or design changed.
 
-## 2026-08-17 — Resource Lab media accessibility
+## 2026-08-17 — Resource Lab media accessibility and event-archive guardrail
 
 - Added native lazy loading to the Resource Lab slide-deck image so the public page passes the media-accessibility guardrail without changing visible content.
+- Retired the duplicate GitHub event-archive workflow after its scheduled run failed branch protection and revealed that it would replace 30 curated archive entries with only 28 Luma API entries. The active additive Hermes watchdog remains enabled and preserves manual entries.
 - GSC monitor checked 10 URLs (77 tracked) and found no actionable indexing errors; shared styles and all JSON-LD blocks also passed audit.
