@@ -63,3 +63,8 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Search Console identified `/join2/` as a duplicate of the indexed primary `/join/` page and selected `/join/` as Google's canonical.
 - Aligned `/join2/` canonical, Open Graph URL, and WebPage JSON-LD with `/join/`; marked the experimental route `noindex, follow`; removed it from the sitemap; and excluded it from future generated sitemaps.
 - No visible page copy or design changed.
+
+## 2026-08-17 — Resource Lab media accessibility
+
+- Added native lazy loading to the Resource Lab slide-deck image so the public page passes the media-accessibility guardrail without changing visible content.
+- GSC monitor checked 10 URLs (77 tracked) and found no actionable indexing errors; shared styles and all JSON-LD blocks also passed audit.
