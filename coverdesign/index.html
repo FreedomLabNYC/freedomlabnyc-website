@@ -19,98 +19,19 @@
   <meta name="twitter:description" content="Freedom Lab NYC sponsorship cover design review.">
   <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
   <style>
-    @font-face{font-family:"Space Grotesk";src:url("assets/space-grotesk-latin.woff2") format("woff2");font-weight:300 700}
-    @font-face{font-family:"JetBrains Mono";src:url("assets/jetbrains-mono-latin.woff2") format("woff2");font-weight:400 500}
-    :root{--green:#32d011;--green-bright:#8dff56;--green-pale:#d8ffc7;--black:#030504;--white:#f4f7f2}
     *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%;background:#cfd5cf;color:var(--white);font-family:"Space Grotesk",sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    html,body{margin:0;min-height:100%;background:#d3d6d3}
     body{display:flex;justify-content:center;padding:28px}
-    .sheet{position:relative;width:8.5in;height:11in;overflow:hidden;isolation:isolate;background:radial-gradient(circle at 50% 48%,#4ee72e 0%,var(--green) 45%,#26ad0c 100%);box-shadow:0 20px 70px rgba(0,0,0,.28)}
-    .sheet::before{content:"";position:absolute;inset:0;z-index:0;opacity:.38;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.26'/%3E%3C/svg%3E");mix-blend-mode:soft-light;pointer-events:none}
-    .poster{position:absolute;z-index:1;left:83px;top:71px;width:650px;height:914px;overflow:hidden;border-radius:42px;background:#030504;border:1px solid rgba(0,0,0,.72)}
-    .light-art{position:absolute;inset:0;width:100%;height:100%;display:block}
-    .title{position:absolute;z-index:6;left:56px;right:56px;bottom:37px;margin:0;text-align:center;text-transform:uppercase;font-family:"JetBrains Mono",monospace;font-weight:400;line-height:1.45}
-    .title-main{display:block;color:#f4f7f2;font-size:12px;letter-spacing:.46em;white-space:nowrap}
-    .title-main em{color:var(--green);font-style:normal}
-    .title-sub{display:block;margin-top:7px;color:rgba(244,247,242,.62);font-size:6.5px;letter-spacing:.3em}
-    .review-tag{position:absolute;z-index:2;top:29px;left:39px;font-family:"JetBrains Mono",monospace;font-size:6px;letter-spacing:.18em;text-transform:uppercase;color:rgba(2,10,2,.56)}
-    .edition{position:absolute;z-index:2;right:39px;bottom:28px;font-family:"JetBrains Mono",monospace;font-size:6px;letter-spacing:.18em;text-transform:uppercase;color:rgba(2,10,2,.56)}
+    .page{width:min(8.5in,calc(100vw - 20px))}
+    .cover{display:block;width:100%;height:auto;aspect-ratio:8.5/11}
     @page{size:Letter;margin:0}
-    @media print{html,body{background:#fff}.sheet{box-shadow:none}body{padding:0}}
-    @media screen and (max-width:900px){body{padding:10px}.sheet{transform-origin:top center;transform:scale(calc((100vw - 20px) / 816));margin-bottom:calc(-1056px + (1056px * ((100vw - 20px) / 816)))}}
+    @media print{html,body{background:#fff}body{padding:0}.page{width:8.5in}.cover{width:8.5in;height:11in}}
   </style>
 </head>
 <body>
   <!-- Unlisted design-review route: intentionally excluded from navigation and sitemap. -->
-  <main class="sheet" aria-label="Freedom Lab NYC sponsorship packages cover">
-    <div class="review-tag">Partnership brief</div>
-    <section class="poster" aria-label="Abstract torchlight cover artwork">
-      <svg class="light-art" viewBox="0 0 650 914" role="img" aria-label="Abstract green and white rays rising from a concentrated point of light">
-        <defs>
-          <linearGradient id="darkField" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#050706"/>
-            <stop offset=".5" stop-color="#061109"/>
-            <stop offset="1" stop-color="#020403"/>
-          </linearGradient>
-          <linearGradient id="greenRay" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#62ff3d" stop-opacity=".06"/>
-            <stop offset=".58" stop-color="#56ef30" stop-opacity=".88"/>
-            <stop offset="1" stop-color="#32d011" stop-opacity=".08"/>
-          </linearGradient>
-          <linearGradient id="paleRay" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#eaffdf" stop-opacity=".08"/>
-            <stop offset=".62" stop-color="#d8ffc7" stop-opacity=".92"/>
-            <stop offset="1" stop-color="#d8ffc7" stop-opacity=".06"/>
-          </linearGradient>
-          <linearGradient id="whiteRay" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#ffffff" stop-opacity=".14"/>
-            <stop offset=".63" stop-color="#ffffff" stop-opacity=".98"/>
-            <stop offset="1" stop-color="#ffffff" stop-opacity=".04"/>
-          </linearGradient>
-          <linearGradient id="stem" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#d8ffc7" stop-opacity=".86"/>
-            <stop offset=".45" stop-color="#32d011" stop-opacity=".46"/>
-            <stop offset="1" stop-color="#32d011" stop-opacity="0"/>
-          </linearGradient>
-          <radialGradient id="bloom" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="#ffffff" stop-opacity="1"/>
-            <stop offset=".18" stop-color="#e7ffdd" stop-opacity=".92"/>
-            <stop offset=".48" stop-color="#6cff45" stop-opacity=".47"/>
-            <stop offset="1" stop-color="#32d011" stop-opacity="0"/>
-          </radialGradient>
-          <filter id="softGlow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="43"/></filter>
-          <filter id="grain" x="0" y="0" width="100%" height="100%">
-            <feTurbulence type="fractalNoise" baseFrequency=".82" numOctaves="4" seed="7" stitchTiles="stitch" result="noise"/>
-            <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
-            <feComponentTransfer in="mono" result="grainAlpha"><feFuncA type="table" tableValues="0 .08"/></feComponentTransfer>
-            <feBlend in="SourceGraphic" in2="grainAlpha" mode="soft-light"/>
-          </filter>
-          <clipPath id="roundClip"><rect width="650" height="914" rx="42"/></clipPath>
-        </defs>
-        <g clip-path="url(#roundClip)" filter="url(#grain)">
-          <rect width="650" height="914" fill="url(#darkField)"/>
-          <path d="M319 704 C240 650 105 550 -42 410 L-42 565 C90 650 190 708 292 753 Z" fill="url(#greenRay)" opacity=".67"/>
-          <path d="M327 698 C270 615 190 490 100 330 L180 292 C254 462 305 592 366 704 Z" fill="url(#paleRay)" opacity=".62"/>
-          <path d="M324 712 C286 558 284 392 306 210 L381 -34 L462 -34 C382 238 355 488 393 718 Z" fill="url(#paleRay)" opacity=".87"/>
-          <path d="M330 720 C330 537 360 307 450 -34 L545 -34 C440 280 420 523 415 720 Z" fill="url(#whiteRay)" opacity=".98"/>
-          <path d="M378 714 C424 500 510 278 648 97 L700 166 C554 372 486 556 456 754 Z" fill="url(#greenRay)" opacity=".98"/>
-          <path d="M402 720 C500 573 600 463 696 392 L696 518 C578 603 506 674 442 768 Z" fill="url(#greenRay)" opacity=".74"/>
-          <path d="M405 716 C496 640 579 590 688 545 L688 675 C575 698 507 727 438 767 Z" fill="#32d011" opacity=".2"/>
-          <path d="M315 709 C214 647 124 579 -35 433 L-35 508 C98 628 201 696 307 758 Z" fill="#d8ffc7" opacity=".16"/>
-          <path d="M347 687 L375 687 L375 870 L344 870 Z" fill="url(#stem)" opacity=".88"/>
-          <path d="M306 695 L338 695 L338 875 L303 875 Z" fill="url(#stem)" opacity=".49"/>
-          <path d="M382 694 L414 694 L420 871 L387 871 Z" fill="url(#stem)" opacity=".62"/>
-          <path d="M268 708 L300 708 L296 861 L266 861 Z" fill="url(#stem)" opacity=".22"/>
-          <ellipse cx="371" cy="691" rx="190" ry="151" fill="url(#bloom)" filter="url(#softGlow)" opacity=".97"/>
-          <ellipse cx="371" cy="691" rx="105" ry="72" fill="url(#bloom)" opacity=".9"/>
-          <path d="M544 -20 C478 228 438 432 405 608" fill="none" stroke="#d8ffc7" stroke-width="2" opacity=".8"/>
-          <path d="M647 314 C554 488 484 600 423 704" fill="none" stroke="#8dff56" stroke-width="2" opacity=".65"/>
-          <rect width="650" height="914" fill="none" stroke="rgba(255,255,255,.07)"/>
-        </g>
-      </svg>
-      <h1 class="title"><span class="title-main">Freedom Lab <em>NYC</em></span><span class="title-sub">Sponsorship Packages</span></h1>
-    </section>
-    <div class="edition">New York City · 2026</div>
+  <main class="page">
+    <img class="cover" src="assets/cover-final.svg" alt="Freedom Lab NYC Sponsorship Packages cover with abstract green and white torchlight rays">
   </main>
 </body>
 </html>
