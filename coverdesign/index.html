@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Freedom Lab NYC — Sponsorship Cover</title>
+  <meta name="description" content="Cover concept for the Freedom Lab NYC community event sponsorship brief.">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <link rel="canonical" href="https://freedomlab.nyc/coverdesign/">
+  <meta property="og:title" content="Freedom Lab NYC Sponsorship Packages">
+  <meta property="og:description" content="Freedom Lab NYC sponsorship cover design review.">
+  <meta property="og:url" content="https://freedomlab.nyc/coverdesign/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Freedom Lab NYC Sponsorship Packages">
+  <meta name="twitter:description" content="Freedom Lab NYC sponsorship cover design review.">
+  <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+  <style>
+    @font-face{font-family:"Press Start 2P";src:url("assets/press-start-2p-latin.woff2") format("woff2");font-weight:400}
+    @font-face{font-family:"Space Grotesk";src:url("assets/space-grotesk-latin.woff2") format("woff2");font-weight:300 700}
+    @font-face{font-family:"JetBrains Mono";src:url("assets/jetbrains-mono-latin.woff2") format("woff2");font-weight:400 500}
+
+    :root{
+      --black:#020604;
+      --ink:#051009;
+      --deep:#082512;
+      --green:#32d011;
+      --green-bright:#8dff56;
+      --green-pale:#d8ffc7;
+      --paper:#f3f8f1;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#d8ddd8;color:var(--paper);font-family:"Space Grotesk",sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{display:flex;justify-content:center;padding:28px}
+
+    .sheet{
+      position:relative;
+      width:8.5in;
+      height:11in;
+      overflow:hidden;
+      isolation:isolate;
+      background:
+        radial-gradient(circle at 47% 83%,rgba(50,208,17,.22),transparent 31%),
+        linear-gradient(148deg,#07150b 0%,#030806 60%,#06170a 100%);
+      box-shadow:0 20px 70px rgba(0,0,0,.32);
+    }
+
+    .sheet::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      opacity:.28;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.24'/%3E%3C/svg%3E");
+      mix-blend-mode:soft-light;
+      pointer-events:none;
+    }
+
+    .folio{
+      position:absolute;
+      top:39px;
+      left:48px;
+      right:48px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-family:"JetBrains Mono",monospace;
+      font-size:7px;
+      line-height:1;
+      letter-spacing:.19em;
+      text-transform:uppercase;
+      color:rgba(216,255,199,.63);
+    }
+
+    .folio::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      top:18px;
+      height:1px;
+      background:linear-gradient(90deg,rgba(50,208,17,.66),rgba(50,208,17,.08) 66%,transparent);
+    }
+
+    .cover-card{
+      position:absolute;
+      top:93px;
+      left:98px;
+      width:620px;
+      height:842px;
+      overflow:hidden;
+      border:1px solid rgba(174,255,138,.31);
+      border-radius:31px;
+      background:
+        linear-gradient(180deg,rgba(141,255,86,.05),transparent 36%),
+        linear-gradient(152deg,#0c4319 0%,#0a3215 42%,#06160c 100%);
+    }
+
+    .cover-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:8;
+      border-radius:inherit;
+      background:
+        linear-gradient(105deg,rgba(255,255,255,.11),transparent 15% 73%,rgba(255,255,255,.035)),
+        radial-gradient(circle at 42% 87%,rgba(141,255,86,.42),transparent 26%);
+      mix-blend-mode:screen;
+      pointer-events:none;
+    }
+
+    .cover-card::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:11;
+      opacity:.18;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.32'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay;
+      pointer-events:none;
+    }
+
+    .registration{
+      position:absolute;
+      inset:0;
+      z-index:1;
+      opacity:.18;
+      background-image:
+        linear-gradient(rgba(216,255,199,.18) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(216,255,199,.12) 1px,transparent 1px);
+      background-size:100% 112px,103px 100%;
+      mask-image:linear-gradient(to bottom,transparent,black 16%,black 92%,transparent);
+    }
+
+    .ray-field{position:absolute;inset:0;z-index:2;overflow:hidden}
+    .ray{position:absolute;inset:-5% -8% -4%;transform-origin:44% 91%;mix-blend-mode:screen;filter:saturate(112%)}
+    .ray-a{background:linear-gradient(180deg,rgba(216,255,199,.48),rgba(87,244,38,.18) 58%,rgba(50,208,17,.02));clip-path:polygon(6% 0,21% 0,49% 94%,38% 94%)}
+    .ray-b{background:linear-gradient(180deg,rgba(141,255,86,.17),rgba(89,242,42,.38) 65%,rgba(50,208,17,.04));clip-path:polygon(27% 0,39% 0,50% 94%,42% 94%)}
+    .ray-c{background:linear-gradient(180deg,rgba(216,255,199,.56),rgba(141,255,86,.21) 50%,rgba(50,208,17,.02));clip-path:polygon(46% 0,57% 0,55% 94%,48% 94%)}
+    .ray-d{background:linear-gradient(180deg,rgba(81,235,39,.13),rgba(174,255,138,.42) 69%,rgba(50,208,17,.04));clip-path:polygon(65% 0,78% 0,59% 94%,52% 94%)}
+    .ray-e{background:linear-gradient(180deg,rgba(216,255,199,.38),rgba(141,255,86,.12) 53%,rgba(50,208,17,.01));clip-path:polygon(84% 0,96% 0,65% 94%,57% 94%)}
+
+    .refraction{
+      position:absolute;
+      left:0;
+      right:0;
+      top:58%;
+      height:118px;
+      z-index:4;
+      border-top:1px solid rgba(216,255,199,.18);
+      border-bottom:1px solid rgba(216,255,199,.11);
+      background:linear-gradient(90deg,rgba(3,14,7,.7),rgba(50,208,17,.16) 34%,rgba(6,27,11,.78) 71%);
+      mix-blend-mode:multiply;
+    }
+
+
+    .logo{
+      position:absolute;
+      top:46px;
+      left:46px;
+      z-index:14;
+      width:176px;
+      height:auto;
+      display:block;
+      filter:drop-shadow(0 3px 8px rgba(0,0,0,.3));
+    }
+
+    .edition{
+      position:absolute;
+      top:51px;
+      right:43px;
+      z-index:14;
+      text-align:right;
+      font-family:"JetBrains Mono",monospace;
+      font-size:7px;
+      line-height:1.65;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+      color:rgba(216,255,199,.67);
+    }
+
+    .edition strong{display:block;color:var(--green-bright);font-weight:500}
+
+    .cover-copy{
+      position:absolute;
+      left:47px;
+      right:45px;
+      bottom:47px;
+      z-index:15;
+    }
+
+    .kicker{
+      margin:0 0 13px;
+      font-family:"JetBrains Mono",monospace;
+      font-size:8px;
+      line-height:1;
+      font-weight:500;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:var(--green-bright);
+    }
+
+    h1{
+      max-width:510px;
+      margin:0;
+      font-size:44px;
+      line-height:.96;
+      font-weight:650;
+      letter-spacing:-.055em;
+      text-transform:uppercase;
+      text-wrap:balance;
+      color:#fff;
+    }
+
+    .descriptor{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:24px;
+      margin-top:22px;
+      padding-top:14px;
+      border-top:1px solid rgba(216,255,199,.34);
+      font-family:"JetBrains Mono",monospace;
+      font-size:7.5px;
+      line-height:1.55;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:rgba(243,248,241,.72);
+    }
+
+    .descriptor span:last-child{text-align:right;color:var(--green-pale)}
+
+    .outer-note{
+      position:absolute;
+      left:49px;
+      bottom:48px;
+      font-family:"JetBrains Mono",monospace;
+      font-size:7px;
+      line-height:1.55;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+      color:rgba(216,255,199,.57);
+    }
+
+    .outer-mark{
+      position:absolute;
+      right:48px;
+      bottom:48px;
+      width:47px;
+      height:8px;
+      background:linear-gradient(90deg,var(--green),rgba(50,208,17,.06));
+    }
+
+    @page{size:Letter;margin:0}
+    @media print{html,body{background:#fff}.sheet{box-shadow:none}body{padding:0}}
+    @media screen and (max-width:900px){body{padding:10px}.sheet{transform-origin:top center;transform:scale(calc((100vw - 20px) / 816));margin-bottom:calc(-1056px + (1056px * ((100vw - 20px) / 816)))}}
+  </style>
+</head>
+<body>
+  <!-- Unlisted design-review route: intentionally excluded from navigation and sitemap. -->
+  <main class="sheet" aria-label="Freedom Lab NYC community event sponsorship cover">
+    <div class="folio"><span>Freedom Lab NYC</span><span>Partnership brief · 01</span></div>
+
+    <section class="cover-card" aria-label="Community event sponsorship">
+      <div class="registration" aria-hidden="true"></div>
+      <div class="ray-field" aria-hidden="true">
+        <div class="ray ray-a"></div>
+        <div class="ray ray-b"></div>
+        <div class="ray ray-c"></div>
+        <div class="ray ray-d"></div>
+        <div class="ray ray-e"></div>
+        <div class="refraction"></div>
+      </div>
+
+      <img class="logo" src="assets/freedom-lab-logo.webp" alt="Freedom Lab NYC">
+      <div class="edition"><strong>Community sponsorship</strong>New York City · 2026</div>
+
+      <div class="cover-copy">
+        <p class="kicker">Build the room with us</p>
+        <h1>Freedom Lab NYC Sponsorship Packages</h1>
+        <div class="descriptor"><span>Practical freedom technology<br>for builders and neighbors</span><span>One event<br>One aligned sponsor</span></div>
+      </div>
+    </section>
+
+    <div class="outer-note">Private · open-source · self-hosted<br>technology in New York City</div>
+    <div class="outer-mark" aria-hidden="true"></div>
+  </main>
+</body>
+</html>
