@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <title>Freedom Lab NYC — Sponsorship Package</title>
+  <meta name="description" content="Editable three-page Freedom Lab NYC sponsorship package.">
+  <link rel="canonical" href="https://freedomlab.nyc/sponsors-html/">
+  <meta property="og:title" content="Freedom Lab NYC Sponsorship Package">
+  <meta property="og:description" content="Editable three-page Freedom Lab NYC sponsorship package.">
+  <meta property="og:url" content="https://freedomlab.nyc/sponsors-html/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Freedom Lab NYC Sponsorship Package">
+  <meta name="twitter:description" content="Editable three-page Freedom Lab NYC sponsorship package.">
+  <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="document" aria-label="Freedom Lab NYC sponsorship package">
+    <div class="page-stage">
+      <section class="page cover-page" role="img" aria-label="Freedom Lab NYC sponsorship package cover"></section>
+    </div>
+
+    <div class="page-stage">
+      <section class="page primer-page" aria-label="Freedom Lab NYC primer">
+        <div class="primer-layout">
+          <header class="document-heading">
+            <div class="eyebrow">Freedom technology in New York City</div>
+            <h1>Freedom Lab NYC: A Primer</h1>
+            <div class="title-rule"></div>
+          </header>
+
+          <section class="about" aria-label="About Freedom Lab NYC">
+            <div class="about-label">About</div>
+            <p>A community of highly technical professionals interested in open source and freedom tech.</p>
+          </section>
+
+          <section class="photo-grid" aria-label="Freedom Lab community photos">
+            <figure><img src="assets/community-01.jpg" alt="Freedom Lab community event in a bright meeting room"></figure>
+            <figure><img src="assets/community-02.jpeg" alt="Freedom Lab class with a full audience"></figure>
+            <figure><img src="assets/community-03.jpeg" alt="Freedom Lab community members playing a Bitcoin board game"></figure>
+            <figure><img src="assets/community-04.jpeg" alt="Freedom Lab community gathering around a long workshop table"></figure>
+          </section>
+
+          <div class="stats-heading">At a glance</div>
+          <section class="stats-grid" aria-label="Freedom Lab statistics">
+            <div class="stat-card"><span class="stat-value">X</span><span class="stat-label">Paying Members</span></div>
+            <div class="stat-card"><span class="stat-value">801</span><span class="stat-label">Calendar Subscribers</span></div>
+            <div class="stat-card"><span class="stat-value">45+</span><span class="stat-label">Attendees per event</span></div>
+            <div class="stat-card"><span class="stat-value">30</span><span class="stat-label">Freedom Tech Events Hosted</span></div>
+          </section>
+        </div>
+      </section>
+    </div>
+
+    <div class="page-stage">
+      <section class="page tiers-page" aria-label="Freedom Lab NYC sponsorship tiers">
+        <header class="document-heading">
+          <div class="eyebrow">Partner with the community</div>
+          <h1>Sponsorship Tiers</h1>
+          <div class="title-rule"></div>
+        </header>
+
+        <div class="tier-collage" aria-label="Examples of sponsor recognition">
+          <figure class="proof-photo event-proof"><img src="assets/event-sponsor-placard.jpeg" alt="Cake Wallet sponsor placard at a Freedom Lab event"></figure>
+          <figure class="proof-photo premium-proof"><img src="assets/premium-sponsor-wall.jpg" alt="3D-printed sponsor logos displayed at Freedom Lab"></figure>
+        </div>
+
+        <section class="tier-ledgers">
+          <article class="tier-ledger">
+            <header class="tier-ledger-head"><h2>Event Sponsor</h2><div class="price">$500 <small>/ event</small></div></header>
+            <ul class="benefits">
+              <li><div class="benefit-group"><strong>Acknowledgments</strong><span>Event listing · In person · Social media</span></div></li>
+              <li>Stickers</li>
+              <li>Placard</li>
+            </ul>
+            <div class="tier-code">Tier 01 · Event activation</div>
+          </article>
+
+          <article class="tier-ledger">
+            <header class="tier-ledger-head"><h2>Premium Sponsor</h2><div class="price">$10,000 <small>/ year</small></div></header>
+            <ul class="benefits">
+              <li>2+ announcement presentations</li>
+              <li>2+ dedicated workshops</li>
+              <li>3D-printed logo on the Premium Sponsor Wall</li>
+            </ul>
+            <div class="tier-code">Tier 02 · Annual partnership</div>
+          </article>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    function sizePages(){
+      const scale=Math.min(1,(window.innerWidth-24)/816);
+      document.querySelectorAll('.page-stage').forEach((stage)=>{
+        const page=stage.querySelector('.page');
+        stage.style.width=`${816*scale}px`;
+        stage.style.height=`${1056*scale}px`;
+        page.style.transform=`scale(${scale})`;
+      });
+    }
+    sizePages();
+    window.addEventListener('resize',sizePages,{passive:true});
+  </script>
+</body>
+</html>
