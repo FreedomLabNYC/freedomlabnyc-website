@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <title>Freedom Lab NYC — Beacon Design Iterations</title>
+  <meta name="description" content="Unlisted Freedom Lab NYC primer page beacon design iterations.">
+  <link rel="canonical" href="https://freedomlab.nyc/coverdesign/primer-options/beacon/">
+  <meta property="og:title" content="Freedom Lab NYC Beacon Design Iterations">
+  <meta property="og:description" content="Unlisted Freedom Lab NYC primer page beacon design iterations.">
+  <meta property="og:url" content="https://freedomlab.nyc/coverdesign/primer-options/beacon/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Freedom Lab NYC Beacon Design Iterations">
+  <meta name="twitter:description" content="Unlisted Freedom Lab NYC primer page beacon design iterations.">
+  <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+  <style>
+    @font-face{font-family:"Space Grotesk";src:url("assets/space-grotesk-latin.woff2") format("woff2");font-weight:300 700}
+    @font-face{font-family:"JetBrains Mono";src:url("assets/jetbrains-mono-latin.woff2") format("woff2");font-weight:400 500}
+    :root{--green:#32d011;--green-light:#8dff56;--green-pale:#d8ffc7;--ink:#020603;--paper:#f4f7f2;--muted:#bac8b6}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#111611;color:var(--paper);font-family:"Space Grotesk",sans-serif}
+    body{padding:42px 20px 72px}
+    .gallery{display:grid;gap:58px;justify-items:center}
+    .option-block{width:816px}
+    .option-label{display:flex;justify-content:space-between;align-items:end;margin:0 0 12px;padding:0 2px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.11em}
+    .option-label strong{font-size:12px;color:var(--green-light);font-weight:500}.option-label span{font-size:9px;color:#7e8e7b}
+    .sheet-stage{width:816px;height:1056px;overflow:hidden}
+    .sheet{position:relative;width:816px;height:1056px;overflow:hidden;isolation:isolate;background:#071109 url("assets/primer-background.png") center/cover no-repeat;color:var(--paper);-webkit-font-smoothing:antialiased}
+    .sheet::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 40%,rgba(1,7,3,.02),rgba(1,7,3,.2) 78%)}
+    .layout{position:absolute;z-index:2;left:96px;right:96px;top:76px;bottom:66px}
+    .heading{text-align:center}.heading .eyebrow{margin-bottom:14px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.19em;text-transform:uppercase;color:var(--green-light)}
+    .title{margin:0;color:#fff;font-size:31px;line-height:1.1;letter-spacing:-.035em;font-weight:620;text-wrap:balance}
+    .title-rule{width:70px;height:2px;margin:25px auto 0;background:linear-gradient(90deg,transparent,var(--green-light),transparent)}
+    .stat-value{display:block;color:var(--green-light);font-size:40px;line-height:1;font-weight:620;letter-spacing:-.04em}
+    .stat-label{display:block;color:#eef5eb;font-size:16px;line-height:1.22;font-weight:500;text-wrap:balance}
+    .statement{margin:0;color:#d7e4d3;font-size:15px;line-height:1.45;text-wrap:balance}
+    .statement-wrap{display:flex;align-items:center;justify-content:center;min-height:106px;margin:48px 28px 0;padding:20px 34px;text-align:center}
+    .statement-wrap .statement{max-width:500px}
+
+    /* C1 — the selected direction, tightened and made more deliberate. */
+    .c1-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:52px}
+    .c1-card{position:relative;height:184px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;padding:28px;text-align:center;background:linear-gradient(145deg,rgba(2,14,5,.6),rgba(2,9,4,.42));backdrop-filter:blur(5px)}
+    .c1-card::before,.c1-card::after{content:"";position:absolute;width:39px;height:39px}
+    .c1-card::before{left:0;top:0;border-left:2px solid rgba(141,255,86,.9);border-top:2px solid rgba(141,255,86,.9)}
+    .c1-card::after{right:0;bottom:0;border-right:2px solid rgba(141,255,86,.9);border-bottom:2px solid rgba(141,255,86,.9)}
+    .c1-card .stat-value{font-family:"JetBrains Mono",monospace;font-weight:500}
+    .c1-statement{border-block:1px solid rgba(141,255,86,.5);background:linear-gradient(90deg,transparent,rgba(2,14,5,.74) 12% 88%,transparent)}
+
+    /* C2 — one open matrix; less card-like, more architectural. */
+    .c2-matrix{position:relative;display:grid;grid-template-columns:1fr 1fr;margin:54px 16px 0}
+    .c2-matrix::before,.c2-matrix::after{content:"";position:absolute;background:rgba(141,255,86,.38)}
+    .c2-matrix::before{left:50%;top:18px;bottom:18px;width:1px}.c2-matrix::after{left:18px;right:18px;top:50%;height:1px}
+    .c2-corners{position:absolute;inset:0;pointer-events:none}
+    .c2-corners::before,.c2-corners::after{content:"";position:absolute;width:55px;height:55px;border-color:rgba(141,255,86,.88)}
+    .c2-corners::before{left:0;top:0;border-left:2px solid rgba(141,255,86,.88);border-top:2px solid rgba(141,255,86,.88)}.c2-corners::after{right:0;bottom:0;border-right:2px solid rgba(141,255,86,.88);border-bottom:2px solid rgba(141,255,86,.88)}
+    .c2-stat{height:194px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:28px;text-align:center;background:rgba(2,11,4,.25);backdrop-filter:blur(3px)}
+    .c2-stat .stat-value{font-family:"JetBrains Mono",monospace;font-size:43px;font-weight:500}.c2-stat .stat-label{max-width:210px}
+    .c2-node{position:absolute;left:50%;top:50%;width:12px;height:12px;transform:translate(-50%,-50%) rotate(45deg);background:var(--green-light);box-shadow:0 0 18px rgba(141,255,86,.55)}
+    .c2-statement{border:1px solid rgba(141,255,86,.42);border-radius:3px;background:rgba(2,13,5,.64);margin-inline:44px}
+
+    /* C3 — left-aligned editorial data modules with coordinates. */
+    .c3-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:52px}
+    .c3-card{position:relative;height:184px;padding:36px 30px 27px 39px;display:flex;flex-direction:column;justify-content:end;gap:12px;background:linear-gradient(90deg,rgba(2,14,5,.7),rgba(2,11,4,.42));backdrop-filter:blur(5px);border-left:3px solid rgba(141,255,86,.82)}
+    .c3-card::after{content:attr(data-index);position:absolute;right:18px;top:16px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.14em;color:rgba(216,255,199,.53)}
+    .c3-card .stat-value{font-family:"JetBrains Mono",monospace;font-size:38px;font-weight:500}.c3-card .stat-label{max-width:220px;text-align:left}
+    .c3-card:nth-child(even){border-left:0;border-right:3px solid rgba(141,255,86,.82);padding-left:30px;padding-right:39px;text-align:right;align-items:end}.c3-card:nth-child(even)::after{left:18px;right:auto}
+    .c3-statement{position:relative;border-block:1px solid rgba(141,255,86,.42);background:rgba(2,13,5,.58)}
+    .c3-statement::before{content:"";position:absolute;left:50%;top:-7px;width:13px;height:13px;transform:translateX(-50%) rotate(45deg);border:1px solid var(--green-light);background:#071109}
+
+    /* C4 — radial register: modules orbit a precise central signal. */
+    .c4-field{position:relative;margin-top:52px;height:402px}
+    .c4-axis-x,.c4-axis-y{position:absolute;background:linear-gradient(90deg,transparent,rgba(141,255,86,.34),transparent)}
+    .c4-axis-x{left:28px;right:28px;top:50%;height:1px}.c4-axis-y{top:26px;bottom:26px;left:50%;width:1px;background:linear-gradient(180deg,transparent,rgba(141,255,86,.34),transparent)}
+    .c4-card{position:absolute;width:262px;height:176px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;padding:25px;text-align:center;background:rgba(2,12,4,.52);backdrop-filter:blur(5px)}
+    .c4-card.pos-a{left:0;top:0}.c4-card.pos-b{right:0;top:0}.c4-card.pos-c{left:0;bottom:0}.c4-card.pos-d{right:0;bottom:0}
+    .c4-card::before{content:"";position:absolute;width:34px;height:34px}
+    .c4-card.pos-a::before{left:0;top:0;border-left:2px solid var(--green-light);border-top:2px solid var(--green-light)}
+    .c4-card.pos-b::before{right:0;top:0;border-right:2px solid var(--green-light);border-top:2px solid var(--green-light)}
+    .c4-card.pos-c::before{left:0;bottom:0;border-left:2px solid var(--green-light);border-bottom:2px solid var(--green-light)}
+    .c4-card.pos-d::before{right:0;bottom:0;border-right:2px solid var(--green-light);border-bottom:2px solid var(--green-light)}
+    .c4-card .stat-value{font-family:"JetBrains Mono",monospace;font-size:39px;font-weight:500}.c4-card .stat-label{max-width:210px}
+    .c4-center{position:absolute;left:50%;top:50%;width:28px;height:28px;transform:translate(-50%,-50%) rotate(45deg);border:1.5px solid var(--green-light);background:#071109;box-shadow:0 0 22px rgba(141,255,86,.28)}
+    .c4-center::after{content:"";position:absolute;inset:7px;background:var(--green-light)}
+    .c4-statement{margin-top:48px;background:linear-gradient(90deg,transparent,rgba(2,14,5,.74) 14% 86%,transparent);border-block:1px solid rgba(141,255,86,.45)}
+
+    @media(max-width:860px){body{padding:24px 12px 52px}.gallery{gap:34px}.option-block{width:calc(100vw - 24px)}.sheet{transform-origin:top left}.option-label span{display:none}}
+  </style>
+</head>
+<body>
+  <main class="gallery" aria-label="Freedom Lab NYC beacon design iterations">
+    <section class="option-block">
+      <div class="option-label"><strong>C1 · Refined Beacons</strong><span>The chosen direction, tightened</span></div>
+      <div class="sheet-stage"><article class="sheet" id="option-c1"><div class="layout">
+        <header class="heading"><div class="eyebrow">Freedom technology in New York City</div><h1 class="title">Freedom Lab NYC: A Primer</h1><div class="title-rule"></div></header>
+        <section class="c1-grid" aria-label="Freedom Lab statistics">
+          <div class="c1-card"><span class="stat-value">X</span><span class="stat-label">Paying Members</span></div><div class="c1-card"><span class="stat-value">801</span><span class="stat-label">Calendar Subscribers</span></div><div class="c1-card"><span class="stat-value">45+</span><span class="stat-label">Attendees per event</span></div><div class="c1-card"><span class="stat-value">30</span><span class="stat-label">Freedom Tech Events Hosted</span></div>
+        </section>
+        <footer class="statement-wrap c1-statement"><p class="statement">A community of highly technical professionals interested in open source and freedom tech.</p></footer>
+      </div></article></div>
+    </section>
+
+    <section class="option-block">
+      <div class="option-label"><strong>C2 · Open Matrix</strong><span>One shared grid, almost no card chrome</span></div>
+      <div class="sheet-stage"><article class="sheet" id="option-c2"><div class="layout">
+        <header class="heading"><div class="eyebrow">Freedom technology in New York City</div><h1 class="title">Freedom Lab NYC: A Primer</h1><div class="title-rule"></div></header>
+        <section class="c2-matrix" aria-label="Freedom Lab statistics"><div class="c2-corners"></div>
+          <div class="c2-stat"><span class="stat-value">X</span><span class="stat-label">Paying Members</span></div><div class="c2-stat"><span class="stat-value">801</span><span class="stat-label">Calendar Subscribers</span></div><div class="c2-stat"><span class="stat-value">45+</span><span class="stat-label">Attendees per event</span></div><div class="c2-stat"><span class="stat-value">30</span><span class="stat-label">Freedom Tech Events Hosted</span></div><div class="c2-node"></div>
+        </section>
+        <footer class="statement-wrap c2-statement"><p class="statement">A community of highly technical professionals interested in open source and freedom tech.</p></footer>
+      </div></article></div>
+    </section>
+
+    <section class="option-block">
+      <div class="option-label"><strong>C3 · Coordinates</strong><span>Editorial alignment and numbered modules</span></div>
+      <div class="sheet-stage"><article class="sheet" id="option-c3"><div class="layout">
+        <header class="heading"><div class="eyebrow">Freedom technology in New York City</div><h1 class="title">Freedom Lab NYC: A Primer</h1><div class="title-rule"></div></header>
+        <section class="c3-grid" aria-label="Freedom Lab statistics">
+          <div class="c3-card" data-index="01"><span class="stat-value">X</span><span class="stat-label">Paying Members</span></div><div class="c3-card" data-index="02"><span class="stat-value">801</span><span class="stat-label">Calendar Subscribers</span></div><div class="c3-card" data-index="03"><span class="stat-value">45+</span><span class="stat-label">Attendees per event</span></div><div class="c3-card" data-index="04"><span class="stat-value">30</span><span class="stat-label">Freedom Tech Events Hosted</span></div>
+        </section>
+        <footer class="statement-wrap c3-statement"><p class="statement">A community of highly technical professionals interested in open source and freedom tech.</p></footer>
+      </div></article></div>
+    </section>
+
+    <section class="option-block">
+      <div class="option-label"><strong>C4 · Radial Register</strong><span>Four modules organized around one signal</span></div>
+      <div class="sheet-stage"><article class="sheet" id="option-c4"><div class="layout">
+        <header class="heading"><div class="eyebrow">Freedom technology in New York City</div><h1 class="title">Freedom Lab NYC: A Primer</h1><div class="title-rule"></div></header>
+        <section class="c4-field" aria-label="Freedom Lab statistics"><div class="c4-axis-x"></div><div class="c4-axis-y"></div>
+          <div class="c4-card pos-a"><span class="stat-value">X</span><span class="stat-label">Paying Members</span></div><div class="c4-card pos-b"><span class="stat-value">801</span><span class="stat-label">Calendar Subscribers</span></div><div class="c4-card pos-c"><span class="stat-value">45+</span><span class="stat-label">Attendees per event</span></div><div class="c4-card pos-d"><span class="stat-value">30</span><span class="stat-label">Freedom Tech Events Hosted</span></div><div class="c4-center"></div>
+        </section>
+        <footer class="statement-wrap c4-statement"><p class="statement">A community of highly technical professionals interested in open source and freedom tech.</p></footer>
+      </div></article></div>
+    </section>
+  </main>
+  <script>
+    function sizeSheets(){
+      const scale=Math.min(1,(window.innerWidth-24)/816);
+      document.querySelectorAll('.sheet-stage').forEach((stage)=>{
+        const sheet=stage.querySelector('.sheet');
+        stage.style.width=`${816*scale}px`;
+        stage.style.height=`${1056*scale}px`;
+        sheet.style.transform=`scale(${scale})`;
+      });
+    }
+    sizeSheets();window.addEventListener('resize',sizeSheets,{passive:true});
+  </script>
+</body>
+</html>
