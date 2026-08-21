@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <title>Freedom Lab NYC — Split Primer Layout</title>
+  <meta name="description" content="Unlisted Freedom Lab NYC split primer layout review.">
+  <link rel="canonical" href="https://freedomlab.nyc/coverdesign/primer-options/split/">
+  <meta property="og:title" content="Freedom Lab NYC Split Primer Layout">
+  <meta property="og:description" content="Unlisted Freedom Lab NYC split primer layout review.">
+  <meta property="og:url" content="https://freedomlab.nyc/coverdesign/primer-options/split/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Freedom Lab NYC Split Primer Layout">
+  <meta name="twitter:description" content="Unlisted Freedom Lab NYC split primer layout review.">
+  <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+  <style>
+    @font-face{font-family:"Space Grotesk";src:url("assets/space-grotesk-latin.woff2") format("woff2");font-weight:300 700}
+    @font-face{font-family:"JetBrains Mono";src:url("assets/jetbrains-mono-latin.woff2") format("woff2");font-weight:400 500}
+    :root{--green:#32d011;--green-light:#8dff56;--green-pale:#d8ffc7;--paper:#f4f7f2;--muted:#d2dfce}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#111611;color:var(--paper);font-family:"Space Grotesk",sans-serif}
+    body{display:flex;justify-content:center;padding:28px}
+    .stage{width:816px;height:1056px;overflow:hidden}
+    .sheet{position:relative;width:816px;height:1056px;overflow:hidden;isolation:isolate;background:#071109 url("assets/primer-background.png") center/cover no-repeat;color:var(--paper);-webkit-font-smoothing:antialiased}
+    .sheet::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:radial-gradient(circle at 52% 36%,rgba(1,7,3,.02),rgba(1,7,3,.22) 82%)}
+    .layout{position:absolute;z-index:2;left:88px;right:88px;top:50px;bottom:48px}
+    .heading{text-align:center}
+    .eyebrow{margin-bottom:12px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--green-light)}
+    .title{margin:0;color:#fff;font-size:31px;line-height:1.1;letter-spacing:-.035em;font-weight:620}
+    .title-rule{width:66px;height:2px;margin:20px auto 0;background:linear-gradient(90deg,transparent,var(--green-light),transparent)}
+
+    .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+    .photo-cell{position:relative;height:160px;margin:0;overflow:hidden;background:rgba(2,12,4,.58);border:1px solid rgba(141,255,86,.28)}
+    .photo-cell img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.94) contrast(1.02)}
+    .photo-cell:nth-child(1) img{object-position:54% 58%}
+    .photo-cell:nth-child(2) img{object-position:52% 43%}
+    .photo-cell:nth-child(3) img{object-position:55% 48%}
+    .photo-cell::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.28);background:linear-gradient(180deg,transparent 68%,rgba(1,7,3,.13))}
+    .photo-empty{background:linear-gradient(145deg,rgba(2,14,5,.58),rgba(2,8,3,.36));backdrop-filter:blur(4px)}
+    .photo-empty::before,.photo-empty::after{display:none}
+
+    .about{min-height:102px;display:grid;grid-template-columns:94px 1fr;gap:22px;align-items:center;margin-top:18px;padding:18px 26px;border-block:1px solid rgba(141,255,86,.42);background:linear-gradient(90deg,transparent,rgba(2,14,5,.72) 9% 91%,transparent)}
+    .about-label{font-family:"JetBrains Mono",monospace;font-size:10px;line-height:1.5;letter-spacing:.18em;text-transform:uppercase;color:var(--green-light)}
+    .about-label span{display:block;margin-top:4px;color:rgba(216,255,199,.48);font-size:8px}
+    .about p{margin:0;color:#d8e5d4;font-size:14px;line-height:1.46;text-wrap:balance}
+
+    .stats-heading{display:flex;align-items:center;gap:14px;margin-top:27px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-light)}
+    .stats-heading::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(141,255,86,.48),transparent)}
+    .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+    .stat-card{position:relative;height:124px;display:flex;align-items:center;justify-content:center;gap:20px;padding:20px 26px;background:linear-gradient(145deg,rgba(2,14,5,.66),rgba(2,9,4,.43));backdrop-filter:blur(5px)}
+    .stat-card::before,.stat-card::after{content:"";position:absolute;width:30px;height:30px}
+    .stat-card::before{left:0;top:0;border-left:2px solid var(--green-light);border-top:2px solid var(--green-light)}
+    .stat-card::after{right:0;bottom:0;border-right:2px solid var(--green-light);border-bottom:2px solid var(--green-light)}
+    .stat-value{min-width:70px;color:var(--green-light);font-family:"JetBrains Mono",monospace;font-size:35px;line-height:1;font-weight:500;text-align:center;letter-spacing:-.04em}
+    .stat-label{max-width:175px;color:#eef5eb;font-size:14px;line-height:1.25;font-weight:500;text-wrap:balance}
+
+    @page{size:Letter;margin:0}
+    @media print{html,body{background:#fff}body{padding:0}.stage,.sheet{width:8.5in;height:11in}}
+    @media(max-width:860px){body{padding:12px}.sheet{transform-origin:top left}}
+  </style>
+</head>
+<body>
+  <main class="stage"><article class="sheet" aria-label="Freedom Lab NYC primer split layout">
+    <div class="layout">
+      <header class="heading"><div class="eyebrow">Freedom technology in New York City</div><h1 class="title">Freedom Lab NYC: A Primer</h1><div class="title-rule"></div></header>
+
+      <section class="photo-grid" aria-label="Freedom Lab community photos">
+        <figure class="photo-cell"><img src="assets/photo-01.jpg" alt="Freedom Lab community event in a bright meeting room"></figure>
+        <figure class="photo-cell"><img src="assets/photo-02.jpeg" alt="Freedom Lab class with a full audience"></figure>
+        <figure class="photo-cell"><img src="assets/photo-03.jpeg" alt="Freedom Lab community members playing a Bitcoin board game"></figure>
+        <figure class="photo-cell photo-empty" aria-label="Reserved space for a fourth community photo"></figure>
+      </section>
+
+      <section class="about" aria-label="About Freedom Lab NYC">
+        <div class="about-label">About<span>01 / 02</span></div>
+        <p>A community of highly technical professionals interested in open source and freedom tech.</p>
+      </section>
+
+      <div class="stats-heading">At a glance <span>02 / 02</span></div>
+      <section class="stats-grid" aria-label="Freedom Lab statistics">
+        <div class="stat-card"><span class="stat-value">X</span><span class="stat-label">Paying Members</span></div>
+        <div class="stat-card"><span class="stat-value">801</span><span class="stat-label">Calendar Subscribers</span></div>
+        <div class="stat-card"><span class="stat-value">45+</span><span class="stat-label">Attendees per event</span></div>
+        <div class="stat-card"><span class="stat-value">30</span><span class="stat-label">Freedom Tech Events Hosted</span></div>
+      </section>
+    </div>
+  </article></main>
+  <script>
+    function sizeSheet(){
+      const scale=Math.min(1,(window.innerWidth-24)/816);
+      const stage=document.querySelector('.stage');const sheet=document.querySelector('.sheet');
+      stage.style.width=`${816*scale}px`;stage.style.height=`${1056*scale}px`;sheet.style.transform=`scale(${scale})`;
+    }
+    sizeSheet();window.addEventListener('resize',sizeSheet,{passive:true});
+  </script>
+</body>
+</html>
