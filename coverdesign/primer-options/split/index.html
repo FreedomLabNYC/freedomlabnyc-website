@@ -34,8 +34,8 @@
     .title{margin:0;color:#fff;font-size:31px;line-height:1.1;letter-spacing:-.035em;font-weight:620}
     .title-rule{width:66px;height:2px;margin:20px auto 0;background:linear-gradient(90deg,transparent,var(--green-light),transparent)}
 
-    .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
-    .photo-cell{position:relative;height:160px;margin:0;overflow:hidden;background:rgba(2,12,4,.58);border:1px solid rgba(141,255,86,.28)}
+    .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+    .photo-cell{position:relative;height:190px;margin:0;overflow:hidden;background:rgba(2,12,4,.58);border:1px solid rgba(141,255,86,.28)}
     .photo-cell img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.94) contrast(1.02)}
     .photo-cell:nth-child(1) img{object-position:54% 58%}
     .photo-cell:nth-child(2) img{object-position:52% 43%}
@@ -43,12 +43,11 @@
     .photo-cell:nth-child(4) img{object-position:50% 48%}
     .photo-cell::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(0,0,0,.28);background:linear-gradient(180deg,transparent 68%,rgba(1,7,3,.13))}
 
-    .about{min-height:102px;display:grid;grid-template-columns:94px 1fr;gap:22px;align-items:center;margin-top:18px;padding:18px 26px;border-block:1px solid rgba(141,255,86,.42);background:linear-gradient(90deg,transparent,rgba(2,14,5,.72) 9% 91%,transparent)}
-    .about-label{font-family:"JetBrains Mono",monospace;font-size:10px;line-height:1.5;letter-spacing:.18em;text-transform:uppercase;color:var(--green-light)}
-    .about-label span{display:block;margin-top:4px;color:rgba(216,255,199,.48);font-size:8px}
-    .about p{margin:0;color:#d8e5d4;font-size:14px;line-height:1.46;text-wrap:balance}
+    .about{min-height:98px;display:grid;grid-template-columns:82px 1fr;gap:24px;align-items:center;margin-top:18px;padding:18px 26px;border-block:1px solid rgba(141,255,86,.42);background:linear-gradient(90deg,transparent,rgba(2,14,5,.72) 9% 91%,transparent)}
+    .about-label{font-family:"JetBrains Mono",monospace;font-size:11px;line-height:1.5;letter-spacing:.18em;text-transform:uppercase;color:var(--green-light)}
+    .about p{margin:0;color:#e3eee0;font-size:17px;line-height:1.4;text-wrap:balance}
 
-    .stats-heading{display:flex;align-items:center;gap:14px;margin-top:27px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-light)}
+    .stats-heading{display:flex;align-items:center;gap:14px;margin-top:25px;font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--green-light)}
     .stats-heading::after{content:"";height:1px;flex:1;background:linear-gradient(90deg,rgba(141,255,86,.48),transparent)}
     .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
     .stat-card{position:relative;height:124px;display:flex;align-items:center;justify-content:center;gap:20px;padding:20px 26px;background:linear-gradient(145deg,rgba(2,14,5,.66),rgba(2,9,4,.43));backdrop-filter:blur(5px)}
@@ -68,6 +67,11 @@
     <div class="layout">
       <header class="heading"><div class="eyebrow">Freedom technology in New York City</div><h1 class="title">Freedom Lab NYC: A Primer</h1><div class="title-rule"></div></header>
 
+      <section class="about" aria-label="About Freedom Lab NYC">
+        <div class="about-label">About</div>
+        <p>A community of highly technical professionals interested in open source and freedom tech.</p>
+      </section>
+
       <section class="photo-grid" aria-label="Freedom Lab community photos">
         <figure class="photo-cell"><img src="assets/photo-01.jpg" alt="Freedom Lab community event in a bright meeting room"></figure>
         <figure class="photo-cell"><img src="assets/photo-02.jpeg" alt="Freedom Lab class with a full audience"></figure>
@@ -75,12 +79,7 @@
         <figure class="photo-cell"><img src="assets/photo-04.jpeg" alt="Freedom Lab community gathering around a long workshop table"></figure>
       </section>
 
-      <section class="about" aria-label="About Freedom Lab NYC">
-        <div class="about-label">About<span>01 / 02</span></div>
-        <p>A community of highly technical professionals interested in open source and freedom tech.</p>
-      </section>
-
-      <div class="stats-heading">At a glance <span>02 / 02</span></div>
+      <div class="stats-heading">At a glance</div>
       <section class="stats-grid" aria-label="Freedom Lab statistics">
         <div class="stat-card"><span class="stat-value">X</span><span class="stat-label">Paying Members</span></div>
         <div class="stat-card"><span class="stat-value">801</span><span class="stat-label">Calendar Subscribers</span></div>
