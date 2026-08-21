@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <title>Freedom Lab NYC — Primer Design Options</title>
+  <meta name="description" content="Unlisted Freedom Lab NYC primer page design options.">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <link rel="canonical" href="https://freedomlab.nyc/coverdesign/primer-options/">
+  <meta property="og:title" content="Freedom Lab NYC Primer Design Options">
+  <meta property="og:description" content="Unlisted Freedom Lab NYC primer page design options.">
+  <meta property="og:url" content="https://freedomlab.nyc/coverdesign/primer-options/">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Freedom Lab NYC Primer Design Options">
+  <meta name="twitter:description" content="Unlisted Freedom Lab NYC primer page design options.">
+  <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+  <style>
+    @font-face{font-family:"Space Grotesk";src:url("assets/space-grotesk-latin.woff2") format("woff2");font-weight:300 700}
+    @font-face{font-family:"JetBrains Mono";src:url("assets/jetbrains-mono-latin.woff2") format("woff2");font-weight:400 500}
+    :root{--green:#32d011;--green-light:#8dff56;--green-pale:#d8ffc7;--ink:#020603;--paper:#f4f7f2;--muted:#b9c8b5}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:#111611;color:var(--paper);font-family:"Space Grotesk",sans-serif}
+    body{padding:42px 20px 72px}
+    .gallery{display:grid;gap:58px;justify-items:center}
+    .option-block{width:816px}
+    .option-label{display:flex;justify-content:space-between;align-items:end;margin:0 0 12px;padding:0 2px;font-family:"JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.11em}
+    .option-label strong{font-size:12px;color:var(--green-light);font-weight:500}.option-label span{font-size:9px;color:#7e8e7b}
+    .sheet-stage{width:816px;height:1056px;overflow:hidden}
+    .sheet{position:relative;width:816px;height:1056px;overflow:hidden;isolation:isolate;background:#071109 url("assets/primer-background.png") center/cover no-repeat;color:var(--paper);-webkit-font-smoothing:antialiased}
+    .sheet::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(2,8,3,.05),rgba(2,8,3,.04) 58%,rgba(2,8,3,.18))}
+    .content{position:absolute;z-index:2}
+    .eyebrow{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.19em;text-transform:uppercase;color:var(--green-light)}
+    .title{margin:0;color:#fff;font-size:30px;line-height:1.08;letter-spacing:-.035em;font-weight:620;text-wrap:balance}
+    .stat-value{display:block;color:var(--green-light);font-size:42px;line-height:1;font-weight:650;letter-spacing:-.04em}
+    .stat-label{display:block;color:#eef5eb;font-size:17px;line-height:1.22;font-weight:500;text-wrap:balance}
+    .statement{margin:0;color:#d6e2d2;font-size:15px;line-height:1.45;text-wrap:balance}
+
+    /* Option A — discrete signal modules, closest to the supplied hierarchy. */
+    .option-a::before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 52% 42%,rgba(8,31,11,.1),rgba(1,8,3,.18) 72%)}
+    .a-layout{left:105px;right:105px;top:82px;bottom:74px;display:flex;flex-direction:column}
+    .a-title{height:96px;display:flex;align-items:center;justify-content:center;padding:18px 34px;text-align:center;border:1.5px solid rgba(97,238,66,.74);border-radius:25px;background:rgba(2,14,5,.72);backdrop-filter:blur(8px)}
+    .a-title .title{font-size:28px}
+    .a-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:44px}
+    .a-card{height:178px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:22px;border:1px solid rgba(89,227,58,.68);border-radius:29px;background:linear-gradient(145deg,rgba(3,18,6,.82),rgba(2,10,4,.7));backdrop-filter:blur(7px);text-align:center}
+    .a-statement{min-height:102px;display:flex;align-items:center;justify-content:center;margin-top:42px;padding:20px 30px;border:1px solid rgba(89,227,58,.55);border-radius:22px;background:rgba(2,13,5,.78);backdrop-filter:blur(8px);text-align:center}
+    .a-statement .statement{max-width:510px}
+
+    /* Option B — one integrated technical brief with internal rules. */
+    .option-b::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(1,7,3,.13),rgba(1,7,3,.03) 32%,rgba(1,7,3,.18))}
+    .b-panel{left:102px;right:102px;top:76px;bottom:72px;padding:44px 48px 38px;border:1px solid rgba(121,247,88,.52);border-radius:34px;background:linear-gradient(160deg,rgba(2,14,5,.84),rgba(2,9,4,.7));backdrop-filter:blur(10px);display:grid;grid-template-rows:auto 1fr auto}
+    .b-heading{display:flex;align-items:start;justify-content:space-between;gap:24px;padding-bottom:31px;border-bottom:1px solid rgba(141,255,86,.3)}
+    .b-heading .title{max-width:430px;font-size:32px}.b-index{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.17em;color:rgba(216,255,199,.62);text-align:right;line-height:1.65;text-transform:uppercase}
+    .b-grid{display:grid;grid-template-columns:1fr 1fr;align-self:center}
+    .b-stat{min-height:190px;display:flex;flex-direction:column;justify-content:center;gap:15px;padding:30px 34px}
+    .b-stat:nth-child(odd){border-right:1px solid rgba(141,255,86,.24)}
+    .b-stat:nth-child(-n+2){border-bottom:1px solid rgba(141,255,86,.24)}
+    .b-stat .stat-value{font-size:50px}.b-stat .stat-label{max-width:190px}
+    .b-footer{display:grid;grid-template-columns:4px 1fr;gap:20px;align-items:center;padding-top:28px;border-top:1px solid rgba(141,255,86,.3)}
+    .b-footer::before{content:"";width:4px;height:58px;background:linear-gradient(var(--green-light),var(--green));border-radius:4px}
+    .b-footer .statement{font-size:14px;max-width:495px}
+
+    /* Option C — airy beacon cards with corner-bracket geometry. */
+    .option-c::before{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(circle at 52% 38%,rgba(1,7,3,.04),rgba(1,7,3,.24) 78%)}
+    .c-layout{left:96px;right:96px;top:80px;bottom:66px}
+    .c-heading{text-align:center}.c-heading .eyebrow{margin-bottom:14px}.c-heading .title{font-size:31px}
+    .c-rule{width:70px;height:2px;margin:26px auto 0;background:linear-gradient(90deg,transparent,var(--green-light),transparent)}
+    .c-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:54px}
+    .c-card{position:relative;height:184px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;padding:28px;text-align:center;background:rgba(2,12,4,.5);backdrop-filter:blur(5px)}
+    .c-card::before,.c-card::after{content:"";position:absolute;width:38px;height:38px;border-color:rgba(141,255,86,.86)}
+    .c-card::before{left:0;top:0;border-left:2px solid rgba(141,255,86,.86);border-top:2px solid rgba(141,255,86,.86)}.c-card::after{right:0;bottom:0;border-right:2px solid rgba(141,255,86,.86);border-bottom:2px solid rgba(141,255,86,.86)}
+    .c-card .stat-value{font-family:"JetBrains Mono",monospace;font-size:39px;font-weight:500}.c-card .stat-label{font-size:16px;max-width:210px}
+    .c-statement{display:flex;align-items:center;justify-content:center;min-height:110px;margin:48px 28px 0;padding:21px 34px;border-block:1px solid rgba(141,255,86,.5);background:linear-gradient(90deg,transparent,rgba(2,14,5,.74) 12% 88%,transparent);text-align:center}
+    .c-statement .statement{max-width:500px}
+
+    @media(max-width:860px){body{padding:24px 12px 52px}.gallery{gap:34px}.option-block{width:calc(100vw - 24px)}.sheet{transform-origin:top left}.option-label span{display:none}}
+  </style>
+</head>
+<body>
+  <main class="gallery" aria-label="Freedom Lab NYC primer design options">
+    <section class="option-block">
+      <div class="option-label"><strong>Option A · Signal Grid</strong><span>Closest to the supplied module layout</span></div>
+      <div class="sheet-stage"><article class="sheet option-a" id="option-a">
+        <div class="content a-layout">
+          <header class="a-title"><h1 class="title">Freedom Lab NYC: A Primer</h1></header>
+          <section class="a-grid" aria-label="Freedom Lab statistics">
+            <div class="a-card"><span class="stat-value">X</span><span class="stat-label">Paying Members</span></div>
+            <div class="a-card"><span class="stat-value">801</span><span class="stat-label">Calendar Subscribers</span></div>
+            <div class="a-card"><span class="stat-value">45+</span><span class="stat-label">Attendees per event</span></div>
+            <div class="a-card"><span class="stat-value">30</span><span class="stat-label">Freedom Tech Events Hosted</span></div>
+          </section>
+          <footer class="a-statement"><p class="statement">A community of highly technical professionals interested in open source and freedom tech.</p></footer>
+        </div>
+      </article></div>
+    </section>
+
+    <section class="option-block">
+      <div class="option-label"><strong>Option B · Technical Brief</strong><span>One integrated panel with quieter structure</span></div>
+      <div class="sheet-stage"><article class="sheet option-b" id="option-b">
+        <div class="content b-panel">
+          <header class="b-heading"><div><div class="eyebrow">Community snapshot</div><h1 class="title">Freedom Lab NYC: A Primer</h1></div><div class="b-index">NYC<br>2026<br>01</div></header>
+          <section class="b-grid" aria-label="Freedom Lab statistics">
+            <div class="b-stat"><span class="stat-value">X</span><span class="stat-label">Paying Members</span></div>
+            <div class="b-stat"><span class="stat-value">801</span><span class="stat-label">Calendar Subscribers</span></div>
+            <div class="b-stat"><span class="stat-value">45+</span><span class="stat-label">Attendees per event</span></div>
+            <div class="b-stat"><span class="stat-value">30</span><span class="stat-label">Freedom Tech Events Hosted</span></div>
+          </section>
+          <footer class="b-footer"><p class="statement">A community of highly technical professionals interested in open source and freedom tech.</p></footer>
+        </div>
+      </article></div>
+    </section>
+
+    <section class="option-block">
+      <div class="option-label"><strong>Option C · Four Beacons</strong><span>More open and graphic while preserving the hierarchy</span></div>
+      <div class="sheet-stage"><article class="sheet option-c" id="option-c">
+        <div class="content c-layout">
+          <header class="c-heading"><div class="eyebrow">Freedom technology in New York City</div><h1 class="title">Freedom Lab NYC: A Primer</h1><div class="c-rule"></div></header>
+          <section class="c-grid" aria-label="Freedom Lab statistics">
+            <div class="c-card"><span class="stat-value">X</span><span class="stat-label">Paying Members</span></div>
+            <div class="c-card"><span class="stat-value">801</span><span class="stat-label">Calendar Subscribers</span></div>
+            <div class="c-card"><span class="stat-value">45+</span><span class="stat-label">Attendees per event</span></div>
+            <div class="c-card"><span class="stat-value">30</span><span class="stat-label">Freedom Tech Events Hosted</span></div>
+          </section>
+          <footer class="c-statement"><p class="statement">A community of highly technical professionals interested in open source and freedom tech.</p></footer>
+        </div>
+      </article></div>
+    </section>
+  </main>
+  <script>
+    function sizeSheets(){
+      const scale=Math.min(1,(window.innerWidth-24)/816);
+      document.querySelectorAll('.sheet-stage').forEach((stage)=>{
+        const sheet=stage.querySelector('.sheet');
+        stage.style.width=`${816*scale}px`;
+        stage.style.height=`${1056*scale}px`;
+        sheet.style.transform=`scale(${scale})`;
+      });
+    }
+    sizeSheets();
+    window.addEventListener('resize',sizeSheets,{passive:true});
+  </script>
+</body>
+</html>
