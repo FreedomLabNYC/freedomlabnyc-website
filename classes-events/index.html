@@ -13,7 +13,7 @@
     <link rel="preload" href="../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../css/fonts.css">
-    <link rel="stylesheet" href="../css/classes.css?v=bcf140a">
+    <link rel="stylesheet" href="../css/classes.css?v=event-covers-local-v1">
 
     <!-- Open Graph / Social -->
     <meta property="og:type" content="website">
@@ -880,22 +880,50 @@
                 }
 
                 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                const escapeHtml = value => String(value ?? '').replace(/[&<>'"]/g, ch => ({
+                    '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+                })[ch]);
+
+                container.addEventListener('error', event => {
+                    const img = event.target;
+                    if (!(img instanceof HTMLImageElement) || !img.matches('[data-fallback-src]')) return;
+                    const fallback = img.dataset.fallbackSrc;
+                    if (!fallback || img.dataset.fallbackUsed) return;
+                    img.dataset.fallbackUsed = 'true';
+                    img.closest('picture')?.querySelectorAll('source').forEach(source => source.remove());
+                    img.removeAttribute('srcset');
+                    img.src = fallback;
+                }, true);
 
                 container.innerHTML = data.events.map(ev => {
                     const d = new Date(ev.date);
                     const dateStr = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-                    const coverHtml = ev.cover
-                        ? `<img src="${ev.cover}" alt="${ev.name}" class="event-card-img" loading="lazy">`
-                        : '';
+                    const coverBase = typeof ev.cover_local === 'string' ? escapeHtml(ev.cover_local) : '';
+                    const originalCover = escapeHtml(ev.cover);
+                    const coverHtml = coverBase
+                        ? `<picture>
+                            <source type="image/webp" srcset="${coverBase}-800.webp 800w, ${coverBase}-1600.webp 1600w" sizes="(max-width: 768px) calc((100vw - 2.75rem) / 2), 350px">
+                            <img src="${coverBase}-800.jpg"
+                                 srcset="${coverBase}-800.jpg 800w, ${coverBase}-1600.jpg 1600w"
+                                 sizes="(max-width: 768px) calc((100vw - 2.75rem) / 2), 350px"
+                                 alt="${escapeHtml(ev.name)}"
+                                 class="event-card-img"
+                                 loading="lazy"
+                                 decoding="async"
+                                 data-fallback-src="${originalCover}">
+                        </picture>`
+                        : ev.cover
+                            ? `<img src="${originalCover}" alt="${escapeHtml(ev.name)}" class="event-card-img" loading="lazy" decoding="async">`
+                            : '';
                     const innerHtml = `
                         <div class="event-card-cover">${coverHtml}</div>
                         <div class="event-card-body">
-                            <span class="event-card-date">${dateStr}</span>
-                            <h3 class="event-card-title">${ev.name}</h3>
+                            <span class="event-card-date">${escapeHtml(dateStr)}</span>
+                            <h3 class="event-card-title">${escapeHtml(ev.name)}</h3>
                         </div>
                     `;
                     return ev.url
-                        ? `<a href="${ev.url}" target="_blank" rel="noopener" class="event-card">${innerHtml}</a>`
+                        ? `<a href="${escapeHtml(ev.url)}" target="_blank" rel="noopener" class="event-card">${innerHtml}</a>`
                         : `<article class="event-card">${innerHtml}</article>`;
                 }).join('');
 
