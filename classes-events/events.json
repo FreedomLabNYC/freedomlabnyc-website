@@ -50,14 +50,12 @@
       "name": "Bitcoin Video and Board Game Night",
       "date": "2026-05-19T22:30:00.000Z",
       "end": "2026-05-20T01:00:00.000Z",
-      "cover": "/static/img/event-archive/bitcoin-video-board-game-night-2026-05-19-source.png",
-      "preview": "/static/img/event-archive/bitcoin-video-board-game-night-2026-05-19-source.png",
-      "cover_source": "User-supplied canonical artwork; SHA-256 79e1e4865377467d1dbc22cf84d19b0b04fd1f03d3db0e255db3965f41eeccb7",
+      "cover": "https://images.lumacdn.com/uploads/zr/81507ee8-7f32-4583-b006-67b28636de2f.png",
       "url": "https://lu.ma/ise6allq",
       "venue": "Fat Cat Fab Lab",
       "location": "224 W 4th St #250, New York",
       "price": "Free",
-      "cover_local": "/static/img/event-archive/event-79e1e4865377467d"
+      "cover_local": "/static/img/event-archive/event-92e5a2520f911c2e"
     },
     {
       "name": "Open-Source AI Agent Skill Sharing Night",
@@ -272,12 +270,14 @@
       "name": "Beginner\u2019s Workshop: Secure Your Bitcoin Wallet",
       "date": "2025-04-15T22:30:00.000Z",
       "end": "2025-04-16T00:30:00.000Z",
-      "cover": "https://images.lumacdn.com/event-covers/vm/37355169-8f7d-49f6-82a1-8b8ce6796a42.png",
+      "cover": "/static/img/event-archive/bitcoin-secure-wallet-2025-04-15-source.png",
+      "preview": "/static/img/event-archive/bitcoin-secure-wallet-2025-04-15-source.png",
+      "cover_source": "User-supplied canonical artwork; SHA-256 79e1e4865377467d1dbc22cf84d19b0b04fd1f03d3db0e255db3965f41eeccb7",
       "url": "https://lu.ma/7imd7ias",
       "venue": "Fat Cat Fab Lab",
       "location": null,
       "price": "Free",
-      "cover_local": "/static/img/event-archive/event-7a174b984c689fc8"
+      "cover_local": "/static/img/event-archive/event-79e1e4865377467d"
     },
     {
       "name": "Beginner's Workshop: How to Set up a Bitcoin Hardware Wallet",

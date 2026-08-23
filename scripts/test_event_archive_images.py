@@ -152,7 +152,7 @@ class EventArchiveImageTests(unittest.TestCase):
             self.assertIn("cover_local", synced["events"][0])
             self.assertEqual(sync_archive_file(archive_path, root), [])
 
-    def test_recent_bitcoin_game_night_uses_approved_artwork(self) -> None:
+    def test_recent_bitcoin_game_night_uses_original_artwork(self) -> None:
         root = Path(__file__).resolve().parents[1]
         archive = json.loads((root / "classes-events" / "events.json").read_text())
         duplicates = sorted(
@@ -162,21 +162,32 @@ class EventArchiveImageTests(unittest.TestCase):
 
         self.assertEqual(len(duplicates), 2)
         older, recent = duplicates
-        source_path = "/static/img/event-archive/bitcoin-video-board-game-night-2026-05-19-source.png"
-        source = root / source_path.lstrip("/")
-        self.assertEqual(recent["cover"], source_path)
-        self.assertEqual(recent["preview"], source_path)
-        self.assertEqual(recent["cover_local"], "/static/img/event-archive/event-79e1e4865377467d")
+        original_cover = "https://images.lumacdn.com/uploads/zr/81507ee8-7f32-4583-b006-67b28636de2f.png"
+        self.assertEqual(recent["cover"], original_cover)
+        self.assertNotIn("preview", recent)
+        self.assertEqual(recent["cover_local"], "/static/img/event-archive/event-92e5a2520f911c2e")
         self.assertNotEqual(older["cover"], recent["cover"])
+
+        event_page = (root / "events" / "2026-05-19-bitcoin-video-and-board-game-night" / "index.html").read_text()
+        self.assertGreaterEqual(event_page.count(original_cover), 2)
+        classes_page = (root / "classes-events" / "index.html").read_text()
+        self.assertIn(original_cover, classes_page)
+
+    def test_secure_wallet_event_uses_approved_orange_artwork(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        archive = json.loads((root / "classes-events" / "events.json").read_text())
+        event = next(event for event in archive["events"] if event.get("url") == "https://lu.ma/7imd7ias")
+        source_path = "/static/img/event-archive/bitcoin-secure-wallet-2025-04-15-source.png"
+        source = root / source_path.lstrip("/")
+        self.assertEqual(event["cover"], source_path)
+        self.assertEqual(event["preview"], source_path)
+        self.assertEqual(event["cover_local"], "/static/img/event-archive/event-79e1e4865377467d")
         self.assertEqual(
             hashlib.sha256(source.read_bytes()).hexdigest(),
             "79e1e4865377467d1dbc22cf84d19b0b04fd1f03d3db0e255db3965f41eeccb7",
         )
-
-        event_page = (root / "events" / "2026-05-19-bitcoin-video-and-board-game-night" / "index.html").read_text()
+        event_page = (root / "events" / "2025-04-15-beginner-s-workshop-secure-your-bitcoin-wallet" / "index.html").read_text()
         self.assertGreaterEqual(event_page.count(source_path), 4)
-        classes_page = (root / "classes-events" / "index.html").read_text()
-        self.assertIn(f"https://freedomlab.nyc{source_path}", classes_page)
 
     def test_lightning_node_event_uses_approved_artwork(self) -> None:
         root = Path(__file__).resolve().parents[1]
