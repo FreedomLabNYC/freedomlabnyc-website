@@ -178,6 +178,27 @@ class EventArchiveImageTests(unittest.TestCase):
         classes_page = (root / "classes-events" / "index.html").read_text()
         self.assertIn(f"https://freedomlab.nyc{source_path}", classes_page)
 
+    def test_lightning_node_event_uses_approved_artwork(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        archive = json.loads((root / "classes-events" / "events.json").read_text())
+        event = next(
+            event
+            for event in archive["events"]
+            if event.get("name") == "Workshop: How to Run a Bitcoin Lightning Node for Beginners"
+        )
+        source_path = "/static/img/event-archive/bitcoin-lightning-node-2024-11-24-source.png"
+        source = root / source_path.lstrip("/")
+        self.assertEqual(event["cover"], source_path)
+        self.assertEqual(event["preview"], source_path)
+        self.assertEqual(event["cover_local"], "/static/img/event-archive/event-949d339224b0d232")
+        self.assertEqual(
+            hashlib.sha256(source.read_bytes()).hexdigest(),
+            "949d339224b0d232ee4ac8b6d85a48b2e3751f0ada3e5503d3fcf0a6deb91652",
+        )
+
+        event_page = (root / "events" / "2024-11-24-workshop-how-to-run-a-bitcoin-lightning-node-for-beginners" / "index.html").read_text()
+        self.assertGreaterEqual(event_page.count(source_path), 4)
+
 
 if __name__ == "__main__":
     unittest.main()

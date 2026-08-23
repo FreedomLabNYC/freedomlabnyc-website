@@ -316,12 +316,14 @@
       "name": "Workshop: How to Run a Bitcoin Lightning Node for Beginners",
       "date": "2024-11-24T23:00:00.000Z",
       "end": null,
-      "cover": "https://images.lumacdn.com/event-covers/lo/6fad8cbc-c7a3-4433-a6ae-7b87e8590aab.webp",
+      "cover": "/static/img/event-archive/bitcoin-lightning-node-2024-11-24-source.png",
+      "preview": "/static/img/event-archive/bitcoin-lightning-node-2024-11-24-source.png",
+      "cover_source": "User-supplied canonical artwork; SHA-256 949d339224b0d232ee4ac8b6d85a48b2e3751f0ada3e5503d3fcf0a6deb91652",
       "url": null,
       "venue": "Fat Cat Fab Lab",
       "location": "224 W 4th St #250, New York",
       "price": null,
-      "cover_local": "/static/img/event-archive/event-6fe2a155ea91d8c7"
+      "cover_local": "/static/img/event-archive/event-949d339224b0d232"
     },
     {
       "name": "Empire State of Bitcoin Launch Event",
