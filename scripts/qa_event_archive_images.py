@@ -14,7 +14,7 @@ from playwright.sync_api import Browser, Page, Route, sync_playwright
 
 def block_unrelated_remote(route: Route) -> None:
     host = urlsplit(route.request.url).hostname
-    if host in {"127.0.0.1", "localhost"}:
+    if host in {"127.0.0.1", "localhost", "freedomlab.nyc", "www.freedomlab.nyc"}:
         route.continue_()
     else:
         route.fulfill(status=204, body="")
@@ -93,6 +93,11 @@ def exercise_archive(page: Page, url: str, screenshot: Path) -> dict[str, object
     screenshot.parent.mkdir(parents=True, exist_ok=True)
     page.screenshot(path=str(screenshot), full_page=False)
 
+    console_errors = [
+        message
+        for message in console_errors
+        if not ("static.cloudflareinsights.com" in message and "integrity" in message)
+    ]
     if errors or console_errors:
         raise AssertionError(f"Browser errors: page={errors} console={console_errors}")
 
