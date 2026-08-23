@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import base64
+import hashlib
 import io
 import json
 import tempfile
@@ -150,6 +151,32 @@ class EventArchiveImageTests(unittest.TestCase):
             self.assertEqual(synced["count"], 1)
             self.assertIn("cover_local", synced["events"][0])
             self.assertEqual(sync_archive_file(archive_path, root), [])
+
+    def test_recent_bitcoin_game_night_uses_approved_artwork(self) -> None:
+        root = Path(__file__).resolve().parents[1]
+        archive = json.loads((root / "classes-events" / "events.json").read_text())
+        duplicates = sorted(
+            [event for event in archive["events"] if event.get("name") == "Bitcoin Video and Board Game Night"],
+            key=lambda event: event["date"],
+        )
+
+        self.assertEqual(len(duplicates), 2)
+        older, recent = duplicates
+        source_path = "/static/img/event-archive/bitcoin-video-board-game-night-2026-05-19-source.png"
+        source = root / source_path.lstrip("/")
+        self.assertEqual(recent["cover"], source_path)
+        self.assertEqual(recent["preview"], source_path)
+        self.assertEqual(recent["cover_local"], "/static/img/event-archive/event-79e1e4865377467d")
+        self.assertNotEqual(older["cover"], recent["cover"])
+        self.assertEqual(
+            hashlib.sha256(source.read_bytes()).hexdigest(),
+            "79e1e4865377467d1dbc22cf84d19b0b04fd1f03d3db0e255db3965f41eeccb7",
+        )
+
+        event_page = (root / "events" / "2026-05-19-bitcoin-video-and-board-game-night" / "index.html").read_text()
+        self.assertGreaterEqual(event_page.count(source_path), 4)
+        classes_page = (root / "classes-events" / "index.html").read_text()
+        self.assertIn(f"https://freedomlab.nyc{source_path}", classes_page)
 
 
 if __name__ == "__main__":

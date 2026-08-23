@@ -50,12 +50,14 @@
       "name": "Bitcoin Video and Board Game Night",
       "date": "2026-05-19T22:30:00.000Z",
       "end": "2026-05-20T01:00:00.000Z",
-      "cover": "https://images.lumacdn.com/uploads/zr/81507ee8-7f32-4583-b006-67b28636de2f.png",
+      "cover": "/static/img/event-archive/bitcoin-video-board-game-night-2026-05-19-source.png",
+      "preview": "/static/img/event-archive/bitcoin-video-board-game-night-2026-05-19-source.png",
+      "cover_source": "User-supplied canonical artwork; SHA-256 79e1e4865377467d1dbc22cf84d19b0b04fd1f03d3db0e255db3965f41eeccb7",
       "url": "https://lu.ma/ise6allq",
       "venue": "Fat Cat Fab Lab",
       "location": "224 W 4th St #250, New York",
       "price": "Free",
-      "cover_local": "/static/img/event-archive/event-92e5a2520f911c2e"
+      "cover_local": "/static/img/event-archive/event-79e1e4865377467d"
     },
     {
       "name": "Open-Source AI Agent Skill Sharing Night",

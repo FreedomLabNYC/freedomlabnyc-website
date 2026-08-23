@@ -15,6 +15,11 @@ EVENTS_JSON = ROOT / "classes-events" / "events.json"
 EVENTS_DIR = ROOT / "events"
 DEFAULT_IMAGE = f"{SITE}/static/img/FL%20Signature%20Rectangular2.png"
 
+def public_url(value: str | None) -> str | None:
+    if not value:
+        return None
+    return f"{SITE}{value}" if value.startswith("/") else value
+
 def slugify(name: str, date: str) -> str:
     d = date[:10] if date else "event"
     s = re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")[:64].strip("-")
@@ -39,11 +44,12 @@ def page(ev: dict) -> tuple[str, str]:
     title=f"{ev.get('name','Freedom Lab event')} | Freedom Lab NYC"
     desc=f"Freedom Lab NYC event: {ev.get('name','hands-on freedom tech gathering')} at {ev.get('venue') or 'a New York City venue'}. RSVP and tickets remain on Luma."
     cover=ev.get('cover') or DEFAULT_IMAGE
-    preview=DEFAULT_IMAGE
+    preview=public_url(ev.get('preview')) or DEFAULT_IMAGE
+    schema_cover=public_url(cover) or DEFAULT_IMAGE
     tags=topic_tags(ev.get('name',''))
     schema={
       "@context":"https://schema.org","@type":"Event","@id":url+"#event","name":ev.get('name'),
-      "description":desc,"url":url,"sameAs":ev.get('url'),"image":cover,
+      "description":desc,"url":url,"sameAs":ev.get('url'),"image":schema_cover,
       "startDate":ev.get('date'),"endDate":ev.get('end'),"eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","eventStatus":"https://schema.org/EventScheduled",
       "organizer":{"@type":"Organization","name":"Freedom Lab NYC","url":SITE+"/"},
       "location":{"@type":"Place","name":ev.get('venue') or "Freedom Lab NYC event venue","address":ev.get('location') or "New York, NY"},

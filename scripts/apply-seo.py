@@ -57,6 +57,12 @@ def rel_url(path: Path) -> str:
     return "/" + rel
 
 
+def public_url(value: str | None) -> str | None:
+    if not value:
+        return None
+    return f"{SITE}{value}" if value.startswith("/") else value
+
+
 def is_excluded(path: Path) -> bool:
     rel = path.relative_to(ROOT)
     if path.name in EXCLUDE_FILES:
@@ -234,7 +240,7 @@ def schemas_for(path: Path, html: str, canonical: str) -> list[object]:
                     "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
                     "eventStatus": "https://schema.org/EventScheduled",
                     "url": ev.get("url") or canonical,
-                    "image": ev.get("cover") or DEFAULT_IMAGE,
+                    "image": public_url(ev.get("preview") or ev.get("cover")) or DEFAULT_IMAGE,
                     "organizer": {"@id": f"{SITE}/#organization"},
                     "location": {
                         "@type": "Place",
