@@ -210,20 +210,20 @@ class EventArchiveImageTests(unittest.TestCase):
         event_page = (root / "events" / "2024-11-24-workshop-how-to-run-a-bitcoin-lightning-node-for-beginners" / "index.html").read_text()
         self.assertGreaterEqual(event_page.count(source_path), 4)
 
-    def test_recent_run_a_bitcoin_node_event_uses_purple_artwork(self) -> None:
+    def test_recent_run_a_bitcoin_node_event_uses_green_artwork(self) -> None:
         root = Path(__file__).resolve().parents[1]
         archive = json.loads((root / "classes-events" / "events.json").read_text())
         event = next(event for event in archive["events"] if event.get("url") == "https://lu.ma/wphbb1r0")
         older = next(event for event in archive["events"] if event.get("url") == "https://lu.ma/0ftm43ff")
-        source_path = "/static/img/event-archive/bitcoin-node-2025-07-29-source.png"
+        source_path = "/static/img/event-archive/bitcoin-node-2025-07-29-green-source.png"
         source = root / source_path.lstrip("/")
         self.assertEqual(event["cover"], source_path)
         self.assertEqual(event["preview"], source_path)
-        self.assertEqual(event["cover_local"], "/static/img/event-archive/event-9e66389614f9898d")
+        self.assertEqual(event["cover_local"], "/static/img/event-archive/event-4c1fcb80fedefe68")
         self.assertNotEqual(older["cover_local"], event["cover_local"])
         self.assertEqual(
             hashlib.sha256(source.read_bytes()).hexdigest(),
-            "9e66389614f9898d4d43133002c92b78181e80a874b406975c927d8395c67fe1",
+            "4c1fcb80fedefe6843997afa48f362ede196c2560731d8d8e1982e2351c00edb",
         )
         event_page = (root / "events" / "2025-07-29-beginner-s-workshop-how-to-run-a-bitcoin-node" / "index.html").read_text()
         self.assertGreaterEqual(event_page.count(source_path), 4)
