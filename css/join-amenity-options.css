@@ -131,7 +131,17 @@
     url('/static/img/join-flatiron/amenities-background.webp') center 54% / cover no-repeat;
 }
 .amenity-fullscreen .member-amenities h2 {
+  margin-bottom: 12px;
   text-shadow: 0 3px 24px rgba(0,0,0,.95);
+}
+.amenity-fullscreen .amenity-subtitle {
+  max-width: 680px;
+  margin: 0 auto 34px;
+  color: rgba(255,255,255,.84);
+  font-size: clamp(.95rem, 1.25vw, 1.08rem);
+  line-height: 1.55;
+  text-align: center;
+  text-shadow: 0 2px 16px rgba(0,0,0,.9);
 }
 .amenity-fullscreen .amenity-modules,
 .amenity-fullscreen .amenity-source {
