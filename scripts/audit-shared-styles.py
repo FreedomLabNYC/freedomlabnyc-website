@@ -3,15 +3,18 @@
 
 Flags public HTML pages that redefine shared title/banner styling inline,
 miss the shared footer, or drift away from the default rectangular preview image.
+Event pages may use an explicit self-hosted event-archive preview.
 This is intentionally lightweight: it does not require a build step.
 """
 from __future__ import annotations
 
 import re
 from pathlib import Path
+from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PREVIEW = 'https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png'
+EVENT_PREVIEW_PREFIX = 'https://freedomlab.nyc/static/img/event-archive/'
 SKIP_DIRS = {
     '.git', '.hermes', 'node_modules', 'ghostr', 'internal', 'sketches',
 }
@@ -63,6 +66,17 @@ def meta_content(text: str, prop: str) -> str | None:
     return match.group(1) if match else None
 
 
+def valid_event_preview(rel: str, values: dict[str, str | None]) -> bool:
+    """Allow matching, self-hosted event artwork when the local asset exists."""
+    preview = values.get('og:image')
+    if not rel.startswith('events/') or preview != values.get('twitter:image'):
+        return False
+    if not preview or not preview.startswith(EVENT_PREVIEW_PREFIX):
+        return False
+    asset = ROOT / unquote(preview.removeprefix('https://freedomlab.nyc/'))
+    return asset.is_file()
+
+
 def main() -> int:
     errors: list[str] = []
     for path in sorted(ROOT.rglob('*.html')):
@@ -79,8 +93,10 @@ def main() -> int:
         for forbidden in FORBIDDEN_INLINE:
             if forbidden in text:
                 errors.append(f'{rel}: inline shared title-banner CSS ({forbidden})')
-        for prop in PREVIEW_PROPS:
-            value = meta_content(text, prop)
+        preview_values = {prop: meta_content(text, prop) for prop in PREVIEW_PROPS}
+        if valid_event_preview(rel, preview_values):
+            continue
+        for prop, value in preview_values.items():
             if value != DEFAULT_PREVIEW:
                 errors.append(f'{rel}: {prop} should be {DEFAULT_PREVIEW}, got {value or "missing"}')
     if errors:

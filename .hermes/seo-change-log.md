@@ -69,3 +69,10 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Added native lazy loading to the Resource Lab slide-deck image so the public page passes the media-accessibility guardrail without changing visible content.
 - Retired the duplicate GitHub event-archive workflow after its scheduled run failed branch protection and revealed that it would replace 30 curated archive entries with only 28 Luma API entries. The active additive Hermes watchdog remains enabled and preserves manual entries.
 - GSC monitor checked 10 URLs (77 tracked) and found no actionable indexing errors; shared styles and all JSON-LD blocks also passed audit.
+
+## 2026-08-24 — SEO audit guardrails aligned with current public scope
+
+- Updated the shared-style audit to accept matching, self-hosted event-specific preview artwork only on `/events/` pages and only when the referenced local event-archive asset exists; the site-wide rectangular signature image remains required elsewhere.
+- Updated the media-accessibility audit to skip explicitly `noindex` design-review/utility pages, matching its public-page scope while retaining checks on indexable pages.
+- GSC monitor checked 10 of 77 sitemap URLs: 53 submitted/indexed, 24 waiting on Google, and no actionable canonical, robots, duplicate, 404, or server issues.
+- Verification: shared-style and media audits passed; event-preview and public/noindex regression probes passed; 154 JSON-LD blocks across 83 HTML files parsed with zero errors; event-archive image tests passed (9/9).

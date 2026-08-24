@@ -12,6 +12,9 @@ for p in ROOT.rglob('*.html'):
     if p.name in EXCLUDE_FILES: continue
     if any(part in EXCLUDE for part in rel.parts): continue
     html=p.read_text(errors='ignore')
+    robots_tags=re.findall(r'<meta\b[^>]*>', html, re.I|re.S)
+    if any(re.search(r'\bname\s*=\s*["\']robots["\']', tag, re.I) and 'noindex' in tag.lower() for tag in robots_tags):
+        continue
     for m in re.finditer(r'<img\b[^>]*>', html, re.I|re.S):
         tag=' '.join(m.group(0).split())
         decorative = 'aria-hidden="true"' in tag.lower() or "aria-hidden='true'" in tag.lower()
