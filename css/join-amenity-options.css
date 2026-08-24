@@ -109,6 +109,37 @@
   background: rgba(4, 8, 5, 0.66);
 }
 
+/* Full-screen photo treatment with top and bottom fades */
+.amenity-fullscreen .member-amenities {
+  width: 100%;
+  min-height: 100svh;
+  margin: 0;
+  padding: clamp(100px, 12vh, 150px) max(20px, calc((100vw - var(--fl-max)) / 2));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(180deg,
+      #070a08 0%,
+      rgba(7, 10, 8, 0.92) 8%,
+      rgba(4, 8, 5, 0.64) 27%,
+      rgba(4, 8, 5, 0.6) 71%,
+      rgba(7, 10, 8, 0.9) 91%,
+      #070a08 100%),
+    url('/static/img/join-flatiron/amenities-background.webp') center 54% / cover no-repeat;
+}
+.amenity-fullscreen .member-amenities h2 {
+  text-shadow: 0 3px 24px rgba(0,0,0,.95);
+}
+.amenity-fullscreen .amenity-modules,
+.amenity-fullscreen .amenity-source {
+  width: min(var(--fl-max), calc(100vw - 40px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Option B — balanced 3 + 2 grid */
 .amenity-variant-b .member-amenities {
   border: 1px solid rgba(50, 208, 17, 0.26);
@@ -182,6 +213,17 @@
 @media (max-width: 700px) {
   .member-amenities { width: calc(100% - 24px); margin-top: 34px; padding: 26px 14px; border-radius: 18px; }
   .amenity-variant-a .member-amenities { background-position: 62% center; }
+  .amenity-fullscreen .member-amenities {
+    width: 100%;
+    min-height: 100svh;
+    margin: 0;
+    padding: 96px 12px 110px;
+    border-radius: 0;
+    background-position: 0 0, 62% center;
+  }
+  .amenity-fullscreen .member-amenities h2 { text-align: center; }
+  .amenity-fullscreen .amenity-modules,
+  .amenity-fullscreen .amenity-source { width: 100%; }
   .member-amenities h2 { margin-bottom: 22px; font-size: 2rem; text-align: left; }
   .amenity-variant-a .amenity-modules,
   .amenity-variant-b .amenity-modules,
