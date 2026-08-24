@@ -81,7 +81,13 @@
 
 /* Option A — five equal modules with thin white hairlines */
 .amenity-variant-a .member-amenities {
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background:
+    linear-gradient(180deg, rgba(4, 8, 5, 0.68), rgba(4, 8, 5, 0.78)),
+    url('/static/img/join-flatiron/amenities-background.webp') center 54% / cover no-repeat;
+}
+.amenity-variant-a .member-amenities h2 {
+  text-shadow: 0 2px 18px rgba(0,0,0,.8);
 }
 .amenity-variant-a .amenity-modules {
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -90,13 +96,17 @@
 .amenity-variant-a .amenity-module {
   align-items: center;
   text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.46);
   border-radius: 13px;
+  background: rgba(4, 8, 5, 0.56);
+  backdrop-filter: blur(2px);
 }
+.amenity-variant-a .amenity-source,
+.amenity-variant-a .amenity-source a { color: rgba(255,255,255,.72); }
 .amenity-variant-a .amenity-module:hover {
   transform: translateY(-3px);
-  border-color: rgba(255,255,255,.72);
-  background: rgba(255,255,255,.025);
+  border-color: rgba(255,255,255,.78);
+  background: rgba(4, 8, 5, 0.66);
 }
 
 /* Option B — balanced 3 + 2 grid */
@@ -171,6 +181,7 @@
 
 @media (max-width: 700px) {
   .member-amenities { width: calc(100% - 24px); margin-top: 34px; padding: 26px 14px; border-radius: 18px; }
+  .amenity-variant-a .member-amenities { background-position: 62% center; }
   .member-amenities h2 { margin-bottom: 22px; font-size: 2rem; text-align: left; }
   .amenity-variant-a .amenity-modules,
   .amenity-variant-b .amenity-modules,
