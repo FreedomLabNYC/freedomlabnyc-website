@@ -547,27 +547,46 @@
             setTimeout(() => sectionObserver.observe(el), i * 100);
         });
 
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbyDDn0cRv9xF6JV_dfeer0B81Uq_q_vkRtuoZ8iQct5aH1_icPEfD66Im5X6Fk444eHKQ/exec';
+        const applicationURL = 'https://api.freedomlab.nyc/applications';
         const form = document.getElementById('waitlistForm');
+        const tierPrices = { sparkmaker: 100, torchbearer: 250, flamekeeper: 400 };
+        const selectedTier = new URLSearchParams(window.location.search).get('tier');
+        if (tierPrices[selectedTier]) {
+            form.querySelector('#budget').value = tierPrices[selectedTier];
+        }
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = form.querySelector('button');
             btn.disabled = true;
             btn.textContent = 'Submitting...';
-
-            const formData = new FormData(form);
-            formData.append('formType', 'Hackerspace Waitlist');
-            if (!form.querySelector('#updates').checked) {
-                formData.set('Updates Opt-in', 'No');
-            }
-
+            const budget = Number(form.querySelector('#budget').value);
+            const membershipTier = tierPrices[selectedTier]
+                ? selectedTier
+                : budget <= 175 ? 'sparkmaker' : budget <= 325 ? 'torchbearer' : 'flamekeeper';
+            const payload = {
+                submission_id: crypto.randomUUID(),
+                name: form.querySelector('#name').value,
+                email: form.querySelector('#email').value,
+                monthly_budget: budget,
+                freedom_tech_tools: form.querySelector('#favorite-projects').value,
+                updates_opt_in: form.querySelector('#updates').checked,
+                consent_version: 'join-2026-08',
+                source: selectedTier ? 'freedomlab.nyc/join2' : 'freedomlab.nyc/join',
+                membership_tier: membershipTier
+            };
             try {
-                await fetch(scriptURL, { method: 'POST', body: formData, mode: 'no-cors' });
+                const response = await fetch(applicationURL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error(`Application failed (${response.status})`);
+                await response.json();
                 if (typeof gtag === 'function') {
                     gtag('event', 'join_waitlist_submit', {
                         event_category: 'conversion',
-                        event_label: 'Hackerspace Waitlist',
-                        form_type: 'Hackerspace Waitlist',
+                        event_label: 'Membership Application',
+                        form_type: 'Membership Application',
                         page_path: '/join/'
                     });
                 }
