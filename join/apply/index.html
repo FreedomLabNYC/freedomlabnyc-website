@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="description" content="Apply for Freedom Lab NYC membership.">
+  <title>Membership Application | Freedom Lab NYC</title>
+  <link rel="canonical" href="https://freedomlab.nyc/join/apply/">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="preload" href="/static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/join-application-final.css?v=1">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Membership Application | Freedom Lab NYC">
+  <meta property="og:description" content="Apply for Freedom Lab NYC membership.">
+  <meta property="og:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Membership Application | Freedom Lab NYC">
+  <meta name="twitter:description" content="Apply for Freedom Lab NYC membership.">
+  <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
+</head>
+<body>
+  <div class="apply-page">
+    <a class="apply-brand" href="/join/" aria-label="Back to Freedom Lab memberships">
+      <picture><source srcset="/static/img/FLNYC 2LINE+LOGO.webp" type="image/webp"><img src="/static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" width="869" height="494"></picture>
+    </a>
+    <main class="apply-main">
+      <div class="apply-header"><h1>Membership Application</h1><span class="apply-progress">Step <strong data-progress-current>1</strong> of 3</span></div>
+      <div class="apply-rule"></div>
+      <p class="apply-intro">Complete the form to apply for Freedom Lab membership.</p>
+
+      <form id="membershipApplication" class="application-form" novalidate>
+        <section class="apply-step" data-step="1">
+          <h2>Personal Information</h2>
+          <div class="apply-grid">
+            <div class="field"><label for="firstName">First name <span class="required">*</span></label><input id="firstName" name="first_name" type="text" autocomplete="given-name" placeholder="First name" required></div>
+            <div class="field"><label for="lastName">Last name <span class="required">*</span></label><input id="lastName" name="last_name" type="text" autocomplete="family-name" placeholder="Last name" required></div>
+            <div class="field"><label for="email">Email address <span class="required">*</span></label><input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required></div>
+            <div class="field"><label for="socialPlatform">Social platform link</label><input id="socialPlatform" name="social_platform_link" type="text" inputmode="url" placeholder="https://"></div>
+          </div>
+          <div class="apply-actions end"><button class="apply-button" type="button" data-next>Next</button></div>
+        </section>
+
+        <section class="apply-step" data-step="2" hidden>
+          <h2>Interests</h2>
+          <div class="apply-grid">
+            <div class="field"><label for="attendedEvent">Have you been to a Freedom Lab event? <span class="required">*</span></label><select id="attendedEvent" name="attended_event" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+            <div class="field" data-event-details hidden><label for="eventsAttended">If so, which one(s)?</label><input id="eventsAttended" name="events_attended" type="text"></div>
+            <div class="field"><label for="mainInterest">What is your main interest in joining Freedom Lab? <span class="required">*</span></label><select id="mainInterest" name="main_interest" required><option value="">Choose one</option><option>Coworking space</option><option>Developing freedom tech</option><option>Community</option><option>Teaching freedom tech</option><option>Learning freedom tech</option><option>Helping Freedom Lab grow</option><option>Other</option></select></div>
+            <div class="field" data-other-interest hidden><label for="mainInterestOther">Other</label><input id="mainInterestOther" name="main_interest_other" type="text"></div>
+            <div class="field full"><label for="freedomTechInterests">What area(s) of freedom tech are you interested in? <span class="required">*</span></label><textarea id="freedomTechInterests" name="freedom_tech_interests" required></textarea></div>
+          </div>
+          <div class="apply-actions"><button class="apply-button secondary" type="button" data-back>Back</button><button class="apply-button" type="button" data-next>Next</button></div>
+        </section>
+
+        <section class="apply-step" data-step="3" hidden>
+          <h2>References</h2>
+          <div class="apply-grid">
+            <div class="field"><label for="references">Reference(s)</label><textarea id="references" name="references"></textarea></div>
+            <div class="field"><label for="otherComments">Other comments</label><textarea id="otherComments" name="other_comments"></textarea></div>
+          </div>
+          <div class="apply-actions"><button class="apply-button secondary" type="button" data-back>Back</button><button class="apply-button" type="submit">Submit application</button></div>
+        </section>
+
+        <p class="apply-status" role="status" hidden></p>
+      </form>
+
+      <section class="apply-success" hidden>
+        <h2>Application submitted</h2>
+        <p>We’ll be in touch after review.</p>
+      </section>
+    </main>
+  </div>
+  <script src="/js/join-application.js?v=1"></script>
+</body>
+</html>

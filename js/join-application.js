@@ -17,6 +17,7 @@
   const status = form.querySelector('.apply-status');
   const success = document.querySelector('.apply-success');
   const selectedTier = new URLSearchParams(location.search).get('tier');
+  const applicationSource = location.pathname.startsWith('/join2/') ? 'join2' : 'join';
   let current = 1;
 
   const setStatus = (message = '') => {
@@ -123,8 +124,8 @@
       other_comments: form.elements.other_comments.value.trim(),
       monthly_budget: tierPrices[selectedTier],
       membership_tier: selectedTier,
-      consent_version: 'join2-2026-08',
-      source: 'freedomlab.nyc/join2',
+      consent_version: `${applicationSource}-2026-08`,
+      source: `freedomlab.nyc/${applicationSource}`,
       freedom_tech_tools: freedomTechInterests,
       updates_opt_in: false
     };
@@ -144,7 +145,7 @@
           event_category: 'conversion',
           event_label: 'Membership Application',
           form_type: 'Membership Application',
-          page_path: '/join2/apply/'
+          page_path: `/${applicationSource}/apply/`
         });
       }
     } catch (error) {
