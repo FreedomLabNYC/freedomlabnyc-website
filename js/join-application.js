@@ -28,7 +28,7 @@
   const showStep = step => {
     current = step;
     steps.forEach(panel => { panel.hidden = Number(panel.dataset.step) !== step; });
-    progress.textContent = String(step);
+    if (progress) progress.textContent = String(step);
     setStatus();
   };
 
@@ -42,7 +42,9 @@
   };
 
   const validateStep = step => {
-    const panel = steps.find(item => Number(item.dataset.step) === step);
+    const panel = steps.length
+      ? steps.find(item => Number(item.dataset.step) === step)
+      : form;
     const fields = [...panel.querySelectorAll('input,select,textarea')].filter(field => !field.disabled && !field.closest('[hidden]'));
     const invalid = fields.find(field => !markValidity(field));
     if (invalid) {
@@ -155,5 +157,5 @@
     }
   });
 
-  showStep(1);
+  if (steps.length) showStep(1);
 })();

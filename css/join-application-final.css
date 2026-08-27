@@ -32,6 +32,7 @@ body { color: var(--text); background: var(--bg); font-family: "Space Grotesk", 
   flex-direction: column;
   justify-content: center;
 }
+.single-page-application .apply-main { width: min(1180px,100%); }
 .apply-header { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; }
 .apply-header h1 { margin: 0; font-size: clamp(1.35rem,2.1vw,1.8rem); line-height: 1.15; letter-spacing: -.025em; }
 .apply-progress { flex: 0 0 auto; color: var(--muted); font-size: .86rem; }
@@ -42,6 +43,11 @@ body { color: var(--text); background: var(--bg); font-family: "Space Grotesk", 
 .apply-step { min-height: 0; }
 .apply-step h2 { margin: 0 0 clamp(14px,2vh,20px); font-size: clamp(1.1rem,1.8vw,1.45rem); line-height: 1.2; }
 .apply-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: clamp(10px,1.5vh,16px) 16px; }
+.single-page-grid { grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(8px,1.2vh,12px) 14px; }
+.field.span-2 { grid-column: span 2; }
+.single-page-form .apply-step h2 { margin-bottom: clamp(10px,1.4vh,14px); }
+.single-page-form .field textarea { height: clamp(58px,7.5vh,68px); }
+.single-page-form .apply-actions { margin-top: clamp(12px,1.6vh,18px); }
 .field { min-width: 0; }
 .field.full { grid-column: 1 / -1; }
 .field label { display: block; margin: 0 0 5px; color: var(--text); font-size: .76rem; font-weight: 650; line-height: 1.25; }
@@ -127,6 +133,18 @@ body { color: var(--text); background: var(--bg); font-family: "Space Grotesk", 
   .apply-actions { margin-top: 12px; }
   .apply-button { min-width: 0; flex: 1; min-height: 44px; }
   .apply-button.secondary { flex: 0 0 100px; }
+}
+
+@media (max-width: 900px) {
+  html:has(.single-page-application), body.single-page-application { height: auto; min-height: 100%; overflow: auto; }
+  .single-page-application .apply-page { height: auto; min-height: 100svh; }
+  .single-page-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .single-page-grid .span-2 { grid-column: 1 / -1; }
+}
+
+@media (max-width: 700px) {
+  .single-page-grid { grid-template-columns: 1fr; }
+  .single-page-grid .span-2 { grid-column: auto; }
 }
 
 @media (max-width: 360px), (max-height: 650px) and (max-width:700px) {
