@@ -3,6 +3,7 @@
 
 Flags public HTML pages that redefine shared title/banner styling inline,
 miss the shared footer, or drift away from the default rectangular preview image.
+It also locks the canonical join page navigation to the homepage navigation.
 Event pages may use an explicit self-hosted event-archive preview.
 This is intentionally lightweight: it does not require a build step.
 """
@@ -45,6 +46,23 @@ FORBIDDEN_INLINE = [
 PREVIEW_PROPS = ['og:image', 'twitter:image']
 
 
+def nav_links(text: str) -> list[tuple[str, str]]:
+    """Return visible label/href pairs from the site's primary navigation."""
+    nav = re.search(
+        r'<nav\b[^>]*class=["\'][^"\']*\bnav-menu\b[^"\']*["\'][^>]*>(.*?)</nav>',
+        text,
+        re.IGNORECASE | re.DOTALL,
+    )
+    if not nav:
+        return []
+    links: list[tuple[str, str]] = []
+    for match in re.finditer(r'<a\b([^>]*)>(.*?)</a>', nav.group(1), re.IGNORECASE | re.DOTALL):
+        href = re.search(r'href=["\']([^"\']+)', match.group(1), re.IGNORECASE)
+        label = re.sub(r'<[^>]+>', ' ', match.group(2))
+        links.append((' '.join(label.split()), href.group(1) if href else ''))
+    return links
+
+
 def is_public_html(path: Path) -> bool:
     rel = path.relative_to(ROOT)
     rel_posix = rel.as_posix()
@@ -79,6 +97,10 @@ def valid_event_preview(rel: str, values: dict[str, str | None]) -> bool:
 
 def main() -> int:
     errors: list[str] = []
+    home_nav = nav_links((ROOT / 'index.html').read_text(errors='ignore'))
+    join_nav = nav_links((ROOT / 'join/index.html').read_text(errors='ignore'))
+    if join_nav != home_nav:
+        errors.append(f'join/index.html: navigation differs from homepage: {join_nav!r} != {home_nav!r}')
     for path in sorted(ROOT.rglob('*.html')):
         if not is_public_html(path):
             continue

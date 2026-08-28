@@ -225,9 +225,9 @@
   .amenity-variant-a .member-amenities { background-position: 62% center; }
   .amenity-fullscreen .member-amenities {
     width: 100%;
-    min-height: 100svh;
+    min-height: 0;
     margin: 0;
-    padding: 96px 12px 110px;
+    padding: 64px 12px 72px;
     border-radius: 0;
     background-position: 0 0, 62% center;
   }
@@ -248,7 +248,8 @@
   .amenity-variant-c .amenity-module,
   .amenity-variant-c .amenity-module:nth-child(-n+2),
   .amenity-variant-c .amenity-module:last-child { grid-column: auto; min-height: 0; }
-  .amenity-module { min-height: 0; padding: 24px 20px; align-items: flex-start; text-align: left; }
+  .amenity-module { min-height: 0; padding: 20px 18px; align-items: flex-start; text-align: left; }
+  .amenity-module h3 { margin: 14px 0 7px; }
   .amenity-variant-c .amenity-module:nth-child(-n+2) { padding: 26px 20px; }
   .amenity-source { text-align: left; }
 }

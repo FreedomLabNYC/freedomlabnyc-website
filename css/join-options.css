@@ -451,15 +451,6 @@ body.join-option-page {
   .action-tier .tier-cta { grid-column: 1 / -1; }
 }
 
-@media (max-width: 768px) {
-  .join-option-page .nav-menu:not(.active) { display: none; }
-  .join-option-page .nav-menu.active {
-    display: flex;
-    right: 0;
-    transform: none;
-  }
-}
-
 @media (max-width: 720px) {
   .option-switcher,
   .editorial-shell,
@@ -492,13 +483,29 @@ body.join-option-page {
     grid-template-columns: 1fr;
   }
   .action-tier .tier-cta { grid-column: 1 / -1; }
-  .stage-hero { min-height: 620px; }
-  .stage-copy { padding: 80px 0 120px; }
-  .stage-copy .hero-copy { max-width: 92%; }
-  .stage-caption { right: 12px; top: auto; bottom: 92px; }
-  .stage-pricing { margin-top: -74px; }
+  .stage-hero { min-height: 540px; }
+  .stage-copy { padding: 56px 0 96px; }
+  .option-stage .hero-title {
+    max-width: 100%;
+    font-size: clamp(1.8rem, 9.2vw, 2.35rem);
+    line-height: 1.16;
+  }
+  .stage-copy .hero-copy {
+    max-width: 100%;
+    margin-top: 18px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .stage-caption { right: 12px; top: auto; bottom: 68px; }
+  .stage-pricing { margin-top: -58px; }
   .stage-tier-grid { gap: 12px; }
-  .stage-tier { border-radius: 18px; }
+  .stage-tier {
+    gap: 16px;
+    padding: 1.35rem;
+    border-radius: 18px;
+  }
+  .stage-tier .benefit-list li { font-size: 0.9rem; }
+  .stage-tier .benefit-list li + li { margin-top: 0.55rem; }
   .price strong { font-size: 2.25rem; }
 }
 
