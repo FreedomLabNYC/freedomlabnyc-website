@@ -20,7 +20,6 @@ body.application-page {
 .application-page *::before,
 .application-page *::after { box-sizing: border-box; }
 .application-page [hidden] { display: none !important; }
-.application-page .hamburger { padding: 0; border: 0; background: transparent; appearance: none; }
 .application-main { min-height: calc(100vh - 86px); }
 .application-back {
   min-height: 44px;
@@ -190,8 +189,6 @@ body.application-page {
 }
 
 @media (max-width: 700px) {
-  .application-page .nav-menu:not(.active) { display: none; }
-  .application-page .nav-menu.active { display: flex; right: 0; transform: none; }
   .application-a .application-main,
   .application-c .application-main { width: calc(100% - 24px); }
   .application-heading h1,

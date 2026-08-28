@@ -32,7 +32,7 @@ SKIP_PATHS = {
     'tag-tree-options.html',
 }
 REQUIRED_PUBLIC_SNIPPETS = [
-    'css/styles.css',
+    'css/styles.css?v=universal-nav-1',
     'footer.js',
 ]
 FORBIDDEN_INLINE = [
@@ -44,6 +44,22 @@ FORBIDDEN_INLINE = [
     '.tutorials-hero h1 {',
 ]
 PREVIEW_PROPS = ['og:image', 'twitter:image']
+SHARED_NAV_SCRIPT = '/js/nav.js?v=universal-nav-1'
+EXPECTED_NAV_LINKS = [
+    ('Classes & Events', '/classes-events/'),
+    ('Resources', '/resources/'),
+    ('Contact', '/contact/'),
+    ('Donate', '/donate/'),
+    ('Join', '/join/'),
+]
+SHARED_CHROME_SELECTOR_TOKENS = (
+    '.site-nav-header',
+    '.nav-menu',
+    '.nav-link',
+    '.nav-btn',
+    '.hamburger',
+    '.mobile-overlay',
+)
 
 
 def nav_links(text: str) -> list[tuple[str, str]]:
@@ -61,6 +77,26 @@ def nav_links(text: str) -> list[tuple[str, str]]:
         label = re.sub(r'<[^>]+>', ' ', match.group(2))
         links.append((' '.join(label.split()), href.group(1) if href else ''))
     return links
+
+
+def component_nav_links(text: str) -> list[tuple[str, str]]:
+    """Return label/href pairs from the shared nav component data."""
+    return [
+        (match.group(2), match.group(1))
+        for match in re.finditer(
+            r"\{\s*key:\s*'[^']+',\s*href:\s*'([^']+)',\s*label:\s*'([^']+)'",
+            text,
+        )
+    ]
+
+
+def shared_chrome_selectors(text: str) -> list[str]:
+    selectors: list[str] = []
+    for match in re.finditer(r'([^{}]+)\{[^{}]*\}', text, re.DOTALL):
+        selector = ' '.join(match.group(1).split())
+        if any(token in selector for token in SHARED_CHROME_SELECTOR_TOKENS):
+            selectors.append(selector)
+    return selectors
 
 
 def css_declarations(text: str, selector: str) -> dict[str, str]:
@@ -111,30 +147,66 @@ def valid_event_preview(rel: str, values: dict[str, str | None]) -> bool:
 
 def main() -> int:
     errors: list[str] = []
-    home_nav = nav_links((ROOT / 'index.html').read_text(errors='ignore'))
-    join_nav = nav_links((ROOT / 'join/index.html').read_text(errors='ignore'))
-    if join_nav != home_nav:
-        errors.append(f'join/index.html: navigation differs from homepage: {join_nav!r} != {home_nav!r}')
-    join_css = (ROOT / 'css/join-options.css').read_text(errors='ignore')
-    hamburger = css_declarations(join_css, '.join-option-page .hamburger')
-    expected_hamburger = {
-        'width': '44px',
-        'height': '44px',
-        'min-height': '44px',
-        'padding': '12px 0 12px 16px',
-        'margin': '-12px 0 -12px auto',
+    shared_nav = (ROOT / 'js/nav.js').read_text(errors='ignore')
+    component_nav = component_nav_links(shared_nav)
+    if component_nav != EXPECTED_NAV_LINKS:
+        errors.append(
+            f'js/nav.js: canonical navigation differs from expected: '
+            f'{component_nav!r} != {EXPECTED_NAV_LINKS!r}'
+        )
+    shared_css = (ROOT / 'css/styles.original.css').read_text(errors='ignore')
+    shared_header = css_declarations(shared_css, '.site-nav-header')
+    expected_shared_header = {
+        'background': 'linear-gradient(180deg, #1c1b19 0%, #201f1d 100%) !important',
+        'backdrop-filter': 'none',
+        '-webkit-backdrop-filter': 'none',
     }
-    for prop, expected in expected_hamburger.items():
-        if hamburger.get(prop) != expected:
+    for prop, expected in expected_shared_header.items():
+        if shared_header.get(prop) != expected:
             errors.append(
-                f'css/join-options.css: mobile hamburger {prop} should be {expected}, '
-                f'got {hamburger.get(prop) or "missing"}'
+                f'css/styles.original.css: shared header {prop} should be {expected}, '
+                f'got {shared_header.get(prop) or "missing"}'
+            )
+    for css_path in [*(ROOT / 'css').glob('*.css'), ROOT / 'resources2/styles.css']:
+        if css_path in {ROOT / 'css/styles.css', ROOT / 'css/styles.original.css'} or not css_path.exists():
+            continue
+        selectors = shared_chrome_selectors(css_path.read_text(errors='ignore'))
+        for selector in selectors:
+            errors.append(
+                f'{css_path.relative_to(ROOT)}: route-specific shared chrome override ({selector})'
+            )
+    join_css = (ROOT / 'css/join-options.css').read_text(errors='ignore')
+    for forbidden_selector in (
+        '.join-option-page .header',
+        '.join-option-page .site-nav-header',
+        '.join-option-page .hamburger',
+    ):
+        if css_declarations(join_css, forbidden_selector):
+            errors.append(
+                f'css/join-options.css: route-specific shared chrome override '
+                f'({forbidden_selector})'
             )
     for path in sorted(ROOT.rglob('*.html')):
         if not is_public_html(path):
             continue
         rel = path.relative_to(ROOT).as_posix()
         text = path.read_text(errors='ignore')
+        has_standard_header = bool(re.search(
+            r'<header\b[^>]*class=["\'][^"\']*\bheader\b[^"\']*["\']',
+            text,
+            re.IGNORECASE,
+        ))
+        uses_shared_nav = 'id="nav-placeholder"' in text or "id='nav-placeholder'" in text
+        if has_standard_header or uses_shared_nav:
+            if has_standard_header:
+                errors.append(f'{rel}: duplicates shared header markup instead of using js/nav.js')
+            if not uses_shared_nav:
+                errors.append(f'{rel}: missing #nav-placeholder')
+            if SHARED_NAV_SCRIPT not in text:
+                errors.append(f'{rel}: missing {SHARED_NAV_SCRIPT}')
+            for style in re.findall(r'<style\b[^>]*>(.*?)</style>', text, re.IGNORECASE | re.DOTALL):
+                for selector in shared_chrome_selectors(style):
+                    errors.append(f'{rel}: inline shared chrome override ({selector})')
         if '<meta name="robots"' in text and 'noindex' in text:
             # Redirect/private/noindex utility pages intentionally have thinner chrome.
             continue

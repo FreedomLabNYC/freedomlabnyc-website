@@ -20,10 +20,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .eyebrow { margin: 0 0 14px; color: var(--lab-green); font-family: 'JetBrains Mono', monospace; font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
 
-.header { background: rgba(7,10,13,.94); border-bottom-color: var(--lab-line); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
-.nav-link.active { color: var(--lab-green); }
-.hamburger { background: transparent; border: 0; }
-
 .lab-hero { position: relative; min-height: 530px; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 80px; padding-block: 100px 72px; overflow: hidden; }
 .hero-grid { position: absolute; inset: 0; opacity: .22; pointer-events: none; background-image: linear-gradient(var(--lab-line) 1px, transparent 1px), linear-gradient(90deg, var(--lab-line) 1px, transparent 1px); background-size: 44px 44px; mask-image: linear-gradient(to right, #000, transparent 80%); }
 .hero-grid::before, .hero-grid::after { content: ''; position: absolute; width: 110px; height: 110px; border-color: var(--lab-green); opacity: .75; }

@@ -10,9 +10,9 @@
     <link rel="preload" href="../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="assets/slides/slide-02.webp" as="image" type="image/webp">
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css?v=universal-nav-1">
     <link rel="stylesheet" href="../css/fonts.css">
-    <link rel="stylesheet" href="styles.css?v=resource-lab-2">
+    <link rel="stylesheet" href="styles.css?v=universal-nav-1">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://freedomlab.nyc/resources2/">
     <meta property="og:title" content="Resource Lab Preview | Freedom Lab NYC">
@@ -24,23 +24,10 @@
     <meta name="twitter:image" content="https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png">
 </head>
 <body>
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-    <header class="header">
-        <a href="/" class="logo" aria-label="Freedom Lab NYC home">
-            <picture>
-                <source srcset="../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
-                <img src="../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide" width="869" height="494">
-            </picture>
-        </a>
-        <nav class="nav-menu" id="navMenu" aria-label="Main navigation">
-            <a href="/classes-events/" class="nav-link">Classes & Events</a>
-            <a href="/resources2/" class="nav-link active">Resources</a>
-            <a href="/contact/" class="nav-link">Contact</a>
-            <a href="/donate/" class="nav-link">Donate</a>
-            <a href="/join/" class="nav-btn">Join</a>
-        </nav>
-        <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
-    </header>
+
+    <div id="nav-placeholder"></div>
+    <script src="/js/nav.js?v=universal-nav-1"></script>
+
 
     <main>
         <section class="lab-hero section-shell" aria-labelledby="page-title">

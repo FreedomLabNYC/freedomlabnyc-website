@@ -6,7 +6,7 @@
     <meta name="description" content="Join the waitlist for Freedom Lab NYC's upcoming freedom tech hackerspace in New York City.">
     <title>Hackerspace Waitlist | Freedom Lab NYC</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/styles.css?v=universal-nav-1">
     <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../../css/fonts.css">
@@ -267,30 +267,9 @@
     </script>
 </head>
 <body>
-    <!-- Mobile Overlay -->
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-    
-    <!-- Header -->
-    <header class="header">
-        <a href="/" class="logo">
-            <picture>
-                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
-                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
-            </picture>
-        </a>
-        <nav class="nav-menu" id="navMenu">
-            <a href="/classes-events/" class="nav-link">Classes & Events</a>
-            <a href="/resources/" class="nav-link">Resources</a>
-            <a href="/contact/" class="nav-link">Contact</a>
-            <a href="/donate/" class="nav-link">Donate</a>
-            <a href="/join/" class="nav-btn">Join</a>
-        </nav>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </header>
+    <div id="nav-placeholder"></div>
+    <script src="/js/nav.js?v=universal-nav-1"></script>
+
 
     <!-- Page Hero -->
     <section class="page-hero">

@@ -21,17 +21,6 @@ body.join-option-page {
   font-family: "Space Grotesk", sans-serif;
 }
 
-.join-option-page .hamburger {
-  width: 44px;
-  height: 44px;
-  min-height: 44px;
-  padding: 12px 0 12px 16px;
-  margin: -12px 0 -12px auto;
-  border: 0;
-  background: transparent;
-  appearance: none;
-}
-
 .join-option-page *,
 
 .join-option-page *::before,
@@ -69,8 +58,6 @@ body.join-option-page {
   color: var(--fl-green);
   background: rgba(50, 208, 17, 0.08);
 }
-
-.join-option-page .header { border-bottom-color: rgba(245, 247, 244, 0.1); }
 
 .hero-title {
   margin: 0;
