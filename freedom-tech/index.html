@@ -118,32 +118,6 @@
 
     <div id="footer-placeholder"></div>
     <script src="../js/footer.js"></script>
-    <script>
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
-        const mobileOverlay = document.getElementById('mobileOverlay');
 
-        function closeMenu() {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            mobileOverlay.classList.toggle('active');
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-        });
-        hamburger.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                hamburger.click();
-            }
-        });
-        mobileOverlay.addEventListener('click', closeMenu);
-        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => link.addEventListener('click', closeMenu));
-    </script>
 </body>
 </html>

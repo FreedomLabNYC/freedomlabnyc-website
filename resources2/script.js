@@ -207,18 +207,4 @@
     resourceSearch.addEventListener('input', renderResources);
     renderResources();
 
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
-    const overlay = document.getElementById('mobileOverlay');
-    function setMenu(open) {
-        hamburger.classList.toggle('active', open);
-        navMenu.classList.toggle('active', open);
-        overlay.classList.toggle('active', open);
-        hamburger.setAttribute('aria-expanded', String(open));
-        hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-        document.body.classList.toggle('menu-open', open);
-    }
-    hamburger.addEventListener('click', () => setMenu(!navMenu.classList.contains('active')));
-    overlay.addEventListener('click', () => setMenu(false));
-    navMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
 })();

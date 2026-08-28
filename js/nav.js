@@ -48,30 +48,39 @@
         if (!hamburger || !navMenu || !mobileOverlay || hamburger.dataset.sharedNavBound) return;
         hamburger.dataset.sharedNavBound = 'true';
 
+        let previousBodyOverflow = document.body.style.overflow;
         const setOpen = (open) => {
+            const wasOpen = navMenu.classList.contains('active');
+            if (open && !wasOpen) previousBodyOverflow = document.body.style.overflow;
             hamburger.classList.toggle('active', open);
             navMenu.classList.toggle('active', open);
             mobileOverlay.classList.toggle('active', open);
             hamburger.setAttribute('aria-expanded', String(open));
             hamburger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
             mobileOverlay.setAttribute('aria-hidden', String(!open));
-            document.body.style.overflow = open ? 'hidden' : '';
+            document.body.style.overflow = open ? 'hidden' : previousBodyOverflow;
         };
 
         hamburger.addEventListener('click', (event) => {
             event.preventDefault();
-            event.stopImmediatePropagation();
             setOpen(!navMenu.classList.contains('active'));
-        }, true);
+        });
 
-        mobileOverlay.addEventListener('click', (event) => {
-            event.stopImmediatePropagation();
-            setOpen(false);
-        }, true);
+        mobileOverlay.addEventListener('click', () => setOpen(false));
 
         navMenu.addEventListener('click', (event) => {
             if (event.target.closest('a')) setOpen(false);
-        }, true);
+        });
+
+        const desktopQuery = window.matchMedia('(min-width: 769px)');
+        const resetAtDesktop = (event) => {
+            if (event.matches) setOpen(false);
+        };
+        if (desktopQuery.addEventListener) {
+            desktopQuery.addEventListener('change', resetAtDesktop);
+        } else {
+            desktopQuery.addListener(resetAtDesktop);
+        }
 
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && navMenu.classList.contains('active')) {

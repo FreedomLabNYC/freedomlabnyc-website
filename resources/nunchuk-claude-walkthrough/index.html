@@ -433,21 +433,7 @@ nunchuk tx broadcast --wallet &lt;wallet-id&gt; --tx-id &lt;tx-id&gt;</code></pr
     <div id="footer-placeholder"></div>
     <script src="../../js/footer.js"></script>
     <script>
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('navMenu');
-        const mobileOverlay = document.getElementById('mobileOverlay');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            mobileOverlay.classList.toggle('active');
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-        });
-        mobileOverlay.addEventListener('click', () => {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
+
         document.querySelectorAll('.tutorial-toc a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();

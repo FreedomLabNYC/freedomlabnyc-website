@@ -60,6 +60,12 @@ SHARED_CHROME_SELECTOR_TOKENS = (
     '.hamburger',
     '.mobile-overlay',
 )
+LEGACY_NAV_BINDING_SNIPPETS = (
+    "getElementById('hamburger')",
+    'getElementById("hamburger")',
+    'mobileOverlay.addEventListener',
+    'mobileOverlay?.addEventListener',
+)
 
 
 def nav_links(text: str) -> list[tuple[str, str]]:
@@ -154,6 +160,8 @@ def main() -> int:
             f'js/nav.js: canonical navigation differs from expected: '
             f'{component_nav!r} != {EXPECTED_NAV_LINKS!r}'
         )
+    if "matchMedia('(min-width: 769px)')" not in shared_nav:
+        errors.append('js/nav.js: missing desktop-breakpoint menu reset')
     shared_css = (ROOT / 'css/styles.original.css').read_text(errors='ignore')
     shared_header = css_declarations(shared_css, '.site-nav-header')
     expected_shared_header = {
@@ -186,6 +194,16 @@ def main() -> int:
                 f'css/join-options.css: route-specific shared chrome override '
                 f'({forbidden_selector})'
             )
+    for script_path in (
+        ROOT / 'js/join-options.js',
+        ROOT / 'js/join-application-preview.js',
+        ROOT / 'resources2/script.js',
+    ):
+        if not script_path.exists():
+            continue
+        script = script_path.read_text(errors='ignore')
+        if any(snippet in script for snippet in LEGACY_NAV_BINDING_SNIPPETS):
+            errors.append(f'{script_path.relative_to(ROOT)}: legacy mobile-navigation binding')
     for path in sorted(ROOT.rglob('*.html')):
         if not is_public_html(path):
             continue
@@ -207,6 +225,9 @@ def main() -> int:
             for style in re.findall(r'<style\b[^>]*>(.*?)</style>', text, re.IGNORECASE | re.DOTALL):
                 for selector in shared_chrome_selectors(style):
                     errors.append(f'{rel}: inline shared chrome override ({selector})')
+            for script in re.findall(r'<script(?![^>]+src=)[^>]*>(.*?)</script>', text, re.IGNORECASE | re.DOTALL):
+                if any(snippet in script for snippet in LEGACY_NAV_BINDING_SNIPPETS):
+                    errors.append(f'{rel}: legacy inline mobile-navigation binding')
         if '<meta name="robots"' in text and 'noindex' in text:
             # Redirect/private/noindex utility pages intentionally have thinner chrome.
             continue
