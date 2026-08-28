@@ -27,33 +27,25 @@ The site serves as the central hub for Freedom Lab NYC:
 * **Architecture:** Static HTML/CSS/JS
 * **Styling:** Custom CSS with modern design patterns
 * **Hosting:** GitHub Pages
-* **No build process required** — pure static files
+* **Build:** Python standard-library compiler for shared navigation and footer partials
 
 ---
 
 ## 🚀 Local Development
 
-Clone the repo and start a local server:
+Clone the repo, build the deployable artifact, and start a local server:
 
-**Option 1: Python (recommended)**
 ```bash
-python3 -m http.server 8000
+npm start
 ```
 
-**Option 2: Node.js serve**
-```bash
-npm run serve
-```
-
-Then visit [http://localhost:8000](http://localhost:8000) in your browser.
-
-Changes to HTML, CSS, or JS files will be reflected on page refresh.
+Then visit [http://localhost:8000](http://localhost:8000). Source pages use shared component placeholders; `scripts/build-site.py` compiles them into `_site/`. Rebuild after changing HTML, partials, CSS, or JavaScript.
 
 ---
 
 ## 🏗️ Build
 
-No build process needed! The site is composed of static files that work directly in any web browser or static hosting service.
+Run `npm run build` to compile tracked site files into `_site/`. The build injects `partials/nav.html` and `partials/footer.html`, and `npm run audit` validates the compiled artifact.
 
 The main pages are:
 * `index.html` - Homepage
@@ -67,7 +59,7 @@ The main pages are:
 
 The site deploys automatically to GitHub Pages when changes are pushed to the `main` branch.
 
-GitHub Pages serves the files directly from the repository root, making the site accessible at [https://freedomlab.nyc](https://freedomlab.nyc) (configured via `CNAME` file).
+The GitHub Actions workflow builds and audits `_site/`, then publishes only that compiled artifact to [https://freedomlab.nyc](https://freedomlab.nyc).
 
 ---
 
@@ -105,7 +97,7 @@ We welcome contributions from developers who want to improve or extend the Freed
    ```bash
    git checkout -b feature/my-new-section
    ```
-3. Run the local dev server with `python3 -m http.server 8000`.
+3. Run the compiled local preview with `npm start`.
 4. Make your changes — edit HTML files directly, add/modify CSS in `css/`, update JavaScript as needed.
 5. Test your changes locally in your browser.
 6. Commit and push your branch:

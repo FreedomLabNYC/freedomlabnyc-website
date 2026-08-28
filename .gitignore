@@ -1,6 +1,10 @@
 # Dependencies
 /node_modules
 
+# Compiled static site
+/_site/
+/._site.candidate/
+
 # Misc
 .DS_Store
 .env.local

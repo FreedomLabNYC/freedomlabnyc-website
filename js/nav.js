@@ -1,46 +1,7 @@
-// Universal Freedom Lab navigation.
-// Every ordinary site page renders this component through #nav-placeholder.
+// Shared Freedom Lab navigation behavior.
+// Markup is compiled from partials/nav.html by scripts/build-site.py.
 
 (function () {
-    const NAV_LINKS = [
-        { key: 'classes-events', href: '/classes-events/', label: 'Classes & Events' },
-        { key: 'resources', href: '/resources/', label: 'Resources' },
-        { key: 'contact', href: '/contact/', label: 'Contact' },
-        { key: 'donate', href: '/donate/', label: 'Donate' },
-        { key: 'join', href: '/join/', label: 'Join', button: true },
-    ];
-
-    function currentSection() {
-        const path = window.location.pathname;
-        if (path === '/' || path === '/index.html') return '';
-        if (path.startsWith('/events/') || path.startsWith('/classes-events/')) return 'classes-events';
-        return NAV_LINKS.find(({ href }) => path.startsWith(href))?.key || '';
-    }
-
-    function navMarkup(activePage) {
-        const links = NAV_LINKS.map(({ key, href, label, button }) => {
-            const active = key === activePage ? ' active' : '';
-            const className = `${button ? 'nav-btn' : 'nav-link'}${active}`;
-            const current = active ? ' aria-current="page"' : '';
-            return `<a href="${href}" class="${className}"${current}>${label}</a>`;
-        }).join('');
-
-        return `
-        <div class="mobile-overlay" id="mobileOverlay" aria-hidden="true"></div>
-        <header class="site-nav-header" data-shared-navigation>
-            <a href="/" class="logo" aria-label="Freedom Lab NYC home">
-                <picture>
-                    <source srcset="/static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
-                    <img src="/static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide" width="869" height="494">
-                </picture>
-            </a>
-            <nav class="nav-menu" id="navMenu" aria-label="Primary">${links}</nav>
-            <button type="button" class="hamburger" id="hamburger" aria-label="Open menu" aria-controls="navMenu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-        </header>`;
-    }
-
     function initMobileMenu() {
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
@@ -65,9 +26,7 @@
             event.preventDefault();
             setOpen(!navMenu.classList.contains('active'));
         });
-
         mobileOverlay.addEventListener('click', () => setOpen(false));
-
         navMenu.addEventListener('click', (event) => {
             if (event.target.closest('a')) setOpen(false);
         });
@@ -90,16 +49,9 @@
         });
     }
 
-    window.renderNav = function renderNav(activePage = currentSection()) {
-        const placeholder = document.getElementById('nav-placeholder');
-        if (!placeholder) return;
-        placeholder.outerHTML = navMarkup(activePage);
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileMenu, { once: true });
+    } else {
         initMobileMenu();
-    };
-
-    if (document.getElementById('nav-placeholder')) {
-        window.renderNav();
-    } else if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => window.renderNav(), { once: true });
     }
 }());

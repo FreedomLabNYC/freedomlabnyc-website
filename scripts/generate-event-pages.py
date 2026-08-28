@@ -91,7 +91,7 @@ def page(ev: dict) -> tuple[str, str]:
   <script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','G-5L8YH7QGBD',{{anonymize_ip:true}});</script>
 </head>
 <body>
-<div id="nav-placeholder"></div><script src="/js/nav.js?v=universal-nav-1"></script>
+<div id="nav-placeholder"></div><script src="/js/nav.js?v=build-partials-1"></script>
 <main class="tutorial-content">
   <div class="tutorial-header">
     <div class="tutorial-breadcrumb"><a href="/classes-events/">Classes & Events</a><span>›</span><span>{escape(ev.get('name','Event'))}</span></div>
@@ -104,7 +104,7 @@ def page(ev: dict) -> tuple[str, str]:
     <img loading="lazy" src="{escape(cover)}" alt="Event cover for {escape(ev.get('name','Freedom Lab event'))}" style="width:100%;border-radius:16px;">
   </div>
   <section class="tutorial-section"><h2>About this Freedom Lab event</h2><p>This is a durable Freedom Lab NYC event page for search, sharing, and archive context. Luma remains the live RSVP and ticketing system, while this page helps people discover the event through Freedom Lab’s own site.</p></section>
-</main><script src="../../js/footer.js"></script></body></html>'''
+</main><div id="footer-placeholder"></div><script src="/js/footer.js?v=build-partials-1"></script></body></html>'''
     return slug, html
 
 def main():

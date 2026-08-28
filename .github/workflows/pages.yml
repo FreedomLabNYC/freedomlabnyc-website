@@ -1,9 +1,9 @@
 # .github/workflows/pages.yml
-name: Deploy Static Site to GitHub Pages
+name: Build and deploy static site to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -12,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
+  group: pages
   cancel-in-progress: true
 
 jobs:
@@ -24,15 +24,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
+      - name: Audit source contracts
+        run: python3 scripts/audit-shared-styles.py
+
+      - name: Build static site
+        run: python3 scripts/build-site.py
+
+      - name: Audit compiled artifact
+        run: python3 scripts/audit-built-site.py _site
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      
-      - name: Upload artifact
+
+      - name: Upload compiled artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
-      
+          path: _site
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

@@ -10,6 +10,7 @@ This is intentionally lightweight: it does not require a build step.
 from __future__ import annotations
 
 import re
+from html import unescape
 from pathlib import Path
 from urllib.parse import unquote
 
@@ -17,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PREVIEW = 'https://freedomlab.nyc/static/img/FL%20Signature%20Rectangular2.png'
 EVENT_PREVIEW_PREFIX = 'https://freedomlab.nyc/static/img/event-archive/'
 SKIP_DIRS = {
-    '.git', '.hermes', 'node_modules', 'ghostr', 'internal', 'sketches',
+    '.git', '.hermes', '_site', 'node_modules', 'ghostr', 'internal', 'partials', 'sketches',
 }
 SKIP_FILES = {
     'google962eebcd38de853f.html',
@@ -44,7 +45,7 @@ FORBIDDEN_INLINE = [
     '.tutorials-hero h1 {',
 ]
 PREVIEW_PROPS = ['og:image', 'twitter:image']
-SHARED_NAV_SCRIPT = '/js/nav.js?v=universal-nav-1'
+SHARED_NAV_SCRIPT = '/js/nav.js?v=build-partials-1'
 EXPECTED_NAV_LINKS = [
     ('Classes & Events', '/classes-events/'),
     ('Resources', '/resources/'),
@@ -80,20 +81,9 @@ def nav_links(text: str) -> list[tuple[str, str]]:
     links: list[tuple[str, str]] = []
     for match in re.finditer(r'<a\b([^>]*)>(.*?)</a>', nav.group(1), re.IGNORECASE | re.DOTALL):
         href = re.search(r'href=["\']([^"\']+)', match.group(1), re.IGNORECASE)
-        label = re.sub(r'<[^>]+>', ' ', match.group(2))
+        label = unescape(re.sub(r'<[^>]+>', ' ', match.group(2)))
         links.append((' '.join(label.split()), href.group(1) if href else ''))
     return links
-
-
-def component_nav_links(text: str) -> list[tuple[str, str]]:
-    """Return label/href pairs from the shared nav component data."""
-    return [
-        (match.group(2), match.group(1))
-        for match in re.finditer(
-            r"\{\s*key:\s*'[^']+',\s*href:\s*'([^']+)',\s*label:\s*'([^']+)'",
-            text,
-        )
-    ]
 
 
 def shared_chrome_selectors(text: str) -> list[str]:
@@ -153,15 +143,21 @@ def valid_event_preview(rel: str, values: dict[str, str | None]) -> bool:
 
 def main() -> int:
     errors: list[str] = []
-    shared_nav = (ROOT / 'js/nav.js').read_text(errors='ignore')
-    component_nav = component_nav_links(shared_nav)
+    nav_partial = (ROOT / 'partials/nav.html').read_text(errors='ignore')
+    component_nav = nav_links(nav_partial)
     if component_nav != EXPECTED_NAV_LINKS:
         errors.append(
-            f'js/nav.js: canonical navigation differs from expected: '
+            f'partials/nav.html: canonical navigation differs from expected: '
             f'{component_nav!r} != {EXPECTED_NAV_LINKS!r}'
         )
+    shared_nav = (ROOT / 'js/nav.js').read_text(errors='ignore')
+    if '<header' in shared_nav or 'renderNav' in shared_nav or 'navMarkup' in shared_nav:
+        errors.append('js/nav.js: navigation markup must live only in partials/nav.html')
     if "matchMedia('(min-width: 769px)')" not in shared_nav:
         errors.append('js/nav.js: missing desktop-breakpoint menu reset')
+    shared_footer = (ROOT / 'js/footer.js').read_text(errors='ignore')
+    if '<footer' in shared_footer or 'renderFooter' in shared_footer:
+        errors.append('js/footer.js: footer markup must live only in partials/footer.html')
     shared_css = (ROOT / 'css/styles.original.css').read_text(errors='ignore')
     shared_header = css_declarations(shared_css, '.site-nav-header')
     expected_shared_header = {
@@ -217,7 +213,7 @@ def main() -> int:
         uses_shared_nav = 'id="nav-placeholder"' in text or "id='nav-placeholder'" in text
         if has_standard_header or uses_shared_nav:
             if has_standard_header:
-                errors.append(f'{rel}: duplicates shared header markup instead of using js/nav.js')
+                errors.append(f'{rel}: duplicates shared header markup instead of using the build partial')
             if not uses_shared_nav:
                 errors.append(f'{rel}: missing #nav-placeholder')
             if SHARED_NAV_SCRIPT not in text:

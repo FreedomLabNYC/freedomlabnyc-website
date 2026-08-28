@@ -4,8 +4,10 @@
   "description": "Freedom Lab NYC - Static website for New York City's premier Freedom Tech community space",
   "private": true,
   "scripts": {
-    "start": "python3 -m http.server 8000",
-    "serve": "npx serve -l 8000 ."
+    "build": "python3 scripts/build-site.py",
+    "audit": "python3 scripts/audit-shared-styles.py && python3 scripts/audit-built-site.py _site",
+    "start": "npm run build && python3 -m http.server 8000 --directory _site",
+    "serve": "npx serve -l 8000 _site"
   },
   "repository": {
     "type": "git",
