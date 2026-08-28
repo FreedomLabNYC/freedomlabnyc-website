@@ -63,6 +63,20 @@ def nav_links(text: str) -> list[tuple[str, str]]:
     return links
 
 
+def css_declarations(text: str, selector: str) -> dict[str, str]:
+    """Return simple declarations from one exact CSS rule."""
+    match = re.search(rf'{re.escape(selector)}\s*\{{(.*?)\}}', text, re.DOTALL)
+    if not match:
+        return {}
+    declarations: dict[str, str] = {}
+    for declaration in match.group(1).split(';'):
+        if ':' not in declaration:
+            continue
+        name, value = declaration.split(':', 1)
+        declarations[name.strip()] = value.strip()
+    return declarations
+
+
 def is_public_html(path: Path) -> bool:
     rel = path.relative_to(ROOT)
     rel_posix = rel.as_posix()
@@ -101,6 +115,21 @@ def main() -> int:
     join_nav = nav_links((ROOT / 'join/index.html').read_text(errors='ignore'))
     if join_nav != home_nav:
         errors.append(f'join/index.html: navigation differs from homepage: {join_nav!r} != {home_nav!r}')
+    join_css = (ROOT / 'css/join-options.css').read_text(errors='ignore')
+    hamburger = css_declarations(join_css, '.join-option-page .hamburger')
+    expected_hamburger = {
+        'width': '44px',
+        'height': '44px',
+        'min-height': '44px',
+        'padding': '12px 0 12px 16px',
+        'margin': '-12px 0 -12px auto',
+    }
+    for prop, expected in expected_hamburger.items():
+        if hamburger.get(prop) != expected:
+            errors.append(
+                f'css/join-options.css: mobile hamburger {prop} should be {expected}, '
+                f'got {hamburger.get(prop) or "missing"}'
+            )
     for path in sorted(ROOT.rglob('*.html')):
         if not is_public_html(path):
             continue

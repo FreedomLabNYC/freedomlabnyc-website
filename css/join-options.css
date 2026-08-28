@@ -22,7 +22,11 @@ body.join-option-page {
 }
 
 .join-option-page .hamburger {
-  padding: 0;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 12px 0 12px 16px;
+  margin: -12px 0 -12px auto;
   border: 0;
   background: transparent;
   appearance: none;
