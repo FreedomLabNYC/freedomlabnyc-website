@@ -13,7 +13,7 @@ EXPECTED_NAV = [
     ("/resources/", "Resources"),
     ("/contact/", "Contact"),
     ("/donate/", "Donate"),
-    ("/join/", "Join"),
+    ("/join/", "Apply"),
 ]
 
 

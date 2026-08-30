@@ -51,7 +51,7 @@ EXPECTED_NAV_LINKS = [
     ('Resources', '/resources/'),
     ('Contact', '/contact/'),
     ('Donate', '/donate/'),
-    ('Join', '/join/'),
+    ('Apply', '/join/'),
 ]
 SHARED_CHROME_SELECTOR_TOKENS = (
     '.site-nav-header',
