@@ -64,14 +64,16 @@
 
   const attendance = form.elements.attended_event;
   const eventDetails = document.querySelector('[data-event-details]');
-  const syncAttendance = () => {
-    const attended = attendance.value === 'yes';
-    eventDetails.hidden = !attended;
-    eventDetails.querySelector('input').disabled = !attended;
-    if (!attended) eventDetails.querySelector('input').value = '';
-  };
-  attendance.addEventListener('change', syncAttendance);
-  syncAttendance();
+  if (attendance && eventDetails) {
+    const syncAttendance = () => {
+      const attended = attendance.value === 'yes';
+      eventDetails.hidden = !attended;
+      eventDetails.querySelector('input').disabled = !attended;
+      if (!attended) eventDetails.querySelector('input').value = '';
+    };
+    attendance.addEventListener('change', syncAttendance);
+    syncAttendance();
+  }
 
   const mainInterest = form.elements.main_interest;
   const otherInterest = document.querySelector('[data-other-interest]');
@@ -110,14 +112,15 @@
     const firstName = form.elements.first_name.value.trim();
     const lastName = form.elements.last_name.value.trim();
     const freedomTechInterests = form.elements.freedom_tech_interests.value.trim();
+    const eventsAttended = form.elements.events_attended.value.trim();
     const payload = {
       submission_id: crypto.randomUUID(),
       first_name: firstName,
       last_name: lastName,
       name: `${firstName} ${lastName}`.trim(),
       email: form.elements.email.value.trim(),
-      attended_event: attendance.value === 'yes',
-      events_attended: form.elements.events_attended.value.trim(),
+      attended_event: attendance ? attendance.value === 'yes' : Boolean(eventsAttended),
+      events_attended: eventsAttended,
       main_interest: mainInterest.value,
       main_interest_other: form.elements.main_interest_other.value.trim(),
       social_platform_link: form.elements.social_platform_link.value.trim(),

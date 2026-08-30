@@ -10,7 +10,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="preload" href="/static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css">
-  <link rel="stylesheet" href="/css/join-application-final.css?v=2">
+  <link rel="stylesheet" href="/css/join-application-final.css?v=3">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Membership Application | Freedom Lab NYC">
   <meta property="og:description" content="Apply for Freedom Lab NYC membership.">
@@ -37,10 +37,9 @@
             <div class="field"><label for="firstName">First name <span class="required">*</span></label><input id="firstName" name="first_name" type="text" autocomplete="given-name" placeholder="First name" required></div>
             <div class="field"><label for="lastName">Last name <span class="required">*</span></label><input id="lastName" name="last_name" type="text" autocomplete="family-name" placeholder="Last name" required></div>
             <div class="field"><label for="email">Email address <span class="required">*</span></label><input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required></div>
-            <div class="field"><label for="socialPlatform">Social platform link</label><input id="socialPlatform" name="social_platform_link" type="text" inputmode="url" placeholder="https://"></div>
+            <div class="field"><label for="socialPlatform">Social platform link</label><input id="socialPlatform" name="social_platform_link" type="text" inputmode="url"></div>
 
-            <div class="field"><label for="attendedEvent">Attended a Freedom Lab event? <span class="required">*</span></label><select id="attendedEvent" name="attended_event" required><option value="">Choose one</option><option value="yes">Yes</option><option value="no">No</option></select></div>
-            <div class="field" data-event-details hidden><label for="eventsAttended">Which event(s)?</label><input id="eventsAttended" name="events_attended" type="text"></div>
+            <div class="field"><label for="eventsAttended">Have you attended a Freedom Lab event before?</label><input id="eventsAttended" name="events_attended" type="text"><p class="field-help">If so, which one</p></div>
             <div class="field"><label for="mainInterest">Main interest <span class="required">*</span></label><select id="mainInterest" name="main_interest" required><option value="">Choose one</option><option>Coworking space</option><option>Developing freedom tech</option><option>Community</option><option>Teaching freedom tech</option><option>Learning freedom tech</option><option>Helping Freedom Lab grow</option><option>Other</option></select></div>
             <div class="field" data-other-interest hidden><label for="mainInterestOther">Other interest</label><input id="mainInterestOther" name="main_interest_other" type="text"></div>
 
@@ -60,6 +59,6 @@
       </section>
     </main>
   </div>
-  <script src="/js/join-application.js?v=2"></script>
+  <script src="/js/join-application.js?v=3"></script>
 </body>
 </html>
