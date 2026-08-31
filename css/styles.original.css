@@ -11,6 +11,7 @@
     --text-primary: #eff0ee;
     --text-secondary: #9da89a;
     --text-muted: #636b60;
+    --footer-social-icon-color: #bbbcba;
     --required: #e05555;
     --radius: 8px;
     --radius-lg: 12px;
@@ -1191,7 +1192,7 @@ a:hover {
     justify-content: center;
     width: 40px;
     height: 40px;
-    color: var(--text-muted);
+    color: var(--footer-social-icon-color);
     transition: all 0.3s ease;
 }
 
@@ -1207,13 +1208,18 @@ a:hover {
 .footer-social-icon {
     width: 24px;
     height: 24px;
-    object-fit: contain;
-    filter: brightness(0) invert(0.5);
+    background-color: currentColor;
+    -webkit-mask: var(--footer-social-icon-mask) center / contain no-repeat;
+    mask: var(--footer-social-icon-mask) center / contain no-repeat;
     transition: all 0.3s ease;
 }
 
-.footer-social-link:hover .footer-social-icon {
-    filter: brightness(0) saturate(100%) invert(52%) sepia(95%) saturate(1000%) hue-rotate(85deg) brightness(95%) contrast(95%);
+.footer-social-icon-nostr {
+    --footer-social-icon-mask: url('/static/img/nostr_logo.png');
+}
+
+.footer-social-icon-onion {
+    --footer-social-icon-mask: url('/static/img/tor_logo.png');
 }
 
 /* Decorative images inside links should behave like part of the link on touch devices.

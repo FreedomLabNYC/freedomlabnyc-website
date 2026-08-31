@@ -72,7 +72,7 @@ def page(ev: dict) -> tuple[str, str]:
   <title>{escape(title)}</title>
   <link rel="canonical" href="{escape(url)}">
   <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="stylesheet" href="../../css/styles.css?v=universal-nav-1">
+  <link rel="stylesheet" href="../../css/styles.css?v=footer-icon-tone-1">
   <link rel="stylesheet" href="../../css/fonts.css">
   <link rel="stylesheet" href="../../css/tutorial-page.css">
   <meta property="og:type" content="event">

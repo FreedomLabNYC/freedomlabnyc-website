@@ -33,7 +33,7 @@ SKIP_PATHS = {
     'tag-tree-options.html',
 }
 REQUIRED_PUBLIC_SNIPPETS = [
-    'css/styles.css?v=universal-nav-1',
+    'css/styles.css?v=footer-icon-tone-1',
     'footer.js',
 ]
 FORBIDDEN_INLINE = [
