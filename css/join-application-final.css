@@ -53,8 +53,43 @@ body.single-page-application { height: auto; min-height: 100%; overflow: auto; }
 .single-page-form .apply-actions { margin-top: clamp(12px,1.6vh,18px); }
 .field { min-width: 0; }
 .field.full { grid-column: 1 / -1; }
-.field label { display: block; margin: 0 0 5px; color: var(--text); font-size: .76rem; font-weight: 650; line-height: 1.25; }
+.field label,
+.field legend { display: block; margin: 0 0 5px; color: var(--text); font-size: .76rem; font-weight: 650; line-height: 1.25; }
 .field-help { margin: 4px 0 0; color: var(--muted); font-size: .7rem; line-height: 1.25; }
+.application-columns { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; align-items: start; }
+.application-column { min-width: 0; display: grid; gap: 12px; }
+.interest-ranking { margin: 0; padding: 0; border: 0; }
+.interest-ranking legend { float: left; width: 100%; }
+.interest-ranking legend + * { clear: both; }
+.ranking-help { margin: 0 0 7px; }
+.ranking-options { display: grid; gap: 5px; }
+.rank-option {
+  min-height: 38px;
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) 98px;
+  align-items: center;
+  gap: 10px;
+  margin: 0 !important;
+  padding: 5px 6px 5px 11px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: var(--field);
+}
+.rank-option > span { min-width: 0; }
+.interest-ranking .rank-option select {
+  width: 100%;
+  height: 28px;
+  padding: 3px 24px 3px 8px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  outline: none;
+  color: var(--text);
+  background: #101310;
+  font: inherit;
+  font-size: .72rem;
+}
+.interest-ranking .rank-option select:focus { border-color: var(--green); }
+.interest-ranking.is-error .ranking-options { outline: 1px solid var(--error); outline-offset: 2px; border-radius: 7px; }
 .required { color: var(--green); }
 .field input,
 .field select,
@@ -130,6 +165,7 @@ body.single-page-application { height: auto; min-height: 100%; overflow: auto; }
   .apply-intro { margin-bottom: 12px; font-size: .8rem; }
   .apply-step h2 { margin-bottom: 11px; font-size: 1.05rem; }
   .apply-grid { grid-template-columns: 1fr; gap: 8px; }
+  .application-columns { grid-template-columns: 1fr; gap: 14px; }
   .field.full { grid-column: auto; }
   .field label { margin-bottom: 3px; font-size: .7rem; }
   .field input,.field select { height: 42px; }

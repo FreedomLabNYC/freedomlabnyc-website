@@ -52,6 +52,11 @@
       setStatus('Please complete the required fields.');
       return false;
     }
+    if (!validateInterestRankings()) {
+      rankingSelects[0].focus();
+      setStatus('Choose three interests and rank them 1, 2, and 3.');
+      return false;
+    }
     return true;
   };
 
@@ -76,15 +81,40 @@
   }
 
   const mainInterest = form.elements.main_interest;
+  const rankingFieldset = form.querySelector('[data-interest-ranking]');
+  const rankingSelects = [...form.querySelectorAll('[data-interest-rank]')];
+  const rankedInterests = () => rankingSelects
+    .filter(select => select.value)
+    .map(select => ({ rank: Number(select.value), interest: select.dataset.interestLabel }))
+    .sort((a, b) => a.rank - b.rank);
+  const validateInterestRankings = () => {
+    if (!rankingSelects.length) return true;
+    const rankings = rankedInterests();
+    const valid = rankings.length === 3
+      && rankings.every((item, index) => item.rank === index + 1)
+      && rankings.every(item => allowedInterests.has(item.interest));
+    rankingFieldset.classList.toggle('is-error', !valid);
+    return valid;
+  };
   const otherInterest = document.querySelector('[data-other-interest]');
   const syncInterest = () => {
-    const other = mainInterest.value === 'Other';
+    const rankedOther = rankingSelects.find(select => select.dataset.interestLabel === 'Other');
+    const other = mainInterest ? mainInterest.value === 'Other' : Boolean(rankedOther?.value);
     otherInterest.hidden = !other;
     otherInterest.querySelector('input').disabled = !other;
     otherInterest.querySelector('input').required = other;
     if (!other) otherInterest.querySelector('input').value = '';
   };
-  mainInterest.addEventListener('change', syncInterest);
+  if (mainInterest) mainInterest.addEventListener('change', syncInterest);
+  rankingSelects.forEach(select => select.addEventListener('change', () => {
+    if (select.value) {
+      rankingSelects.forEach(other => {
+        if (other !== select && other.value === select.value) other.value = '';
+      });
+    }
+    if (rankingFieldset.classList.contains('is-error')) validateInterestRankings();
+    syncInterest();
+  }));
   syncInterest();
 
   form.querySelectorAll('[data-next]').forEach(button => button.addEventListener('click', () => {
@@ -100,7 +130,9 @@
       setStatus('Choose a membership before applying.');
       return;
     }
-    if (!allowedInterests.has(mainInterest.value)) {
+    const rankings = rankedInterests();
+    const primaryInterest = mainInterest ? mainInterest.value : rankings[0]?.interest;
+    if (!allowedInterests.has(primaryInterest)) {
       setStatus('Choose your main interest.');
       return;
     }
@@ -113,6 +145,8 @@
     const lastName = form.elements.last_name.value.trim();
     const freedomTechInterests = form.elements.freedom_tech_interests.value.trim();
     const eventsAttended = form.elements.events_attended.value.trim();
+    const otherInterestDetail = form.elements.main_interest_other.value.trim();
+    const secondaryInterestSummary = rankings.slice(1).map(item => `${item.rank}. ${item.interest}`).join('; ');
     const payload = {
       submission_id: crypto.randomUUID(),
       first_name: firstName,
@@ -121,8 +155,11 @@
       email: form.elements.email.value.trim(),
       attended_event: attendance ? attendance.value === 'yes' : Boolean(eventsAttended),
       events_attended: eventsAttended,
-      main_interest: mainInterest.value,
-      main_interest_other: form.elements.main_interest_other.value.trim(),
+      main_interest: primaryInterest,
+      main_interest_other: rankings.length
+        ? [secondaryInterestSummary, otherInterestDetail && `Other: ${otherInterestDetail}`].filter(Boolean).join('; ')
+        : otherInterestDetail,
+      main_interest_rankings: rankings,
       social_platform_link: form.elements.social_platform_link.value.trim(),
       freedom_tech_interests: freedomTechInterests,
       references: form.elements.references.value.trim(),

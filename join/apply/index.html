@@ -10,7 +10,7 @@
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="preload" href="/static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css">
-  <link rel="stylesheet" href="/css/join-application-final.css?v=3">
+  <link rel="stylesheet" href="/css/join-application-final.css?v=4">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Membership Application | Freedom Lab NYC">
   <meta property="og:description" content="Apply for Freedom Lab NYC membership.">
@@ -39,13 +39,30 @@
             <div class="field"><label for="email">Email address <span class="required">*</span></label><input id="email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required></div>
             <div class="field"><label for="socialPlatform">Social platform link</label><input id="socialPlatform" name="social_platform_link" type="text" inputmode="url"></div>
 
-            <div class="field"><label for="eventsAttended">Have you attended a Freedom Lab event before?</label><input id="eventsAttended" name="events_attended" type="text"><p class="field-help">If so, which one</p></div>
-            <div class="field"><label for="mainInterest">Main interest <span class="required">*</span></label><select id="mainInterest" name="main_interest" required><option value="">Choose one</option><option>Coworking space</option><option>Developing freedom tech</option><option>Community</option><option>Teaching freedom tech</option><option>Learning freedom tech</option><option>Helping Freedom Lab grow</option><option>Other</option></select></div>
-            <div class="field" data-other-interest hidden><label for="mainInterestOther">Other interest</label><input id="mainInterestOther" name="main_interest_other" type="text"></div>
-
-            <div class="field span-2"><label for="freedomTechInterests">Freedom tech interests <span class="required">*</span></label><textarea id="freedomTechInterests" name="freedom_tech_interests" required></textarea></div>
-            <div class="field"><label for="references">Reference(s)</label><textarea id="references" name="references"></textarea></div>
-            <div class="field"><label for="otherComments">Other comments</label><textarea id="otherComments" name="other_comments"></textarea></div>
+            <div class="application-columns span-2">
+              <div class="application-column">
+                <div class="field"><label for="eventsAttended">Have you attended a Freedom Lab event before?</label><input id="eventsAttended" name="events_attended" type="text"><p class="field-help">If so, which one</p></div>
+                <fieldset class="field interest-ranking" data-interest-ranking>
+                  <legend>Rank your interest in joining Freedom Lab <span class="required">*</span></legend>
+                  <p class="field-help ranking-help">Choose your top three using each rank once.</p>
+                  <div class="ranking-options">
+                    <label class="rank-option"><span>Coworking space</span><select data-interest-rank data-interest-label="Coworking space" aria-label="Rank Coworking space"><option value="">Not ranked</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
+                    <label class="rank-option"><span>Developing freedom tech</span><select data-interest-rank data-interest-label="Developing freedom tech" aria-label="Rank Developing freedom tech"><option value="">Not ranked</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
+                    <label class="rank-option"><span>Community</span><select data-interest-rank data-interest-label="Community" aria-label="Rank Community"><option value="">Not ranked</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
+                    <label class="rank-option"><span>Teaching freedom tech</span><select data-interest-rank data-interest-label="Teaching freedom tech" aria-label="Rank Teaching freedom tech"><option value="">Not ranked</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
+                    <label class="rank-option"><span>Learning freedom tech</span><select data-interest-rank data-interest-label="Learning freedom tech" aria-label="Rank Learning freedom tech"><option value="">Not ranked</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
+                    <label class="rank-option"><span>Helping Freedom Lab grow</span><select data-interest-rank data-interest-label="Helping Freedom Lab grow" aria-label="Rank Helping Freedom Lab grow"><option value="">Not ranked</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
+                    <label class="rank-option"><span>Other</span><select data-interest-rank data-interest-label="Other" aria-label="Rank Other"><option value="">Not ranked</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
+                  </div>
+                </fieldset>
+                <div class="field" data-other-interest hidden><label for="mainInterestOther">Other interest</label><input id="mainInterestOther" name="main_interest_other" type="text"></div>
+              </div>
+              <div class="application-column">
+                <div class="field"><label for="freedomTechInterests">What freedom tech tools are you most interested in? <span class="required">*</span></label><textarea id="freedomTechInterests" name="freedom_tech_interests" required></textarea><p class="field-help">Please describe specific tools</p></div>
+                <div class="field"><label for="references">Reference(s)</label><textarea id="references" name="references"></textarea></div>
+                <div class="field"><label for="otherComments">Comments or questions?</label><textarea id="otherComments" name="other_comments"></textarea></div>
+              </div>
+            </div>
           </div>
           <div class="apply-actions end"><button class="apply-button" type="submit">Submit application</button></div>
         </section>
@@ -59,6 +76,6 @@
       </section>
     </main>
   </div>
-  <script src="/js/join-application.js?v=3"></script>
+  <script src="/js/join-application.js?v=4"></script>
 </body>
 </html>
