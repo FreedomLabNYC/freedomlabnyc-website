@@ -31,6 +31,7 @@ SKIP_PATHS = {
     'print-page.html',
     'print-page/index.html',
     'tag-tree-options.html',
+    'resources/agentic-payments/deck/agentic-payments.html',
 }
 REQUIRED_PUBLIC_SNIPPETS = [
     'css/styles.css?v=footer-icon-tone-1',
