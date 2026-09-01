@@ -48,6 +48,7 @@ Agents should not:
 - [Home](https://freedomlab.nyc/): overview of Freedom Lab NYC.
 - [Freedom Tech in NYC](https://freedomlab.nyc/freedom-tech-nyc/): AI-search-friendly answer page for people looking for freedom-tech places and communities in New York City.
 - [Resources](https://freedomlab.nyc/resources/): public tutorials, class materials, and open-source AI skills.
+- [Agentic Payments Workshop](https://freedomlab.nyc/resources/agentic-payments/): slide deck, repos and links on giving an AI agent money it controls (x402, L402, Lightning).
 - [Classes & Events](https://freedomlab.nyc/classes-events/): upcoming and past public classes/events.
 - [Join / Early Access](https://freedomlab.nyc/join/): co-working / hackerspace waitlist and early-access interest.
 - [Donate](https://freedomlab.nyc/donate/): support Freedom Lab.

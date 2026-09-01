@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Agentic Payments workshop resources from Freedom Lab NYC. View or download the slide deck, browse the code repositories, and follow every link covered in the session.">
+    <title>Agentic Payments · Workshop Resources | Freedom Lab NYC</title>
+    <link rel="icon" href="../../static/img/torch transparent icocrop2.png" type="image/png">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="preload" href="../../static/fonts/press-start-2p-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../../css/fonts.css">
+    <link rel="stylesheet" href="../../css/tutorial-page.css">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freedomlab.nyc/resources/agentic-payments/">
+    <meta property="og:title" content="Agentic Payments · Workshop Resources | Freedom Lab NYC">
+    <meta property="og:description" content="View or download the Agentic Payments slide deck, browse the code repositories, and follow every link covered in the session.">
+    <meta property="og:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Agentic Payments · Workshop Resources | Freedom Lab NYC">
+    <meta name="twitter:description" content="View or download the Agentic Payments slide deck, browse the code repositories, and follow every link covered in the session.">
+    <meta name="twitter:image" content="https://freedomlab.nyc/static/img/og-preview.png">
+</head>
+<body>
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+    <header class="header">
+        <a href="/" class="logo"><picture>
+                <source srcset="../../static/img/FLNYC 2LINE+LOGO.webp" type="image/webp">
+                <img src="../../static/img/FLNYC 2LINE+LOGO.png" alt="Freedom Lab NYC" class="logo-wide">
+            </picture></a>
+        <nav class="nav-menu" id="navMenu">
+            <a href="/classes-events/" class="nav-link">Classes &amp; Events</a>
+            <a href="/resources/" class="nav-link active">Resources</a>
+            <a href="/contact/" class="nav-link">Contact</a>
+            <a href="/donate/" class="nav-link">Donate</a>
+            <a href="/join/" class="nav-btn">Join</a>
+        </nav>
+        <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    </header>
+    <main class="tutorial-content">
+
+        <div class="tutorial-header">
+            <div class="tutorial-breadcrumb">
+                <a href="/resources/">Resources</a><span>&rsaquo;</span><span>Agentic Payments</span>
+            </div>
+            <h1 class="tutorial-title">Agentic Payments · Workshop Resources</h1>
+            <div class="tutorial-meta">
+                <span class="tutorial-type-tag class">Class</span>
+                <span class="tutorial-tag">Open-source AI</span>
+                <span class="tutorial-tag">Bitcoin</span>
+                <span class="tutorial-tag">Lightning</span>
+            </div>
+            <p class="tutorial-intro"><strong>Audience:</strong> anyone running an AI agent who wants that agent to pay for things on its own.</p>
+            <p><strong>Format:</strong> in-person workshop, 58 slides, with live audience rounds.</p>
+            <p><strong>What this page is for:</strong> everything from the session in one place. Read the deck, clone the code, follow the links.</p>
+            <p><strong>What you take away:</strong></p>
+            <ul>
+                <li>Why the web shipped with a payment slot, and why that slot was left empty</li>
+                <li>Why an agent cannot use a card, and what breaks when it tries</li>
+                <li>The three ways an agent can pay today, and who runs each rail</li>
+                <li>Where x402 and L402 came from, and how they differ</li>
+                <li>The five tests to run on any money an agent is asked to hold</li>
+                <li>How to give your own agent a wallet it controls</li>
+            </ul>
+        </div>
+
+        <nav class="tutorial-toc">
+            <h3>Table of Contents</h3>
+            <ol>
+                <li><a href="#abstract">Abstract</a></li>
+                <li><a href="#deck">The Slide Deck</a></li>
+                <li><a href="#write-up">Workshop Write-up</a></li>
+                <li><a href="#repositories">Code Repositories</a></li>
+                <li><a href="#resource-links">Resource Links</a></li>
+            </ol>
+        </nav>
+
+        <section class="tutorial-section" id="abstract">
+            <h2>Abstract</h2>
+            <p>The web was built with a slot for payments, and that slot was left empty. Card networks filled the gap instead, and cards need a human to blame when something goes wrong. Agents have now arrived, and the payment layer still demands that human.</p>
+            <p>This session walks through what an agent actually needs in order to pay for something, why the existing rails cannot give it, and which new rails are being built. It covers x402, L402, and the Lightning work that predates both, then runs every option through the same five tests, so you can judge a rail yourself instead of taking a vendor's word for it.</p>
+            <p>It ends with the practical part: getting your own agent a wallet it holds the keys to.</p>
+        </section>
+
+        <section class="tutorial-section" id="deck">
+            <h2>The Slide Deck</h2>
+            <p>The deck is one self-contained HTML file. It opens in any browser, and the arrow keys move between slides.</p>
+            <ul>
+                <li><a href="deck/agentic-payments.html">View the deck in your browser</a>. Nothing is installed and nothing is signed into.</li>
+                <li><a href="deck/agentic-payments.html" download="agentic-payments.html">Download the deck</a>. Saves the HTML file so you can read it offline.</li>
+            </ul>
+            <div class="callout callout-note">
+                <svg class="callout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 16v-4M12 8h.01"/>
+                </svg>
+                <div class="callout-content">
+                    <p><strong>Note:</strong> the downloaded file carries the slides and the diagrams. The short video clips load from this site, so keep the page open in a tab if you want those too.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="tutorial-section" id="write-up">
+            <h2>Workshop Write-up</h2>
+            <p>The step by step version of this workshop, written as an article you can follow at your own pace, is published on the 2112 Capital Solutions site.</p>
+            <ul>
+                <li><a href="https://2112capitalsolutions.com/guides/agentic-payments-workshop" target="_blank" rel="noopener">How to run the Agentic Payments workshop</a>. The full how-to, including what to set up before you start.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="repositories">
+            <h2>Code Repositories</h2>
+            <p>Three repositories back this session. All three are public on GitHub.</p>
+            <ul>
+                <li><a href="https://github.com/TheBitcoinBreakdown-95/sovereign-agent-stack" target="_blank" rel="noopener">TheBitcoinBreakdown-95/sovereign-agent-stack</a>. The reference stack from the talk: what to run so an agent can hold and spend money you control.</li>
+                <li><a href="https://github.com/TheBitcoinBreakdown-95/deck-room-games" target="_blank" rel="noopener">TheBitcoinBreakdown-95/deck-room-games</a>. The live audience rounds and room games used during the session.</li>
+                <li><a href="https://github.com/TheBitcoinBreakdown-95/agentic-payments-resources" target="_blank" rel="noopener">TheBitcoinBreakdown-95/agentic-payments-resources</a>. The full reading and link list that backs this page.</li>
+            </ul>
+        </section>
+
+        <section class="tutorial-section" id="resource-links">
+            <h2>Resource Links</h2>
+
+            <h3>Directories and explorers</h3>
+            <ul>
+                <li><a href="https://402index.io" target="_blank" rel="noopener">402index.io</a>. An index of services that take x402 payments, so you can see what an agent can buy today.</li>
+                <li><a href="https://x402scan.com" target="_blank" rel="noopener">x402scan.com</a>. An explorer for x402 payment activity, useful for checking whether a rail is really being used.</li>
+            </ul>
+
+            <h3>Give an agent a wallet</h3>
+            <ul>
+                <li><a href="https://docs.moneydevkit.com/agent-wallet" target="_blank" rel="noopener">docs.moneydevkit.com/agent-wallet</a>. Money Dev Kit's guide to giving an agent a wallet of its own.</li>
+                <li><a href="https://docs.wdk.tether.io/ai/x402/" target="_blank" rel="noopener">docs.wdk.tether.io/ai/x402/</a>. Tether's Wallet Development Kit docs for wiring x402 into an AI agent.</li>
+            </ul>
+
+            <h3>L402, the Lightning-native standard</h3>
+            <ul>
+                <li><a href="https://l402.org" target="_blank" rel="noopener">l402.org</a>. The home page for L402, the paid HTTP standard built on Lightning.</li>
+                <li><a href="https://github.com/l402-protocol/l402" target="_blank" rel="noopener">github.com/l402-protocol/l402</a>. The L402 specification and its reference material.</li>
+                <li><a href="https://docs.lightning.engineering/the-lightning-network/l402" target="_blank" rel="noopener">docs.lightning.engineering/the-lightning-network/l402</a>. Lightning Labs' own L402 documentation, from the team that shipped it in 2019.</li>
+                <li><a href="https://github.com/Fewsats/awesome-L402" target="_blank" rel="noopener">github.com/Fewsats/awesome-L402</a>. A curated list of L402 tools, libraries, and working implementations.</li>
+            </ul>
+
+            <h3>Put a paywall in front of an API</h3>
+            <ul>
+                <li><a href="https://lightningenable.com" target="_blank" rel="noopener">lightningenable.com</a>. A service for adding Lightning payments to an API you already run.</li>
+                <li><a href="https://lightningprox.com" target="_blank" rel="noopener">lightningprox.com</a>. A proxy that sits in front of an API and charges per request.</li>
+                <li><a href="https://aiprox.dev" target="_blank" rel="noopener">aiprox.dev</a>. A proxy aimed at pay per call access to AI model endpoints.</li>
+            </ul>
+
+            <h3>Live things to point an agent at</h3>
+            <ul>
+                <li><a href="https://api.bitcoinbenji.com" target="_blank" rel="noopener">api.bitcoinbenji.com</a>. A paid API you can use to test an agent payment from end to end.</li>
+                <li><a href="https://unhuman.shopping" target="_blank" rel="noopener">unhuman.shopping</a>. A storefront built for agents to buy from, rather than for people to browse.</li>
+            </ul>
+
+            <h3>Reading and what comes next</h3>
+            <ul>
+                <li><a href="https://spiralxyz.substack.com/p/open-source-ai-needs-to-get-serious" target="_blank" rel="noopener">Open source AI needs to get serious</a>, from Spiral. The argument for why open source AI has to solve payments.</li>
+                <li><a href="https://wavelength.lightning.engineering" target="_blank" rel="noopener">wavelength.lightning.engineering</a>. Lightning Labs' Wavelength, aimed at machine to machine payments at very small amounts.</li>
+            </ul>
+        </section>
+
+        <nav class="tutorial-nav">
+            <a href="/resources/" class="tutorial-nav-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back to Resources</a>
+        </nav>
+    </main>
+    <div id="footer-placeholder"></div>
+    <script src="../../js/footer.js"></script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        mobileOverlay.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        document.querySelectorAll('.tutorial-toc a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').slice(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    history.pushState(null, null, '#' + targetId);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
