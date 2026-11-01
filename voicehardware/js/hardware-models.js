@@ -39,6 +39,30 @@ export async function buildModel(kind){
   const defs=[['01','rear','Rear shell','Proposed hollow 112 × 84 × 23 mm case. Not fit-tested.',[-24,-12,-27],'Rear shell / hollow solid'],['02','board','99.5 × 60 PCB','Sourced board outline. Packages and heights are photo-estimated.',[0,4,12],'PCB outline EXACT'],['03','display','3.97″ e-paper','Sourced active area 86.4 × 51.84 mm. UI is illustrative.',[8,4,49],'Active area EXACT'],['04','front','Fascia + PTT','Original EEVEE fascia with real apertures; orange actuator is a concept.',[22,8,86],'Front fascia through-cut solid'],['05','audio','Audio concept','Illustrative speaker chamber and PTT reservation; not validated wiring.',[-23,-23,19],'Concept speaker enclosure']];
   for(const [prefix,id,label,description,offset,anchorName] of defs){let group;gltf.scene.traverse(o=>{if(o.name.startsWith(prefix))group=o;});let anchor;group.traverse(o=>{if(o.name.replace(/[^a-z0-9]/gi,'').startsWith(anchorName.replace(/[^a-z0-9]/gi,'')))anchor=o;});parts.push({id,label,description,group,offset:new T.Vector3(...offset).divideScalar(scale),anchor:anchor||group.children.find(o=>o.isMesh)});}
   size=112;
+ }else if(kind==='amoled'){
+  size=48.96;
+  const disc2=(g,name,ro,ri,d,x,y,z,color)=>{const s=new T.Shape();s.absarc(0,0,ro,0,Math.PI*2);const h=new T.Path();h.absarc(0,0,ri,0,Math.PI*2,true);s.holes=[h];const o=new T.Mesh(new T.ExtrudeGeometry(s,{depth:d,bevelEnabled:false,curveSegments:48}),mat(color));o.position.set(x,y,z);o.name=name;g.add(o);return o;};
+  const amoledUI=()=>{const c=document.createElement('canvas');c.width=c.height=800;const q=c.getContext('2d');q.fillStyle='#0a1216';q.fillRect(0,0,800,800);q.strokeStyle='#ef8955';q.lineWidth=6;q.beginPath();q.arc(400,400,352,0,Math.PI*2);q.stroke();q.fillStyle='#e8ede5';q.textAlign='center';q.font='bold 64px sans-serif';q.fillText('AMOLED',400,380);q.font='36px sans-serif';q.fillText('466 × 466',400,448);q.font='28px monospace';q.fillStyle='#8fa39a';q.fillText('INTERFACE STUDY',400,520);const t=new T.CanvasTexture(c);t.colorSpace=T.SRGBColorSpace;return new T.MeshBasicMaterial({map:t});};
+  const rear=part(root,'rear','Rear modules','Solder side: ESP32-S3R8 (32-bit LX7 dual-core, 8 MB PSRAM, 16 MB flash), AXP2101 PMIC, ES8311 speaker codec, ES7210 dual-microphone array, TCA9554 expander, IMU and RTC. Package placement is photo-estimated from manufacturer photography, not PCB CAD.',[-4,-2,-15]);
+  rear.anchor=solid(rear.group,'ESP32-S3R8 module',18,18,.8,1.2,0,2,-2.8,colors.ink);
+  solid(rear.group,'AXP2101 power',5,5,.3,1,-13,-8,-2.8,colors.ink);
+  solid(rear.group,'ES8311 codec',4,4,.3,1,-13,8,-2.8,colors.ink);
+  solid(rear.group,'ES7210 mic array',4.5,3,.3,1,-4,-12,-2.8,colors.ink);
+  solid(rear.group,'TCA9554 expander',3.5,3.5,.3,.9,7,-11,-2.8,colors.ink);
+  solid(rear.group,'IMU',3,3,.3,.8,12,9,-2.8,colors.ink);
+  solid(rear.group,'RTC',3.2,2.6,.3,.8,-9,12,-2.8,colors.ink);
+  const board=part(root,'board','φ46.00 round PCB','Round board 48.96 mm overall, PCB circle φ46.00 mm, 10.40 mm deep; 2 × M2.00 standoffs with 2 × φ1.80 holes; MX1.25 headers labeled SPK and BAT (3.7 V LiPo, charge/discharge supported); native USB-C. All from the manufacturer drawing — bore and header positions on the circle are photo-estimated.',[0,0,14]);
+  board.anchor=disc(board.group,'PCB circle',23,1.6,0,0,0,colors.pcb);
+  for(const x of [-16,16]){disc(board.group,'M2 standoff annulus',1.6,.2,x,0,.2,colors.gold);disc(board.group,'φ1.80 bore',.9,.25,x,0,.15,colors.ink);}
+  solid(board.group,'SPK header',6,4,.5,3.5,-9,-19.3,1.6,0xd8d4b8);
+  solid(board.group,'BAT header',6,4,.5,3.5,7,-20.2,1.6,0xd8d4b8);
+  solid(board.group,'USB-C shell',9,3,1,1.4,0,-23.4,.1,colors.metal);
+  const display=part(root,'display','1.75″ CO5300 AMOLED','466 × 466 round QSPI AMOLED; cover glass chords 44.16 × 43.76 mm from the dimension drawing. Screen content is illustrative, not a UI capture.',[6,4,30]);
+  display.anchor=disc(display.group,'CO5300 glass',22.08,1.2,0,0,1.6,0x0a1216);
+  const ui=new T.Mesh(new T.CircleGeometry(20.4,48),amoledUI());ui.position.set(0,0,2.82);ui.name='AMOLED UI (illustrative)';display.group.add(ui);
+  const front=part(root,'front','Touch + bezel','CST9217 capacitive touch sensing under the glass; gestures verified on hardware: hold screen to talk, swipe down to cancel, PWR key cancel (hold 2 s = new conversation). The bezel ring is the modeled frame edge, not a manufactured part.',[9,7,46]);
+  front.anchor=disc2(front.group,'Bezel ring',22.4,21.2,.6,0,0,2.8,colors.ink);
+  parts=[rear,board,display,front];
  }else{
   const note=kind==='note4',w=note?97:39.8,h=note?97:53,d=note?8.75:16.9,r=note?5:4.5;size=w;
   const rear=part(root,'rear',note?'Magnetic back':'Rear cover',note?'97 × 97 × 8.75 mm complete product envelope, including magnetic back. Interior surfaces approximate.':'39.8 × 53 × 16.9 mm manufacturer enclosure envelope. Internal depths approximate.',[-w*.16,-h*.05,-w*.3]);
