@@ -76,3 +76,9 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Updated the media-accessibility audit to skip explicitly `noindex` design-review/utility pages, matching its public-page scope while retaining checks on indexable pages.
 - GSC monitor checked 10 of 77 sitemap URLs: 53 submitted/indexed, 24 waiting on Google, and no actionable canonical, robots, duplicate, 404, or server issues.
 - Verification: shared-style and media audits passed; event-preview and public/noindex regression probes passed; 154 JSON-LD blocks across 83 HTML files parsed with zero errors; event-archive image tests passed (9/9).
+
+## 2026-11-09 — Agentic Payments deck media accessibility
+
+- Marked decorative skyline images as hidden from assistive technology and added explicit loading behavior to slide/QR imagery.
+- Added accessible labels to four silent video animations and a shared WebVTT captions track documenting that they contain no audio.
+- Verified all four MP4s are video-only with `ffprobe`; no spoken-audio transcript was omitted.

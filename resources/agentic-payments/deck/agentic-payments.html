@@ -1223,7 +1223,7 @@ body.op .nav .keys{display:none}
      Slides pptx export (Agentic Payments | Freedom Lab NYC), original resolution. -->
 <!-- VISUAL: HELD - full-bleed night skyline with the pixel torch lockup, same composition as the source slide. -->
 <section class="slide active" data-frag="S00" data-kind="cover" data-steps="0" data-step="0">
-  <img src="assets/fl-skyline-night.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+  <img src="assets/fl-skyline-night.png" alt="" aria-hidden="true" loading="eager" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
   <img src="assets/fl-logo-lockup.png" alt="Freedom Lab NYC" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62%;max-height:70%;object-fit:contain;">
   <div class="blobs"></div>
   <div class="notes">
@@ -1358,7 +1358,7 @@ body.op .nav .keys{display:none}
      freedomlab.nyc/links, Cake Wallet sponsor), extracted at original resolution from the pptx. -->
 <!-- VISUAL: HELD - the links-page render, contained on the page's own near-black. -->
 <section class="slide" data-frag="S02c" data-kind="cover" data-steps="0" data-step="0" style="background:#0a0f0a;">
-  <img src="assets/fl-links-page.png" alt="Freedom Lab NYC links page: early access to the hackerspace, join the Telegram, upcoming events, freedomlab.nyc/links" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;">
+  <img src="assets/fl-links-page.png" loading="eager" alt="Freedom Lab NYC links page: early access to the hackerspace, join the Telegram, upcoming events, freedomlab.nyc/links" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;">
   <div class="blobs"></div>
   <div class="notes">
     <p class="lbl">TLDR</p>
@@ -1969,7 +1969,9 @@ body.op .nav .keys{display:none}
   <h2>The web has a payment slot and it was left empty.</h2>
   <div class="body">
     <div class="vid">
-      <video src="assets/s11-empty-slot.mp4" muted="" playsinline="" preload="auto"></video>
+      <video src="assets/s11-empty-slot.mp4" aria-label="The web has a payment slot and it was left empty" muted="" playsinline="" preload="auto">
+        <track kind="captions" src="assets/silent-captions.vtt" srclang="en" label="English">
+      </video>
     </div>
   </div>
   <div class="blobs"></div>
@@ -2662,7 +2664,9 @@ body.op .nav .keys{display:none}
   <h2>Agents cannot use the existing rails.</h2>
   <div class="body">
     <div class="vid b b1">
-      <video src="assets/s21a-rails-forged.mp4" muted playsinline preload="auto"></video>
+      <video src="assets/s21a-rails-forged.mp4" aria-label="Agents cannot use the existing rails" muted playsinline preload="auto">
+        <track kind="captions" src="assets/silent-captions.vtt" srclang="en" label="English">
+      </video>
     </div>
     <div class="cap b b2" style="font-size:1.32em;line-height:1.45;margin-top:.7em">&ldquo;Traditional payment rails require government IDs, bank accounts, and manual enrollment, none of which work for autonomous software.&rdquo; <small>Lightning Labs, lightning-agent-tools</small></div>
   </div>
@@ -3048,7 +3052,9 @@ body.op .nav .keys{display:none}
   <h2>Big Labs are going directly to merchants themselves</h2>
   <div class="body">
     <div class="vid">
-      <video src="assets/s23a-over-the-wall.mp4" muted="" playsinline="" preload="auto"></video>
+      <video src="assets/s23a-over-the-wall.mp4" aria-label="Big Labs are going directly to merchants themselves" muted="" playsinline="" preload="auto">
+        <track kind="captions" src="assets/silent-captions.vtt" srclang="en" label="English">
+      </video>
     </div>
   </div>
   <div class="blobs"></div>
@@ -3947,7 +3953,9 @@ body.fl-editing .slide.active .zaphit{animation:none;opacity:0}
   <h2>Private at the <em>money layer</em>.</h2>
   <div class="body">
     <div class="vid">
-      <video src="assets/s34-blind-signature.mp4" muted="" playsinline="" preload="auto"></video>
+      <video src="assets/s34-blind-signature.mp4" aria-label="Private at the money layer" muted="" playsinline="" preload="auto">
+        <track kind="captions" src="assets/silent-captions.vtt" srclang="en" label="English">
+      </video>
     </div>
   </div>
   <div class="blobs"><br></div><div class="notes">
@@ -4518,7 +4526,7 @@ body.fl-editing .slide.active .zaphit{animation:none;opacity:0}
      only the notes differ. -->
 <!-- VISUAL: HELD - full-bleed night skyline with the pixel torch lockup, identical to S00. -->
 <section class="slide" data-frag="S43" data-kind="cover" data-steps="0" data-step="0">
-  <img src="assets/fl-skyline-night.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+  <img src="assets/fl-skyline-night.png" alt="" aria-hidden="true" loading="eager" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
   <img src="assets/fl-logo-lockup.png" alt="Freedom Lab NYC" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:62%;max-height:70%;object-fit:contain;">
   <div class="blobs"></div>
   <div class="notes">
@@ -4600,7 +4608,7 @@ body.fl-editing .slide.active .zaphit{animation:none;opacity:0}
      network call until GC presses Q or Show code. -->
 <div class="opqr" id="op-qr" contenteditable="false">
   <div class="card">
-    <img id="op-qr-img" alt="scan to join the room">
+    <img id="op-qr-img" loading="eager" alt="scan to join the room">
     <div class="cap">Scan to join. No agent? Scan, then tap Play.</div>
     <div class="miss">The room is not answering, so there is no code to show.</div>
   </div>
