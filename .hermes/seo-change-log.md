@@ -82,3 +82,9 @@ Running reference for Wren. Keep entries concise; include what changed, why, and
 - Marked decorative skyline images as hidden from assistive technology and added explicit loading behavior to slide/QR imagery.
 - Added accessible labels to four silent video animations and a shared WebVTT captions track documenting that they contain no audio.
 - Verified all four MP4s are video-only with `ffprobe`; no spoken-audio transcript was omitted.
+
+## 2026-11-09 — GSC live sitemap monitor repair
+
+- Updated `~/.hermes/scripts/freedom_lab_gsc_monitor.py` to inspect the deployed sitemap with a bounded no-cache fetch and a visible local fallback instead of silently using a stale checkout.
+- Live monitoring now covers 84 URLs rather than the stale local list of 78; all six previously omitted resource URLs returned fresh `PASS / Submitted and indexed` inspections.
+- Current totals: 71 submitted/indexed, 13 waiting on Google, and no actionable indexing errors.
